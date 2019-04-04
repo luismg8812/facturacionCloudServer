@@ -1,10 +1,10 @@
 --rol 
-Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('1','admin');
-Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('2','cajero');
-Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('3','Propietario');
-Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('4','Developer');
-Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('5','Contador');
-Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('6','Bodeguero');
+Insert into ROL (ROL_ID,NOMBRE) values ('1','admin');
+Insert into ROL (ROL_ID,NOMBRE) values ('2','cajero');
+Insert into ROL (ROL_ID,NOMBRE) values ('3','Propietario');
+Insert into ROL (ROL_ID,NOMBRE) values ('4','Developer');
+Insert into ROL (ROL_ID,NOMBRE) values ('5','Contador');
+Insert into ROL (ROL_ID,NOMBRE) values ('6','Bodeguero');
 --fin rol
 
 --usuario
