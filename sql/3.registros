@@ -1,0 +1,12 @@
+--rol 
+Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('1','admin');
+Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('2','cajero');
+Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('3','Propietario');
+Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('4','Developer');
+Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('5','Contador');
+Insert into ROL (ROL_ID,NOMBRE,ESTADO) values ('6','Bodeguero');
+--fin rol
+
+--usuario
+INSERT INTO public.usuario(usuario_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
+--fin usuario
