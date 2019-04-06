@@ -10,3 +10,21 @@ Insert into ROL (ROL_ID,NOMBRE) values ('6','Bodeguero');
 --usuario
 INSERT INTO public.usuario(usuario_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
 --fin usuario
+
+--menu--
+INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(1,'Facturación');
+INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(2,'facturación electrónica');
+INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(3,'Funciones');
+INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(4,'Usuarios');
+INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(5,'Listados');
+--menu
+
+--tipo_empresa
+INSERT INTO public.tipo_empresa(tipo_empresa_id, nombre)VALUES (1, 'Principal');
+INSERT INTO public.tipo_empresa(tipo_empresa_id, nombre)VALUES (2, 'Sucursal');
+--fin tipo_empresa
+
+--estado_empresa
+INSERT INTO public.estado_empresa(estado_empresa_id, nombre)VALUES (1, 'Activa');
+INSERT INTO public.estado_empresa(estado_empresa_id, nombre)VALUES (2, 'DesActiva');
+--fin estado_empresa
