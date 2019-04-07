@@ -82,6 +82,7 @@ CREATE  TABLE SUB_MENU (
   MENU_ID                          smallint,
   NOMBRE                           VARCHAR(50),
   URL                              VARCHAR(50),
+  OP                               smallint,
   CONSTRAINT PK_SUB_MENU
     PRIMARY KEY ( SUB_MENU_ID ) 
 );

@@ -10,6 +10,7 @@ class UsuarioRoutes{
     }
 
     config():void{
+        this.router.get('/opcionUsuarioByUsuario' ,usuarioController.opcionUsuarioByUsuario);
         this.router.get('/usuarioByMail' ,usuarioController.usuarioByMail);
         this.router.delete('/deleteUsuario/:id',usuarioController.deleteUsuario);
         this.router.post('/createUsuario',usuarioController.createUsuario);

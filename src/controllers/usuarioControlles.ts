@@ -11,6 +11,14 @@ class UsuarioControllers{
         res.json({"messsage":"usuario controller"});  
     }
 
+    public async opcionUsuarioByUsuario(req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId; 
+        const menuId = req.query.menuId; 
+        const opcionUsuario = await  db.query(usuarioRepository.opcionUsuarioByUsuario,[usuarioId,menuId]);       
+             res.json(opcionUsuario.rows);  
+       
+    }
+
     public deleteUsuario (req:Request, res:Response){
         res.json({"delete_usuario": +req.params.id});
     }

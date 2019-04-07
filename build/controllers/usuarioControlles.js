@@ -23,6 +23,14 @@ class UsuarioControllers {
             res.json({ "messsage": "usuario controller" });
         });
     }
+    opcionUsuarioByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const menuId = req.query.menuId;
+            const opcionUsuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.opcionUsuarioByUsuario, [usuarioId, menuId]);
+            res.json(opcionUsuario.rows);
+        });
+    }
     deleteUsuario(req, res) {
         res.json({ "delete_usuario": +req.params.id });
     }
