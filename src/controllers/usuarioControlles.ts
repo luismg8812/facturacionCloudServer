@@ -11,6 +11,18 @@ class UsuarioControllers{
         res.json({"messsage":"usuario controller"});  
     }
 
+    public async getRolByIds (req:Request, res:Response):Promise<any>{
+        console.log(req.query);
+        let ids:string = req.query.ids; 
+        var vid2=ids.split(",");
+        console.log(vid2);
+        const roles = await  db.query("select * from rol where rol_id in ("+vid2.toString()+")");       
+             res.json(roles.rows);  
+          
+    }
+
+    
+
     public async opcionUsuarioByUsuario(req:Request, res:Response):Promise<any>{
         const usuarioId = req.query.usuarioId; 
         const menuId = req.query.menuId; 

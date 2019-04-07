@@ -23,6 +23,16 @@ class UsuarioControllers {
             res.json({ "messsage": "usuario controller" });
         });
     }
+    getRolByIds(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.query);
+            let ids = req.query.ids;
+            var vid2 = ids.split(",");
+            console.log(vid2);
+            const roles = yield database_1.default.query("select * from rol where rol_id in (" + vid2.toString() + ")");
+            res.json(roles.rows);
+        });
+    }
     opcionUsuarioByUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuarioId = req.query.usuarioId;
