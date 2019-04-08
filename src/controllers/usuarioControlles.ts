@@ -11,6 +11,15 @@ class UsuarioControllers{
         res.json({"messsage":"usuario controller"});  
     }
 
+    public async getByUsuario (req:Request, res:Response):Promise<any>{
+        const usuario = req.query.usuario;
+        const empresaId = req.query.empresaId;
+        const rolId = req.query.rolId;
+        console.log(empresaId);
+        const usuarioRes = await  db.query(usuarioRepository.getByUsuario,[empresaId]);       
+             res.json(usuarioRes.rows);  
+    }
+
     public async getRolByIds (req:Request, res:Response):Promise<any>{
         console.log(req.query);
         let ids:string = req.query.ids; 
