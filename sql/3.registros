@@ -8,7 +8,7 @@ Insert into ROL (ROL_ID,NOMBRE) values ('6','Bodeguero');
 --fin rol
 
 --usuario
-INSERT INTO public.usuario(usuario_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
+INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
 --fin usuario
 
 --menu--

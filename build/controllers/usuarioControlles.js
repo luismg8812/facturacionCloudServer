@@ -56,8 +56,19 @@ class UsuarioControllers {
     }
     createUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //await db.query("insert into usuario set ? ",[req.body]);
-            //res.json({"message:"user saved"});
+            delete req.body.usuario_id;
+            var empresa_id = req.body.empresa_id;
+            var nombre = req.body.nombre;
+            var apellido = req.body.apellido;
+            var correo = req.body.correo;
+            var clave = req.body.clave;
+            var fecha_registro = req.body.fecha_registro;
+            var identificacion = req.body.identificacion;
+            var estado = req.body.estado;
+            console.log(empresa_id);
+            const usuario = yield database_1.default.query("INSERT INTO usuario(empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado) VALUES ($1,$2,$3,$4,$5,$6,$7,$8 )", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado]);
+            console.log("usuario guardo:");
+            res.json({ "code": 200 });
         });
     }
     updateUsuario(req, res) {

@@ -1,0 +1,4 @@
+create sequence S_USUARIO
+START WITH 50
+increment by 1
+;
