@@ -20,7 +20,6 @@ class UsuarioControllers {
             console.log(mail);
             const usuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.usuarioByMail, [mail]);
             res.json(usuario.rows);
-            res.json({ "messsage": "usuario controller" });
         });
     }
     getByUsuario(req, res) {
@@ -79,6 +78,14 @@ class UsuarioControllers {
     }
     updateUsuario(req, res) {
         res.json({ "update_usuario": +req.params.id });
+    }
+    getRolByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            console.log(usuarioId);
+            const rol = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getRolByUsuario, [usuarioId]);
+            res.json(rol.rows);
+        });
     }
 }
 exports.usuarioController = new UsuarioControllers();

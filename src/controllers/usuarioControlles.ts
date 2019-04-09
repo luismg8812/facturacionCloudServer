@@ -7,8 +7,7 @@ class UsuarioControllers{
         const mail = req.query.mail; 
         console.log(mail);
         const usuario = await  db.query(usuarioRepository.usuarioByMail,[mail]);       
-             res.json(usuario.rows);  
-        res.json({"messsage":"usuario controller"});  
+             res.json(usuario.rows);   
     }
 
     public async getByUsuario (req:Request, res:Response):Promise<any>{
@@ -69,6 +68,13 @@ class UsuarioControllers{
  
     public updateUsuario (req:Request, res:Response){
         res.json({"update_usuario": +req.params.id});
+    }
+
+    public async getRolByUsuario (req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId; 
+        console.log(usuarioId);
+        const rol = await  db.query(usuarioRepository.getRolByUsuario,[usuarioId]);       
+             res.json(rol.rows);        
     }
 }
 

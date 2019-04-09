@@ -14,6 +14,7 @@ class UsuarioRoutes{
         this.router.get('/usuarioByMail' ,usuarioController.usuarioByMail);
         this.router.get('/getRolByIds' ,usuarioController.getRolByIds);
         this.router.get('/getByUsuario' ,usuarioController.getByUsuario);
+        this.router.get('/getRolByUsuario' ,usuarioController.getRolByUsuario);
         this.router.delete('/deleteUsuario/:id',usuarioController.deleteUsuario);
         this.router.post('/createUsuario',usuarioController.createUsuario);
         this.router.put('/updateUsuario/:id',usuarioController.updateUsuario);
