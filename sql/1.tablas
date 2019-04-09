@@ -91,7 +91,7 @@ ALTER TABLE SUB_MENU ADD CONSTRAINT FK_SUB_MENU_REFERENCE_MENU
     REFERENCES MENU (MENU_ID);
 	
 CREATE  TABLE USUARIO (
-  USUARIO_ID                       int NOT NULL,
+  USUARIO_ID                       int DEFAULT nextval('S_USUARIO'),
   EMPRESA_ID					   SMALLINT,
   NOMBRE                           VARCHAR(100),
   APELLIDO                         VARCHAR(100),
@@ -125,7 +125,7 @@ ALTER TABLE OPCION_USUARIO ADD CONSTRAINT FK_OPCION_REFERENCE_SUB_M
     REFERENCES SUB_MENU (SUB_MENU_ID);
 
 CREATE  TABLE ROL_USUARIO (
-  ROL_USUARIO_ID                int NOT NULL,
+  ROL_USUARIO_ID                int NOT NULL DEFAULT nextval('S_ROL_USUARIO'),
   ROL_ID                      smallint,
   USUARIO_ID                       int,
   CONSTRAINT PK_ROL_USUARIO

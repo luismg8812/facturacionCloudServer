@@ -2,3 +2,8 @@ create sequence S_USUARIO
 START WITH 50
 increment by 1
 ;
+
+create sequence S_ROL_USUARIO
+START WITH 50
+increment by 1
+;

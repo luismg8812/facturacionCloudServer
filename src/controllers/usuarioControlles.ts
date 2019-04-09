@@ -45,6 +45,9 @@ class UsuarioControllers{
     }
 
     public async createUsuario (req:Request, res:Response):Promise<any>{
+        
+        let roles:string[]=req.query.rolId.split(",");
+        console.log(req.query.rolId);
         delete req.body.usuario_id; 
         var empresa_id =req.body.empresa_id;
         var nombre =req.body.nombre;
@@ -54,10 +57,14 @@ class UsuarioControllers{
         var fecha_registro =req.body.fecha_registro;
         var  identificacion=req.body.identificacion;
         var  estado=req.body.estado;
-        console.log(empresa_id);
-        const  usuario=  await db.query("INSERT INTO usuario(empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado) VALUES ($1,$2,$3,$4,$5,$6,$7,$8 )", [empresa_id,nombre,apellido,correo,clave,fecha_registro,identificacion,estado]);
+        console.log(req.body);
+        await db.query("INSERT INTO usuario(empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado) VALUES ($1,$2,$3,$4,$5,$6,$7,$8 )", [empresa_id,nombre,apellido,correo,clave,fecha_registro,identificacion,estado]);
+        const usuario = await  db.query(usuarioRepository.usuarioByMail,[correo]);
+        for(let i=0; i<roles.length;i++){
+            await db.query("INSERT INTO rol_usuario(rol_id, usuario_id) VALUES ($1,$2)", [roles[i],usuario.rows[0].usuario_id]);
+        }
         console.log("usuario guardo:");
-        res.json({"code":200});
+        res.json({"code":200,"usuario_id":usuario.rows[0].usuario_id});
     }
  
     public updateUsuario (req:Request, res:Response){
