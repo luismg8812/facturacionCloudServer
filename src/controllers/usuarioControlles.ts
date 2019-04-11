@@ -65,10 +65,30 @@ class UsuarioControllers{
         console.log("usuario guardo:");
         res.json({"code":200,"usuario_id":usuario.rows[0].usuario_id});
     }
- 
-    public updateUsuario (req:Request, res:Response){
-        res.json({"update_usuario": +req.params.id});
+
+    public async updateUsuario (req:Request, res:Response):Promise<any>{
+        
+        let roles:string[]=req.query.rolId.split(",");
+        console.log(req.query.rolId);
+        var usuario_id =req.body.usuario_id;
+        var empresa_id =req.body.empresa_id;
+        var nombre =req.body.nombre;
+        var  apellido=req.body.apellido;
+        var correo =req.body.correo;
+        var clave =req.body.clave;
+        var fecha_registro =req.body.fecha_registro;
+        var  identificacion=req.body.identificacion;
+        var  estado=req.body.estado;
+        console.log(req.body);
+        await db.query("UPDATE usuario set empresa_id=$1, nombre=$2, apellido=$3, correo=$4, clave=$5, fecha_registro=$6, identificacion=$7, estado=$8 where usuario_id=$9", [empresa_id,nombre,apellido,correo,clave,fecha_registro,identificacion,estado,usuario_id]);
+        const usuario = await  db.query(usuarioRepository.deleteRolUsuario,[usuario_id]);
+        for(let i=0; i<roles.length;i++){
+            await db.query("INSERT INTO rol_usuario(rol_id, usuario_id) VALUES ($1,$2)", [roles[i],usuario_id]);
+        }
+        console.log("usuario guardo:");
+        res.json({"code":200,"usuario_id":usuario_id});
     }
+ 
 
     public async getRolByUsuario (req:Request, res:Response):Promise<any>{
         const usuarioId = req.query.usuarioId; 

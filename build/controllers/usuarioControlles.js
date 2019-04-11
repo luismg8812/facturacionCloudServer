@@ -77,7 +77,27 @@ class UsuarioControllers {
         });
     }
     updateUsuario(req, res) {
-        res.json({ "update_usuario": +req.params.id });
+        return __awaiter(this, void 0, void 0, function* () {
+            let roles = req.query.rolId.split(",");
+            console.log(req.query.rolId);
+            var usuario_id = req.body.usuario_id;
+            var empresa_id = req.body.empresa_id;
+            var nombre = req.body.nombre;
+            var apellido = req.body.apellido;
+            var correo = req.body.correo;
+            var clave = req.body.clave;
+            var fecha_registro = req.body.fecha_registro;
+            var identificacion = req.body.identificacion;
+            var estado = req.body.estado;
+            console.log(req.body);
+            yield database_1.default.query("UPDATE usuario set empresa_id=$1, nombre=$2, apellido=$3, correo=$4, clave=$5, fecha_registro=$6, identificacion=$7, estado=$8 where usuario_id=$9", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, usuario_id]);
+            const usuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.deleteRolUsuario, [usuario_id]);
+            for (let i = 0; i < roles.length; i++) {
+                yield database_1.default.query("INSERT INTO rol_usuario(rol_id, usuario_id) VALUES ($1,$2)", [roles[i], usuario_id]);
+            }
+            console.log("usuario guardo:");
+            res.json({ "code": 200, "usuario_id": usuario_id });
+        });
     }
     getRolByUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

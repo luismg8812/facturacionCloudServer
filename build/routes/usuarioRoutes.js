@@ -15,7 +15,7 @@ class UsuarioRoutes {
         this.router.get('/getRolByUsuario', usuarioControlles_1.usuarioController.getRolByUsuario);
         this.router.delete('/deleteUsuario/:id', usuarioControlles_1.usuarioController.deleteUsuario);
         this.router.post('/createUsuario', usuarioControlles_1.usuarioController.createUsuario);
-        this.router.put('/updateUsuario/:id', usuarioControlles_1.usuarioController.updateUsuario);
+        this.router.put('/updateUsuario', usuarioControlles_1.usuarioController.updateUsuario);
     }
 }
 const usuarioRoutes = new UsuarioRoutes();
