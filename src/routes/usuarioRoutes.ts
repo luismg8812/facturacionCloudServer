@@ -18,6 +18,8 @@ class UsuarioRoutes{
         this.router.delete('/deleteUsuario/:id',usuarioController.deleteUsuario);
         this.router.post('/createUsuario',usuarioController.createUsuario);
         this.router.put('/updateUsuario',usuarioController.updateUsuario);
+        this.router.get('/getSubMenuAll' ,usuarioController.getSubMenuAll);
+        
     }
 }
 const usuarioRoutes= new UsuarioRoutes();

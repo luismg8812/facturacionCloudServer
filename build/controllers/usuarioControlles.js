@@ -107,5 +107,11 @@ class UsuarioControllers {
             res.json(rol.rows);
         });
     }
+    getSubMenuAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rol = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getSubMenuAll);
+            res.json(rol.rows);
+        });
+    }
 }
 exports.usuarioController = new UsuarioControllers();

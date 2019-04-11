@@ -6,6 +6,8 @@ class UsuarioRepository{
     public getByUsuario:string="select * from usuario where empresa_id = $1"; 
     public getRolByUsuario:string="select * from rol_usuario where usuario_id = $1";
     public deleteRolUsuario:string="delete from rol_usuario where usuario_id = $1";
+    public getSubMenuAll:string="select * from sub_menu";
+    
 }
 
 export const usuarioRepository = new UsuarioRepository();

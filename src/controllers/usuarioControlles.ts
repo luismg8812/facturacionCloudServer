@@ -96,6 +96,12 @@ class UsuarioControllers{
         const rol = await  db.query(usuarioRepository.getRolByUsuario,[usuarioId]);       
              res.json(rol.rows);        
     }
+
+    public async getSubMenuAll (req:Request, res:Response):Promise<any>{
+        
+        const rol = await  db.query(usuarioRepository.getSubMenuAll);       
+             res.json(rol.rows);        
+    }
 }
 
 export const usuarioController = new UsuarioControllers();
