@@ -39,6 +39,15 @@ class UsuarioControllers{
        
     }
 
+    public async opcionUsuarioByUsuarioSinMenu(req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId; 
+        const opcionUsuario = await  db.query(usuarioRepository.opcionUsuarioByUsuarioSinMenu,[usuarioId]);       
+             res.json(opcionUsuario.rows);  
+       
+    }
+
+    
+
     public deleteUsuario (req:Request, res:Response){
         res.json({"delete_usuario": +req.params.id});
     }
