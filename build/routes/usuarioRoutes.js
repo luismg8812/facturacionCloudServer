@@ -18,6 +18,7 @@ class UsuarioRoutes {
         this.router.put('/updateUsuario', usuarioControlles_1.usuarioController.updateUsuario);
         this.router.get('/getSubMenuAll', usuarioControlles_1.usuarioController.getSubMenuAll);
         this.router.get('/opcionUsuarioByUsuarioSinMenu', usuarioControlles_1.usuarioController.opcionUsuarioByUsuarioSinMenu);
+        this.router.get('/getActivacionByUsuario', usuarioControlles_1.usuarioController.getActivacionByUsuario);
     }
 }
 const usuarioRoutes = new UsuarioRoutes();

@@ -57,6 +57,13 @@ class UsuarioControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getActivacionByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const opcionUsuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getActivacionByUsuario, [usuarioId]);
+            res.json(opcionUsuario.rows);
+        });
+    }
     deleteUsuario(req, res) {
         res.json({ "delete_usuario": +req.params.id });
     }

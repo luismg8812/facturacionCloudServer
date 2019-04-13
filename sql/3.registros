@@ -44,12 +44,13 @@ Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (2,1,'Entradas d
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios del Sistema','/usuarios',0);
 --fin sub-menu
 
+--activaciones
+INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (1, 'Activar Comandas');
+INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (2, 'Activar impresión en pantalla');
+INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (3, 'Activar proporción');
+INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (4, 'Activar proporción');
+INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (5, 'Activar Ver remisiones En cuadre de caja');
 
-
-
-
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('6','Inventario Fisico','1','PF(''inventario_fisico'').show()','/WEB-INF/facelets/actividad/inventarioFisico/inventarioFisico.xhtml','inventario_fisico');
 
 
 
@@ -61,7 +62,7 @@ Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('2','Terceros',
 
 
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('4','Entrega mercancia','1','PF(''entrega_mercancia'').show()','/WEB-INF/facelets/actividad/entregaMercancia/entregaMercancia.xhtml','entrega_mercancia');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('5','Activar Comandas','1',null,null,'activar_comandas');
+
 
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('7','Clientes','1','PF(''clientes'').show()','/WEB-INF/facelets/clientes/clientes/clientes.xhtml','clientes');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('8','Envio documentos','1','PF(''envio_documentos'').show()','/WEB-INF/facelets/electronic/envioDoc/envioDocumento.xhtml','envio_documentos');
@@ -74,10 +75,10 @@ Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('14','Abonos Cl
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('15','Cuadre de Caja','1','PF(''cuadre_caja'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/opcion.xhtml','cuadre_caja');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('16','Avance Efectivo','1','PF(''avance_afectivo'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/avanceEfectivo.xhtml','avance_afectivo');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('17','Buscar Documentos X Fecha','1','PF(''buscar_factura'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/buscarFactura/buscarFactura.xhtml','buscar_factura');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('18','Activar impresión en pantalla','1',null,null,'activar_impresion_pantalla');
+
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('19','Exportar Contabilidad DELTA','1','PF(''contabilidad_delta'').show();','/WEB-INF/facelets/electronic/exportarContavilidadDelta/exportarContavilidadDelta.xhtml','contabilidad_delta');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('20','Activar proporción','1',null,null,'activar_proporcion');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('21','Activar Ver remisiones En cuadre de caja','1',null,null,'ver_remisiones');
+
+Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('21','','1',null,null,'ver_remisiones');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('22','Cuadre Diario','1','PF(''reduccion'').show();','/WEB-INF/facelets/precios/reduccion/reduccion.xhtml','reduccion');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('23','Cierre Diario','1','PF(''cierre_diario'').hide();',null,'cierre_diario');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('24','Activar múltiples impresoras','1',null,null,'multiples_impresoras');

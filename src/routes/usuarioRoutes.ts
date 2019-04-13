@@ -20,6 +20,7 @@ class UsuarioRoutes{
         this.router.put('/updateUsuario',usuarioController.updateUsuario);
         this.router.get('/getSubMenuAll' ,usuarioController.getSubMenuAll);
         this.router.get('/opcionUsuarioByUsuarioSinMenu' ,usuarioController.opcionUsuarioByUsuarioSinMenu);
+        this.router.get('/getActivacionByUsuario' ,usuarioController.getActivacionByUsuario);
         
     }
 }

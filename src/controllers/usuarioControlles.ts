@@ -46,6 +46,15 @@ class UsuarioControllers{
        
     }
 
+    public async getActivacionByUsuario(req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId; 
+        const opcionUsuario = await  db.query(usuarioRepository.getActivacionByUsuario,[usuarioId]);       
+             res.json(opcionUsuario.rows);  
+       
+    }
+
+    
+
     
 
     public deleteUsuario (req:Request, res:Response){
