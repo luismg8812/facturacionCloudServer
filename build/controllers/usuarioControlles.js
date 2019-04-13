@@ -127,5 +127,11 @@ class UsuarioControllers {
             res.json(rol.rows);
         });
     }
+    getActivacionAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rol = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getActivacionAll);
+            res.json(rol.rows);
+        });
+    }
 }
 exports.usuarioController = new UsuarioControllers();

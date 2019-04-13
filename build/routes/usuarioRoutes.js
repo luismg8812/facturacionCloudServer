@@ -17,6 +17,7 @@ class UsuarioRoutes {
         this.router.post('/createUsuario', usuarioControlles_1.usuarioController.createUsuario);
         this.router.put('/updateUsuario', usuarioControlles_1.usuarioController.updateUsuario);
         this.router.get('/getSubMenuAll', usuarioControlles_1.usuarioController.getSubMenuAll);
+        this.router.get('/getActivacionAll', usuarioControlles_1.usuarioController.getActivacionAll);
         this.router.get('/opcionUsuarioByUsuarioSinMenu', usuarioControlles_1.usuarioController.opcionUsuarioByUsuarioSinMenu);
         this.router.get('/getActivacionByUsuario', usuarioControlles_1.usuarioController.getActivacionByUsuario);
     }

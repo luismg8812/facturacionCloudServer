@@ -120,6 +120,13 @@ class UsuarioControllers{
         const rol = await  db.query(usuarioRepository.getSubMenuAll);       
              res.json(rol.rows);        
     }
+
+    public async getActivacionAll (req:Request, res:Response):Promise<any>{
+        
+        const rol = await  db.query(usuarioRepository.getActivacionAll);       
+             res.json(rol.rows);        
+    }
+    
 }
 
 export const usuarioController = new UsuarioControllers();

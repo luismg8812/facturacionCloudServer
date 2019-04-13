@@ -10,6 +10,7 @@ class UsuarioRepository {
         this.getRolByUsuario = "select * from rol_usuario where usuario_id = $1";
         this.deleteRolUsuario = "delete from rol_usuario where usuario_id = $1";
         this.getSubMenuAll = "select * from sub_menu";
+        this.getActivacionAll = "select * from activacion";
     }
 }
 exports.usuarioRepository = new UsuarioRepository();
