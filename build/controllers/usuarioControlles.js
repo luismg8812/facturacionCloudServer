@@ -133,5 +133,32 @@ class UsuarioControllers {
             res.json(rol.rows);
         });
     }
+    guardarRutas(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            let subMenuId = req.query.subMenuId.split(",");
+            console.log(subMenuId);
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.deleteOpcionUsuario, [usuarioId]);
+            for (let i = 0; i < subMenuId.length; i++) {
+                console.log(subMenuId[i]);
+                yield database_1.default.query("INSERT INTO opcion_usuario(sub_menu_id, usuario_id, fecha_registro,estado) VALUES ($1,$2,NOW(),1)", [subMenuId[i], usuarioId]);
+            }
+            console.log("rutas guardo:");
+            res.json({ "code": 200, "usuario_id": usuarioId });
+        });
+    }
+    guardarActivaciones(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            let activacionId = req.query.activacionId.split(",");
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.deleteActivacionUsuario, [usuarioId]);
+            console.log(usuarioId);
+            for (let i = 0; i < activacionId.length; i++) {
+                yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
+            }
+            console.log("rutas guardo:");
+            res.json({ "code": 200, "usuario_id": usuarioId });
+        });
+    }
 }
 exports.usuarioController = new UsuarioControllers();

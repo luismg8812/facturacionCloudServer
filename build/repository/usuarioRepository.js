@@ -9,6 +9,8 @@ class UsuarioRepository {
         this.getByUsuario = "select * from usuario where empresa_id = $1";
         this.getRolByUsuario = "select * from rol_usuario where usuario_id = $1";
         this.deleteRolUsuario = "delete from rol_usuario where usuario_id = $1";
+        this.deleteOpcionUsuario = "delete from opcion_usuario where usuario_id = $1";
+        this.deleteActivacionUsuario = "delete from activacion_usuario where usuario_id = $1";
         this.getSubMenuAll = "select * from sub_menu";
         this.getActivacionAll = "select * from activacion";
     }

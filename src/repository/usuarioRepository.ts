@@ -10,6 +10,8 @@ class UsuarioRepository{
     public getByUsuario:string="select * from usuario where empresa_id = $1"; 
     public getRolByUsuario:string="select * from rol_usuario where usuario_id = $1";
     public deleteRolUsuario:string="delete from rol_usuario where usuario_id = $1";
+    public deleteOpcionUsuario:string="delete from opcion_usuario where usuario_id = $1";
+    public deleteActivacionUsuario:string="delete from activacion_usuario where usuario_id = $1";
     public getSubMenuAll:string="select * from sub_menu";
     public getActivacionAll:string="select * from activacion";
     

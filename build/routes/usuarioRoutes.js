@@ -20,6 +20,8 @@ class UsuarioRoutes {
         this.router.get('/getActivacionAll', usuarioControlles_1.usuarioController.getActivacionAll);
         this.router.get('/opcionUsuarioByUsuarioSinMenu', usuarioControlles_1.usuarioController.opcionUsuarioByUsuarioSinMenu);
         this.router.get('/getActivacionByUsuario', usuarioControlles_1.usuarioController.getActivacionByUsuario);
+        this.router.get('/guardarRutas', usuarioControlles_1.usuarioController.guardarRutas);
+        this.router.get('/guardarActivaciones', usuarioControlles_1.usuarioController.guardarActivaciones);
     }
 }
 const usuarioRoutes = new UsuarioRoutes();

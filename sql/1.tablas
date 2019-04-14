@@ -109,7 +109,7 @@ ALTER TABLE usuario ADD CONSTRAINT FK_EMPR_REFEREN_USU
     REFERENCES EMPRESA (EMPRESA_ID);
 
 CREATE  TABLE OPCION_USUARIO (
-  OPCION_USUARIO_ID                int NOT NULL,
+  OPCION_USUARIO_ID                int NOT NULL DEFAULT nextval('S_OPCION_USUARIO'),
   SUB_MENU_ID                      smallint,
   USUARIO_ID                       int,
   ESTADO                           VARCHAR(1),
@@ -141,7 +141,7 @@ ALTER TABLE ROL_USUARIO ADD CONSTRAINT FK_ROL_USU_REFERENCE_ROL
 
 
 CREATE  TABLE ACTIVACION (
-  ACTIVACION_ID                    smallint NOT NULL,
+  ACTIVACION_ID                    smallint NOT NULL ,
   NOMBRE                           VARCHAR(100),
   CONSTRAINT PK_ACTIVACION
     PRIMARY KEY ( ACTIVACION_ID ) 
@@ -149,7 +149,7 @@ CREATE  TABLE ACTIVACION (
 
 	
 CREATE  TABLE ACTIVACION_USUARIO (
-  ACTIVACION_USUARIO_ID            int NOT NULL,
+  ACTIVACION_USUARIO_ID            int NOT NULL DEFAULT nextval('S_ACTIVACION_USUARIO'),
   ACTIVACION_ID                    smallint,
   USUARIO_ID                       int,
   ESTADO                           VARCHAR(1),

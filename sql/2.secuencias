@@ -7,3 +7,13 @@ create sequence S_ROL_USUARIO
 START WITH 50
 increment by 1
 ;
+
+create sequence S_OPCION_USUARIO
+START WITH 200
+increment by 1
+;
+
+create sequence S_ACTIVACION_USUARIO
+START WITH 200
+increment by 1
+;

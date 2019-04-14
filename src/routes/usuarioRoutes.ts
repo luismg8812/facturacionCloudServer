@@ -23,6 +23,8 @@ class UsuarioRoutes{
         
         this.router.get('/opcionUsuarioByUsuarioSinMenu' ,usuarioController.opcionUsuarioByUsuarioSinMenu);
         this.router.get('/getActivacionByUsuario' ,usuarioController.getActivacionByUsuario);
+        this.router.get('/guardarRutas' ,usuarioController.guardarRutas);
+        this.router.get('/guardarActivaciones' ,usuarioController.guardarActivaciones);
         
     }
 }

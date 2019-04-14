@@ -43,14 +43,12 @@ class UsuarioControllers{
         const usuarioId = req.query.usuarioId; 
         const opcionUsuario = await  db.query(usuarioRepository.opcionUsuarioByUsuarioSinMenu,[usuarioId]);       
              res.json(opcionUsuario.rows);  
-       
     }
 
     public async getActivacionByUsuario(req:Request, res:Response):Promise<any>{
         const usuarioId = req.query.usuarioId; 
         const opcionUsuario = await  db.query(usuarioRepository.getActivacionByUsuario,[usuarioId]);       
              res.json(opcionUsuario.rows);  
-       
     }
 
     
@@ -125,6 +123,33 @@ class UsuarioControllers{
         
         const rol = await  db.query(usuarioRepository.getActivacionAll);       
              res.json(rol.rows);        
+    }
+
+    public async guardarRutas (req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId;
+        let subMenuId:string[]=req.query.subMenuId.split(",");
+        console.log(subMenuId); 
+        await  db.query(usuarioRepository.deleteOpcionUsuario,[usuarioId]);  
+        
+        for(let i=0; i<subMenuId.length;i++){
+            console.log(subMenuId[i]);
+            await db.query("INSERT INTO opcion_usuario(sub_menu_id, usuario_id, fecha_registro,estado) VALUES ($1,$2,NOW(),1)", [subMenuId[i],usuarioId]);
+        }
+        console.log("rutas guardo:");
+        res.json({"code":200,"usuario_id":usuarioId});
+        
+    }
+
+    public async guardarActivaciones (req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId;
+        let activacionId:string[]=req.query.activacionId.split(","); 
+        await  db.query(usuarioRepository.deleteActivacionUsuario,[usuarioId]);  
+        console.log(usuarioId);
+        for(let i=0; i<activacionId.length;i++){
+            await db.query("INSERT INTO activacion_usuario(activacion_id, usuario_id) VALUES ($1,$2)", [activacionId[i],usuarioId]);
+        }
+        console.log("rutas guardo:");
+        res.json({"code":200,"usuario_id":usuarioId});
     }
     
 }
