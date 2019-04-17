@@ -17,3 +17,49 @@ create sequence S_ACTIVACION_USUARIO
 START WITH 200
 increment by 1
 ;
+
+create sequence S_MARCA
+START WITH 10
+increment by 1
+;
+
+create sequence S_GRUPO
+START WITH 10
+increment by 1
+;
+
+create sequence S_MARCA
+START WITH 10
+increment by 1
+;
+
+create sequence S_EMPLEADO
+START WITH 10
+increment by 1
+;
+
+create sequence S_PROVEEDOR
+START WITH 10
+increment by 1
+;
+
+create sequence S_CLIENTE
+START WITH 10
+increment by 1
+;
+
+create sequence S_PRODUCTO
+START WITH 10
+increment by 1
+;
+
+create sequence S_PRODUCTO_EMPRESA
+START WITH 10
+increment by 1
+;
+
+
+create sequence S_TIPO_PAGO_DOCUMENTO
+START WITH 10
+increment by 1
+;

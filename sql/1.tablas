@@ -28,6 +28,140 @@ CREATE  TABLE   ESTADO_EMPRESA (
 
 
 
+
+CREATE  TABLE   EMPLEADO (
+  EMPLEADO_ID                      smallint NOT NULL DEFAULT nextval('S_EMPLEADO'),
+  NOMBRE                           VARCHAR(100),
+  APELLIDO                         VARCHAR(100),
+  TELEFONO                         VARCHAR(20),
+  IDENTIFICACION                   VARCHAR(20),
+  ESTADO                           smallint,
+  CONSTRAINT PK_EMPLEADO
+    PRIMARY KEY ( EMPLEADO_ID ) 
+);  
+
+CREATE  TABLE departamento (
+ DEPARTAMENTO_ID                   smallint NOT NULL,
+ NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_DEPARTAMENTO
+    PRIMARY KEY ( DEPARTAMENTO_ID ) 
+);
+
+CREATE  TABLE INVOICE (
+  INVOICE_ID                smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_INVOICE
+    PRIMARY KEY ( INVOICE_ID ) 
+);
+
+CREATE  TABLE TIPO_PAGO(
+  TIPO_PAGO_ID                     smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_TIPO_PAGO
+    PRIMARY KEY ( TIPO_PAGO_ID ) 
+);
+
+CREATE  TABLE TIPO_DOCUMENTO(
+  TIPO_DOCUMENTO_ID                smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_TIPO_DOCUMENTO
+    PRIMARY KEY (TIPO_DOCUMENTO_ID) 
+);
+
+CREATE  TABLE CIUDAD (
+  CIUDAD_ID                        int NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  DEPARTAMENTO_ID                  smallint,
+  CONSTRAINT PK_CIUDAD
+    PRIMARY KEY ( CIUDAD_ID ) 
+);
+
+ALTER TABLE CIUDAD ADD CONSTRAINT FK_CIUDAD_REFERENCE_DEPAR
+ FOREIGN KEY (DEPARTAMENTO_ID)
+    REFERENCES DEPARTAMENTO (DEPARTAMENTO_ID); 
+
+CREATE  TABLE MARCA (
+  MARCA_ID                int NOT NULL DEFAULT nextval('S_MARCA'),
+  EMPRESA_ID			  int,
+  NOMBRE                  VARCHAR(50),
+  CONSTRAINT PK_MARCA
+    PRIMARY KEY ( MARCA_ID ) 
+);
+
+
+ALTER TABLE MARCA ADD CONSTRAINT FK_EMPR_REFERENCE_MARCA
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);
+
+CREATE  TABLE GRUPO (
+  GRUPO_ID                         smallint NOT NULL DEFAULT nextval('S_GRUPO'),
+  EMPRESA_ID			           int,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_GRUPO
+    PRIMARY KEY ( GRUPO_ID ) 
+);
+
+ALTER TABLE GRUPO ADD CONSTRAINT FK_EMPR_REFERENCE_GRUPO
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);
+
+
+CREATE  TABLE PROVEEDOR (
+  PROVEEDOR_ID                     int NOT NULL DEFAULT nextval('S_PROVEEDOR'),
+  CIUDAD_ID                        int,
+  EMPRESA_ID					   int, 
+  NOMBRE                           VARCHAR(100),
+  APELLIDOS                        VARCHAR(100),
+  DOCUMENTO                        VARCHAR(30),
+  BARRIO                           VARCHAR(50),
+  DIRECCION                        VARCHAR(50),
+  CELULAR                          decimal,
+  FIJO                             decimal,
+  FECHA_REGISTRO                   timestamp,
+  CREDITO_ACTIVO                   smallint,
+  CUPO_CREDITO                     decimal,
+  RETENCION                        decimal,
+  BASE_RETENCION				   decimal,
+  CONSTRAINT PK_PROVEEDOR
+    PRIMARY KEY ( PROVEEDOR_ID ) 
+);
+ALTER TABLE PROVEEDOR ADD CONSTRAINT FK_CIUDAD_REFERENCE_PROV
+  FOREIGN KEY (CIUDAD_ID)
+    REFERENCES CIUDAD (CIUDAD_ID);
+	
+ALTER TABLE PROVEEDOR ADD CONSTRAINT FK_EMPR_REFERENCE_PROV
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);	
+
+	    
+CREATE  TABLE CLIENTE (
+  CLIENTE_ID                       int NOT NULL DEFAULT nextval('S_CLIENTE'),
+  EMPRESA_ID					   int, 
+  NOMBRE                           VARCHAR(100),
+  APELLIDOS                        VARCHAR(100),
+  DOCUMENTO                        VARCHAR(30),
+  CIUDAD_ID                        int,
+  BARRIO                           VARCHAR(50),
+  DIRECCION                        VARCHAR(50),
+  CELULAR                          VARCHAR(20),
+  FIJO                             VARCHAR(20),
+  FECHA_REGISTRO                   timestamp,
+  CUMPLEANOS                       timestamp,
+  CREDITO_ACTIVO                   smallint,
+  CUPO_CREDITO                     decimal,
+  RETENCION                        decimal,
+  mail                             VARCHAR(100),
+  CONSTRAINT PK_CLIENTE
+    PRIMARY KEY ( CLIENTE_ID ) 
+);
+ALTER TABLE CLIENTE ADD CONSTRAINT FK_CIUDAD_REFERENCE_CLI
+  FOREIGN KEY (CIUDAD_ID)
+    REFERENCES CIUDAD (CIUDAD_ID);  
+ALTER TABLE CLIENTE ADD CONSTRAINT FK_EMPE_REFERENCE_CLI
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID); 	
+
+
 CREATE  TABLE EMPRESA (
   EMPRESA_ID                       smallint NOT NULL,
   TIPO_EMPRESA_ID 				   smallint,
@@ -147,7 +281,6 @@ CREATE  TABLE ACTIVACION (
     PRIMARY KEY ( ACTIVACION_ID ) 
 );
 
-	
 CREATE  TABLE ACTIVACION_USUARIO (
   ACTIVACION_USUARIO_ID            int NOT NULL DEFAULT nextval('S_ACTIVACION_USUARIO'),
   ACTIVACION_ID                    smallint,
@@ -166,3 +299,167 @@ ALTER TABLE ACTIVACION_USUARIO ADD CONSTRAINT FK_ACTIV_REFERENCE_USUA
 ALTER TABLE ACTIVACION_USUARIO ADD CONSTRAINT FK_ACT_USU_REFERENCE_ACT
   FOREIGN KEY (ACTIVACION_ID)
     REFERENCES ACTIVACION (ACTIVACION_ID);
+	
+CREATE  TABLE PRODUCTO (
+  PRODUCTO_ID                      int NOT NULL DEFAULT nextval('S_PRODUCTO'),
+  GRUPO_ID                         smallint,
+  EMPRESA_ID                       smallint,
+  MARCA_ID                         smallint,
+  PROVEEDOR_ID                     smallint,
+  FECHA_REGISTRO                   timestamp,
+  COSTO                            decimal,
+  COSTO_PUBLICO                    decimal,
+  IMPUESTO						   decimal,
+  STOCK_MIN                        decimal,
+  STOCK_MAX                        decimal,
+  CODIGO_BARRAS                    VARCHAR(200),
+  PESO                             decimal,
+  BALANZA                          smallint,
+  NOMBRE                           VARCHAR(200),
+  CANTIDAD                         decimal,
+  UNIDAD                           VARCHAR(20),
+  PROMO                            smallint,
+  PUB_PROMO                        decimal,
+  ESTADO                           smallint,
+  KG_PROMO                         decimal,
+  UTILIDAD_SUGERIDA                 decimal,
+  SUB_PRODUCTO					   smallint,
+  IMPRESO_COMANDA                  smallint,
+  CONSTRAINT PK_PRODUCTO
+    PRIMARY KEY ( PRODUCTO_ID ) 
+);
+
+ALTER TABLE PRODUCTO ADD CONSTRAINT FK_PRODUCTO_REFERENCE_MARCA
+  FOREIGN KEY (MARCA_ID)
+    REFERENCES MARCA (MARCA_ID);
+
+ALTER TABLE PRODUCTO ADD CONSTRAINT FK_PRODUCTO_REFERENCE_GRUPO
+  FOREIGN KEY (GRUPO_ID)
+    REFERENCES GRUPO (GRUPO_ID);
+
+ALTER TABLE PRODUCTO ADD CONSTRAINT FK_PRODUCTO_REFERENCE_PROV
+  FOREIGN KEY (PROVEEDOR_ID)
+    REFERENCES PROVEEDOR (PROVEEDOR_ID);
+
+ALTER TABLE PRODUCTO ADD CONSTRAINT FK_PRODUCTO_REFERENCE_EMPR
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);	
+		
+CREATE  TABLE DOCUMENTO (
+  DOCUMENTO_ID                     bigint NOT NULL DEFAULT nextval('S_DOCUMENTO'),
+  TIPO_DOCUMENTO_ID                smallint,
+  EMPRESA_ID					   int,
+  PROVEEDOR_ID                     int,
+  USUARIO_ID                       int,
+  CLIENTE_ID                       int,
+  EMPLEADO_ID                      smallint,
+  FECHA_REGISTRO                   timestamp,
+  CONSECUTIVO_DIAN                 varchar(20),
+  IMPRESO                          smallint,
+  TOTAL                            decimal,
+  EXCENTO                          decimal,
+  GRAVADO                          decimal,
+  IVA                              decimal,
+  CIERRE_DIARIO                    smallint,
+  DETALLE_ENTRADA                  VARCHAR(50),
+  MAC                              VARCHAR(100),
+  SALDO                            decimal,
+  PESO_TOTAL                       decimal,
+  DESCUENTO                        decimal,
+  CAMBIO                           decimal,
+  iva_5                           decimal,
+ iva_19                            decimal,
+ base_5                            decimal,
+ base_19                           decimal,
+ retefuente                        decimal,
+ INTERES 			 			   decimal,
+ TOTAL_COSTO 					   decimal,
+ LETRA_CONSECUTIVO 				   VARCHAR(10),
+ INVOICE						   smallint,
+ ANULADO                           smallint,
+  CONSTRAINT PK_DOCUMENTO
+    PRIMARY KEY ( DOCUMENTO_ID ) 
+);
+
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_CLIEN
+  FOREIGN KEY (CLIENTE_ID)
+    REFERENCES CLIENTE (CLIENTE_ID);
+
+
+
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_USUARIO
+  FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);
+
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_TIPO
+  FOREIGN KEY (TIPO_DOCUMENTO_ID)
+    REFERENCES TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID);
+
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_PROVEEDOR
+  FOREIGN KEY (PROVEEDOR_ID)
+    REFERENCES PROVEEDOR (PROVEEDOR_ID);
+    
+	
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_INVOICE
+FOREIGN KEY (INVOICE)
+REFERENCES INVOICE (INVOICE_ID);
+    
+	
+	
+CREATE  TABLE DOCUMENTO_DETALLE (
+  DOCUMENTO_DETALLE_ID             bigint NOT NULL DEFAULT nextval('S_DOCUMENTO_DETALLE'),
+  DOCUMENTO_ID                     bigint,
+  PRODUCTO_ID                      int,
+  FECHA_REGISTRO                   timestamp,
+  CANTIDAD                         decimal,
+  ESTADO                           smallint,
+  PARCIAL                          decimal,
+  UNITARIO 						   decimal,
+ IMPRESO_COMANDA 				   smallint,
+  CONSTRAINT PK_DOCUMENTO_DETALLE
+    PRIMARY KEY ( DOCUMENTO_DETALLE_ID ) 
+);
+
+COMMENT ON COLUMN DOCUMENTO_DETALLE.IMPRESO_COMANDA IS 'este campo controla cuando el producto esta en algula lista, si es ya se imprimio en como comanda';
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROD
+  FOREIGN KEY (PRODUCTO_ID)
+    REFERENCES PRODUCTO (PRODUCTO_ID);
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_DOCU
+  FOREIGN KEY (DOCUMENTO_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+	
+	
+CREATE  TABLE TIPO_PAGO_DOCUMENTO (
+  TIPO_PAGO_DOCUMENTO_ID           int NOT NULL DEFAULT nextval('S_TIPO_PAGO_DOCUMENTO'),
+  TIPO_PAGO_ID                    smallint,
+  DOCUMENTO_ID                       int,
+  FECHA_REGISTRO                   timestamp,
+  VALOR								DECIMAL
+  CONSTRAINT PK_TIPO_PAGO_DOCUMENTO
+    PRIMARY KEY ( TIPO_PAGO_DOCUMENTO_ID ) 
+);	
+
+CREATE  TABLE ABONO (
+  ABONO_ID                       int NOT NULL,
+  DOCUMENTO_ID                    int,
+  TIPO_PAGO_ID                    int,
+  USUARIO_ID                      int,
+  CANTIDAD                        decimal,
+  FECHA_INGRESO                   timestamp,
+  CONSTRAINT PK_ABONO
+    PRIMARY KEY ( ABONO_ID ) 
+);    
+ALTER TABLE ABONO ADD CONSTRAINT FK_ABON_REFERENCE_USUARIO
+  FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);
+
+ALTER TABLE ABONO ADD CONSTRAINT FK_ABONO_REFERENCE_TIPA
+  FOREIGN KEY (TIPO_PAGO_ID)
+    REFERENCES TIPO_PAGO (TIPO_PAGO_ID);   
+	
+
+ALTER TABLE ABONO ADD CONSTRAINT FK_ABONO_REFERENCE_DOCU
+  FOREIGN KEY (DOCUMENTO_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);	
