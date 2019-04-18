@@ -9,6 +9,7 @@ class ProductoRoutes {
     }
     config() {
         this.router.get('/getProductosByEmpresa', productoControllers_1.productoControllers.getProductosByEmpresa);
+        this.router.get('/getProductoById', productoControllers_1.productoControllers.getProductoById);
     }
 }
 const productoRoutes = new ProductoRoutes();

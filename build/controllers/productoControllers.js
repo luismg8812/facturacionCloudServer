@@ -21,5 +21,13 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getProductoById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const productoId = req.query.productoId;
+            const productos = yield database_1.default.query(productoRepository_1.productoRepository.getProductoById, [empresaId, productoId]);
+            res.json(productos.rows);
+        });
+    }
 }
 exports.productoControllers = new ProductoControllers();

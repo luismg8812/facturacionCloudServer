@@ -64,6 +64,7 @@ INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (15, 'Activar Cambi
 INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (16, 'Activar aplicar descuento en factura');
 INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (17, 'Activar bloqueo de cuadre de caja');
 INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (18, 'Activar asignación de empleados a factura');
+INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (19, 'Activar Cliente en facturación',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 
 
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('31','','1',null,null,'anular_factura');

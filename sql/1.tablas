@@ -217,6 +217,7 @@ CREATE  TABLE SUB_MENU (
   NOMBRE                           VARCHAR(50),
   URL                              VARCHAR(50),
   OP                               smallint,
+  DESCRIPCION					   VARCHAR(200),
   CONSTRAINT PK_SUB_MENU
     PRIMARY KEY ( SUB_MENU_ID ) 
 );
@@ -277,6 +278,7 @@ ALTER TABLE ROL_USUARIO ADD CONSTRAINT FK_ROL_USU_REFERENCE_ROL
 CREATE  TABLE ACTIVACION (
   ACTIVACION_ID                    smallint NOT NULL ,
   NOMBRE                           VARCHAR(100),
+  DESCRIPCION					   VARCHAR(200),
   CONSTRAINT PK_ACTIVACION
     PRIMARY KEY ( ACTIVACION_ID ) 
 );
@@ -325,6 +327,7 @@ CREATE  TABLE PRODUCTO (
   UTILIDAD_SUGERIDA                 decimal,
   SUB_PRODUCTO					   smallint,
   IMPRESO_COMANDA                  smallint,
+  VARIOS						   SMALLINT,
   CONSTRAINT PK_PRODUCTO
     PRIMARY KEY ( PRODUCTO_ID ) 
 );
