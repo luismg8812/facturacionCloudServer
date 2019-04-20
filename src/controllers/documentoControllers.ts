@@ -37,7 +37,7 @@ class DocumentoControllers{
         var letra_consecutivo = req.body.letra_consecutivo;
         var invoice=req.body.invoice;
         var anulado=req.body.anulado;
-        //console.log(req.body);
+        console.log(req.body);
         const id = await  db.query(documentoRepository.getIdDocumento);
         const documento_id = id.rows[0].nextval; 
         console.log(documento_id);
