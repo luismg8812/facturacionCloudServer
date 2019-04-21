@@ -1,0 +1,39 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const database_1 = __importDefault(require("../database"));
+class DocumentoDetalleControllers {
+    createDocumentoDetalle(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let documento_id = req.body.documento_id;
+            let producto_id = req.body.producto_id;
+            let fecha_registro = req.body.fecha_registro;
+            let cantidad = req.body.cantidad;
+            let estado = req.body.estado;
+            let parcial = req.body.parcial;
+            let unitario = req.body.unitario;
+            let impreso_comanda = req.body.impreso_comanda;
+            console.log(req.body);
+            //const id = await  db.query(documentoRepository.getIdDocumento);
+            //const documento_id = id.rows[0].nextval; 
+            //console.log(documento_id);
+            var query = "INSERT INTO documento_detalle(documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
+            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda]).then(res2 => {
+                res.json({ "code": 200, "documento_detalle_id": documento_id });
+            }).catch(error => {
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
+        });
+    }
+}
+exports.documentoDetalleControllers = new DocumentoDetalleControllers();

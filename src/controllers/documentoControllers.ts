@@ -7,12 +7,12 @@ class DocumentoControllers{
 
     public async createDocumento (req:Request, res:Response):Promise<any>{     
         
-        var tipo_documento_id =req.body.tipo_documento_id;
-        var empresa_id =req.body.empresa_id;
-        var proveedor_id=req.body.proveedor_id;
-        var usuario_id=req.body.usuario_id;
-        var cliente_id=req.body.cliente_id;
-        var empleado_id=req.body.empleado_id;
+        let tipo_documento_id:number =req.body.tipo_documento_id;
+        var empresa_id:number =req.body.empresa_id;
+        var proveedor_id:number=req.body.proveedor_id;
+        var usuario_id:number=req.body.usuario_id;
+        var cliente_id:number=req.body.cliente_id;
+        var empleado_id:number=req.body.empleado_id;
         var fecha_registro =req.body.fecha_registro;
         var consecutivo_dian=req.body.consecutivo_dian;
         var impreso=req.body.impreso;
@@ -42,9 +42,12 @@ class DocumentoControllers{
         const documento_id = id.rows[0].nextval; 
         console.log(documento_id);
         var query="INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,impuesto,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado) VALUES ($31,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$30 )";
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,impuesto,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado,documento_id]);
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,impuesto,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado,documento_id]).then(res2=>{
+            res.json({"code":200,"documento_id":documento_id});
+        }).catch(error=>{
+            res.json({"code":400,"documento_id":documento_id});
+        });
         
-        res.json({"code":200,"documento_id":documento_id});
     }
     
   
