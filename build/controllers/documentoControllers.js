@@ -54,6 +54,7 @@ class DocumentoControllers {
             yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, impuesto, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, invoice, anulado, documento_id]).then(res2 => {
                 res.json({ "code": 200, "documento_id": documento_id });
             }).catch(error => {
+                console.error(error);
                 res.json({ "code": 400, "documento_id": documento_id });
             });
         });
