@@ -9,6 +9,7 @@ class DocumentoDetalleControllers{
         let documento_id:number =req.body.documento_id;
         let producto_id:number =req.body.producto_id;
         let fecha_registro:Date =req.body.fecha_registro;
+        console.log(fecha_registro);
         let cantidad:number =req.body.cantidad;
         let estado:number =req.body.estado;
         let parcial:number =req.body.parcial;
@@ -19,11 +20,12 @@ class DocumentoDetalleControllers{
         const id = await  db.query(documentoDetalleRepository.getIdDocumentoDetalle);
         const documento_detalle_id = id.rows[0].nextval; 
         console.log(documento_detalle_id);
-        var query="INSERT INTO documento_detalle(documento_detalle_id,documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
+        var query="INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8)";
         await db.query(query, [documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda,documento_detalle_id]).then(res2=>{
             res.json({"code":200,"documento_detalle_id":documento_detalle_id});
         }).catch(error=>{
-            res.json({"code":400,"documento_detalle_id":documento_detalle_id});
+            console.log(error);
+            res.json({"code":400,"documento_detalle_id":documento_detalle_id,"error":error.error});
         });
         
     }
