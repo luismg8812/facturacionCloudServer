@@ -18,12 +18,12 @@ class DocumentoDetalleControllers{
         console.log(req.body);
         const id = await  db.query(documentoDetalleRepository.getIdDocumentoDetalle);
         const documento_detalle_id = id.rows[0].nextval; 
-        //console.log(documento_id);
+        console.log(documento_detalle_id);
         var query="INSERT INTO documento_detalle(documento_detalle_id,documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
         await db.query(query, [documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda,documento_detalle_id]).then(res2=>{
-            res.json({"code":200,"documento_detalle_id":documento_id});
+            res.json({"code":200,"documento_detalle_id":documento_detalle_id});
         }).catch(error=>{
-            res.json({"code":400,"documento_id":documento_id});
+            res.json({"code":400,"documento_detalle_id":documento_detalle_id});
         });
         
     }
