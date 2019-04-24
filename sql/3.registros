@@ -65,8 +65,26 @@ INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (16, 'Activar aplic
 INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (17, 'Activar bloqueo de cuadre de caja');
 INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (18, 'Activar asignación de empleados a factura');
 INSERT INTO public.activacion(	activacion_id, nombre)	VALUES (19, 'Activar Cliente en facturación',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
+-- fin activaciones
 
+--tipo documento data
+INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(1,'ENTRADA POR GUIA');
+INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(2,'ENTRADA ALMACEN');
+INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(3,'ENTRADAS X BAJAS');
+INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(4,'COTIZACIÓN');
+INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(5,'AVANCE EFECTIVO');
+INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(6,'SALIDAS ALMACEN');
+INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(7,'SALIDAS X BAJAS');
+INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(8,'VALES');
+INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(9,'NO. GUIA');
+INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(10,'FACTURA DE VENTA');
+--fin tipo documento
 
+-- invoice
+INSERT INTO public.invoice(invoice_id, nombre) VALUES (1, 'sin enviar');
+INSERT INTO public.invoice(invoice_id, nombre) VALUES (2, 'enviados');
+INSERT INTO public.invoice(invoice_id, nombre) VALUES (3, 'descartados');
+--fin invoice 
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('31','','1',null,null,'anular_factura');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('33','','1',null,null,'codigo_barras');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('43','','1',null,null,'facturacion_guia');

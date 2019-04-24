@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
+const documentoDetalleRepository_1 = require("../repository/documentoDetalleRepository");
 class DocumentoDetalleControllers {
     createDocumentoDetalle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,11 +25,11 @@ class DocumentoDetalleControllers {
             let unitario = req.body.unitario;
             let impreso_comanda = req.body.impreso_comanda;
             console.log(req.body);
-            //const id = await  db.query(documentoRepository.getIdDocumento);
-            //const documento_id = id.rows[0].nextval; 
+            const id = yield database_1.default.query(documentoDetalleRepository_1.documentoDetalleRepository.getIdDocumentoDetalle);
+            const documento_detalle_id = id.rows[0].nextval;
             //console.log(documento_id);
-            var query = "INSERT INTO documento_detalle(documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
-            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda]).then(res2 => {
+            var query = "INSERT INTO documento_detalle(documento_detalle_id,documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
+            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, documento_detalle_id]).then(res2 => {
                 res.json({ "code": 200, "documento_detalle_id": documento_id });
             }).catch(error => {
                 res.json({ "code": 400, "documento_id": documento_id });
