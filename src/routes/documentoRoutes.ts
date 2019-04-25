@@ -11,6 +11,8 @@ class DocumentoRoutes{
 
     config():void{
         this.router.post('/createDocumento' ,documentoControllers.createDocumento);
+        this.router.post('/updateDocumento' ,documentoControllers.updateDocumento);
+        
     }
 }
 const documentoRoutes= new DocumentoRoutes();

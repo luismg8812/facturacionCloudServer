@@ -9,6 +9,7 @@ class DocumentoRoutes {
     }
     config() {
         this.router.post('/createDocumento', documentoControllers_1.documentoControllers.createDocumento);
+        this.router.post('/updateDocumento', documentoControllers_1.documentoControllers.updateDocumento);
     }
 }
 const documentoRoutes = new DocumentoRoutes();
