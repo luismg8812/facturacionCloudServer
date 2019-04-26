@@ -29,5 +29,17 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    updateCantidad(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var producto_id = req.body.producto_id;
+            var cantidad = req.body.cantidad;
+            let query = "update producto set cantidad=$1 where producto_id = $2";
+            yield database_1.default.query(query, [cantidad, producto_id]).then(res2 => {
+                res.json({ "code": 200, "producto_id": producto_id });
+            }).catch(error => {
+                res.json({ "code": 200, "producto_id": producto_id, "error:": error.error });
+            });
+        });
+    }
 }
 exports.productoControllers = new ProductoControllers();

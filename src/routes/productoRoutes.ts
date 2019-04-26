@@ -12,6 +12,8 @@ class ProductoRoutes{
     config():void{
         this.router.get('/getProductosByEmpresa' ,productoControllers.getProductosByEmpresa);
         this.router.get('/getProductoById' ,productoControllers.getProductoById);
+        this.router.put('/updateCantidad' ,productoControllers.updateCantidad);
+        
         
     }
 }
