@@ -362,7 +362,7 @@ CREATE  TABLE DOCUMENTO (
   TOTAL                            decimal,
   EXCENTO                          decimal,
   GRAVADO                          decimal,
-  IVA                              decimal,
+  iva                         decimal,
   CIERRE_DIARIO                    smallint,
   DETALLE_ENTRADA                  VARCHAR(50),
   MAC                              VARCHAR(100),
@@ -466,3 +466,22 @@ ALTER TABLE ABONO ADD CONSTRAINT FK_ABONO_REFERENCE_TIPA
 ALTER TABLE ABONO ADD CONSTRAINT FK_ABONO_REFERENCE_DOCU
   FOREIGN KEY (DOCUMENTO_ID)
     REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+	
+CREATE  TABLE CONFIGURACION (
+  CONFIGURACION_ID                smallint NOT NULL,
+  EMPPRESA_ID					  int;
+  SERVER						  smallint,
+  FECHA_COMBINADA                 smallint,
+  impresion_continua              smallint,
+  nombre_producto_largo           smallint,
+  guardar_facturas                smallint,
+  gramera                         smallint,
+  num_impresion 				  smallint,
+  CONSTRAINT PK_CONFIGURACION
+    PRIMARY KEY ( CONFIGURACION_ID ) 
+);
+COMMENT ON COLUMN configuracion.impresion_continua IS 'campo para controla la impresion de los reportes despues de que se imprima el cuadre de caja(pedido por martin regifo)';
+COMMENT ON COLUMN configuracion.FECHA_COMBINADA IS 'campo que controla el nicio del dia, si es = 1 el dia comienza a las 5.59 y termina a las 6.00 del otro dia';
+COMMENT ON COLUMN configuracion.nombre_producto_largo IS 'este campo controla si se requiere mas espacio en la descripcion de la factura pero en dos lineas o mas corto pero en una sola linea';
+COMMENT ON COLUMN configuracion.guardar_facturas IS 'este campo controla si se guardan las facturas e informes en disco';
+COMMENT ON COLUMN configuracion.gramera IS 'este campo controla que tipo y marca de gramera se utiliza';	

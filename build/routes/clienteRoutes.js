@@ -9,6 +9,7 @@ class ClienteRoutes {
     }
     config() {
         this.router.get('/getClientesByEmpresa', clienteControllers_1.clienteControllers.getClientesByEmpresa);
+        this.router.get('/getConfiguracionByEmpresa', clienteControllers_1.clienteControllers.getConfiguracionByEmpresa);
     }
 }
 const clienteRoutes = new ClienteRoutes();

@@ -11,7 +11,9 @@ class ClienteRoutes{
 
     config():void{
         this.router.get('/getClientesByEmpresa' ,clienteControllers.getClientesByEmpresa);
+        this.router.get('/getConfiguracionByEmpresa' ,clienteControllers.getConfiguracionByEmpresa);
     }
+    
 }
 const clienteRoutes= new ClienteRoutes();
 export default clienteRoutes.router;

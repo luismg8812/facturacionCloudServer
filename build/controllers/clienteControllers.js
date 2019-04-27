@@ -21,5 +21,12 @@ class ClienteControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getConfiguracionByEmpresa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const configuracion = yield database_1.default.query(clienteRepository_1.clienteRepository.getConfiguracionByEmpresa, [empresaId]);
+            res.json(configuracion.rows);
+        });
+    }
 }
 exports.clienteControllers = new ClienteControllers();

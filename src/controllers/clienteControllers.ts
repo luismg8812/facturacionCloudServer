@@ -9,5 +9,13 @@ class ClienteControllers{
         const opcionUsuario = await  db.query(clienteRepository.getClientesByEmpresa,[empresaId]);       
              res.json(opcionUsuario.rows);  
     }
+
+    public async getConfiguracionByEmpresa(req:Request, res:Response):Promise<any>{
+        const empresaId = req.query.empresaId; 
+        const configuracion = await  db.query(clienteRepository.getConfiguracionByEmpresa,[empresaId]);       
+             res.json(configuracion.rows);  
+    }
+
+    
 }
 export const clienteControllers = new ClienteControllers();
