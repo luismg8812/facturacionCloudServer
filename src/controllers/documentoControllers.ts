@@ -49,6 +49,23 @@ class DocumentoControllers{
         });
     }
 
+    public async createTipoPagoDocumento (req:Request, res:Response):Promise<any>{            
+        var tipo_pago_id:number =req.body.tipo_pago_id;
+        var documento_id:number=req.body.documento_id;
+        var fecha_registro:number=req.body.fecha_registro;
+        var valor:number=req.body.valor;   
+        console.log(req.body);    
+        var query="INSERT INTO tipo_pago_documento(documento_id,tipo_pago_id, fecha_registro, valor) VALUES ($1,$2,$3,$4)";
+        await db.query(query, [documento_id, tipo_pago_id, fecha_registro, valor]).then(res2=>{
+            res.json({"code":200,"documento_id":documento_id});
+        }).catch(error=>{
+            console.error(error);
+            res.json({"code":400,"documento_id":documento_id});
+        });
+    }
+
+    
+
     public async updateDocumento (req:Request, res:Response):Promise<any>{ 
         let documento_id:number =req.body.documento_id;           
         let tipo_documento_id:number =req.body.tipo_documento_id;

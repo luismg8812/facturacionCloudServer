@@ -10,6 +10,7 @@ class DocumentoRoutes {
     config() {
         this.router.post('/createDocumento', documentoControllers_1.documentoControllers.createDocumento);
         this.router.post('/updateDocumento', documentoControllers_1.documentoControllers.updateDocumento);
+        this.router.post('/createTipoPagoDocumento', documentoControllers_1.documentoControllers.createTipoPagoDocumento);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

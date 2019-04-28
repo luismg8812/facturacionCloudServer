@@ -59,6 +59,22 @@ class DocumentoControllers {
             });
         });
     }
+    createTipoPagoDocumento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var tipo_pago_id = req.body.tipo_pago_id;
+            var documento_id = req.body.documento_id;
+            var fecha_registro = req.body.fecha_registro;
+            var valor = req.body.valor;
+            console.log(req.body);
+            var query = "INSERT INTO tipo_pago_documento(documento_id,tipo_pago_id, fecha_registro, valor) VALUES ($1,$2,$3,$4)";
+            yield database_1.default.query(query, [documento_id, tipo_pago_id, fecha_registro, valor]).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
+        });
+    }
     updateDocumento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let documento_id = req.body.documento_id;

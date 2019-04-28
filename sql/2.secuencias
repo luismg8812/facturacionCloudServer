@@ -53,13 +53,18 @@ START WITH 10
 increment by 1
 ;
 
-create sequence S_PRODUCTO_EMPRESA
+
+create sequence S_TIPO_PAGO_DOCUMENTO
 START WITH 10
 increment by 1
 ;
 
+create sequence S_DOCUMENTO
+START WITH 10
+increment by 1
+;
 
-create sequence S_TIPO_PAGO_DOCUMENTO
+create sequence S_DOCUMENTO_DETALLE
 START WITH 10
 increment by 1
 ;
