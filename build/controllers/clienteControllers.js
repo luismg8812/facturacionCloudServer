@@ -28,5 +28,11 @@ class ClienteControllers {
             res.json(configuracion.rows);
         });
     }
+    getTipoPago(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const tipoPago = yield database_1.default.query(clienteRepository_1.clienteRepository.getTipoPago);
+            res.json(tipoPago.rows);
+        });
+    }
 }
 exports.clienteControllers = new ClienteControllers();

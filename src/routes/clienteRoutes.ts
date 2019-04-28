@@ -12,6 +12,8 @@ class ClienteRoutes{
     config():void{
         this.router.get('/getClientesByEmpresa' ,clienteControllers.getClientesByEmpresa);
         this.router.get('/getConfiguracionByEmpresa' ,clienteControllers.getConfiguracionByEmpresa);
+        this.router.get('/getTipoPago' ,clienteControllers.getTipoPago);
+        
     }
     
 }

@@ -16,6 +16,11 @@ class ClienteControllers{
              res.json(configuracion.rows);  
     }
 
+    public async getTipoPago(req:Request, res:Response):Promise<any>{  
+        const tipoPago = await  db.query(clienteRepository.getTipoPago);       
+             res.json(tipoPago.rows);  
+    }
+
     
 }
 export const clienteControllers = new ClienteControllers();
