@@ -30,5 +30,19 @@ class EmpresaControllers {
             res.json(usuario.rows);
         });
     }
+    updateConsecutivoEmpresa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var consecutivo = req.body.consecutivo;
+            var empresa_id = req.body.empresa_id;
+            console.log(req.body);
+            var query = "UPDATE empresa SET  consecutivo=$1 WHERE empresa_id = $2";
+            yield database_1.default.query(query, [consecutivo, empresa_id]).then(res2 => {
+                res.json({ "code": 200, "empresa_id": empresa_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "empresa_id": empresa_id, "error": error.error });
+            });
+        });
+    }
 }
 exports.empresaControllers = new EmpresaControllers();
