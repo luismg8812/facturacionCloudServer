@@ -9,5 +9,18 @@ class EmpresaControllers{
         const usuario = await  db.query(empresaRepository.pagosEmpresaByEmpresa,[empresa_id]);       
              res.json(usuario.rows);     
     }
+    
+    public async getEmpresaById (req:Request, res:Response):Promise<any>{
+        const empresa_id = req.query.empresa_id; 
+        console.log(empresa_id);
+        const usuario = await  db.query(empresaRepository.getEmpresaById,[empresa_id]);       
+             res.json(usuario.rows);     
+    }
 }
+
+
+
+
+
+
 export const empresaControllers = new EmpresaControllers();

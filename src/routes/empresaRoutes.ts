@@ -11,6 +11,8 @@ class EmpresaRoutes{
 
     config():void{
         this.router.get('/pagosEmpresaByEmpresa' ,empresaControllers.pagosEmpresaByEmpresa);
+        this.router.get('/getEmpresaById' ,empresaControllers.getEmpresaById);
+        
     }
 }
 const usuarioRoutes= new EmpresaRoutes();

@@ -22,5 +22,13 @@ class EmpresaControllers {
             res.json(usuario.rows);
         });
     }
+    getEmpresaById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresa_id = req.query.empresa_id;
+            console.log(empresa_id);
+            const usuario = yield database_1.default.query(empresaRepository_1.empresaRepository.getEmpresaById, [empresa_id]);
+            res.json(usuario.rows);
+        });
+    }
 }
 exports.empresaControllers = new EmpresaControllers();
