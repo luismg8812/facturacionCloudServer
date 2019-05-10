@@ -166,7 +166,6 @@ CREATE  TABLE EMPRESA (
   EMPRESA_ID                       smallint NOT NULL,
   TIPO_EMPRESA_ID 				   smallint,
   ESTADO_EMPRESA_ID				   smallint,
-  PAGOS_EMPRESA_ID				   int,
   NOMBRE                           VARCHAR(50),
   REPRESENTE                       VARCHAR(100),
   NIT                              VARCHAR(20),
@@ -185,6 +184,7 @@ CREATE  TABLE EMPRESA (
   autorizacion_hasta               int,
   SLOGAN                           varchar(100),
   IMPUESTO                         varchar(12), 
+  CONSECUTIVO					   int,
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
@@ -480,8 +480,26 @@ CREATE  TABLE CONFIGURACION (
   CONSTRAINT PK_CONFIGURACION
     PRIMARY KEY ( CONFIGURACION_ID ) 
 );
+ALTER TABLE CONFIGURACION ADD CONSTRAINT FK_CONFIGURACION_REFERENCE_EMPR
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);
 COMMENT ON COLUMN configuracion.impresion_continua IS 'campo para controla la impresion de los reportes despues de que se imprima el cuadre de caja(pedido por martin regifo)';
 COMMENT ON COLUMN configuracion.FECHA_COMBINADA IS 'campo que controla el nicio del dia, si es = 1 el dia comienza a las 5.59 y termina a las 6.00 del otro dia';
 COMMENT ON COLUMN configuracion.nombre_producto_largo IS 'este campo controla si se requiere mas espacio en la descripcion de la factura pero en dos lineas o mas corto pero en una sola linea';
 COMMENT ON COLUMN configuracion.guardar_facturas IS 'este campo controla si se guardan las facturas e informes en disco';
 COMMENT ON COLUMN configuracion.gramera IS 'este campo controla que tipo y marca de gramera se utiliza';	
+
+
+CREATE  TABLE IMPRESORA_EMPRESA (
+  IMPRESORA_EMPRESA_ID    int NOT NULL DEFAULT nextval('S_IMPRESORA_EMPRESA'),
+  EMPRESA_ID			  int,
+  NOMBRE_IMPRESORA        VARCHAR(100),
+  TIPO_IMPRESION          VARCHAR(20),
+  CONSTRAINT PK_IMPRESORA_EMPRESA
+    PRIMARY KEY ( IMPRESORA_EMPRESA_ID ) 
+);
+
+
+ALTER TABLE IMPRESORA_EMPRESA ADD CONSTRAINT FK_IMPRE_REFERENCE_EMPR
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);

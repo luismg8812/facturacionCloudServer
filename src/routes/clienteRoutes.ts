@@ -13,6 +13,8 @@ class ClienteRoutes{
         this.router.get('/getClientesByEmpresa' ,clienteControllers.getClientesByEmpresa);
         this.router.get('/getConfiguracionByEmpresa' ,clienteControllers.getConfiguracionByEmpresa);
         this.router.get('/getTipoPago' ,clienteControllers.getTipoPago);
+        this.router.get('/getImpresorasEmpresa' ,clienteControllers.getImpresorasEmpresa);
+        
         
     }
     

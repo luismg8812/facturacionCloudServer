@@ -10,6 +10,14 @@ class ClienteControllers{
              res.json(opcionUsuario.rows);  
     }
 
+    public async getImpresorasEmpresa(req:Request, res:Response):Promise<any>{
+        const empresaId = req.query.empresaId; 
+        const impresoraEmpresa = await  db.query(clienteRepository.getImpresorasEmpresa,[empresaId]);       
+             res.json(impresoraEmpresa.rows);  
+    }
+
+    
+
     public async getConfiguracionByEmpresa(req:Request, res:Response):Promise<any>{
         const empresaId = req.query.empresaId; 
         const configuracion = await  db.query(clienteRepository.getConfiguracionByEmpresa,[empresaId]);       

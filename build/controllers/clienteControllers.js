@@ -21,6 +21,13 @@ class ClienteControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getImpresorasEmpresa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const impresoraEmpresa = yield database_1.default.query(clienteRepository_1.clienteRepository.getImpresorasEmpresa, [empresaId]);
+            res.json(impresoraEmpresa.rows);
+        });
+    }
     getConfiguracionByEmpresa(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaId = req.query.empresaId;

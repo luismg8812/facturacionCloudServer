@@ -68,3 +68,8 @@ create sequence S_DOCUMENTO_DETALLE
 START WITH 10
 increment by 1
 ;
+
+create sequence S_IMPRESORA_EMPRESA
+START WITH 10
+increment by 1
+;

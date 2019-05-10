@@ -11,6 +11,7 @@ class ClienteRoutes {
         this.router.get('/getClientesByEmpresa', clienteControllers_1.clienteControllers.getClientesByEmpresa);
         this.router.get('/getConfiguracionByEmpresa', clienteControllers_1.clienteControllers.getConfiguracionByEmpresa);
         this.router.get('/getTipoPago', clienteControllers_1.clienteControllers.getTipoPago);
+        this.router.get('/getImpresorasEmpresa', clienteControllers_1.clienteControllers.getImpresorasEmpresa);
     }
 }
 const clienteRoutes = new ClienteRoutes();
