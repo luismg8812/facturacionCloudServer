@@ -20,7 +20,7 @@ class UsuarioRoutes{
         this.router.put('/updateUsuario',usuarioController.updateUsuario);
         this.router.get('/getSubMenuAll' ,usuarioController.getSubMenuAll);
         this.router.get('/getActivacionAll' ,usuarioController.getActivacionAll);
-        
+        this.router.get('/opcionPuntoVentaByUsuario' ,usuarioController.opcionPuntoVentaByUsuario);
         this.router.get('/opcionUsuarioByUsuarioSinMenu' ,usuarioController.opcionUsuarioByUsuarioSinMenu);
         this.router.get('/getActivacionByUsuario' ,usuarioController.getActivacionByUsuario);
         this.router.get('/guardarRutas' ,usuarioController.guardarRutas);

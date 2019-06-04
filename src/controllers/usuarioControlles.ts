@@ -45,6 +45,14 @@ class UsuarioControllers{
              res.json(opcionUsuario.rows);  
     }
 
+    public async opcionPuntoVentaByUsuario(req:Request, res:Response):Promise<any>{
+        const usuarioId = req.query.usuarioId; 
+        const opcionUsuario = await  db.query(usuarioRepository.opcionPuntoVentaByUsuario,[usuarioId]);       
+             res.json(opcionUsuario.rows);  
+    }
+
+    
+
     public async getActivacionByUsuario(req:Request, res:Response):Promise<any>{
         const usuarioId = req.query.usuarioId; 
         const opcionUsuario = await  db.query(usuarioRepository.getActivacionByUsuario,[usuarioId]);       
