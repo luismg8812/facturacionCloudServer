@@ -118,5 +118,17 @@ class DocumentoControllers {
             });
         });
     }
+    getDocumentoByTipo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const usuarioId = req.query.usuarioId;
+            let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
+            console.log(tipoDocumentoId);
+            let query = "select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ()";
+            query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
+            const docuemntos = yield database_1.default.query(query, [empresaId, usuarioId]);
+            res.json(docuemntos.rows);
+        });
+    }
 }
 exports.documentoControllers = new DocumentoControllers();

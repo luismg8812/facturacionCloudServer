@@ -108,6 +108,15 @@ class DocumentoControllers{
         });
     }
     
-  
+    public async getDocumentoByTipo(req:Request, res:Response):Promise<any>{
+        const empresaId = req.query.empresaId; 
+        const usuarioId = req.query.usuarioId; 
+        let tipoDocumentoId:string[]=req.query.tipoDocumentoId.split(",");
+        console.log(tipoDocumentoId); 
+        let query:string ="select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ()";
+        query=query.replace('()', "("+tipoDocumentoId.toString()+")");
+        const docuemntos = await  db.query(query,[empresaId,usuarioId ]);       
+             res.json(docuemntos.rows);  
+    }
 }
 export const documentoControllers = new DocumentoControllers();

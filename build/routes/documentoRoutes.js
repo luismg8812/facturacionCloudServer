@@ -11,6 +11,7 @@ class DocumentoRoutes {
         this.router.post('/createDocumento', documentoControllers_1.documentoControllers.createDocumento);
         this.router.post('/updateDocumento', documentoControllers_1.documentoControllers.updateDocumento);
         this.router.post('/createTipoPagoDocumento', documentoControllers_1.documentoControllers.createTipoPagoDocumento);
+        this.router.get('/getDocumentoByTipo', documentoControllers_1.documentoControllers.getDocumentoByTipo);
     }
 }
 const documentoRoutes = new DocumentoRoutes();
