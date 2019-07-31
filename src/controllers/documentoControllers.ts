@@ -2,6 +2,7 @@ import {Request,Response} from 'express';
 import { clienteRepository } from '../repository/clienteRepository';
 import db  from '../database';
 import { documentoRepository } from '../repository/documentoRepository';
+import { CuadreCajaVoModel } from '../models/cuadreCajaVo.model';
 
 class DocumentoControllers{
 
@@ -118,5 +119,26 @@ class DocumentoControllers{
         const docuemntos = await  db.query(query,[empresaId,usuarioId ]);       
              res.json(docuemntos.rows);  
     }
+
+    public async getCuadreCaja(req:Request, res:Response):Promise<any>{
+        const empresaId = req.query.empresaId; 
+        const usuarioId = req.query.usuarioId; 
+        const cerrado = req.query.cerrado; 
+        let cuadreCajaVoModel:CuadreCajaVoModel=new CuadreCajaVoModel();
+        let tipoDocumentoId:string[]=req.query.tipoDocumentoId.split(",");
+        console.log(tipoDocumentoId); 
+                                
+        let queryTotalFacturas ="select sum(total) totalFacturas from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ();";
+        let queryDocumentosNoImpresos ="select count(*) documentosNoImpresos from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () and impreso=0;";
+        queryTotalFacturas=queryTotalFacturas.replace('()', "("+tipoDocumentoId.toString()+")");
+        queryDocumentosNoImpresos=queryDocumentosNoImpresos.replace('()', "("+tipoDocumentoId.toString()+")");
+        let totalFacturas = await  db.query(queryTotalFacturas,[empresaId,usuarioId ]);       
+        let documentosNoImpresos = await  db.query(queryDocumentosNoImpresos,[empresaId,usuarioId ]);       
+        cuadreCajaVoModel.totalFacturas=totalFacturas.rows[0].totalfacturas;
+        cuadreCajaVoModel.documentosNoImpresos=documentosNoImpresos.rows[0].documentosnoimpresos;
+        console.log(totalFacturas);
+        res.json(cuadreCajaVoModel);  
+    }
+    
 }
 export const documentoControllers = new DocumentoControllers();

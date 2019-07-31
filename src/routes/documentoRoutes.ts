@@ -14,6 +14,7 @@ class DocumentoRoutes{
         this.router.post('/updateDocumento' ,documentoControllers.updateDocumento);
         this.router.post('/createTipoPagoDocumento' ,documentoControllers.createTipoPagoDocumento);
         this.router.get('/getDocumentoByTipo' ,documentoControllers.getDocumentoByTipo);
+        this.router.get('/getCuadreCaja' ,documentoControllers.getCuadreCaja);
         
     }
 }

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 const documentoRepository_1 = require("../repository/documentoRepository");
+const cuadreCajaVo_model_1 = require("../models/cuadreCajaVo.model");
 class DocumentoControllers {
     createDocumento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -128,6 +129,26 @@ class DocumentoControllers {
             query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
             const docuemntos = yield database_1.default.query(query, [empresaId, usuarioId]);
             res.json(docuemntos.rows);
+        });
+    }
+    getCuadreCaja(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const usuarioId = req.query.usuarioId;
+            const cerrado = req.query.cerrado;
+            let cuadreCajaVoModel = new cuadreCajaVo_model_1.CuadreCajaVoModel();
+            let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
+            console.log(tipoDocumentoId);
+            let queryTotalFacturas = "select sum(total) totalFacturas from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ();";
+            let queryDocumentosNoImpresos = "select count(*) documentosNoImpresos from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () and impreso=0;";
+            queryTotalFacturas = queryTotalFacturas.replace('()', "(" + tipoDocumentoId.toString() + ")");
+            queryDocumentosNoImpresos = queryDocumentosNoImpresos.replace('()', "(" + tipoDocumentoId.toString() + ")");
+            let totalFacturas = yield database_1.default.query(queryTotalFacturas, [empresaId, usuarioId]);
+            let documentosNoImpresos = yield database_1.default.query(queryDocumentosNoImpresos, [empresaId, usuarioId]);
+            cuadreCajaVoModel.totalFacturas = totalFacturas.rows[0].totalfacturas;
+            cuadreCajaVoModel.documentosNoImpresos = documentosNoImpresos.rows[0].documentosnoimpresos;
+            console.log(totalFacturas);
+            res.json(cuadreCajaVoModel);
         });
     }
 }
