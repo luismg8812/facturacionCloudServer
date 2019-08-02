@@ -132,11 +132,12 @@ class DocumentoControllers{
         let queryDocumentosNoImpresos ="select count(*) documentosNoImpresos from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () and impreso=0;";
         queryTotalFacturas=queryTotalFacturas.replace('()', "("+tipoDocumentoId.toString()+")");
         queryDocumentosNoImpresos=queryDocumentosNoImpresos.replace('()', "("+tipoDocumentoId.toString()+")");
-        let totalFacturas = await  db.query(queryTotalFacturas,[empresaId,usuarioId ]);       
+        let totalFacturas = await  db.query(queryTotalFacturas,[empresaId,usuarioId ]);  
+        console.log(totalFacturas);     
         let documentosNoImpresos = await  db.query(queryDocumentosNoImpresos,[empresaId,usuarioId ]);       
         cuadreCajaVoModel.totalFacturas=totalFacturas.rows[0].totalfacturas;
         cuadreCajaVoModel.documentosNoImpresos=documentosNoImpresos.rows[0].documentosnoimpresos;
-        console.log(totalFacturas);
+        
         res.json(cuadreCajaVoModel);  
     }
     

@@ -144,10 +144,10 @@ class DocumentoControllers {
             queryTotalFacturas = queryTotalFacturas.replace('()', "(" + tipoDocumentoId.toString() + ")");
             queryDocumentosNoImpresos = queryDocumentosNoImpresos.replace('()', "(" + tipoDocumentoId.toString() + ")");
             let totalFacturas = yield database_1.default.query(queryTotalFacturas, [empresaId, usuarioId]);
+            console.log(totalFacturas);
             let documentosNoImpresos = yield database_1.default.query(queryDocumentosNoImpresos, [empresaId, usuarioId]);
             cuadreCajaVoModel.totalFacturas = totalFacturas.rows[0].totalfacturas;
             cuadreCajaVoModel.documentosNoImpresos = documentosNoImpresos.rows[0].documentosnoimpresos;
-            console.log(totalFacturas);
             res.json(cuadreCajaVoModel);
         });
     }
