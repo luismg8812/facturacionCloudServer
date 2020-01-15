@@ -130,6 +130,7 @@ class DocumentoControllers{
                                 
         let queryTotalFacturas ="select sum(total) totalFacturas from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ();";
         let queryDocumentosNoImpresos ="select count(*) documentosNoImpresos from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () and impreso=0;";
+        
         queryTotalFacturas=queryTotalFacturas.replace('()', "("+tipoDocumentoId.toString()+")");
         queryDocumentosNoImpresos=queryDocumentosNoImpresos.replace('()', "("+tipoDocumentoId.toString()+")");
         let totalFacturas = await  db.query(queryTotalFacturas,[empresaId,usuarioId ]);  
