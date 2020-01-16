@@ -6,5 +6,14 @@ export default{
         database:'d4mn73eg995brt',
         port:5432,
         ssl: true
+    },
+
+    database_local:{
+        host:'localhost',
+        user:'facturacion',
+        password:'nuevof',
+        database:'facturacion_local',
+        port:5432
+       // ssl: true
     }
 } 

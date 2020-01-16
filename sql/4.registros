@@ -7,10 +7,6 @@ Insert into ROL (ROL_ID,NOMBRE) values ('5','Contador');
 Insert into ROL (ROL_ID,NOMBRE) values ('6','Bodeguero');
 --fin rol
 
---usuario
-INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
---fin usuario
-
 --menu--
 INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(1,'Facturación');
 INSERT INTO MENU (MENU_ID,NOMBRE) VALUES(2,'facturación electrónica');
@@ -38,6 +34,11 @@ INSERT INTO public.empresa(
 			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', '', '', '2019-04-06', 'IMPRESA POR COMPUTADOR',1, 10000, 'EFECTIVO', 'IVA');
 --FIN EMPRESA
 
+--usuario
+INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
+--fin usuario
+
+
 ---sub menu data
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (1,1,'Ventas del día','/ventasDia',0);
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (2,1,'Entradas de almacen','/entradasAlmacen',0);
@@ -64,8 +65,8 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (15, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (16, 'Activar aplicar descuento en factura','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (17, 'Activar bloqueo de cuadre de caja','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (18, 'Activar asignación de empleados a factura','');
-INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (19, 'Activar Cliente en facturación',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas','');
-INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (20, 'Activar Tipos de pago',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas','');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (19, 'Activar Cliente en facturación',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (20, 'Activar Tipos de pago',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 -- fin activaciones
 
 --tipo documento data
@@ -86,6 +87,17 @@ INSERT INTO public.invoice(invoice_id, nombre) VALUES (1, 'sin enviar');
 INSERT INTO public.invoice(invoice_id, nombre) VALUES (2, 'enviados');
 INSERT INTO public.invoice(invoice_id, nombre) VALUES (3, 'descartados');
 --fin invoice 
+
+
+
+
+
+
+
+
+
+
+--no utilizado
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('31','','1',null,null,'anular_factura');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('33','','1',null,null,'codigo_barras');
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('43','','1',null,null,'facturacion_guia');

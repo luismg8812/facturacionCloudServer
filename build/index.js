@@ -13,6 +13,7 @@ const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
 const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
 const documentoRoutes_1 = __importDefault(require("./routes/documentoRoutes"));
 const documentoDetalleRoutes_1 = __importDefault(require("./routes/documentoDetalleRoutes"));
+//prueba de ejecucion
 class Server {
     constructor() {
         this.app = express_1.default();

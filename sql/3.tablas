@@ -26,6 +26,32 @@ CREATE  TABLE   ESTADO_EMPRESA (
     PRIMARY KEY ( ESTADO_EMPRESA_ID )
 );
 
+CREATE  TABLE EMPRESA (
+  EMPRESA_ID                       smallint NOT NULL,
+  TIPO_EMPRESA_ID 				   smallint,
+  ESTADO_EMPRESA_ID				   smallint,
+  NOMBRE                           VARCHAR(50),
+  REPRESENTE                       VARCHAR(100),
+  NIT                              VARCHAR(20),
+  REGIMEN                          VARCHAR(20),
+  DIRECCION                        VARCHAR(50),
+  BARRIO                           VARCHAR(50),
+  CIUDAD                           VARCHAR(50),
+  DEPARTAMENTO                     VARCHAR(50),
+  TELEFONO_FIJO                    VARCHAR(50),
+  CEL                              VARCHAR(11),
+  LETRA_CONSECUTIVO                VARCHAR(10),
+  resolucion_dian                  varchar(50),
+  fecha_resolucion                 timestamp,
+  t_factura                        varchar(30),
+  autorizacion_desde               int,
+  autorizacion_hasta               int,
+  SLOGAN                           varchar(100),
+  IMPUESTO                         varchar(12), 
+  CONSECUTIVO					   int,
+  CONSTRAINT PK_EMPRESA
+  PRIMARY KEY ( EMPRESA_ID ) 
+);
 
 
 
@@ -162,32 +188,7 @@ ALTER TABLE CLIENTE ADD CONSTRAINT FK_EMPE_REFERENCE_CLI
     REFERENCES EMPRESA (EMPRESA_ID); 	
 
 
-CREATE  TABLE EMPRESA (
-  EMPRESA_ID                       smallint NOT NULL,
-  TIPO_EMPRESA_ID 				   smallint,
-  ESTADO_EMPRESA_ID				   smallint,
-  NOMBRE                           VARCHAR(50),
-  REPRESENTE                       VARCHAR(100),
-  NIT                              VARCHAR(20),
-  REGIMEN                          VARCHAR(20),
-  DIRECCION                        VARCHAR(50),
-  BARRIO                           VARCHAR(50),
-  CIUDAD                           VARCHAR(50),
-  DEPARTAMENTO                     VARCHAR(50),
-  TELEFONO_FIJO                    VARCHAR(50),
-  CEL                              VARCHAR(11),
-  LETRA_CONSECUTIVO                VARCHAR(10),
-  resolucion_dian                  varchar(50),
-  fecha_resolucion                 timestamp,
-  t_factura                        varchar(30),
-  autorizacion_desde               int,
-  autorizacion_hasta               int,
-  SLOGAN                           varchar(100),
-  IMPUESTO                         varchar(12), 
-  CONSECUTIVO					   int,
-  CONSTRAINT PK_EMPRESA
-  PRIMARY KEY ( EMPRESA_ID ) 
-);
+
 ALTER TABLE EMPRESA ADD CONSTRAINT FK_EMPR_REFEREN_TIPO_EMPR
  FOREIGN KEY (TIPO_EMPRESA_ID)
     REFERENCES TIPO_EMPRESA (TIPO_EMPRESA_ID);
@@ -439,7 +440,7 @@ CREATE  TABLE TIPO_PAGO_DOCUMENTO (
   TIPO_PAGO_ID                    smallint,
   DOCUMENTO_ID                       int,
   FECHA_REGISTRO                   timestamp,
-  VALOR								DECIMAL
+  VALOR								DECIMAL,
   CONSTRAINT PK_TIPO_PAGO_DOCUMENTO
     PRIMARY KEY ( TIPO_PAGO_DOCUMENTO_ID ) 
 );	
@@ -469,7 +470,7 @@ ALTER TABLE ABONO ADD CONSTRAINT FK_ABONO_REFERENCE_DOCU
 	
 CREATE  TABLE CONFIGURACION (
   CONFIGURACION_ID                smallint NOT NULL,
-  EMPPRESA_ID					  int;
+  EMPRESA_ID					  int,
   SERVER						  smallint,
   FECHA_COMBINADA                 smallint,
   impresion_continua              smallint,

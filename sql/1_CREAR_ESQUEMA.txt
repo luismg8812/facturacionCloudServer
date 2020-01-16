@@ -1,0 +1,14 @@
+CREATE DATABASE facturacion_local
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+COMMENT ON DATABASE facturacion_local
+    IS 'base de datos de facturacion 2.0 local';
+	
+CREATE USER facturacion PASSWORD 'nuevof';
+GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
+GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
+commit;

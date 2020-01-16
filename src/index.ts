@@ -8,7 +8,7 @@ import ClienteRoutes from './routes/clienteRoutes';
 import ProductoRoutes from './routes/productoRoutes';
 import DocumentoRoutes from './routes/documentoRoutes';
 import DocumentoDetalleRoutes from './routes/documentoDetalleRoutes';
-
+//prueba de ejecucion
 class Server{
    public app:Application;
 
