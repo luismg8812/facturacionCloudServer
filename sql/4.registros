@@ -35,16 +35,20 @@ INSERT INTO public.empresa(
 --FIN EMPRESA
 
 --usuario
-INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,1,'admin','admin', 'effectivesoftware1@gmail.com','123456','2019-04-02', '1', '1');
+INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,1,'admin','admin', 'info@effectivesoftware.com.co','123','2019-04-02', '1', '1');
 --fin usuario
 
 
 ---sub menu data
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (1,1,'Ventas del día','/ventasDia',0);
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (2,1,'Entradas de almacen','/entradasAlmacen',0);
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios del Sistema','/usuarios',0);
+Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios del Sistema','/usuario',0);
 
 --fin sub-menu
+
+--opcion usuario
+INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, estado, fecha_registro)VALUES (1, 3, 1, 1, '2020-01-17');
+-- fin opciones usuario
 
 --activaciones
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (1, 'Activar Comandas','');
@@ -88,12 +92,13 @@ INSERT INTO public.invoice(invoice_id, nombre) VALUES (2, 'enviados');
 INSERT INTO public.invoice(invoice_id, nombre) VALUES (3, 'descartados');
 --fin invoice 
 
+--clientes
+INSERT INTO public.cliente(cliente_id, empresa_id, nombre, apellidos, documento, ciudad_id, barrio, direccion, celular, fijo, fecha_registro, cumpleanos, credito_activo, cupo_credito, retencion, mail)VALUES (1, 1, 'varios', 'varios', 123456789, null, null, 'calle 123', 3155959929, null, '2020-01-18','2020-01-18' , 1, 0, 0, null);
+--fin cliente
 
-
-
-
-
-
+--productos
+INSERT INTO public.producto(producto_id, grupo_id, empresa_id, marca_id, proveedor_id, fecha_registro, costo, costo_publico, impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, unidad, promo, pub_promo, estado, kg_promo, utilidad_sugerida, sub_producto, impreso_comanda, varios)VALUES (1, null, 1, null, null, '2020-01-18', 0, 0, 0, 1, 10000, '1234', 0, 0, 'x01 varios', 100000, 1, 0, 0, 1, 0, 0, null, null, 1);
+--fin productos
 
 
 
