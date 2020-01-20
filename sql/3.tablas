@@ -372,7 +372,7 @@ CREATE  TABLE DOCUMENTO (
   PESO_TOTAL                       decimal,
   DESCUENTO                        decimal,
   CAMBIO                           decimal,
-  iva_5                           decimal,
+  iva_5                            decimal,
  iva_19                            decimal,
  base_5                            decimal,
  base_19                           decimal,
@@ -382,9 +382,14 @@ CREATE  TABLE DOCUMENTO (
  LETRA_CONSECUTIVO 				   VARCHAR(10),
  INVOICE						   smallint,
  ANULADO                           smallint,
+ DESCRIPCION_CLIENTE               VARCHAR(1000),
+ DESCRIPCION_TRABAJADOR              VARCHAR(1000),
   CONSTRAINT PK_DOCUMENTO
     PRIMARY KEY ( DOCUMENTO_ID ) 
 );
+
+COMMENT ON COLUMN DOCUMENTO.DESCRIPCION_CLIENTE IS 'este campo controla la informacion sobre el trabajo dada por el cliente';
+COMMENT ON COLUMN DOCUMENTO.DESCRIPCION_TRABAJADOR IS 'este campo controla la informacion sobre el trabajo dada por el trabajador';
 
 ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_CLIEN
   FOREIGN KEY (CLIENTE_ID)

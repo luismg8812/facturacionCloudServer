@@ -45,6 +45,7 @@ Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (2,1,'Entradas d
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios del Sistema','/usuario',0);
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (4, null, 'Cuadre de caja', 'cuadreCajaPV', 1, 'Opción que controla el resumen de ventas diarias');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (5, null, 'Buscar Documentos Por Fecha', 'documentosXFechaPV', 1, 'Opción para buscar los documentos por fecha');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (6, 1, 'Orden de trabajo', '/ot', 0, 'Opción que permite crear ordenes de trabajo para talleres');
 --fin sub-menu
 
 --opcion usuario
@@ -85,6 +86,7 @@ INSERT INTO TIPO_DOCUMENTO  (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(7,'SALIDAS X BAJAS
 INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(8,'VALES');
 INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(9,'NO. GUIA');
 INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(10,'FACTURA DE VENTA');
+INSERT INTO TIPO_DOCUMENTO (TIPO_DOCUMENTO_ID,NOMBRE) VALUES(11,'ORDEN DE TRABAJO');
 --fin tipo documento
 
 -- invoice
