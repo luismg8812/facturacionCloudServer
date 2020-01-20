@@ -43,7 +43,8 @@ INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clav
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (1,1,'Ventas del día','/ventasDia',0);
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (2,1,'Entradas de almacen','/entradasAlmacen',0);
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios del Sistema','/usuario',0);
-
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (4, null, 'Cuadre de caja', 'cuadreCajaPV', 1, 'Opción que controla el resumen de ventas diarias');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (5, null, 'Buscar Documentos Por Fecha', 'documentosXFechaPV', 1, 'Opción para buscar los documentos por fecha');
 --fin sub-menu
 
 --opcion usuario
@@ -99,6 +100,7 @@ INSERT INTO public.cliente(cliente_id, empresa_id, nombre, apellidos, documento,
 --productos
 INSERT INTO public.producto(producto_id, grupo_id, empresa_id, marca_id, proveedor_id, fecha_registro, costo, costo_publico, impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, unidad, promo, pub_promo, estado, kg_promo, utilidad_sugerida, sub_producto, impreso_comanda, varios)VALUES (1, null, 1, null, null, '2020-01-18', 0, 0, 0, 1, 10000, '1234', 0, 0, 'x01 varios', 100000, 1, 0, 0, 1, 0, 0, null, null, 1);
 --fin productos
+
 
 
 
