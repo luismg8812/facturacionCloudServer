@@ -25,12 +25,13 @@ class DocumentoDetalleControllers {
             let parcial = req.body.parcial;
             let unitario = req.body.unitario;
             let impreso_comanda = req.body.impreso_comanda;
+            let descripcion = req.body.descripcion;
             console.log(req.body);
             const id = yield database_1.default.query(documentoDetalleRepository_1.documentoDetalleRepository.getIdDocumentoDetalle);
             const documento_detalle_id = id.rows[0].nextval;
             console.log(documento_detalle_id);
-            var query = "INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8)";
-            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, documento_detalle_id]).then(res2 => {
+            var query = "INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda,descripcion) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8,$10)";
+            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, documento_detalle_id, descripcion]).then(res2 => {
                 res.json({ "code": 200, "documento_detalle_id": documento_detalle_id });
             }).catch(error => {
                 console.log(error);

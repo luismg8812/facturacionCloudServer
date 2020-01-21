@@ -426,6 +426,7 @@ CREATE  TABLE DOCUMENTO_DETALLE (
   PARCIAL                          decimal,
   UNITARIO 						   decimal,
  IMPRESO_COMANDA 				   smallint,
+ descripcion                       varchar(200),
   CONSTRAINT PK_DOCUMENTO_DETALLE
     PRIMARY KEY ( DOCUMENTO_DETALLE_ID ) 
 );
