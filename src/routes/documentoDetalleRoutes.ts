@@ -12,6 +12,9 @@ class DocumentoDetalleRoutes{
 
     config():void{
         this.router.post('/createDocumentoDetalle' ,documentoDetalleControllers.createDocumentoDetalle);
+        this.router.post('/updateDocumentoDetalle' ,documentoDetalleControllers.updateDocumentoDetalle);
+        this.router.get('/getDocumentoDetalleByDocumento' ,documentoDetalleControllers.getDocumentoDetalleByDocumento);
+        
     }
 }
 const documentoDetalleRoutes= new DocumentoDetalleRoutes();
