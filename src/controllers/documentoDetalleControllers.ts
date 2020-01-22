@@ -27,10 +27,38 @@ class DocumentoDetalleControllers{
         }).catch(error=>{
             console.log(error);
             res.json({"code":400,"documento_detalle_id":documento_detalle_id,"error":error.error});
-        });
+        });      
+    }
+
+    public async updateDocumentoDetalle (req:Request, res:Response):Promise<any>{ 
         
+        let documento_detalle_id:number =req.body.documento_detalle_id;
+        let documento_id:number =req.body.documento_id;
+        let producto_id:number =req.body.producto_id;
+        let fecha_registro:Date =req.body.fecha_registro;
+        console.log(fecha_registro);
+        let cantidad:number =req.body.cantidad;
+        let estado:number =req.body.estado;
+        let parcial:number =req.body.parcial;
+        let unitario:number =req.body.unitario;
+        let impreso_comanda:number =req.body.impreso_comanda;
+        let descripcion:number =req.body.descripcion;
+        console.log(req.body);
+        var query="UPDATE documento_detalle SET  documento_id=$1, producto_id= $2, fecha_registro=$3, cantidad=$4, estado=$5, parcial=$6, unitario=$7, impreso_comanda=$8,descripcion=$9 WHERE documento_detalle_id = $10";
+        await db.query(query, [documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda,descripcion,documento_detalle_id]).then(res2=>{
+            res.json({"code":200,"documento_detalle_id":documento_detalle_id});
+        }).catch(error=>{
+            console.error(error);
+            res.json({"code":400,"documento_id":documento_id,"error":error.error});
+        });
     }
     
+    public async getDocumentoDetalleByDocumento (req:Request, res:Response):Promise<any>{
+        const documento_id = req.query.documento_id; 
+        console.log(documento_id);
+        const usuario = await  db.query(documentoDetalleRepository.getDocumentoDetalleByDocumento,[documento_id]);       
+             res.json(usuario.rows);     
+    }
   
 }
 export const documentoDetalleControllers = new DocumentoDetalleControllers();

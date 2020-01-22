@@ -131,7 +131,7 @@ class DocumentoControllers {
             const usuarioId = req.query.usuarioId;
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
             console.log(tipoDocumentoId);
-            let query = "select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ()";
+            let query = "select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () order by documento_id";
             query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
             const docuemntos = yield database_1.default.query(query, [empresaId, usuarioId]);
             res.json(docuemntos.rows);
