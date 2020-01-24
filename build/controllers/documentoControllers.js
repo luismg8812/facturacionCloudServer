@@ -145,16 +145,36 @@ class DocumentoControllers {
             let cuadreCajaVoModel = new cuadreCajaVo_model_1.CuadreCajaVoModel();
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
             console.log(tipoDocumentoId);
-            let queryTotalFacturas = "select sum(total) totalFacturas from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in ();";
-            let queryDocumentosNoImpresos = "select count(*) documentosNoImpresos from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () and impreso=0;";
-            queryTotalFacturas = queryTotalFacturas.replace('()', "(" + tipoDocumentoId.toString() + ")");
-            queryDocumentosNoImpresos = queryDocumentosNoImpresos.replace('()', "(" + tipoDocumentoId.toString() + ")");
-            let totalFacturas = yield database_1.default.query(queryTotalFacturas, [empresaId, usuarioId]);
-            console.log(totalFacturas);
-            let documentosNoImpresos = yield database_1.default.query(queryDocumentosNoImpresos, [empresaId, usuarioId]);
-            cuadreCajaVoModel.totalFacturas = totalFacturas.rows[0].totalfacturas;
-            cuadreCajaVoModel.documentosNoImpresos = documentosNoImpresos.rows[0].documentosnoimpresos;
-            res.json(cuadreCajaVoModel);
+            let query = "select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () order by documento_id";
+            query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
+            const docuemntos = yield database_1.default.query(query, [empresaId, usuarioId]);
+            res.json(docuemntos.rows);
+        });
+    }
+    getOrdenesTrabajo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const placa = req.query.placa;
+            const cliente = req.query.cliente;
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            console.log(placa);
+            let query = "select * from documento where empresa_id= $1 and tipo_documento_id = 11 ";
+            if (placa != '') {
+                query = query + " and detalle_entrada like '%" + placa + "%'";
+            }
+            if (cliente != '') {
+                query = query + " and cliente_id=  " + cliente;
+            }
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query, [empresaId]);
+            res.json(docuemntos.rows);
         });
     }
 }
