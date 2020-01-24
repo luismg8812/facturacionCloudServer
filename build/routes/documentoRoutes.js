@@ -13,6 +13,7 @@ class DocumentoRoutes {
         this.router.post('/createTipoPagoDocumento', documentoControllers_1.documentoControllers.createTipoPagoDocumento);
         this.router.get('/getDocumentoByTipo', documentoControllers_1.documentoControllers.getDocumentoByTipo);
         this.router.get('/getCuadreCaja', documentoControllers_1.documentoControllers.getCuadreCaja);
+        this.router.get('/getOrdenesTrabajo', documentoControllers_1.documentoControllers.getOrdenesTrabajo);
     }
 }
 const documentoRoutes = new DocumentoRoutes();
