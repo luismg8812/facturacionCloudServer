@@ -148,7 +148,7 @@ class DocumentoControllers{
         console.log(placa);
         let query:string ="select * from documento where empresa_id= $1 and tipo_documento_id = 11 ";
         if(placa!=''){
-            query=query+" and detalle_entrada like '%"+placa+"%'";
+            query=query+" and LOWER(detalle_entrada) like LOWER('%"+placa+"%')";
         }
         if(cliente!=''){
             query=query+" and cliente_id=  "+ cliente;
@@ -159,6 +159,7 @@ class DocumentoControllers{
         if(fechaFinal!=''){
             query=query+" and fecha_registro <= '"+fechaFinal+"'";
         }
+        query=query+" order by documento_id desc";
         console.log(query);
         const docuemntos = await  db.query(query,[empresaId ]);       
              res.json(docuemntos.rows);  
