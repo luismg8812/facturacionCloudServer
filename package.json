@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "mkdirp": "^1.0.3",
     "morgan": "^1.9.1",
     "pg": "^7.9.0",
     "xpress": "^2.4.6"
