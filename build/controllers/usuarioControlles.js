@@ -74,6 +74,33 @@ class UsuarioControllers {
     deleteUsuario(req, res) {
         res.json({ "delete_usuario": +req.params.id });
     }
+    getFile(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const nombre = req.query.nombre;
+            if (nombre == null) {
+                res.json("");
+            }
+            else {
+                var contents = require("fs").readFileSync("resources/img/" + nombre);
+                new Buffer(contents).toString('base64');
+                res.json(new Buffer(contents).toString('base64'));
+                console.log(new Buffer(contents).toString('base64'));
+                //this.downloadURLLocal = reader.result;
+            }
+        });
+    }
+    postFile(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            let file = req.body;
+            console.log(file);
+            var base64Data = req.body.foto.replace(/^data:image\/png;base64,/, "");
+            require("fs").writeFile("resources/img/" + req.body.nombre, base64Data, 'base64', function (err) {
+                console.log(err);
+            });
+            res.json({ "code": 200, "usuario_id": "cualquier mk" });
+        });
+    }
     createUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let roles = req.query.rolId.split(",");

@@ -1,0 +1,18 @@
+--despliegue desarrollo facturacion cloud
+
+--server
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2> cd .\server\
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2\server> tsc -w
+
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2> cd .\server\build\
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2\server\build> node index.js
+
+
+--client
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2> cd .\client\
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2\client> ng serve --o 
+
+movil
+
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2> cd .\movil\movil   
+PS C:\Users\LUIS\OneDrive\Documentos\facturacionCloud2> cordova run android
