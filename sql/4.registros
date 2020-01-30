@@ -46,6 +46,7 @@ Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios d
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (4, null, 'Cuadre de caja', 'cuadreCajaPV', 1, 'Opción que controla el resumen de ventas diarias');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (5, null, 'Buscar Documentos Por Fecha', 'documentosXFechaPV', 1, 'Opción para buscar los documentos por fecha');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (6, 1, 'Orden de trabajo', '/ot', 0, 'Opción que permite crear ordenes de trabajo para talleres');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (7, 1, 'Gestión Orden de trabajo/Factura', '/gestionOrden', 0, 'Opción que permite asignar precios a las ordenes de trabajo y crear facturas a partir de estas');
 --fin sub-menu
 
 --opcion usuario

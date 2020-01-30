@@ -5,6 +5,7 @@ class ClienteRepository{
     public getConfiguracionByEmpresa = "select * from configuracion where empresa_id = $1"; 
     public getTipoPago = "select * from tipo_pago";
     public getImpresorasEmpresa:string="select * from impresora_empresa where empresa_id = $1"; 
+    public getIdCliente:string="select nextval('s_cliente')";
     
 }
 
