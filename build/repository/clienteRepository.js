@@ -6,6 +6,7 @@ class ClienteRepository {
         this.getConfiguracionByEmpresa = "select * from configuracion where empresa_id = $1";
         this.getTipoPago = "select * from tipo_pago";
         this.getImpresorasEmpresa = "select * from impresora_empresa where empresa_id = $1";
+        this.getIdCliente = "select nextval('s_cliente')";
     }
 }
 exports.clienteRepository = new ClienteRepository();
