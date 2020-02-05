@@ -75,7 +75,7 @@ class UsuarioControllers {
             var contents= require("fs").readFileSync("resources/img/"+nombre);
         new Buffer(contents).toString('base64')
             res.json(new Buffer(contents).toString('base64'));
-            console.log(new Buffer(contents).toString('base64'));
+           // console.log(new Buffer(contents).toString('base64'));
           //this.downloadURLLocal = reader.result;
         }
         
@@ -87,13 +87,13 @@ class UsuarioControllers {
 
 
     public async postFile(req: Request, res: Response): Promise<any> {
-        console.log(req.body);
+        //console.log(req.body);
         let file: File = req.body;
-        console.log(file);
+        //console.log(file);
         var base64Data = req.body.foto.replace(/^data:image\/png;base64,/, "");
         require("fs").writeFile("resources/img/"+req.body.nombre, base64Data, 'base64', function (err: any) {
             console.log(err);
-        });
+        }); 
         res.json({ "code": 200, "usuario_id": "cualquier mk" });
     }
 

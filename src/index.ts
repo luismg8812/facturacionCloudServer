@@ -8,6 +8,7 @@ import ClienteRoutes from './routes/clienteRoutes';
 import ProductoRoutes from './routes/productoRoutes';
 import DocumentoRoutes from './routes/documentoRoutes';
 import DocumentoDetalleRoutes from './routes/documentoDetalleRoutes';
+import marcaRoutes from './routes/marcaRoutes';
 //prueba de ejecucion
 class Server{
    public app:Application;
@@ -33,6 +34,7 @@ class Server{
         this.app.use('/producto',ProductoRoutes);
         this.app.use('/documento',DocumentoRoutes);
         this.app.use('/documentoDetalle',DocumentoDetalleRoutes);
+        this.app.use('/marca',marcaRoutes);
     }
     
     start():void{
