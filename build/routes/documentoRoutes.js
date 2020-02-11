@@ -14,6 +14,10 @@ class DocumentoRoutes {
         this.router.get('/getDocumentoByTipo', documentoControllers_1.documentoControllers.getDocumentoByTipo);
         this.router.get('/getCuadreCaja', documentoControllers_1.documentoControllers.getCuadreCaja);
         this.router.get('/getOrdenesTrabajo', documentoControllers_1.documentoControllers.getOrdenesTrabajo);
+        this.router.post('/createDocumentoOrden', documentoControllers_1.documentoControllers.createDocumentoOrden);
+        this.router.post('/deleteDocumentoOrdenByOrden', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByOrden);
+        this.router.get('/getDocumentoOrdenById', documentoControllers_1.documentoControllers.getDocumentoOrdenById);
+        this.router.get('/getOrdenesByDocumentoId', documentoControllers_1.documentoControllers.getOrdenesByDocumentoId);
     }
 }
 const documentoRoutes = new DocumentoRoutes();
