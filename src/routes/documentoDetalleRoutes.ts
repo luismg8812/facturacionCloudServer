@@ -14,6 +14,7 @@ class DocumentoDetalleRoutes{
         this.router.post('/createDocumentoDetalle' ,documentoDetalleControllers.createDocumentoDetalle);
         this.router.post('/updateDocumentoDetalle' ,documentoDetalleControllers.updateDocumentoDetalle);
         this.router.get('/getDocumentoDetalleByDocumento' ,documentoDetalleControllers.getDocumentoDetalleByDocumento);
+        this.router.get('/getDocumentoDetalleByDocumentoList' ,documentoDetalleControllers.getDocumentoDetalleByDocumentoList);
         
     }
 }

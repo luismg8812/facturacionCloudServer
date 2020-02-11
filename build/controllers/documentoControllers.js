@@ -65,6 +65,34 @@ class DocumentoControllers {
             });
         });
     }
+    deleteDocumentoOrdenByOrden(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var documento_id = req.body.documento_id;
+            console.log(req.body);
+            var query = "delete from documento_orden where orden_id = $1";
+            yield database_1.default.query(query, [documento_id]).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
+        });
+    }
+    createDocumentoOrden(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var documento_orden_id = req.body.tipo_pago_id;
+            var documento_id = req.body.documento_id;
+            var orden_id = req.body.orden_id;
+            console.log(req.body);
+            var query = "INSERT INTO documento_orden (documento_id,orden_id) VALUES ($1,$2)";
+            yield database_1.default.query(query, [documento_id, orden_id]).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
+        });
+    }
     createTipoPagoDocumento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var tipo_pago_id = req.body.tipo_pago_id;
@@ -135,9 +163,32 @@ class DocumentoControllers {
             const usuarioId = req.query.usuarioId;
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
             console.log(tipoDocumentoId);
-            let query = "select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () order by documento_id";
+            let query = "select * from documento where empresa_id= $1 ";
+            if (usuarioId != "") {
+                query = query + " and usuario_id= " + usuarioId;
+            }
+            query = query + " and tipo_documento_id in () order by documento_id";
             query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
-            const docuemntos = yield database_1.default.query(query, [empresaId, usuarioId]);
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query, [empresaId]);
+            res.json(docuemntos.rows);
+        });
+    }
+    getDocumentoOrdenById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ordenId = req.query.ordenId;
+            console.log(ordenId);
+            let query = "select * from documento_orden where orden_id= $1 ";
+            const docuemntos = yield database_1.default.query(query, [ordenId]);
+            res.json(docuemntos.rows);
+        });
+    }
+    getOrdenesByDocumentoId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const documentoId = req.query.documentoId;
+            let query = "select * from documento  where documento_id in (select orden_id from documento_orden  where documento_id = $1) ";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query, [documentoId]);
             res.json(docuemntos.rows);
         });
     }
@@ -148,10 +199,14 @@ class DocumentoControllers {
             const cerrado = req.query.cerrado;
             let cuadreCajaVoModel = new cuadreCajaVo_model_1.CuadreCajaVoModel();
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
-            console.log(tipoDocumentoId);
-            let query = "select * from documento where empresa_id= $1 and usuario_id= $2 and tipo_documento_id in () order by documento_id";
+            let query = "select * from documento where empresa_id= $1 ";
+            if (usuarioId != "") {
+                query = query + " and usuario_id= " + usuarioId;
+            }
+            query = query + " and tipo_documento_id in () order by documento_id";
             query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
-            const docuemntos = yield database_1.default.query(query, [empresaId, usuarioId]);
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query, [empresaId]);
             res.json(docuemntos.rows);
         });
     }
@@ -162,8 +217,9 @@ class DocumentoControllers {
             const cliente = req.query.cliente;
             const fechaInicial = req.query.fechaInicial;
             const fechaFinal = req.query.fechaFinal;
+            const tipoDocumentoId = req.query.tipoDocumentoId;
             console.log(placa);
-            let query = "select * from documento where empresa_id= $1 and tipo_documento_id = 11 ";
+            let query = "select * from documento where empresa_id= $1 and tipo_documento_id = " + tipoDocumentoId;
             if (placa != '') {
                 query = query + " and LOWER(detalle_entrada) like LOWER('%" + placa + "%')";
             }
