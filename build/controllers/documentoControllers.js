@@ -124,7 +124,7 @@ class DocumentoControllers {
             var total = req.body.total;
             var excento = req.body.excento;
             var gravado = req.body.gravado;
-            var iva = req.body.impuesto;
+            var iva = req.body.iva;
             var cierre_diario = req.body.cierre_diario;
             var detalle_entrada = req.body.detalle_entrada;
             var mac = req.body.mac;
