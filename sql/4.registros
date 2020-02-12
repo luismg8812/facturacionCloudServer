@@ -105,6 +105,19 @@ INSERT INTO public.cliente(cliente_id, empresa_id, nombre, apellidos, documento,
 INSERT INTO public.producto(producto_id, grupo_id, empresa_id, marca_id, proveedor_id, fecha_registro, costo, costo_publico, impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, unidad, promo, pub_promo, estado, kg_promo, utilidad_sugerida, sub_producto, impreso_comanda, varios)VALUES (1, null, 1, null, null, '2020-01-18', 0, 0, 0, 1, 10000, '1234', 0, 0, 'x01 varios', 100000, 1, 0, 0, 1, 0, 0, null, null, 1);
 --fin productos
 
+--tipo pago
+INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (1, 'Efectvo');
+INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (2, 'Crédito');
+INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (3, 'Cehque');
+INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (4, 'Consignación');
+INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (5, 'Tarjeta');
+INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (6, 'vale');
+--fin tipo_pago
+
+-- configuracion
+INSERT INTO public.configuracion(configuracion_id, server, fecha_combinada, impresion_continua, nombre_producto_largo, guardar_facturas, gramera, num_impresion, empresa_id)VALUES (1, 1, 0, 0, 0, 1, 1, 1, 1);
+--fin configuracion	
+
 --marcas vehiculos
 Insert into MARCA_VEHICULO (MARCA_VEHICULO_ID,NOMBRE) values (	1,'Abarth');
 Insert into MARCA_VEHICULO (MARCA_VEHICULO_ID,NOMBRE) values (	2,'Alfa Romeo');
