@@ -134,7 +134,7 @@ class UsuarioControllers {
         var identificacion = req.body.identificacion;
         var estado = req.body.estado;
         console.log(req.body);
-        await db.query("UPDATE usuario set empresa_id=$1, nombre=$2, apellido=$3, correo=$4, clave=$5, fecha_registro=$6, identificacion=$7, estado=$8 where usuario_id=$9", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, usuario_id]);
+        await db.query("UPDATE usuario set empresa_id=$1, nombre=$2, apellido=$3,  fecha_registro=$4, identificacion=$5, estado=$6 where usuario_id=$7", [empresa_id, nombre, apellido,  fecha_registro, identificacion, estado, usuario_id]);
         const usuario = await db.query(usuarioRepository.deleteRolUsuario, [usuario_id]);
         for (let i = 0; i < roles.length; i++) {
             await db.query("INSERT INTO rol_usuario(rol_id, usuario_id) VALUES ($1,$2)", [roles[i], usuario_id]);
