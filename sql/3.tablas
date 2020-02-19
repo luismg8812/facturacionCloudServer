@@ -49,6 +49,7 @@ CREATE  TABLE EMPRESA (
   SLOGAN                           varchar(100),
   IMPUESTO                         varchar(12), 
   CONSECUTIVO					   int,
+  actividad_economica			   varchar(100),
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
