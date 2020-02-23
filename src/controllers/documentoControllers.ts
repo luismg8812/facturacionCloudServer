@@ -42,12 +42,13 @@ class DocumentoControllers{
         var descripcion_trabajador=req.body.descripcion_trabajador;
         var modelo_marca_id=req.body.modelo_marca_id;
         var linea_vehiculo=req.body.linea_vehiculo;
+        var impresora=req.body.impresora;
         console.log(req.body);
         const id = await  db.query(documentoRepository.getIdDocumento);
         const documento_id = id.rows[0].nextval; 
         console.log(documento_id);
-        var query="INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo) VALUES ($31,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$30,$32,$33,$34,$35,$36 )";
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado,documento_id,fecha_entrega,descripcion_cliente,descripcion_trabajador,modelo_marca_id,linea_vehiculo]).then(res2=>{
+        var query="INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora) VALUES ($31,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$30,$32,$33,$34,$35,$36,$37 )";
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado,documento_id,fecha_entrega,descripcion_cliente,descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora]).then(res2=>{
             res.json({"code":200,"documento_id":documento_id});
         }).catch(error=>{
             console.error(error);
@@ -137,10 +138,11 @@ class DocumentoControllers{
         var fecha_entrega =req.body.fecha_entrega;
         var modelo_marca_id=req.body.modelo_marca_id;
         var linea_vehiculo=req.body.linea_vehiculo;
+        var impresora=req.body.impresora;
         
         console.log(req.body);
-        var query="UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,invoice=$29,anulado=$30 ,  fecha_entrega=$32, descripcion_cliente=$33, descripcion_trabajador=$34, modelo_marca_id=$35,linea_vehiculo=$36 WHERE documento_id = $31";
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado,documento_id,fecha_entrega,descripcion_cliente,descripcion_trabajador,modelo_marca_id,linea_vehiculo]).then(res2=>{
+        var query="UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,invoice=$29,anulado=$30 ,  fecha_entrega=$32, descripcion_cliente=$33, descripcion_trabajador=$34, modelo_marca_id=$35,linea_vehiculo=$36, impresora=$37 WHERE documento_id = $31";
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,invoice,anulado,documento_id,fecha_entrega,descripcion_cliente,descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora]).then(res2=>{
             res.json({"code":200,"documento_id":documento_id});
         }).catch(error=>{
             console.error(error);
