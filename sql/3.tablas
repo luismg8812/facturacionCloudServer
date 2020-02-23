@@ -50,6 +50,7 @@ CREATE  TABLE EMPRESA (
   IMPUESTO                         varchar(12), 
   CONSECUTIVO					   int,
   actividad_economica			   varchar(100),
+  url_logo	  				       varchar(500),
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
@@ -406,6 +407,7 @@ CREATE  TABLE DOCUMENTO (
  DESCRIPCION_TRABAJADOR              VARCHAR(1000),
  LINEA_VEHICULO                   VARCHAR(20),
  MODELO_MARCA_ID                            int,
+ impresora 						   varchar(20),
   CONSTRAINT PK_DOCUMENTO
     PRIMARY KEY ( DOCUMENTO_ID ) 
 );
