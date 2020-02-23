@@ -151,6 +151,7 @@ class DocumentoControllers {
             var impresora = req.body.impresora;
             console.log(req.body);
             var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,invoice=$29,anulado=$30 ,  fecha_entrega=$32, descripcion_cliente=$33, descripcion_trabajador=$34, modelo_marca_id=$35,linea_vehiculo=$36, impresora=$37 WHERE documento_id = $31";
+            console.log(query);
             yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, invoice, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora]).then(res2 => {
                 res.json({ "code": 200, "documento_id": documento_id });
             }).catch(error => {
