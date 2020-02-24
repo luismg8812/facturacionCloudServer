@@ -42,11 +42,14 @@ INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clav
 ---sub menu data
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (1,1,'Ventas del día','/ventasDia',0);
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (2,1,'Entradas de almacen','/entradasAlmacen',0);
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,3,'Usuarios del Sistema','/usuario',0);
+Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (3,4,'Usuarios del Sistema','/usuario',0);
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (4, null, 'Cuadre de caja', 'cuadreCajaPV', 1, 'Opción que controla el resumen de ventas diarias');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (5, null, 'Buscar Documentos Por Fecha', 'documentosXFechaPV', 1, 'Opción para buscar los documentos por fecha');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (6, 1, 'Orden de trabajo', '/ot', 0, 'Opción que permite crear ordenes de trabajo para talleres');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (7, 1, 'Gestión Orden de trabajo/Factura', '/gestionOrden', 0, 'Opción que permite asignar precios a las ordenes de trabajo y crear facturas a partir de estas');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (8, 1, 'Nomina', '/nomima', 0, 'Opción que permite manejar la nomina de los empleados relacionados con ordenes de trabajo');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (9, 4, 'Empleados', '/empleado', 0, 'Opción que permite gestionar los empleados del establecimiento');
+
 --fin sub-menu
 
 --opcion usuario
@@ -1230,58 +1233,3 @@ Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('56','Activar a
 
 --fin activaciones
 
-
-
-
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('2','Terceros','1','PF(''terceros'').show()','/WEB-INF/facelets/clientes/terceros/terceros.xhtml','terceros');
-
-
-
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('4','Entrega mercancia','1','PF(''entrega_mercancia'').show()','/WEB-INF/facelets/actividad/entregaMercancia/entregaMercancia.xhtml','entrega_mercancia');
-
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('7','Clientes','1','PF(''clientes'').show()','/WEB-INF/facelets/clientes/clientes/clientes.xhtml','clientes');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('8','Envio documentos','1','PF(''envio_documentos'').show()','/WEB-INF/facelets/electronic/envioDoc/envioDocumento.xhtml','envio_documentos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('9','Consultar estado Doc','1','PF(''consultar_estado'').show()','/WEB-INF/facelets/electronic/consultarDocumentos/consultaDocumentos.xhtml','consultar_estado');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('10','Info. Artículos','1','PF(''info_articulos'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/infoArticulos.xhtml','info_articulos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('11','Grupos','1','PF(''grupos'').show();','/WEB-INF/facelets/clientes/grupos/grupos.xhtml','grupos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('12','Retefuente Proveedores','1','PF(''retefuente_proveedores'').show();','/WEB-INF/facelets/clientes/proveedores/retefuenteProveedores.xhtml','retefuente_proveedores');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('13','Vales','1','PF(''abonos'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/abonos/abonosCliente.xhtml','vales');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('14','Abonos Clientes','1','PF(''abonos'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/abonos/abonosCliente.xhtml','abonos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('15','Cuadre de Caja','1','PF(''cuadre_caja'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/opcion.xhtml','cuadre_caja');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('16','Avance Efectivo','1','PF(''avance_afectivo'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/avanceEfectivo.xhtml','avance_afectivo');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('17','Buscar Documentos X Fecha','1','PF(''buscar_factura'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/buscarFactura/buscarFactura.xhtml','buscar_factura');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('19','Exportar Contabilidad DELTA','1','PF(''contabilidad_delta'').show();','/WEB-INF/facelets/electronic/exportarContavilidadDelta/exportarContavilidadDelta.xhtml','contabilidad_delta');
-
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('22','Cuadre Diario','1','PF(''reduccion'').show();','/WEB-INF/facelets/precios/reduccion/reduccion.xhtml','reduccion');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('23','Cierre Diario','1','PF(''cierre_diario'').hide();',null,'cierre_diario');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('25','Cardex','1','PF(''cardex'').show();','/WEB-INF/facelets/Listados/cardex/cardex.xhtml','cardex');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('26','Sub-Productos','1','PF(''sub-productos'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/subProductos/subProductos.xhtml','sub-productos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('27','Sucursales','1','PF(''sucursales'').show();','/WEB-INF/facelets/funciones/sucursales/sucursales.xhtml','sucursales');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('28','Usuarios del Sistema','1','PF(''usuarios_sistema'').show();','/WEB-INF/facelets/funciones/usuarios.xhtml','usuarios_sistema');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('30','Liberar Cierre Diario','1','PF(''liberar_cierre'').show();','/WEB-INF/facelets/funciones/liberarCuadre/liberarCuadre.xhtml','liberar_cierre');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('32','Importar Base de datos','1','PF(''importar'').show()','/WEB-INF/facelets/actividad/importar/importar.xhtml','importar');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('34','Ventas Todas las cajas ','1','PF(''ventas_todas'').show()','/WEB-INF/facelets/funciones/ventasTodas.xhtml','ventas_todas');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('35','Borrar Todas las facturas','1','PF(''borrar_todas'').show()','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/borrarTodas.xhtml','borrar_todas');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('36','Proveedores','1','PF(''proveedores'').show()','/WEB-INF/facelets/clientes/proveedores/proveedores.xhtml','proveedores');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('37','Abonos','1','PF(''abonos2'').show()','/WEB-INF/facelets/clientes/abonos/abonos.xhtml','abonos2');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('38','Ganancias','1','PF(''ganancias'').show();','/WEB-INF/facelets/precios/ganancias/ganancias.xhtml','ganancias');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('39','Devoluciones','1','PF(''devoluciones'').show();','/WEB-INF/facelets/Listados/devoluciones/devoluciones.xhtml','devoluciones');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('40','Informe de ventas','1','PF(''infoVentas'').show();','/WEB-INF/facelets/Listados/informeVentas/informeVentas.xhtml','infoVentas');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('41','Activar cartera Cliente','1',null,null,'cartera_clientes');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('42','Activar guia transporte','1',null,null,'guia_gransporte');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('46','Reporte de Productos','1','PF(''reporte_productos'').show();','/WEB-INF/facelets/Listados/reporteProductos/reporteProductos.xhtml','reporte_productos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('50','Cronómetro de Bodegueros','1','PF(''cronometro_bodegueros'').show();','/WEB-INF/facelets/actividad/entregaMercancia/cronometroBodegueros.xhtml','cronometro_bodegueros');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('55','Creación de Empleados','1','PF(''empleados'').show();','/WEB-INF/facelets/clientes/empleados/empleados.xhtml','empleados');
-
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('57','Detalle salidas Almacen','1','PF(''salidas_almacen'').show();','/WEB-INF/facelets/actividad/puntoVentaDia/opcion/reporteMovimientoDocumento.xhtml','salidas_almacen');
---fin sub menu

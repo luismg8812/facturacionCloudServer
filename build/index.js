@@ -8,6 +8,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
+const empleadoRoutes_1 = __importDefault(require("./routes/empleadoRoutes"));
 const empresaRoutes_1 = __importDefault(require("./routes/empresaRoutes"));
 const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
 const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
@@ -36,6 +37,7 @@ class Server {
         this.app.use('/documento', documentoRoutes_1.default);
         this.app.use('/documentoDetalle', documentoDetalleRoutes_1.default);
         this.app.use('/marca', marcaRoutes_1.default);
+        this.app.use('/empleado', empleadoRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
