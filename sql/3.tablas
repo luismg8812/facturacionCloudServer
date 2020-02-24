@@ -57,8 +57,9 @@ CREATE  TABLE EMPRESA (
 
 
 
-CREATE  TABLE   EMPLEADO (
+CREATE  TABLE EMPLEADO (
   EMPLEADO_ID                      smallint NOT NULL DEFAULT nextval('S_EMPLEADO'),
+  EMPRESA_ID                       smallint,
   NOMBRE                           VARCHAR(100),
   APELLIDO                         VARCHAR(100),
   TELEFONO                         VARCHAR(20),
