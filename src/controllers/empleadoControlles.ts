@@ -6,7 +6,7 @@ class EmpleadoControllers {
    
     public async createEmpleado(req: Request, res: Response): Promise<any> {
 
-        var empresa_id = req.body.empresa_id;
+        var empresa_id = req.body.empresa_id; 
         var nombre = req.body.nombre;
         var apellido = req.body.apellido;
         var telefono = req.body.telefono;
