@@ -35,6 +35,26 @@ class EmpleadoControllers {
             });
         });
     }
+    createProductoEmpleado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var empleado_id = req.body.empleado_id;
+            var concepto_producto = req.body.concepto_producto;
+            var valor = req.body.valor;
+            var fecha_registro = req.body.fecha_registro;
+            var cierre_diario = req.body.cierre_diario;
+            console.log(req.body);
+            const id = yield database_1.default.query(empleadoRepository_1.empleadoRepository.getIdProductoEmpleado);
+            const producto_empleado_id = id.rows[0].nextval;
+            console.log(producto_empleado_id);
+            var query = "INSERT INTO producto_empleado(producto_empleado_id,empleado_id,concepto_producto, valor, fecha_registro,cierre_diario) VALUES ($1,$2,$3,$4,$5,$6)";
+            yield database_1.default.query(query, [producto_empleado_id, empleado_id, concepto_producto, valor, fecha_registro, cierre_diario]).then(res2 => {
+                res.json({ "code": 200, "producto_empleado_id": producto_empleado_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "producto_empleado_id": producto_empleado_id });
+            });
+        });
+    }
     updateEmpleado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var empresa_id = req.body.empresa_id;
@@ -44,9 +64,14 @@ class EmpleadoControllers {
             var identificacion = req.body.identificacion;
             var estado = req.body.estado;
             var empleado_id = req.body.empleado_id;
+            var pago_empleado_id = req.body.pago_empleado_id;
+            var porcentaje_pago = req.body.porcentaje_pago;
+            var sueldo = req.body.sueldo;
+            var pago_admin = req.body.pago_admin;
+            var porcentaje_descuento = req.body.porcentaje_descuento;
             console.log(req.body);
-            var query = "UPDATE empleado SET  empresa_id=$1, nombre= $2, apellido=$3, telefono=$4,identificacion =$5, estado=$6 WHERE empleado_id = $7";
-            yield database_1.default.query(query, [empresa_id, nombre, apellido, telefono, identificacion, estado, empleado_id]).then(res2 => {
+            var query = "UPDATE empleado SET  empresa_id=$1, nombre= $2, apellido=$3, telefono=$4,identificacion =$5, estado=$6, pago_empleado_id=$8, porcentaje_pago=$9, sueldo=$10, pago_admin=$11, porcentaje_descuento=$12 WHERE empleado_id = $7";
+            yield database_1.default.query(query, [empresa_id, nombre, apellido, telefono, identificacion, estado, empleado_id, pago_empleado_id, porcentaje_pago, sueldo, pago_admin, porcentaje_descuento]).then(res2 => {
                 res.json({ "code": 200, "empleado_id": empleado_id });
             }).catch(error => {
                 console.error(error);
@@ -59,6 +84,36 @@ class EmpleadoControllers {
             const empresaId = req.query.empresaId;
             const rol = yield database_1.default.query(empleadoRepository_1.empleadoRepository.getEmpleadoByAll, [empresaId]);
             res.json(rol.rows);
+        });
+    }
+    getPagosEmpleadosAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rol = yield database_1.default.query(empleadoRepository_1.empleadoRepository.getPagosEmpleadosAll);
+            res.json(rol.rows);
+        });
+    }
+    getProductoEmpleadoByEmpleado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empleadoId = req.query.empleadoId;
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let query = "select * from producto_empleado where 1=1 ";
+            if (empleadoId != null) {
+                query = query + " and empleado_id= " + empleadoId;
+            }
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            else {
+                query = query + " and (cierre_diario=0 or cierre_diario is null)";
+            }
+            query = query + " order by fecha_registro desc";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
         });
     }
 }

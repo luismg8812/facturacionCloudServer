@@ -74,7 +74,7 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (14, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (15, 'Activar Cambio de precio','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (16, 'Activar aplicar descuento en factura','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (17, 'Activar bloqueo de cuadre de caja','');
-INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (18, 'Activar asignación de empleados a factura','');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (18, 'Activar asignación de empleados a factura','permite asociar empleador a las facturas o las ordenes de trabajo');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (19, 'Activar Cliente en facturación',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (20, 'Activar Tipos de pago',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (21, 'Activar Productos Fijos en Orden de pedido',' Permite que se asignen productos fijos no editables en las ordenes de pedido');
@@ -99,6 +99,12 @@ INSERT INTO public.invoice(invoice_id, nombre) VALUES (1, 'sin enviar');
 INSERT INTO public.invoice(invoice_id, nombre) VALUES (2, 'enviados');
 INSERT INTO public.invoice(invoice_id, nombre) VALUES (3, 'descartados');
 --fin invoice 
+
+--pago empleado
+INSERT INTO public.pago_empleado(pago_empleado_id, nombre) VALUES (1, 'fijo');
+INSERT INTO public.pago_empleado(pago_empleado_id, nombre) VALUES (2, 'porcentaje');
+INSERT INTO public.pago_empleado(pago_empleado_id, nombre) VALUES (3, 'mesclado');
+--fin pago empleado
 
 --clientes
 INSERT INTO public.cliente(cliente_id, empresa_id, nombre, apellidos, documento, ciudad_id, barrio, direccion, celular, fijo, fecha_registro, cumpleanos, credito_activo, cupo_credito, retencion, mail)VALUES (1, 1, 'varios', 'varios', 123456789, null, null, 'calle 123', 3155959929, null, '2020-01-18','2020-01-18' , 1, 0, 0, null);

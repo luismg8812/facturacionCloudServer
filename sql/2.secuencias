@@ -74,6 +74,12 @@ START WITH 10
 increment by 1
 ;
 
+create sequence S_PRODUCTO_EMPLEADO
+START WITH 10
+increment by 1
+;
+
+
 
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;

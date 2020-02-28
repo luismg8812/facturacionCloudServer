@@ -20,6 +20,10 @@ class DocumentoRoutes{
         this.router.post('/deleteDocumentoOrdenByOrden' ,documentoControllers.deleteDocumentoOrdenByOrden);
         this.router.get('/getDocumentoOrdenById' ,documentoControllers.getDocumentoOrdenById);
         this.router.get('/getOrdenesByDocumentoId' ,documentoControllers.getOrdenesByDocumentoId);
+        this.router.get('/getNominaByEmpleado' ,documentoControllers.getNominaByEmpleado);
+        this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
+        this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
+        
         
     }
 }
