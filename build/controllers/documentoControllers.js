@@ -245,10 +245,12 @@ class DocumentoControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const fechaInicial = req.query.fechaInicial;
             const fechaFinal = req.query.fechaFinal;
+            const empresaId = req.query.empresaId;
             let query = "select subt.nombre, vale.empleado_id, coalesce(subt.subtotal, 0) subtotal , coalesce(vale.vales, 0) vales ,coalesce(produ.productos, 0) productos ,coalesce(subt.pago_admin, 0)  admon, (coalesce(subt.subtotal, 0)- coalesce(vale.vales, 0) -coalesce(produ.productos, 0)+coalesce(subt.pago_admin, 0) ) total from"
                 + " (select nombre, empleado.empleado_id,  sum(documento.total) subtotal,empleado.pago_admin from  empleado"
-                + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id"
-                + " and documento.tipo_documento_id=11";
+                + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id";
+            +" and documento.tipo_documento_id=11";
+            +" and empleado.empresa_id=" + empresaId;
             if (fechaInicial == '') {
                 query = query + " and documento.cierre_diario =0";
             }
@@ -260,6 +262,7 @@ class DocumentoControllers {
             query = query + " (select nombre, empleado.empleado_id,  sum(documento.total) vales from  empleado";
             query = query + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id";
             query = query + " and documento.tipo_documento_id=8";
+            query = query + " and empleado.empresa_id=" + empresaId;
             if (fechaInicial == '') {
                 query = query + " and documento.cierre_diario =0";
             }
@@ -277,6 +280,7 @@ class DocumentoControllers {
                 query = query + " and producto_empleado.fecha_registro>= '" + fechaInicial + "'";
                 query = query + " and producto_empleado.fecha_registro <= '" + fechaFinal + "'";
             }
+            query = query + " and empleado.empresa_id=" + empresaId;
             query = query + " GROUP by nombre, empleado.empleado_id) produ";
             query = query + " where subt.empleado_id = vale.empleado_id";
             query = query + " and subt.empleado_id = produ.empleado_id";
