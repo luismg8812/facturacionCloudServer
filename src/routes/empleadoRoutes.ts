@@ -12,7 +12,11 @@ class EmpleadoRoutes{
     config():void{
         this.router.get('/empleadoAll' ,empleadoControllers.empleadoAll);
         this.router.post('/createEmpleado',empleadoControllers.createEmpleado);
+        this.router.post('/createProductoEmpleado',empleadoControllers.createProductoEmpleado);
         this.router.put('/updateEmpleado',empleadoControllers.updateEmpleado);
+        this.router.get('/getPagosEmpleadosAll' ,empleadoControllers.getPagosEmpleadosAll);
+        this.router.get('/getProductoEmpleadoByEmpleado' ,empleadoControllers.getProductoEmpleadoByEmpleado);
+        
     }
 }
 const empleadoRoutes= new EmpleadoRoutes();

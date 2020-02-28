@@ -19,6 +19,13 @@ CREATE  TABLE   TIPO_EMPRESA (
     PRIMARY KEY ( TIPO_EMPRESA_ID )
 );
 
+CREATE  TABLE   PAGO_EMPLEADO (
+  PAGO_EMPLEADO_ID          smallint NOT NULL,
+  NOMBRE                   VARCHAR(50),
+  CONSTRAINT PK_PAGO_EMPLEADO
+    PRIMARY KEY ( PAGO_EMPLEADO_ID )
+);
+
 CREATE  TABLE   ESTADO_EMPRESA (
   ESTADO_EMPRESA_ID        smallint NOT NULL,
   NOMBRE                   VARCHAR(50),
@@ -65,9 +72,16 @@ CREATE  TABLE EMPLEADO (
   TELEFONO                         VARCHAR(20),
   IDENTIFICACION                   VARCHAR(20),
   ESTADO                           smallint,
+  PAGO_EMPLEADO_ID					smallint,
+  PORCENTAJE_PAGO					smallint,
+  PORCENTAJE_DESCUENTO					smallint,
+  SUELDO							DECIMAL,
+  PAGO_ADMIN						DECIMAL,
   CONSTRAINT PK_EMPLEADO
     PRIMARY KEY ( EMPLEADO_ID ) 
 );  
+
+
 
 CREATE  TABLE departamento (
  DEPARTAMENTO_ID                   smallint NOT NULL,
@@ -103,6 +117,21 @@ CREATE  TABLE TIPO_DOCUMENTO(
   CONSTRAINT PK_TIPO_DOCUMENTO
     PRIMARY KEY (TIPO_DOCUMENTO_ID) 
 );
+
+CREATE  TABLE PRODUCTO_EMPLEADO (
+  PRODUCTO_EMPLEADO_ID             smallint NOT NULL DEFAULT nextval('S_PRODUCTO_EMPLEADO'),
+  EMPLEADO_ID                      smallint,
+  VALOR							   decimal,
+  cierre_diario                    smallint;
+  concepto_producto                varchar(50);
+  FECHA_REGISTRO                   timestamp,
+  CONSTRAINT PK_PRODUCTO_EMPLEADO
+    PRIMARY KEY ( PRODUCTO_EMPLEADO_ID ) 
+);  
+
+ALTER TABLE PRODUCTO_EMPLEADO ADD CONSTRAINT FK_pro_emp_REFERENCE_empleado
+ FOREIGN KEY (EMPLEADO_ID)
+    REFERENCES empleado (EMPLEADO_ID); 
 
 CREATE  TABLE CIUDAD (
   CIUDAD_ID                        int NOT NULL,

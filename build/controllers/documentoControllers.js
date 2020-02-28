@@ -241,5 +241,89 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getNominaByEmpleado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let query = "select subt.nombre, vale.empleado_id, coalesce(subt.subtotal, 0) subtotal , coalesce(vale.vales, 0) vales ,coalesce(produ.productos, 0) productos ,coalesce(subt.pago_admin, 0)  admon, (coalesce(subt.subtotal, 0)- coalesce(vale.vales, 0) -coalesce(produ.productos, 0)+coalesce(subt.pago_admin, 0) ) total from"
+                + " (select nombre, empleado.empleado_id,  sum(documento.total) subtotal,empleado.pago_admin from  empleado"
+                + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id"
+                + " and documento.tipo_documento_id=11";
+            if (fechaInicial == '') {
+                query = query + " and documento.cierre_diario =0";
+            }
+            else {
+                query = query + " and documento.fecha_registro>= '" + fechaInicial + "'";
+                query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
+            }
+            query = query + " GROUP by nombre, empleado.empleado_id,empleado.pago_admin ) subt,";
+            query = query + " (select nombre, empleado.empleado_id,  sum(documento.total) vales from  empleado";
+            query = query + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id";
+            query = query + " and documento.tipo_documento_id=8";
+            if (fechaInicial == '') {
+                query = query + " and documento.cierre_diario =0";
+            }
+            else {
+                query = query + " and documento.fecha_registro>= '" + fechaInicial + "'";
+                query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
+            }
+            query = query + " GROUP by nombre, empleado.empleado_id) vale,";
+            query = query + " (select nombre, empleado.empleado_id,  sum(producto_empleado.valor) productos from  empleado";
+            query = query + " LEFT JOIN producto_empleado ON empleado.empleado_id = producto_empleado.empleado_id";
+            if (fechaInicial == '') {
+                query = query + " and (producto_empleado.cierre_diario =0 or producto_empleado.cierre_diario is null)";
+            }
+            else {
+                query = query + " and producto_empleado.fecha_registro>= '" + fechaInicial + "'";
+                query = query + " and producto_empleado.fecha_registro <= '" + fechaFinal + "'";
+            }
+            query = query + " GROUP by nombre, empleado.empleado_id) produ";
+            query = query + " where subt.empleado_id = vale.empleado_id";
+            query = query + " and subt.empleado_id = produ.empleado_id";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
+    cierreNomina(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
+            let cierre = 1;
+            let query = "UPDATE documento SET cierre_diario = $1 where tipo_documento_id in (11,8) and empleado_id is not null; ";
+            yield database_1.default.query("update producto_empleado set cierre_diario = 1");
+            console.log(query);
+            yield database_1.default.query(query, [cierre]).then(res2 => {
+                res.json({ "code": 200, "documento_id": cierre });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "documento_id": cierre, "error": error.error });
+            });
+        });
+    }
+    getOrdenesByEmpleado(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empleadoId = req.query.empleadoId;
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            const tipoDocumentoId = req.query.tipoDocumentoId;
+            let query = "select * from documento where tipo_documento_id = " + tipoDocumentoId;
+            if (empleadoId != null) {
+                query = query + "and empleado_id= " + empleadoId;
+            }
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            else {
+                query = query + " and cierre_diario=0";
+            }
+            query = query + " order by documento_id desc";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
 }
 exports.documentoControllers = new DocumentoControllers();
