@@ -245,12 +245,15 @@ class DocumentoControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const fechaInicial = req.query.fechaInicial;
             const fechaFinal = req.query.fechaFinal;
-            const empresaId = req.query.empresaId;
-            let query = "select subt.nombre, vale.empleado_id, coalesce(subt.subtotal, 0) subtotal , coalesce(vale.vales, 0) vales ,coalesce(produ.productos, 0) productos ,coalesce(subt.pago_admin, 0)  admon, (coalesce(subt.subtotal, 0)- coalesce(vale.vales, 0) -coalesce(produ.productos, 0)+coalesce(subt.pago_admin, 0) ) total from"
-                + " (select nombre, empleado.empleado_id,  sum(documento.total) subtotal,empleado.pago_admin from  empleado"
-                + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id";
-            +" and documento.tipo_documento_id=11";
-            +" and empleado.empresa_id=" + empresaId;
+            console.log(req.query);
+            let empleadoId = req.query.idEmpleados.split(",");
+            let query = "select subt.nombre, subt.empleado_id, subt.subtotal subtotal, coalesce(vale.vales,0) vales,"
+                + " coalesce(produ.productos,0) productos, coalesce(subt.pago_admin, 0) admon, coalesce(subt.ahorro,0) ahorro,"
+                + " (subt.subtotal+coalesce(subt.pago_admin, 0)-coalesce(vale.vales,0)-coalesce(produ.productos,0)-coalesce(subt.ahorro,0)) total"
+                + " from"
+                + "  (select nombre, empleado.empleado_id,  coalesce(sum(documento.total),0)*(1 -(empleado.porcentaje_pago::decimal/100)) subtotal,empleado.pago_admin,coalesce(sum(documento.total),0)* (empleado.porcentaje_descuento::decimal/100) ahorro"
+                + "   from  empleado LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id"
+                + "   and documento.tipo_documento_id=11";
             if (fechaInicial == '') {
                 query = query + " and documento.cierre_diario =0";
             }
@@ -258,11 +261,10 @@ class DocumentoControllers {
                 query = query + " and documento.fecha_registro>= '" + fechaInicial + "'";
                 query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
             }
-            query = query + " GROUP by nombre, empleado.empleado_id,empleado.pago_admin ) subt,";
-            query = query + " (select nombre, empleado.empleado_id,  sum(documento.total) vales from  empleado";
-            query = query + " LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id";
-            query = query + " and documento.tipo_documento_id=8";
-            query = query + " and empleado.empresa_id=" + empresaId;
+            query = query + "   GROUP by nombre, empleado.empleado_id,empleado.pago_admin ) subt,"
+                + "  (select nombre, empleado.empleado_id,  sum(documento.total) vales "
+                + "   from  empleado LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id ";
+            query = query + "   and documento.tipo_documento_id=8 ";
             if (fechaInicial == '') {
                 query = query + " and documento.cierre_diario =0";
             }
@@ -270,9 +272,9 @@ class DocumentoControllers {
                 query = query + " and documento.fecha_registro>= '" + fechaInicial + "'";
                 query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
             }
-            query = query + " GROUP by nombre, empleado.empleado_id) vale,";
-            query = query + " (select nombre, empleado.empleado_id,  sum(producto_empleado.valor) productos from  empleado";
-            query = query + " LEFT JOIN producto_empleado ON empleado.empleado_id = producto_empleado.empleado_id";
+            query = query + "   GROUP by nombre, empleado.empleado_id) vale,"
+                + "  (select nombre, empleado.empleado_id,  sum(producto_empleado.valor) productos "
+                + "   from  empleado LEFT JOIN producto_empleado ON empleado.empleado_id = producto_empleado.empleado_id ";
             if (fechaInicial == '') {
                 query = query + " and (producto_empleado.cierre_diario =0 or producto_empleado.cierre_diario is null)";
             }
@@ -280,10 +282,11 @@ class DocumentoControllers {
                 query = query + " and producto_empleado.fecha_registro>= '" + fechaInicial + "'";
                 query = query + " and producto_empleado.fecha_registro <= '" + fechaFinal + "'";
             }
-            query = query + " and empleado.empresa_id=" + empresaId;
-            query = query + " GROUP by nombre, empleado.empleado_id) produ";
-            query = query + " where subt.empleado_id = vale.empleado_id";
-            query = query + " and subt.empleado_id = produ.empleado_id";
+            query = query + "   GROUP by nombre, empleado.empleado_id) produ"
+                + "   where subt.empleado_id = vale.empleado_id"
+                + "   and subt.empleado_id = produ.empleado_id"
+                + "   and  subt.empleado_id in ()";
+            query = query.replace('()', "(" + empleadoId.toString() + ")");
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
