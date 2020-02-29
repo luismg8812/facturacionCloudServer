@@ -248,8 +248,8 @@ class DocumentoControllers{
         if(fechaInicial==''){
             query=query+" and documento.cierre_diario =0";
         }else{
-            query=query+" and documento.fecha_registro>= '"+fechaInicial+"'";
-            query=query+" and documento.fecha_registro <= '"+fechaFinal+"'";
+            query=query+" and documento.fecha_registro>= TO_TIMESTAMP('"+fechaInicial+"', 'DD-MM-YYYY HH24:MI:SS')  ";
+            query=query+" and documento.fecha_registro <=  TO_TIMESTAMP('"+fechaFinal+"', 'DD-MM-YYYY HH24:MI:SS') ";
         }
         query=query+"   GROUP by nombre, empleado.empleado_id,empleado.pago_admin ) subt,"
         +"  (select nombre, empleado.empleado_id,  sum(documento.total) vales "
@@ -258,8 +258,8 @@ class DocumentoControllers{
         if(fechaInicial==''){
             query=query+" and documento.cierre_diario =0";
         }else{
-            query=query+" and documento.fecha_registro>= '"+fechaInicial+"'";
-            query=query+" and documento.fecha_registro <= '"+fechaFinal+"'";
+            query=query+" and documento.fecha_registro>= TO_TIMESTAMP('"+fechaInicial+"', 'DD-MM-YYYY HH24:MI:SS')  ";
+            query=query+" and documento.fecha_registro <=  TO_TIMESTAMP('"+fechaFinal+"', 'DD-MM-YYYY HH24:MI:SS') ";
         }
         query=query+"   GROUP by nombre, empleado.empleado_id) vale,"
         +"  (select nombre, empleado.empleado_id,  sum(producto_empleado.valor) productos "
@@ -267,8 +267,8 @@ class DocumentoControllers{
         if(fechaInicial==''){
             query=query+" and (producto_empleado.cierre_diario =0 or producto_empleado.cierre_diario is null)"
         }else{
-            query=query+" and producto_empleado.fecha_registro>= '"+fechaInicial+"'";
-            query=query+" and producto_empleado.fecha_registro <= '"+fechaFinal+"'";
+            query=query+" and producto_empleado.fecha_registro>= TO_TIMESTAMP('"+fechaInicial+"', 'DD-MM-YYYY HH24:MI:SS')  ";
+            query=query+" and producto_empleado.fecha_registro <= TO_TIMESTAMP('"+fechaFinal+"', 'DD-MM-YYYY HH24:MI:SS') ";
         }
         query=query+"   GROUP by nombre, empleado.empleado_id) produ"
         +"   where subt.empleado_id = vale.empleado_id"
