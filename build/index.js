@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
+const cors_1 = __importDefault(require("cors"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const empleadoRoutes_1 = __importDefault(require("./routes/empleadoRoutes"));
@@ -24,7 +25,7 @@ class Server {
     config() {
         this.app.set("port", process.env.PORT || 9090);
         this.app.use(morgan_1.default('dev'));
-        //this.app.use(cors({origin: '*'}));
+        this.app.use(cors_1.default({ origin: '*' }));
         this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
