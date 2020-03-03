@@ -49,6 +49,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (7, 1, 'Gestión Orden de trabajo/Factura', '/gestionOrden', 0, 'Opción que permite asignar precios a las ordenes de trabajo y crear facturas a partir de estas');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (8, 1, 'Nomina', '/nomima', 0, 'Opción que permite manejar la nomina de los empleados relacionados con ordenes de trabajo');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (9, 4, 'Empleados', '/empleado', 0, 'Opción que permite gestionar los empleados del establecimiento');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (10, 5, 'Informe Movimientos', '/infoMovimiento', 0, 'Opción que permite los movimientos de los tipos de documentos');
 
 --fin sub-menu
 

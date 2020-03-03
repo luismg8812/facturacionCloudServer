@@ -23,7 +23,8 @@ class DocumentoRoutes{
         this.router.get('/getNominaByEmpleado' ,documentoControllers.getNominaByEmpleado);
         this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
         this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
-        
+        this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
+        this.router.get('/getDocumentosByFechaAndTipo' ,documentoControllers.getDocumentosByFechaAndTipo);
         
     }
 }

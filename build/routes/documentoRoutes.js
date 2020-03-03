@@ -21,6 +21,8 @@ class DocumentoRoutes {
         this.router.get('/getNominaByEmpleado', documentoControllers_1.documentoControllers.getNominaByEmpleado);
         this.router.get('/getOrdenesByEmpleado', documentoControllers_1.documentoControllers.getOrdenesByEmpleado);
         this.router.post('/cierreNomina', documentoControllers_1.documentoControllers.cierreNomina);
+        this.router.get('/getTiposDocumento', documentoControllers_1.documentoControllers.getTiposDocumento);
+        this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

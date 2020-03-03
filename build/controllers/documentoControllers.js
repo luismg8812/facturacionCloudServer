@@ -186,6 +186,14 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getTiposDocumento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let query = "select * from tipo_documento";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getOrdenesByDocumentoId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const documentoId = req.query.documentoId;
@@ -238,6 +246,37 @@ class DocumentoControllers {
             query = query + " order by documento_id desc";
             console.log(query);
             const docuemntos = yield database_1.default.query(query, [empresaId]);
+            res.json(docuemntos.rows);
+        });
+    }
+    getDocumentosByFechaAndTipo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            console.log(req.query);
+            let empleadoId = req.query.idEmpleados;
+            let empresaId = req.query.empresaId;
+            let usuarioId = req.query.usuarioId;
+            let tipoDocumentoId = req.query.tipoDocumentoId;
+            let query = "select sum(total) total,DATE(fecha_registro) fecha, sum(base_5) base_5,sum(base_19) base_19, "
+                + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento from documento where 1=1";
+            query = query + " and empresa_id = " + empresaId;
+            if (tipoDocumentoId != '') {
+                query = query + "  and tipo_documento_id = " + tipoDocumentoId;
+            }
+            else {
+                query = query + "  and tipo_documento_id = 10"; //se muestra factura por defecto si viene vacio
+            }
+            query = query + " and DATE(fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
+            if (usuarioId != '') {
+                query = query + " and usuario_id = " + usuarioId;
+            }
+            if (empleadoId != '') {
+                query = query + " and empleado_id =  " + empleadoId;
+            }
+            query = query + " GROUP BY DATE(fecha_registro) order by fecha";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
         });
     }
