@@ -6,6 +6,7 @@ class ClienteRepository{
     public getTipoPago = "select * from tipo_pago";
     public getImpresorasEmpresa:string="select * from impresora_empresa where empresa_id = $1"; 
     public getIdCliente:string="select nextval('s_cliente')";
+    public getTipoIdentificacionAll = "select * from tipo_identificacion order by tipo_identificacion_id";
     
 }
 

@@ -50,6 +50,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (8, 1, 'Nomina', '/nomima', 0, 'Opción que permite manejar la nomina de los empleados relacionados con ordenes de trabajo');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (9, 4, 'Empleados', '/empleado', 0, 'Opción que permite gestionar los empleados del establecimiento');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (10, 5, 'Informe Movimientos', '/infoMovimiento', 0, 'Opción que permite los movimientos de los tipos de documentos');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (11, 4, 'Clientes', '/cliente', 0, 'Opción que permite gestionar los clientes del establecimiento');
 
 --fin sub-menu
 
@@ -127,6 +128,16 @@ INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (6, 'vale');
 -- configuracion
 INSERT INTO public.configuracion(configuracion_id, server, fecha_combinada, impresion_continua, nombre_producto_largo, guardar_facturas, gramera, num_impresion, empresa_id)VALUES (1, 1, 0, 0, 0, 1, 1, 1, 1);
 --fin configuracion	
+
+-- TIPOS DOCUMENTO
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (1,'Registro Civil', 'RC');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (2,'Tarjeta de identidad', 'TI');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (3,'Cédula de ciudadanía', 'CC');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (4,'Cédula de extranjería', 'CE');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (5,'Pasaporte', 'PA');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (6,'Menor sin identificación', 'MS');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (7,'Adulto sin identidad', 'AS');
+ -- FIN TIPOS DOCUMENTO	
 
 --marcas vehiculos
 Insert into MARCA_VEHICULO (MARCA_VEHICULO_ID,NOMBRE) values (	1,'Abarth');
@@ -1223,20 +1234,5 @@ Insert into MODELO_MARCA (MODELO_MARCA_ID, MARCA_VEHICULO_ID, NOMBRE) values ( 1
 
 
 
---no utilizado
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('31','','1',null,null,'anular_factura');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('33','','1',null,null,'codigo_barras');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('43','','1',null,null,'facturacion_guia');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('44','','1',null,null,'clave_borrado');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('45','','1',null,null,'descuentos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('47','','1',null,null,'copia_factura');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('48','','1',null,null,'stock');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('49','','1',null,null,'precios_sugeridos');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('51','','1',null,null,'cliente_obligatorio');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('52','','1',null,null,'cambio_precio');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('53','','1',null,null,'descuento_enfactura');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('54','Activar bloqueo de cuadre de caja','1',null,null,'bloqueo_cuadreCaja');
-Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values ('56','Activar asignación de empleados a factura','1',null,null,'asignar_empleados_factura');
 
---fin activaciones
 
