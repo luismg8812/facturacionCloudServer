@@ -5,6 +5,14 @@ CREATE  TABLE ROL (
     PRIMARY KEY ( ROL_ID ) 
 );
 
+CREATE  TABLE TIPO_IDENTIFICACION (
+  TIPO_IDENTIFICACION_ID           smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  NOMBRE_CORTO                     VARCHAR(4),
+  CONSTRAINT PK_TIPO_IDENTIFICACION
+    PRIMARY KEY ( TIPO_IDENTIFICACION_ID ) 
+);
+
 CREATE  TABLE MENU (
   MENU_ID                          smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -214,8 +222,11 @@ ALTER TABLE PROVEEDOR ADD CONSTRAINT FK_EMPR_REFERENCE_PROV
 CREATE  TABLE CLIENTE (
   CLIENTE_ID                       int NOT NULL DEFAULT nextval('S_CLIENTE'),
   EMPRESA_ID					   int, 
-  NOMBRE                           VARCHAR(100),
-  APELLIDOS                        VARCHAR(100),
+  tipo_identificacion_id		   smallint,
+  NOMBRE                           VARCHAR(50),
+  SEGUNDO_NOMBRE                   VARCHAR(50),
+  APELLIDOS                        VARCHAR(50),
+  SEGUNDO_APELLIDOS                VARCHAR(50),
   DOCUMENTO                        VARCHAR(30),
   CIUDAD_ID                        int,
   BARRIO                           VARCHAR(50),
@@ -228,6 +239,7 @@ CREATE  TABLE CLIENTE (
   CUPO_CREDITO                     decimal,
   RETENCION                        decimal,
   mail                             VARCHAR(100),
+  	   
   CONSTRAINT PK_CLIENTE
     PRIMARY KEY ( CLIENTE_ID ) 
 );
@@ -237,6 +249,9 @@ ALTER TABLE CLIENTE ADD CONSTRAINT FK_CIUDAD_REFERENCE_CLI
 ALTER TABLE CLIENTE ADD CONSTRAINT FK_EMPE_REFERENCE_CLI
   FOREIGN KEY (EMPRESA_ID)
     REFERENCES EMPRESA (EMPRESA_ID); 	
+ALTER TABLE CLIENTE ADD CONSTRAINT FK_tipo_iden_REFERENCE_CLI
+  FOREIGN KEY (tipo_identificacion_id)
+    REFERENCES tipo_identificacion (tipo_identificacion_id); 	
 
 
 
