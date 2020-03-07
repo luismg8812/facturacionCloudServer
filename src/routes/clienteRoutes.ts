@@ -15,6 +15,8 @@ class ClienteRoutes{
         this.router.get('/getTipoPago' ,clienteControllers.getTipoPago);
         this.router.get('/getImpresorasEmpresa' ,clienteControllers.getImpresorasEmpresa);
         this.router.post('/saveCliente' ,clienteControllers.saveCliente);
+        this.router.post('/updateCliente' ,clienteControllers.updateCliente);
+        
         this.router.get('/getTipoIdentificacionAll' ,clienteControllers.getTipoIdentificacionAll);
         
     }
