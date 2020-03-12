@@ -51,6 +51,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (9, 4, 'Empleados', '/empleado', 0, 'Opción que permite gestionar los empleados del establecimiento');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (10, 5, 'Informe Movimientos', '/infoMovimiento', 0, 'Opción que permite los movimientos de los tipos de documentos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (11, 4, 'Clientes', '/cliente', 0, 'Opción que permite gestionar los clientes del establecimiento');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (12, 1, 'Inventario Fisico', '/inventarioFisico', 0, 'Opción que permite gestionar los datos de los productos');
 
 --fin sub-menu
 
