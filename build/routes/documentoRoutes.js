@@ -23,6 +23,7 @@ class DocumentoRoutes {
         this.router.post('/cierreNomina', documentoControllers_1.documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento', documentoControllers_1.documentoControllers.getTiposDocumento);
         this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
+        this.router.get('/getDocumentoByTipoAndFecha', documentoControllers_1.documentoControllers.getDocumentoByTipoAndFecha);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

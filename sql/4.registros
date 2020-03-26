@@ -81,6 +81,7 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (18, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (19, 'Activar Cliente en facturación',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (20, 'Activar Tipos de pago',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (21, 'Activar Productos Fijos en Orden de pedido',' Permite que se asignen productos fijos no editables en las ordenes de pedido');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (22, 'Activar Cambio de fecha en facturas',' Permite que se cambie la fecha de generacion de una factura');
 -- fin activaciones
 
 --tipo documento data
@@ -138,6 +139,7 @@ INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_co
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (5,'Pasaporte', 'PA');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (6,'Menor sin identificación', 'MS');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (7,'Adulto sin identidad', 'AS');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (8,'NIT', 'NIT');
  -- FIN TIPOS DOCUMENTO	
 
 --marcas vehiculos

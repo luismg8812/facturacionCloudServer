@@ -205,62 +205,62 @@ class DocumentoControllers {
         let cuadreCajaVoModel: CuadreCajaVoModel = new CuadreCajaVoModel();
         let tipoDocumentoId: string[] = req.query.tipoDocumentoId.split(",");
 
-        let query: string = "select total_facturas,documentos_no_impresos, abonos,efectivo,tarjetas, cheques,vales,cartera from" 
-        +" ( select sum(total) total_facturas from documento"; 
-        query = query + "  where empresa_id="+empresaId;  
-        query = query + "  and usuario_id= "+usuarioId; 
+        let query: string = "select total_facturas,documentos_no_impresos, abonos,efectivo,tarjetas, cheques,vales,cartera from"
+            + " ( select sum(total) total_facturas from documento";
+        query = query + "  where empresa_id=" + empresaId;
+        query = query + "  and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) total,";
         query = query + " (  select count(*) documentos_no_impresos  from documento";
-        query = query + "    where empresa_id= "+empresaId;  
-        query = query + "    and usuario_id= "+usuarioId; 
+        query = query + "    where empresa_id= " + empresaId;
+        query = query + "    and usuario_id= " + usuarioId;
         query = query + "    and impreso=0";
         query = query + "    and tipo_documento_id =10";
         query = query + " ) impresos,";
         query = query + " (  select coalesce(sum(cantidad),0) abonos from abono,documento";
         query = query + "    where abono.documento_id = documento.documento_id";
         query = query + "    and cierre_diario =0"
-        query = query + "    and abono.usuario_id= "+usuarioId; 
-        query = query + "    and empresa_id="+empresaId;  
+        query = query + "    and abono.usuario_id= " + usuarioId;
+        query = query + "    and empresa_id=" + empresaId;
         query = query + "    and tipo_documento_id =10"
         query = query + " ) abono,"
-        query = query + " ( select sum(total) efectivo from documento,tipo_pago_documento" 
-        query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id"  
+        query = query + " ( select sum(total) efectivo from documento,tipo_pago_documento"
+        query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id"
         query = query + "   and tipo_pago_id=1"
-        query = query + "    and empresa_id="+empresaId;    
-        query = query + "    and usuario_id= "+usuarioId;
+        query = query + "    and empresa_id=" + empresaId;
+        query = query + "    and usuario_id= " + usuarioId;
         query = query + "   and tipo_documento_id =10"
         query = query + " ) efectivo,"
         query = query + " ( select coalesce(sum(total),0) tarjetas from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=5"
-        query = query + "    and empresa_id="+empresaId;    
-        query = query + "    and usuario_id= "+usuarioId;
+        query = query + "    and empresa_id=" + empresaId;
+        query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) tarjetas,"
         query = query + " ( select coalesce(sum(total),0) cheques from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=3"
-        query = query + "    and empresa_id="+empresaId;    
-        query = query + "    and usuario_id= "+usuarioId;
+        query = query + "    and empresa_id=" + empresaId;
+        query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) cheques,"
         query = query + " ( select coalesce(sum(total),0) vales from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=6"
-        query = query + "    and empresa_id="+empresaId;    
-        query = query + "    and usuario_id= "+usuarioId;
+        query = query + "    and empresa_id=" + empresaId;
+        query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) vales,"
         query = query + " ( select coalesce(sum(total),0) cartera from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=2"
-        query = query + "    and empresa_id="+empresaId;    
-        query = query + "    and usuario_id= "+usuarioId;
+        query = query + "    and empresa_id=" + empresaId;
+        query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) cartera";
         const tokens = query.split('()')
-        const stripped = tokens.join("(" + tipoDocumentoId.toString() + ")") 
+        const stripped = tokens.join("(" + tipoDocumentoId.toString() + ")")
         query = stripped;
         console.log(query);
         const docuemntos = await db.query(query);
@@ -306,11 +306,11 @@ class DocumentoControllers {
         let tipoDocumentoId = req.query.tipoDocumentoId;
         let query: string = "select sum(total) total,DATE(fecha_registro) fecha, sum(base_5) base_5,sum(base_19) base_19, "
             + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento from documento where 1=1";
-            query = query + " and empresa_id = " + empresaId;
+        query = query + " and empresa_id = " + empresaId;
         if (tipoDocumentoId != '') {
             query = query + "  and tipo_documento_id = " + tipoDocumentoId;
-        }else{
-            query = query + "  and tipo_documento_id = 10" ;//se muestra factura por defecto si viene vacio
+        } else {
+            query = query + "  and tipo_documento_id = 10";//se muestra factura por defecto si viene vacio
         }
         query = query + " and DATE(fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
         if (usuarioId != '') {
@@ -319,7 +319,55 @@ class DocumentoControllers {
         if (empleadoId != '') {
             query = query + " and empleado_id =  " + empleadoId;
         }
-        query = query + " GROUP BY DATE(fecha_registro) order by fecha" ;
+        query = query + " GROUP BY DATE(fecha_registro) order by fecha";
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
+    public async getDocumentoByTipoAndFecha(req: Request, res: Response): Promise<any> {
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal;
+        let proveedorId = req.query.proveedorId;
+        let clienteId = req.query.clienteId;
+        let empleadoId = req.query.empleadoId;
+        let empresaId = req.query.empresaId;
+        let usuarioId = req.query.usuarioId;
+        let tipoDocumentoId = req.query.tipoDocumentoId;
+        let documentoId = req.query.documentoId;
+        let consecutivoDian = req.query.consecutivoDian;
+        console.log(req.query);
+        let query: string = "select *  from documento where 1=1";
+        query = query + " and empresa_id = " + empresaId;
+        query = query + "  and tipo_documento_id = " + tipoDocumentoId;
+        if (tipoDocumentoId == '10') {
+            query = query + " and impreso = 1  and consecutivo_dian is not null";
+        }
+        if (fechaInicial != "") {
+            query = query + " and DATE(fecha_registro) >= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != "") {
+            query = query + " and DATE(fecha_registro) <= '" + fechaFinal + "'";
+        }
+        if (usuarioId != '') {
+            query = query + " and usuario_id = " + usuarioId;
+        }
+        if (empleadoId != '') {
+            query = query + " and empleado_id =  " + empleadoId;
+        }
+        if (clienteId != '0') {
+            query = query + " and cliente_id =  " + clienteId;
+        }
+        if (proveedorId != '') {
+            query = query + " and proveedor_id =  " + proveedorId;
+        }
+        if (documentoId != '') {
+            query = query + " and documento_id =  " + documentoId;
+        }
+        if (consecutivoDian != '') {
+            query = query + " and consecutivo_dian  like '%" + consecutivoDian+"%'";
+        }
+        query = query + " order by fecha_registro desc";
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
