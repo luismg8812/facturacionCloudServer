@@ -335,6 +335,55 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getDocumentoByTipoAndFecha(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let proveedorId = req.query.proveedorId;
+            let clienteId = req.query.clienteId;
+            let empleadoId = req.query.empleadoId;
+            let empresaId = req.query.empresaId;
+            let usuarioId = req.query.usuarioId;
+            let tipoDocumentoId = req.query.tipoDocumentoId;
+            let documentoId = req.query.documentoId;
+            let consecutivoDian = req.query.consecutivoDian;
+            console.log(req.query);
+            let query = "select *  from documento where 1=1";
+            query = query + " and empresa_id = " + empresaId;
+            query = query + "  and tipo_documento_id = " + tipoDocumentoId;
+            if (tipoDocumentoId == '10') {
+                query = query + " and impreso = 1  and consecutivo_dian is not null";
+            }
+            if (fechaInicial != "") {
+                query = query + " and DATE(fecha_registro) >= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != "") {
+                query = query + " and DATE(fecha_registro) <= '" + fechaFinal + "'";
+            }
+            if (usuarioId != '') {
+                query = query + " and usuario_id = " + usuarioId;
+            }
+            if (empleadoId != '') {
+                query = query + " and empleado_id =  " + empleadoId;
+            }
+            if (clienteId != '0') {
+                query = query + " and cliente_id =  " + clienteId;
+            }
+            if (proveedorId != '') {
+                query = query + " and proveedor_id =  " + proveedorId;
+            }
+            if (documentoId != '') {
+                query = query + " and documento_id =  " + documentoId;
+            }
+            if (consecutivoDian != '') {
+                query = query + " and consecutivo_dian  like '%" + consecutivoDian + "%'";
+            }
+            query = query + " order by fecha_registro desc";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getNominaByEmpleado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const fechaInicial = req.query.fechaInicial;
