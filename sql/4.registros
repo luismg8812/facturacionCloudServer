@@ -114,6 +114,10 @@ INSERT INTO public.pago_empleado(pago_empleado_id, nombre) VALUES (3, 'mesclado'
 INSERT INTO public.cliente(cliente_id, empresa_id, nombre, apellidos, documento, ciudad_id, barrio, direccion, celular, fijo, fecha_registro, cumpleanos, credito_activo, cupo_credito, retencion, mail)VALUES (1, 1, 'varios', 'varios', 123456789, null, null, 'calle 123', 3155959929, null, '2020-01-18','2020-01-18' , 1, 0, 0, null);
 --fin cliente
 
+--proveedor
+INSERT INTO public.proveedor(proveedor_id, empresa_id, nombre, apellidos, documento, ciudad_id, barrio, direccion, celular, fijo, fecha_registro, credito_activo, cupo_credito, retencion, mail)VALUES (1, 1, 'varios', 'varios', 123456789, null, null, 'calle 123', 3155959929, null, '2020-01-18' , 1, 0, 0, null);
+--fin cliente
+
 --productos
 INSERT INTO public.producto(producto_id, grupo_id, empresa_id, marca_id, proveedor_id, fecha_registro, costo, costo_publico, impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, unidad, promo, pub_promo, estado, kg_promo, utilidad_sugerida, sub_producto, impreso_comanda, varios)VALUES (1, null, 1, null, null, '2020-01-18', 0, 0, 0, 1, 10000, '1234', 0, 0, 'x01 varios', 100000, 1, 0, 0, 1, 0, 0, null, null, 1);
 --fin productos

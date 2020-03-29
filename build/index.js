@@ -11,6 +11,7 @@ const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 const empleadoRoutes_1 = __importDefault(require("./routes/empleadoRoutes"));
 const empresaRoutes_1 = __importDefault(require("./routes/empresaRoutes"));
 const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
+const proveedorRoutes_1 = __importDefault(require("./routes/proveedorRoutes"));
 const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
 const documentoRoutes_1 = __importDefault(require("./routes/documentoRoutes"));
 const documentoDetalleRoutes_1 = __importDefault(require("./routes/documentoDetalleRoutes"));
@@ -41,6 +42,7 @@ class Server {
         this.app.use('/usuario', usuarioRoutes_1.default);
         this.app.use('/empresa', empresaRoutes_1.default);
         this.app.use('/cliente', clienteRoutes_1.default);
+        this.app.use('/proveedor', proveedorRoutes_1.default);
         this.app.use('/producto', productoRoutes_1.default);
         this.app.use('/documento', documentoRoutes_1.default);
         this.app.use('/documentoDetalle', documentoDetalleRoutes_1.default);
