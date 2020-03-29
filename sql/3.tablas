@@ -207,6 +207,7 @@ CREATE  TABLE PROVEEDOR (
   CUPO_CREDITO                     decimal,
   RETENCION                        decimal,
   BASE_RETENCION				   decimal,
+  mail                             VARCHAR(100),
   CONSTRAINT PK_PROVEEDOR
     PRIMARY KEY ( PROVEEDOR_ID ) 
 );

@@ -6,6 +6,7 @@ import usuarioRoutes from "./routes/usuarioRoutes";
 import empleadoRoutes from "./routes/empleadoRoutes";
 import EmpresaRoutes from './routes/empresaRoutes';
 import ClienteRoutes from './routes/clienteRoutes';
+import ProveedorRoutes from './routes/proveedorRoutes';
 import ProductoRoutes from './routes/productoRoutes';
 import DocumentoRoutes from './routes/documentoRoutes';
 import DocumentoDetalleRoutes from './routes/documentoDetalleRoutes';
@@ -41,6 +42,7 @@ class Server{
         this.app.use('/usuario',usuarioRoutes);
         this.app.use('/empresa',EmpresaRoutes);
         this.app.use('/cliente',ClienteRoutes);
+        this.app.use('/proveedor',ProveedorRoutes);
         this.app.use('/producto',ProductoRoutes);
         this.app.use('/documento',DocumentoRoutes);
         this.app.use('/documentoDetalle',DocumentoDetalleRoutes);
