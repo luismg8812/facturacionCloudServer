@@ -602,3 +602,38 @@ ALTER TABLE DOCUMENTO_ORDEN ADD CONSTRAINT FK_DOCU_REFERENCE_ORDEN
 ALTER TABLE DOCUMENTO_ORDEN ADD CONSTRAINT FK_DOCU_ORD_REFERENCE_ORDEN
   FOREIGN KEY (ORDEN_ID)
     REFERENCES DOCUMENTO (DOCUMENTO_ID);
+	
+	CREATE  TABLE INFORME_DIARIO (
+  		
+  INFORME_DIARIO_ID            int NOT NULL,
+  EMPRESA_ID                       smallint,
+  TOTAL_VENTAS              decimal,
+  TOTAL_REMISIONES          decimal,
+  IVA_VENTAS                decimal,
+  IVA_REMISIONES            decimal,
+  FECHA_INGRESO             timestamp,
+  FECHA_INFORME             timestamp,
+  COSTO_VENTAS            decimal,
+  COSTO_REMISIONES            decimal,
+  cantidad_Documentos        smallint,
+  documento_inicio          VARCHAR(50),
+  documento_fin            	VARCHAR(50),
+  iva_5                     decimal,
+  Iva_19                    decimal,
+  base_19                   decimal,
+  base_5                    decimal,
+  excento                   decimal,
+  iva_5_compras             decimal,
+  Iva_19_compras            decimal,
+  base_19_compras           decimal,
+  base_5_compras            decimal,
+  excento_compras           decimal,
+  cierre_diario				smallint,
+  
+  CONSTRAINT PK_INFORME_DIARIO
+    PRIMARY KEY ( INFORME_DIARIO_ID ) 
+);  
+
+ALTER TABLE INFORME_DIARIO ADD CONSTRAINT FK_EMPR_REFERENCE_MARCA
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);

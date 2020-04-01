@@ -11,6 +11,8 @@ import ProductoRoutes from './routes/productoRoutes';
 import DocumentoRoutes from './routes/documentoRoutes';
 import DocumentoDetalleRoutes from './routes/documentoDetalleRoutes';
 import marcaRoutes from './routes/marcaRoutes';
+import informeDiarioRoutes from './routes/informeDiarioRoutes';
+
 //prueba de ejecucion
 class Server{
    public app:Application;
@@ -47,6 +49,7 @@ class Server{
         this.app.use('/documento',DocumentoRoutes);
         this.app.use('/documentoDetalle',DocumentoDetalleRoutes);
         this.app.use('/marca',marcaRoutes);
+        this.app.use('/informeDiario',informeDiarioRoutes);
         this.app.use('/empleado',empleadoRoutes);
     }
     
