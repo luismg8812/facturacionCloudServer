@@ -27,8 +27,8 @@ class UsuarioRoutes{
         this.router.get('/guardarActivaciones' ,usuarioController.guardarActivaciones);
         this.router.post('/postFile',usuarioController.postFile);
         this.router.get('/getFile' ,usuarioController.getFile);
-        
-        
+        this.router.get('/usuarioByRol' ,usuarioController.usuarioByRol);
+     
     }
 }
 const usuarioRoutes= new UsuarioRoutes();

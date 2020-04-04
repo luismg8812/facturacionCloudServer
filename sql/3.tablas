@@ -637,3 +637,32 @@ ALTER TABLE DOCUMENTO_ORDEN ADD CONSTRAINT FK_DOCU_ORD_REFERENCE_ORDEN
 ALTER TABLE INFORME_DIARIO ADD CONSTRAINT FK_EMPR_REFERENCE_MARCA
   FOREIGN KEY (EMPRESA_ID)
     REFERENCES EMPRESA (EMPRESA_ID);
+	
+CREATE  TABLE INFORME_MENSUAL (	
+  INFORME_MENSUAL_ID            int NOT NULL,
+  EMPRESA_ID                    smallint,
+  COSTO_ENVENTARIO_INICIAL      decimal,
+  IVA_ENVENTARIO_INICIAL        decimal,
+  COMPRAS                		decimal,
+  IVA_COMPRAS            		decimal,
+  VENTAS             			decimal,
+  IVA_VENTAS             		decimal,
+  COSTO_VENTAS            		decimal,
+  COSTO_REMISIONES              decimal,
+  COSTO_ENTRADAS        		decimal,
+  COSTO_SALIDAS          		decimal,
+  COSTO_DEVOLUCIONES_VENTA    	decimal,
+  COSTO_DEVOLUCIONES_COMPRA     decimal,
+  UTILIDAD_BRUTA_MES            decimal,
+  INVENTARIO_FINAL              decimal,
+  FECHA_INFORME                 timestamp,
+  FECHA_INGRESO                 timestamp,
+  cierre_MENSUAL				smallint,
+  
+  CONSTRAINT PK_INFORME_MENSUAL
+    PRIMARY KEY ( INFORME_MENSUAL_ID ) 
+);  
+
+ALTER TABLE INFORME_MENSUAL ADD CONSTRAINT FK_INFO_MENSU_REFERENCE_EMPR
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);

@@ -24,6 +24,7 @@ class DocumentoRoutes {
         this.router.get('/getTiposDocumento', documentoControllers_1.documentoControllers.getTiposDocumento);
         this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha', documentoControllers_1.documentoControllers.getDocumentoByTipoAndFecha);
+        this.router.get('/getDocumentosByTipoPago', documentoControllers_1.documentoControllers.getDocumentosByTipoPago);
     }
 }
 const documentoRoutes = new DocumentoRoutes();
