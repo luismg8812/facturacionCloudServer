@@ -26,6 +26,7 @@ class DocumentoRoutes{
         this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha' ,documentoControllers.getDocumentoByTipoAndFecha);
+        this.router.get('/getDocumentosByTipoPago' ,documentoControllers.getDocumentosByTipoPago);
         
     }
 }

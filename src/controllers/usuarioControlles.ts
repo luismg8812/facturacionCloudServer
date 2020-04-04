@@ -19,6 +19,29 @@ class UsuarioControllers {
         res.json(usuarioRes.rows);
     }
 
+    public async usuarioByRol(req: Request, res: Response): Promise<any> {
+        const empresaId = req.query.empresaId;
+        const rolId = req.query.rolId;
+        const tipoDocumentoId = req.query.tipoDocumentoId;
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal;
+        console.log(req.query);
+        let query = "select  usuario.nombre, sum(documento.total) total, count(*) num from rol_usuario, usuario, documento "+
+        " where rol_usuario.usuario_id=usuario.usuario_id "+
+        " and usuario.usuario_id = documento.usuario_id "+
+        " and usuario.empresa_id = "+empresaId+
+        " and rol_id= "+rolId+
+        " and documento.tipo_documento_id= "+tipoDocumentoId+
+        " and documento.impreso=1"+
+        " and DATE(documento.fecha_registro) BETWEEN TO_TIMESTAMP('"+fechaInicial+"', 'DD-MM-YYYY') and TO_TIMESTAMP('"+fechaFinal+"', 'DD-MM-YYYY')"+
+        " GROUP by usuario.nombre";
+        console.log(query);
+        const usuarioRes = await db.query(query);
+        res.json(usuarioRes.rows);
+    }
+
+    
+
     public async getRolByIds(req: Request, res: Response): Promise<any> {
         console.log(req.query);
         let ids: string = req.query.ids;
