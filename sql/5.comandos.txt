@@ -1,0 +1,12 @@
+--instalar pm2
+npm install -g pm2
+
+---compilar el server
+C:\facturacion\build> pm2 start index.js --name servercomponent
+
+------compilar local
+C:\facturacion\local>npm rebuild
+C:\facturacion\local>pm2 start index.js --name localcomponent
+
+-------log
+pm2 monit

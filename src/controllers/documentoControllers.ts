@@ -375,7 +375,7 @@ class DocumentoControllers {
         if (empleadoId != '') {
             query = query + " and empleado_id =  " + empleadoId;
         }
-        if (clienteId != '0') {
+        if (clienteId != '') {
             query = query + " and cliente_id =  " + clienteId;
         }
         if (proveedorId != '') {
