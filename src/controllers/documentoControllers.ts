@@ -60,13 +60,15 @@ class DocumentoControllers {
         let invoice_id: number = req.body.invoice_id;
         let fecha_registro: number = req.body.fecha_registro;
         let mensaje: number = req.body.mensaje;
+        let status: number = req.body.status;
+        
         console.log(req.body);
         const id = await db.query(documentoRepository.getIdDocumentoInvoice);
         const documento_invoice_id = id.rows[0].nextval;
         console.log(documento_invoice_id);
-        var query = "INSERT INTO documento_invoice(documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje) VALUES ($1,$2,$3,$4,$5)";
+        var query = "INSERT INTO documento_invoice(documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje,status) VALUES ($1,$2,$3,$4,$5,$6)";
         console.log(query);
-        await db.query(query, [documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje]).then(res2 => {
+        await db.query(query, [documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje,status]).then(res2 => {
             res.json({ "code": 200, "documento_invoice_id": documento_invoice_id });
         }).catch(error => {
             console.error(error);
@@ -362,6 +364,27 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    public async getDocumentoForFacturacionElectronica(req: Request, res: Response): Promise<any> {
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal; 
+        let empresaId = req.query.empresaId;
+        let tipoDocumentoId = req.query.tipoDocumentoId;
+        let invoiceId =req.query.invoiceId;
+        console.log(req.query);
+        let query: string = " select documento.* from documento, documento_invoice"+
+        " where documento.documento_id=documento_invoice.documento_id"+
+        " and impreso=1" +
+        " and empresa_id = "+ empresaId+
+        " and documento_invoice.invoice_id=" +invoiceId;
+        if(invoiceId==1){
+          query=query+ " and documento.documento_id not in (select  documento_id from documento_invoice where invoice_id <> 1)";
+        }
+        query=query+ "order by documento.fecha_registro desc";
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
     public async getDocumentoByTipoAndFecha(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
@@ -409,6 +432,7 @@ class DocumentoControllers {
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
     }
+    
 
     public async getNominaByEmpleado(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
