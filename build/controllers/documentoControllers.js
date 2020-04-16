@@ -71,13 +71,14 @@ class DocumentoControllers {
             let invoice_id = req.body.invoice_id;
             let fecha_registro = req.body.fecha_registro;
             let mensaje = req.body.mensaje;
+            let status = req.body.status;
             console.log(req.body);
             const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getIdDocumentoInvoice);
             const documento_invoice_id = id.rows[0].nextval;
             console.log(documento_invoice_id);
-            var query = "INSERT INTO documento_invoice(documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje) VALUES ($1,$2,$3,$4,$5)";
+            var query = "INSERT INTO documento_invoice(documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje,status) VALUES ($1,$2,$3,$4,$5,$6)";
             console.log(query);
-            yield database_1.default.query(query, [documento_invoice_id, documento_id, invoice_id, fecha_registro, mensaje]).then(res2 => {
+            yield database_1.default.query(query, [documento_invoice_id, documento_id, invoice_id, fecha_registro, mensaje, status]).then(res2 => {
                 res.json({ "code": 200, "documento_invoice_id": documento_invoice_id });
             }).catch(error => {
                 console.error(error);
@@ -369,6 +370,28 @@ class DocumentoControllers {
                 " and documento.impreso = 1" +
                 " and DATE(documento.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')" +
                 " GROUP by nombre";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
+    getDocumentoForFacturacionElectronica(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let empresaId = req.query.empresaId;
+            let tipoDocumentoId = req.query.tipoDocumentoId;
+            let invoiceId = req.query.invoiceId;
+            console.log(req.query);
+            let query = " select documento.* from documento, documento_invoice" +
+                " where documento.documento_id=documento_invoice.documento_id" +
+                " and impreso=1" +
+                " and empresa_id = " + empresaId +
+                " and documento_invoice.invoice_id=" + invoiceId;
+            if (invoiceId == 1) {
+                query = query + " and documento.documento_id not in (select  documento_id from documento_invoice where invoice_id <> 1)";
+            }
+            query = query + "order by documento.fecha_registro desc";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);

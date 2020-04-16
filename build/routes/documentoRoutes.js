@@ -26,6 +26,7 @@ class DocumentoRoutes {
         this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha', documentoControllers_1.documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getDocumentosByTipoPago', documentoControllers_1.documentoControllers.getDocumentosByTipoPago);
+        this.router.get('/getDocumentoForFacturacionElectronica', documentoControllers_1.documentoControllers.getDocumentoForFacturacionElectronica);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

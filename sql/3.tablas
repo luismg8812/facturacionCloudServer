@@ -602,6 +602,7 @@ CREATE  TABLE DOCUMENTO_INVOICE (
   INVOICE_ID		       					smallint,
   FECHA_REGISTRO							timestamp,
   mensaje        							VARCHAR(500),
+  status									VARCHAR(20),
   CONSTRAINT PK_DOCUMENTO_INVOICE
     PRIMARY KEY ( DOCUMENTO_INVOICE_ID ) 
 );
