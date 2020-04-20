@@ -104,5 +104,11 @@ class ClienteControllers {
             res.json(tipoIdentificacion.rows);
         });
     }
+    getTipoEmpresa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const tipoIdentificacion = yield database_1.default.query(clienteRepository_1.clienteRepository.getTipoEmpresa);
+            res.json(tipoIdentificacion.rows);
+        });
+    }
 }
 exports.clienteControllers = new ClienteControllers();

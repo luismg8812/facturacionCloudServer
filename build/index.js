@@ -17,6 +17,7 @@ const documentoRoutes_1 = __importDefault(require("./routes/documentoRoutes"));
 const documentoDetalleRoutes_1 = __importDefault(require("./routes/documentoDetalleRoutes"));
 const marcaRoutes_1 = __importDefault(require("./routes/marcaRoutes"));
 const informeDiarioRoutes_1 = __importDefault(require("./routes/informeDiarioRoutes"));
+const apiRoutes_1 = __importDefault(require("./routes/apiRoutes"));
 //prueba de ejecucion
 class Server {
     constructor() {
@@ -50,10 +51,11 @@ class Server {
         this.app.use('/marca', marcaRoutes_1.default);
         this.app.use('/informeDiario', informeDiarioRoutes_1.default);
         this.app.use('/empleado', empleadoRoutes_1.default);
+        this.app.use('/api', apiRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
-            console.log("init by port: ", this.app.get('port'));
+            console.log("start by port: ", this.app.get('port'));
         });
     }
 }

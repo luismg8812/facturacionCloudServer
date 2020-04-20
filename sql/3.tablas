@@ -5,6 +5,16 @@ CREATE  TABLE ROL (
     PRIMARY KEY ( ROL_ID ) 
 );
 
+CREATE  TABLE fact_tipo_empresa (
+  fact_tipo_empresa_ID             smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CODIGO                           VARCHAR(10),
+  CONSTRAINT PK_fact_tipo_empresa
+    PRIMARY KEY ( fact_tipo_empresa_ID ) 
+);
+
+
+
 CREATE  TABLE tipo_impresion (
   tipo_impresion_ID                smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -461,6 +471,9 @@ CREATE  TABLE DOCUMENTO (
  LINEA_VEHICULO                   VARCHAR(20),
  MODELO_MARCA_ID                            int,
  impresora 						   varchar(20),
+ invoice_id						   smallint,
+ CUFE							   varchar(500),
+ QRCODE							   varchar(500),
   CONSTRAINT PK_DOCUMENTO
     PRIMARY KEY ( DOCUMENTO_ID ) 
 );
@@ -475,6 +488,10 @@ ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_CLIEN
 ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_marc_vehi
   FOREIGN KEY (MODELO_MARCA_ID)
     REFERENCES MODELO_MARCA (MODELO_MARCA_ID);
+	
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_invoice
+  FOREIGN KEY (INVOICE_ID)
+    REFERENCES INVOICE (INVOICE_ID);
 
 
 ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_USUARIO
