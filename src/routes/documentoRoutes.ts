@@ -25,10 +25,12 @@ class DocumentoRoutes{
         this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
         this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
+        this.router.get('/getInvoice' ,documentoControllers.getInvoice);
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha' ,documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getDocumentosByTipoPago' ,documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getDocumentoForFacturacionElectronica' ,documentoControllers.getDocumentoForFacturacionElectronica);
+        this.router.get('/getByDocumentoId' ,documentoControllers.getByDocumentoId);
         
     }
 }

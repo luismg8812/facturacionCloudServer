@@ -8,6 +8,7 @@ class ClienteRepository {
         this.getImpresorasEmpresa = "select * from impresora_empresa where empresa_id = $1 order by numero_impresora";
         this.getIdCliente = "select nextval('s_cliente')";
         this.getTipoIdentificacionAll = "select * from tipo_identificacion order by tipo_identificacion_id";
+        this.getTipoEmpresa = "select * from fact_tipo_empresa order by nombre";
     }
 }
 exports.clienteRepository = new ClienteRepository();

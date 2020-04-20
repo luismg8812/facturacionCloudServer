@@ -12,6 +12,8 @@ import DocumentoRoutes from './routes/documentoRoutes';
 import DocumentoDetalleRoutes from './routes/documentoDetalleRoutes';
 import marcaRoutes from './routes/marcaRoutes';
 import informeDiarioRoutes from './routes/informeDiarioRoutes';
+import apiRoutes from './routes/apiRoutes';
+
 
 //prueba de ejecucion
 class Server{
@@ -51,11 +53,12 @@ class Server{
         this.app.use('/marca',marcaRoutes);
         this.app.use('/informeDiario',informeDiarioRoutes);
         this.app.use('/empleado',empleadoRoutes);
+        this.app.use('/api',apiRoutes);
     }
     
     start():void{
         this.app.listen(this.app.get('port'),()=>{
-            console.log("init by port: ",this.app.get('port'));
+            console.log("start by port: ",this.app.get('port'));
         });
     }
 }

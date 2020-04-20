@@ -23,10 +23,12 @@ class DocumentoRoutes {
         this.router.get('/getOrdenesByEmpleado', documentoControllers_1.documentoControllers.getOrdenesByEmpleado);
         this.router.post('/cierreNomina', documentoControllers_1.documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento', documentoControllers_1.documentoControllers.getTiposDocumento);
+        this.router.get('/getInvoice', documentoControllers_1.documentoControllers.getInvoice);
         this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha', documentoControllers_1.documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getDocumentosByTipoPago', documentoControllers_1.documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getDocumentoForFacturacionElectronica', documentoControllers_1.documentoControllers.getDocumentoForFacturacionElectronica);
+        this.router.get('/getByDocumentoId', documentoControllers_1.documentoControllers.getByDocumentoId);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

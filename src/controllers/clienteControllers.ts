@@ -84,8 +84,15 @@ class ClienteControllers{
         res.json(tipoPago.rows);  
     }
 
+    
+
     public async getTipoIdentificacionAll(req:Request, res:Response):Promise<any>{  
         const tipoIdentificacion = await  db.query(clienteRepository.getTipoIdentificacionAll);              
+        res.json(tipoIdentificacion.rows);  
+    }
+
+    public async getTipoEmpresa(req:Request, res:Response):Promise<any>{  
+        const tipoIdentificacion = await  db.query(clienteRepository.getTipoEmpresa);              
         res.json(tipoIdentificacion.rows);  
     }
 
