@@ -9,14 +9,15 @@ class ApiControllers {
 
 
   public async sendMail(req: Request, res: Response) {
-    console.log(req.body);
+    //console.log(req.body);
     let html = req.body.html;
     let email = req.body.emailCliente;
     let xml_64 = req.body.xml_64;
     let xml_name = req.body.xml_name;
-    let pdf_name = req.body.pdf_name;
-    let pdf_64 = req.body.pdf_64;
-    
+    let pdf_name:string = req.body.pdf_name;
+    let pdf_64:string = req.body.pdf_64;
+    pdf_64=pdf_64.replace("data:application/pdf;filename=generated.pdf;base64,","");
+    console.log(pdf_64);
     
     let transporter = nodemailer.createTransport({
       host: "mail.effectivesoftware.com.co",
@@ -57,12 +58,12 @@ console.log(html);
           filename: xml_name,
           content: xml_64,
           encoding: 'base64'
-        }/*,
+        },
         {
           filename: pdf_name,
           content: pdf_64,
           encoding: 'base64'
-        }*/
+        }
       ]
     }, function (err, info) {
       if (err) {

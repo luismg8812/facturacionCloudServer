@@ -242,10 +242,11 @@ CREATE  TABLE CLIENTE (
   CLIENTE_ID                       int NOT NULL DEFAULT nextval('S_CLIENTE'),
   EMPRESA_ID					   int, 
   tipo_identificacion_id		   smallint,
+  fact_tipo_empresa_id             smallint,
   NOMBRE                           VARCHAR(50),
   SEGUNDO_NOMBRE                   VARCHAR(50),
   APELLIDOS                        VARCHAR(50),
-  SEGUNDO_APELLIDOS                VARCHAR(50),
+  SEGUNDO_APELLIDO                VARCHAR(50),
   DOCUMENTO                        VARCHAR(30),
   CIUDAD_ID                        int,
   BARRIO                           VARCHAR(50),
@@ -271,7 +272,9 @@ ALTER TABLE CLIENTE ADD CONSTRAINT FK_EMPE_REFERENCE_CLI
 ALTER TABLE CLIENTE ADD CONSTRAINT FK_tipo_iden_REFERENCE_CLI
   FOREIGN KEY (tipo_identificacion_id)
     REFERENCES tipo_identificacion (tipo_identificacion_id); 	
-
+ALTER TABLE CLIENTE ADD CONSTRAINT FK_tipo_emp_REFERENCE_CLI
+  FOREIGN KEY (fact_tipo_empresa_id)
+    REFERENCES fact_tipo_empresa (fact_tipo_empresa_id);  	
 
 
 ALTER TABLE EMPRESA ADD CONSTRAINT FK_EMPR_REFEREN_TIPO_EMPR
@@ -600,6 +603,7 @@ CREATE  TABLE IMPRESORA_EMPRESA (
   EMPRESA_ID			  int,
   TIPO_IMPRESION_id          smallint,
   NUMERO_IMPRESORA		  smallint,
+  nombre_impresora        varchar(100),
   CONSTRAINT PK_IMPRESORA_EMPRESA
     PRIMARY KEY ( IMPRESORA_EMPRESA_ID ) 
 );

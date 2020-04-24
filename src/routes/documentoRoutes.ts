@@ -31,6 +31,7 @@ class DocumentoRoutes{
         this.router.get('/getDocumentosByTipoPago' ,documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getDocumentoForFacturacionElectronica' ,documentoControllers.getDocumentoForFacturacionElectronica);
         this.router.get('/getByDocumentoId' ,documentoControllers.getByDocumentoId);
+        this.router.get('/getDocumentoInvoiceByDocumento' ,documentoControllers.getDocumentoInvoiceByDocumento);
         
     }
 }

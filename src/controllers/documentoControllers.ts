@@ -235,6 +235,16 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    public async getDocumentoInvoiceByDocumento(req: Request, res: Response): Promise<any> {
+        const documentoId = req.query.documentoId;
+        let query: string = "select * from documento_invoice  where documento_id = $1 order by fecha_registro desc ";
+        console.log(query);
+        const docuemntos = await db.query(query, [documentoId]);
+        res.json(docuemntos.rows);
+    }
+
+    
+
 
 
     public async getCuadreCaja(req: Request, res: Response): Promise<any> {
@@ -542,6 +552,7 @@ class DocumentoControllers {
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
     }
+    
 
 
 }
