@@ -59,7 +59,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (17, 2, 'Verificar estado documentos enviados', '/estadoDocumentos', 0, 'Opción que permite verificar el estado de los documentos para facturacion electronica');
 
 --fin sub-menu
-http://localhost:9090/usuario/usuarioByMail?mail=info@effectivesoftware.com.co
+
 --opcion usuario
 INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, estado, fecha_registro)VALUES (1, 3, 1, 1, '2020-01-17');
 -- fin opciones usuario
@@ -68,7 +68,7 @@ INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, es
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (1, 'Activar Comandas','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (2, 'Activar impresión en pantalla','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (3, 'Activar proporción','');
---INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'Activar proporción','');
+--INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'activa','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (5, 'Activar Ver remisiones En cuadre de caja','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (6, 'Activar Crear nota crédito/débito','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (7, 'Activar Código de Barras','');
@@ -149,12 +149,16 @@ INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (6, 'vale');
 INSERT INTO public.configuracion(configuracion_id, server, fecha_combinada, impresion_continua, nombre_producto_largo, guardar_facturas, gramera, num_impresion, empresa_id)VALUES (1, 1, 0, 0, 0, 1, 1, 1, 1);
 --fin configuracion	
 
+--proporcion
+INSERT INTO public.proporcion(proporcion_id,empresa_id, base, variable, contador_factura, contador_remision, rango_par_a, rango_par_b, rango_impar_a, rango_impar_b)VALUES (1, ,1,1, 1, 0, 0, 0, 0, 0, 0);
+--fin proporcion
+
 -- TIPOS DOCUMENTO
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (1,'Registro Civil', '11');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (2,'Tarjeta de identidad', '12');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (3,'Cédula de ciudadanía', '13');
-INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (2,'Cédula de extranjería', '22');
-INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (4,'Pasaporte', '41');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (4,'Cédula de extranjería', '22');
+INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (5,'Pasaporte', '41');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (6,'Menor sin identificación', '6');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (7,'Adulto sin identidad', '7');
 INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_corto) VALUES (8,'NIT', '50');

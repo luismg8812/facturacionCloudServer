@@ -29,6 +29,8 @@ class Server {
         this.app.set("port", process.env.PORT || 9090);
         this.app.use(morgan_1.default('dev'));
         this.app.use(cors_1.default({ origin: '*' }));
+        this.app.use(express_1.default.json({ limit: '50mb' }));
+        this.app.use(express_1.default.urlencoded({ limit: '50mb' }));
         this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');

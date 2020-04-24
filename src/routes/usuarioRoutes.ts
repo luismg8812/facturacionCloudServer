@@ -28,7 +28,8 @@ class UsuarioRoutes{
         this.router.post('/postFile',usuarioController.postFile);
         this.router.get('/getFile' ,usuarioController.getFile);
         this.router.get('/usuarioByRol' ,usuarioController.usuarioByRol);
-     
+        this.router.get('/getProporcion' ,usuarioController.getProporcion);
+        this.router.put('/updateProporcion',usuarioController.updateProporcion);
     }
 }
 const usuarioRoutes= new UsuarioRoutes();

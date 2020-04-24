@@ -247,6 +247,15 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getDocumentoInvoiceByDocumento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const documentoId = req.query.documentoId;
+            let query = "select * from documento_invoice  where documento_id = $1 order by fecha_registro desc ";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query, [documentoId]);
+            res.json(docuemntos.rows);
+        });
+    }
     getCuadreCaja(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaId = req.query.empresaId;

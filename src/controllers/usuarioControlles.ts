@@ -40,6 +40,17 @@ class UsuarioControllers {
         res.json(usuarioRes.rows);
     }
 
+    public async getProporcion(req: Request, res: Response): Promise<any> {
+        const empresaId = req.query.empresaId;
+        console.log(req.query);
+        let query = "select * from proporcion where empresa_id = "+empresaId;
+        console.log(query);
+        const usuarioRes = await db.query(query);
+        res.json(usuarioRes.rows);
+    }
+
+    
+
     
 
     public async getRolByIds(req: Request, res: Response): Promise<any> {
@@ -164,6 +175,16 @@ class UsuarioControllers {
         }
         console.log("usuario guardo:");
         res.json({ "code": 200, "usuario_id": usuario_id });
+    }
+
+    public async updateProporcion(req: Request, res: Response): Promise<any> {
+        var proporcion_id = req.body.proporcion_id;
+        var contador_factura = req.body.contador_factura;
+        var contador_remision = req.body.contador_remision;
+        console.log(req.body);
+        await db.query("UPDATE proporcion set contador_factura=$1, contador_remision=$2 where proporcion_id=$3", [contador_factura, contador_remision, proporcion_id]);
+        console.log("proporcion actualizada:");
+        res.json({ "code": 200, "proporcion_id": proporcion_id });
     }
 
 
