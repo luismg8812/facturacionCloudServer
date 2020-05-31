@@ -6,6 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
+const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
+const empleadoRoutes_1 = __importDefault(require("./routes/empleadoRoutes"));
+const empresaRoutes_1 = __importDefault(require("./routes/empresaRoutes"));
+const clienteRoutes_1 = __importDefault(require("./routes/clienteRoutes"));
+const proveedorRoutes_1 = __importDefault(require("./routes/proveedorRoutes"));
+const productoRoutes_1 = __importDefault(require("./routes/productoRoutes"));
+const documentoRoutes_1 = __importDefault(require("./routes/documentoRoutes"));
+const documentoDetalleRoutes_1 = __importDefault(require("./routes/documentoDetalleRoutes"));
+const marcaRoutes_1 = __importDefault(require("./routes/marcaRoutes"));
+const informeDiarioRoutes_1 = __importDefault(require("./routes/informeDiarioRoutes"));
+const apiRoutes_1 = __importDefault(require("./routes/apiRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -26,6 +37,17 @@ class Server {
     }
     router() {
         this.app.use(indexRoutes_1.default);
+        this.app.use('/usuario', usuarioRoutes_1.default);
+        this.app.use('/empresa', empresaRoutes_1.default);
+        this.app.use('/cliente', clienteRoutes_1.default);
+        this.app.use('/proveedor', proveedorRoutes_1.default);
+        this.app.use('/producto', productoRoutes_1.default);
+        this.app.use('/documento', documentoRoutes_1.default);
+        this.app.use('/documentoDetalle', documentoDetalleRoutes_1.default);
+        this.app.use('/marca', marcaRoutes_1.default);
+        this.app.use('/informeDiario', informeDiarioRoutes_1.default);
+        this.app.use('/empleado', empleadoRoutes_1.default);
+        this.app.use('/api', apiRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
