@@ -96,6 +96,7 @@ class DocumentoDetalleControllers {
         where dd.producto_id = pp.producto_id
         and dd.documento_id = d.documento_id
         and d.impreso=1
+        and d.empresa_id= ${empresaId}
         and dd.estado=1`;
             query = query + " and DATE(dd.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
             if (usuarioId != '') {
