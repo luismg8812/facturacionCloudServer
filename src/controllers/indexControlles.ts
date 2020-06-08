@@ -1,8 +1,13 @@
 import {Request,Response} from 'express';
+import db  from '../database';
 
 class IndexControllers{
-    public index (req:Request, res:Response){
-        res.send("<h1>intro index server</h1>");
+    public  async index (req:Request, res:Response){
+        const tipoIdentificacion = await  db.query("select * from tipo_identificacion order by tipo_identificacion_id");              
+        res.json(tipoIdentificacion.rows);
+        res.send(`<h1>intro index server
+        ${tipoIdentificacion.rows}
+        </h1>`);
     }
 
 } 

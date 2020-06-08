@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { clienteRepository } from '../repository/clienteRepository';
 import db from '../database';
 import { documentoRepository } from '../repository/documentoRepository';
-import { CuadreCajaVoModel } from '../models/cuadreCajaVo.model';
+
 
 class DocumentoControllers {
 
@@ -177,7 +177,7 @@ class DocumentoControllers {
         const empresaId = req.query.empresaId;
         const usuarioId = req.query.usuarioId;
         const impreso = req.query.impreso;
-        let tipoDocumentoId: string[] = req.query.tipoDocumentoId.split(",");
+        let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
         console.log(tipoDocumentoId);
         let query: string = "select * from documento where empresa_id= $1 ";
         if (usuarioId != "") {
@@ -251,8 +251,7 @@ class DocumentoControllers {
         const empresaId = req.query.empresaId;
         const usuarioId = req.query.usuarioId;
         const cerrado = req.query.cerrado;
-        let cuadreCajaVoModel: CuadreCajaVoModel = new CuadreCajaVoModel();
-        let tipoDocumentoId: string[] = req.query.tipoDocumentoId.split(",");
+        let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
 
         let query: string = "select total_facturas,documentos_no_impresos, abonos,efectivo,tarjetas, cheques,vales,cartera from"
             + " ( select sum(total) total_facturas from documento";
@@ -398,7 +397,7 @@ class DocumentoControllers {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal; 
         let empresaId = req.query.empresaId;
-        let tipoDocumentoId: string[] = req.query.tipoDocumentoId.split(",");
+        let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
         let invoiceId =req.query.invoiceId;
         console.log(req.query);
         let query: string = " select  * from documento where  impreso=1 " +
@@ -465,7 +464,7 @@ class DocumentoControllers {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
         console.log(req.query);
-        let empleadoId: string[] = req.query.idEmpleados.split(",");
+        let empleadoId: string[] = (<string>req.query.idEmpleados).split(",");
         let query: string = "select subt.nombre, subt.empleado_id, subt.subtotal subtotal, coalesce(vale.vales,0) vales,"
             + " coalesce(produ.productos,0) productos, coalesce(subt.pago_admin, 0) admon, coalesce(subt.ahorro,0) ahorro,"
             + " (subt.subtotal+coalesce(subt.pago_admin, 0)-coalesce(vale.vales,0)-coalesce(produ.productos,0)-coalesce(subt.ahorro,0)) total"

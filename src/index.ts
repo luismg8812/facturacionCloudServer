@@ -1,6 +1,5 @@
-import express, {Application} from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
-import cors from 'cors';
 import indexRoutes from "./routes/indexRoutes";
 import usuarioRoutes from "./routes/usuarioRoutes";
 import empleadoRoutes from "./routes/empleadoRoutes";
@@ -14,23 +13,19 @@ import marcaRoutes from './routes/marcaRoutes';
 import informeDiarioRoutes from './routes/informeDiarioRoutes';
 import apiRoutes from './routes/apiRoutes';
 
+class Server {
+    public app: Application;
 
-//prueba de ejecucion
-class Server{
-   public app:Application;
-
-    constructor(){       
-        this.app=express();
+    constructor() {
+        this.app = express();
         this.config();
         this.router();
     }
 
-    config():void{
-        this.app.set("port",process.env.PORT ||9090);
+    config(): void {
+        this.app.set("port", process.env.PORT || 9090);
         this.app.use(morgan('dev'));
-        this.app.use(cors({origin: '*'}));
-        this.app.use(express.json({limit: '50mb'}));
-        this.app.use(express.urlencoded({limit: '50mb'}));
+        this.app.use(express.json({ limit: '50mb' }));
         this.app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
@@ -38,12 +33,9 @@ class Server{
             res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
             next();
         });
-        
-        //this.app.use(cors({origin: 'http://localhost:4200'}));
-        this.app.use(express.json());
     }
 
-    router():void{
+    router(): void {
         this.app.use(indexRoutes);
         this.app.use('/usuario',usuarioRoutes);
         this.app.use('/empresa',EmpresaRoutes);
@@ -57,12 +49,13 @@ class Server{
         this.app.use('/empleado',empleadoRoutes);
         this.app.use('/api',apiRoutes);
     }
-    
-    start():void{
-        this.app.listen(this.app.get('port'),()=>{
-            console.log("start by port: ",this.app.get('port'));
+
+    start(): void {
+        this.app.listen(this.app.get('port'), () => {
+            console.log("start by port: ", this.app.get('port'));
         });
     }
 }
-const server =new Server();
+
+const server = new Server();
 server.start();

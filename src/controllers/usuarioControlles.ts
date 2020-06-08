@@ -55,7 +55,7 @@ class UsuarioControllers {
 
     public async getRolByIds(req: Request, res: Response): Promise<any> {
         console.log(req.query);
-        let ids: string = req.query.ids;
+        let ids: string = <string>req.query.ids;
         var vid2 = ids.split(",");
         console.log(vid2);
         const roles = await db.query("select * from rol where rol_id in (" + vid2.toString() + ")");
@@ -133,7 +133,7 @@ class UsuarioControllers {
 
     public async createUsuario(req: Request, res: Response): Promise<any> {
 
-        let roles: string[] = req.query.rolId.split(",");
+        let roles: string[] = (<string>req.query.rolId).split(",");
         console.log(req.query.rolId);
         delete req.body.usuario_id;
         var empresa_id = req.body.empresa_id;
@@ -156,7 +156,7 @@ class UsuarioControllers {
 
     public async updateUsuario(req: Request, res: Response): Promise<any> {
 
-        let roles: string[] = req.query.rolId.split(",");
+        let roles: string[] = (<string>req.query.rolId).split(",");
         console.log(req.query.rolId);
         var usuario_id = req.body.usuario_id;
         var empresa_id = req.body.empresa_id;
@@ -211,7 +211,7 @@ class UsuarioControllers {
 
     public async guardarRutas(req: Request, res: Response): Promise<any> {
         const usuarioId = req.query.usuarioId;
-        let subMenuId: string[] = req.query.subMenuId.split(",");
+        let subMenuId: string[] = (<string>req.query.subMenuId).split(",");
         console.log(subMenuId);
         await db.query(usuarioRepository.deleteOpcionUsuario, [usuarioId]);
 
@@ -226,7 +226,7 @@ class UsuarioControllers {
 
     public async guardarActivaciones(req: Request, res: Response): Promise<any> {
         const usuarioId = req.query.usuarioId;
-        let activacionId: string[] = req.query.activacionId.split(",");
+        let activacionId: string[] = (<string>req.query.activacionId).split(",");
         await db.query(usuarioRepository.deleteActivacionUsuario, [usuarioId]);
         console.log(usuarioId);
         for (let i = 0; i < activacionId.length; i++) {

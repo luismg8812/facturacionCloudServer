@@ -23,7 +23,7 @@ class ApiControllers {
             let pdf_name = req.body.pdf_name;
             let pdf_64 = req.body.pdf_64;
             pdf_64 = pdf_64.replace("data:application/pdf;filename=generated.pdf;base64,", "");
-            console.log(pdf_64);
+            //console.log(pdf_64);
             let transporter = nodemailer_1.default.createTransport({
                 host: "mail.effectivesoftware.com.co",
                 pool: true,
@@ -40,7 +40,7 @@ class ApiControllers {
             let ruta = __dirname.replace("\controllers", "public\\images\\");
             html = html + `<b/><img src="${ruta + 'logo.png'}" height="42" width="42">`;
             html = html + `<b/><img src="${ruta + 'nice.jpeg'}" height="42" width="42">`;
-            console.log(html);
+            //console.log(html);
             yield transporter.sendMail({
                 from: '"Facturacion Effective" <facturacion_electronica@effectivesoftware.com.co>',
                 to: email,

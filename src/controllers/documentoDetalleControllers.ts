@@ -65,7 +65,7 @@ class DocumentoDetalleControllers{
     }
 
     public async getDocumentoDetalleByDocumentoList (req:Request, res:Response):Promise<any>{
-        const documento_id = req.query.documento_id; 
+        const documento_id = <string>req.query.documento_id; 
         let query:string="select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in ()";
         query=query.replace('()', "("+documento_id.toString()+")");
         console.log(query);
@@ -73,6 +73,32 @@ class DocumentoDetalleControllers{
              res.json(usuario.rows);     
     }
 
+    public async getDocumentosByFechaAndTipo (req:Request, res:Response):Promise<any>{
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal;
+        let empleadoId = req.query.idEmpleados;
+        let empresaId = req.query.empresaId;
+        let usuarioId = req.query.usuarioId;
+        console.log(req.query);
+        let query:string=`select dd.documento_detalle_id, dd.fecha_registro,pp.nombre, COALESCE(pp.porcentaje_venta,0) porcentaje_venta, d.consecutivo_dian, 
+        dd.cantidad, dd.unitario, d.empleado_id vendedor, dd.parcial, dd.parcial*(COALESCE(pp.porcentaje_venta,0)/100) gana
+        from documento_detalle dd, producto pp, documento d
+        where dd.producto_id = pp.producto_id
+        and dd.documento_id = d.documento_id
+        and d.impreso=1
+        and dd.estado=1`;
+        query = query + " and DATE(dd.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
+        if (usuarioId != '') {
+            query = query + " and d.usuario_id = " + usuarioId;
+        }
+        if (empleadoId != '') {
+            query = query + " and d.empleado_id =  " + empleadoId;
+        }
+        query = query + " order by dd.documento_detalle_id desc";
+        console.log(query);
+        const usuario = await  db.query(query);       
+             res.json(usuario.rows);     
+    }
     
   
 }

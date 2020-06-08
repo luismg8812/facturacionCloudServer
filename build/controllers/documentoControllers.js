@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 const documentoRepository_1 = require("../repository/documentoRepository");
-const cuadreCajaVo_model_1 = require("../models/cuadreCajaVo.model");
 class DocumentoControllers {
     createDocumento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -261,7 +260,6 @@ class DocumentoControllers {
             const empresaId = req.query.empresaId;
             const usuarioId = req.query.usuarioId;
             const cerrado = req.query.cerrado;
-            let cuadreCajaVoModel = new cuadreCajaVo_model_1.CuadreCajaVoModel();
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
             let query = "select total_facturas,documentos_no_impresos, abonos,efectivo,tarjetas, cheques,vales,cartera from"
                 + " ( select sum(total) total_facturas from documento";

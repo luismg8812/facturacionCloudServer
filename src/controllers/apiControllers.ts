@@ -14,11 +14,11 @@ class ApiControllers {
     let email = req.body.emailCliente;
     let xml_64 = req.body.xml_64;
     let xml_name = req.body.xml_name;
-    let pdf_name:string = req.body.pdf_name;
-    let pdf_64:string = req.body.pdf_64;
-    pdf_64=pdf_64.replace("data:application/pdf;filename=generated.pdf;base64,","");
-    console.log(pdf_64);
-    
+    let pdf_name: string = req.body.pdf_name;
+    let pdf_64: string = req.body.pdf_64;
+    pdf_64 = pdf_64.replace("data:application/pdf;filename=generated.pdf;base64,", "");
+    //console.log(pdf_64);
+
     let transporter = nodemailer.createTransport({
       host: "mail.effectivesoftware.com.co",
       pool: true,
@@ -32,11 +32,11 @@ class ApiControllers {
         rejectUnauthorized: false
       }
     });
-    let ruta=__dirname.replace("\controllers","public\\images\\");
-    
-     html =html+ `<b/><img src="${ruta+'logo.png'}" height="42" width="42">`
-     html =html+ `<b/><img src="${ruta+'nice.jpeg'}" height="42" width="42">`
-console.log(html);
+    let ruta = __dirname.replace("\controllers", "public\\images\\");
+
+    html = html + `<b/><img src="${ruta + 'logo.png'}" height="42" width="42">`
+    html = html + `<b/><img src="${ruta + 'nice.jpeg'}" height="42" width="42">`
+    //console.log(html);
     await transporter.sendMail({
       from: '"Facturacion Effective" <facturacion_electronica@effectivesoftware.com.co>', // sender address
       to: email, // list of receivers
@@ -46,13 +46,13 @@ console.log(html);
       attachments: [
         {
           filename: 'logo.png',
-          path: ruta+'logo.png',
-          cid: 'logo.png' 
+          path: ruta + 'logo.png',
+          cid: 'logo.png'
         },
         {
           filename: 'nice.jpeg',
-          path: ruta+'nice.jpeg',
-          cid: 'nice.png' 
+          path: ruta + 'nice.jpeg',
+          cid: 'nice.png'
         },
         {
           filename: xml_name,
