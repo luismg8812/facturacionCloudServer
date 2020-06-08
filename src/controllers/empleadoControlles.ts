@@ -11,7 +11,7 @@ class EmpleadoControllers {
         var apellido = req.body.apellido;
         var telefono = req.body.telefono;
         var identificacion = req.body.identificacion;
-        var estado = req.body.estado;  
+        var estado = req.body.estado;     
         console.log(req.body);
         const id = await  db.query(empleadoRepository.getIdEmpleado);
         const empleado_id = id.rows[0].nextval; 
