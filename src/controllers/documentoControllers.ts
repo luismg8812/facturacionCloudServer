@@ -368,7 +368,7 @@ class DocumentoControllers {
             query = query + " and empleado_id =  " + empleadoId;
         }
         query = query + " GROUP BY DATE(fecha_registro) order by fecha";
-        console.log(query);
+        console.log(query); 
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
     }
