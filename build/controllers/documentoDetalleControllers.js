@@ -82,5 +82,33 @@ class DocumentoDetalleControllers {
             res.json(usuario.rows);
         });
     }
+    getDocumentosByFechaAndTipo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let empleadoId = req.query.idEmpleados;
+            let empresaId = req.query.empresaId;
+            let usuarioId = req.query.usuarioId;
+            console.log(req.query);
+            let query = `select dd.documento_detalle_id, dd.fecha_registro,pp.nombre, COALESCE(pp.porcentaje_venta,0) porcentaje_venta, d.consecutivo_dian, 
+        dd.cantidad, dd.unitario, d.empleado_id vendedor, dd.parcial, dd.parcial*(COALESCE(pp.porcentaje_venta,0)/100) gana
+        from documento_detalle dd, producto pp, documento d
+        where dd.producto_id = pp.producto_id
+        and dd.documento_id = d.documento_id
+        and d.impreso=1
+        and dd.estado=1`;
+            query = query + " and DATE(dd.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
+            if (usuarioId != '') {
+                query = query + " and d.usuario_id = " + usuarioId;
+            }
+            if (empleadoId != '') {
+                query = query + " and d.empleado_id =  " + empleadoId;
+            }
+            query = query + " order by dd.documento_detalle_id desc";
+            console.log(query);
+            const usuario = yield database_1.default.query(query);
+            res.json(usuario.rows);
+        });
+    }
 }
 exports.documentoDetalleControllers = new DocumentoDetalleControllers();
