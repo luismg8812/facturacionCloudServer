@@ -12,3 +12,5 @@ pm2 save
 
 -------log
 pm2 monit
+
+shell:startup

@@ -265,17 +265,19 @@ class DocumentoControllers {
                 + " ( select sum(total) total_facturas from documento";
             query = query + "  where empresa_id=" + empresaId;
             query = query + "  and usuario_id= " + usuarioId;
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "  and tipo_documento_id in ()";
             query = query + " ) total,";
             query = query + " (  select count(*) documentos_no_impresos  from documento";
             query = query + "    where empresa_id= " + empresaId;
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "    and impreso=0";
+            query = query + "    and cierre_diario= " + cerrado;
             query = query + "    and tipo_documento_id =10";
             query = query + " ) impresos,";
             query = query + " (  select coalesce(sum(cantidad),0) abonos from abono,documento";
             query = query + "    where abono.documento_id = documento.documento_id";
-            query = query + "    and cierre_diario =0";
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "    and abono.usuario_id= " + usuarioId;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and tipo_documento_id =10";
@@ -283,6 +285,7 @@ class DocumentoControllers {
             query = query + " ( select sum(total) efectivo from documento,tipo_pago_documento";
             query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id";
             query = query + "   and tipo_pago_id=1";
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "   and tipo_documento_id =10";
@@ -290,6 +293,7 @@ class DocumentoControllers {
             query = query + " ( select coalesce(sum(total),0) tarjetas from documento,tipo_pago_documento ";
             query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  ";
             query = query + "   and tipo_pago_id=5";
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "  and tipo_documento_id in ()";
@@ -297,6 +301,7 @@ class DocumentoControllers {
             query = query + " ( select coalesce(sum(total),0) cheques from documento,tipo_pago_documento ";
             query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  ";
             query = query + "   and tipo_pago_id=3";
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "  and tipo_documento_id in ()";
@@ -304,6 +309,7 @@ class DocumentoControllers {
             query = query + " ( select coalesce(sum(total),0) vales from documento,tipo_pago_documento ";
             query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  ";
             query = query + "   and tipo_pago_id=6";
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "  and tipo_documento_id in ()";
@@ -311,6 +317,7 @@ class DocumentoControllers {
             query = query + " ( select coalesce(sum(total),0) cartera from documento,tipo_pago_documento ";
             query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  ";
             query = query + "   and tipo_pago_id=2";
+            query = query + "  and cierre_diario= " + cerrado;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "  and tipo_documento_id in ()";
