@@ -58,6 +58,8 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (16, 2, 'Envio de documentos', '/envioDocumentos', 0, 'Opción que permite enviar documentos para facturacion electronica');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (17, 2, 'Verificar estado documentos enviados', '/estadoDocumentos', 0, 'Opción que permite verificar el estado de los documentos para facturacion electronica');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (18, 5, 'Movimiento de productos', '/movimientoProductos', 0, 'Opción que permite controlar las ventas que se realizaron de determinado producto');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (19, null, 'Edición de productos', '/EditarProductos', 1, 'Opción que permite editar los productos de la empresa');
+
 
 --fin sub-menu
 
@@ -151,7 +153,7 @@ INSERT INTO public.configuracion(configuracion_id, server, fecha_combinada, impr
 --fin configuracion	
 
 --proporcion
-INSERT INTO public.proporcion(proporcion_id,empresa_id, base, variable, contador_factura, contador_remision, rango_par_a, rango_par_b, rango_impar_a, rango_impar_b)VALUES (1, ,1,1, 1, 0, 0, 0, 0, 0, 0);
+INSERT INTO public.proporcion(proporcion_id,empresa_id, base, variable, contador_factura, contador_remision, rango_par_a, rango_par_b, rango_impar_a, rango_impar_b)VALUES (1, 1,1, 1, 0, 0, 0, 0, 0, 0);
 --fin proporcion
 
 -- TIPOS DOCUMENTO
@@ -169,6 +171,8 @@ INSERT INTO public.tipo_identificacion(tipo_identificacion_id, nombre, nombre_co
  INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (1, 'TXT 80 MM', 'TXT80MM');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (2, 'TXT 50 MM', 'TXT50MM');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (3, 'PDF MEDIA CARTA', 'PDFCARTA');
+INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (4, 'PDF 80mm', 'PDF80MM');
+INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (5, 'PDF 50mm', 'PDF50MM');
 --FIN TIPO IMPRESION
 
 --marcas vehiculos

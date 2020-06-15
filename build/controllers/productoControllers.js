@@ -21,6 +21,13 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getGruposByEmpresa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const productos = yield database_1.default.query(productoRepository_1.productoRepository.getGruposByEmpresa, [empresaId]);
+            res.json(productos.rows);
+        });
+    }
     getProductoById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaId = req.query.empresaId;

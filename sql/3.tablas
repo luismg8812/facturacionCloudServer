@@ -711,7 +711,41 @@ CREATE  TABLE INFORME_MENSUAL (
   
   CONSTRAINT PK_INFORME_MENSUAL
     PRIMARY KEY ( INFORME_MENSUAL_ID ) 
-);  
+); 
+
+-- Table: public.proporcion
+
+-- DROP TABLE public.proporcion;
+
+CREATE TABLE public.proporcion
+(
+    proporcion_id smallint NOT NULL,
+    base integer,
+    variable integer,
+    contador_factura integer,
+    contador_remision integer,
+    rango_par_a numeric,
+    rango_par_b numeric,
+    rango_impar_a numeric,
+    rango_impar_b numeric,
+    empresa_id smallint,
+    CONSTRAINT pk_proporcion_id PRIMARY KEY (proporcion_id),
+    CONSTRAINT fk_empr_reference_proporc FOREIGN KEY (empresa_id)
+        REFERENCES public.empresa (empresa_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.proporcion
+    OWNER to postgres;
+
+GRANT ALL ON TABLE public.proporcion TO facturacion;
+
+GRANT ALL ON TABLE public.proporcion TO postgres; 
 
 ALTER TABLE INFORME_MENSUAL ADD CONSTRAINT FK_INFO_MENSU_REFERENCE_EMPR
   FOREIGN KEY (EMPRESA_ID)
