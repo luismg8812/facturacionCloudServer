@@ -9,8 +9,8 @@ class ProveedorRoutes {
     }
     config() {
         this.router.get('/getProveedoresByEmpresa', proveedorControllers_1.proveedorControllers.getProveedoresByEmpresa);
-        this.router.post('/saveCliente', proveedorControllers_1.proveedorControllers.saveCliente);
-        this.router.post('/updateCliente', proveedorControllers_1.proveedorControllers.updateCliente);
+        this.router.post('/saveProveedor', proveedorControllers_1.proveedorControllers.saveProveedor);
+        this.router.post('/updateProveedor', proveedorControllers_1.proveedorControllers.updateProveedor);
     }
 }
 const proveedorRoutes = new ProveedorRoutes();

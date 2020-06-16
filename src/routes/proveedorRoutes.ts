@@ -11,8 +11,8 @@ class ProveedorRoutes{
 
     config():void{
         this.router.get('/getProveedoresByEmpresa' ,proveedorControllers.getProveedoresByEmpresa);  
-        this.router.post('/saveCliente' ,proveedorControllers.saveCliente);
-        this.router.post('/updateCliente' ,proveedorControllers.updateCliente);    
+        this.router.post('/saveProveedor' ,proveedorControllers.saveProveedor);
+        this.router.post('/updateProveedor' ,proveedorControllers.updateProveedor);    
     }
     
 }
