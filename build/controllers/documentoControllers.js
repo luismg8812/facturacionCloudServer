@@ -569,5 +569,40 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getGananciaDocumentos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let empresaId = req.query.empresaId;
+            console.log(req.query);
+            let query = `select total_ventas,total_costos_ventas,total_remisiones, total_costos_remisiones,iva_5,iva_19,excento,
+        (total_ventas-total_costos_ventas) ganancias_ventas,(total_remisiones-total_costos_remisiones) ganancias_remisiones
+        from 
+           (select sum(total) total_ventas, sum(total_costo) total_costos_ventas, sum(iva_5) iva_5, sum(iva_19) iva_19,
+            sum(excento) excento
+            from documento 
+            where tipo_documento_id=10 and empresa_id= ${empresaId}`;
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            query = query + `) ventas,
+           (select coalesce(sum(total),0) total_remisiones, coalesce(sum(total_costo),0) total_costos_remisiones
+            from documento 
+            where tipo_documento_id=9 and empresa_id= ${empresaId}`;
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            query = query + " ) remisiones ";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
 }
 exports.documentoControllers = new DocumentoControllers();

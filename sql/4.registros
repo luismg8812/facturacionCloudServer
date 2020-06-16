@@ -59,7 +59,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (17, 2, 'Verificar estado documentos enviados', '/estadoDocumentos', 0, 'Opción que permite verificar el estado de los documentos para facturacion electronica');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (18, 5, 'Movimiento de productos', '/movimientoProductos', 0, 'Opción que permite controlar las ventas que se realizaron de determinado producto');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (19, null, 'Edición de productos', '/EditarProductos', 1, 'Opción que permite editar los productos de la empresa');
-
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (20, 5, 'Informe de ganancias', '/infoganancia', 0, 'Opción que permite ver las ganancias en ventas, remisiones, ordenes de compra y gastos');
 
 --fin sub-menu
 
