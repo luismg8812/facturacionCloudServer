@@ -81,7 +81,7 @@ class ProductoControllers {
       console.log(req.body);
       await db.query(query, [grupo_id, proveedor_id, marca_id, fecha_registro, costo, costo_publico, sub_producto,
          impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, promo, pub_promo, estado, kg_promo,
-         varios, utilidad_sugerida, producto_id]).then(res2 => {
+         varios, utilidad_sugerida, producto_id,fecha_vencimiento,porcentaje_venta]).then(res2 => {
             res.json({ "code": 200, "producto_id": producto_id });
             console.log(req.body);
          }).catch(error => {

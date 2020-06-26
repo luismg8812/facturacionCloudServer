@@ -213,8 +213,11 @@ CREATE  TABLE PROVEEDOR (
   PROVEEDOR_ID                     int NOT NULL DEFAULT nextval('S_PROVEEDOR'),
   CIUDAD_ID                        int,
   EMPRESA_ID					   int, 
+  tipo_identificacion_id		   smallint,
   NOMBRE                           VARCHAR(100),
+  SEGUNDO_NOMBRE                   VARCHAR(50),
   APELLIDOS                        VARCHAR(100),
+  SEGUNDO_APELLIDO                 VARCHAR(50),
   DOCUMENTO                        VARCHAR(30),
   BARRIO                           VARCHAR(50),
   DIRECCION                        VARCHAR(50),
@@ -442,6 +445,7 @@ ALTER TABLE PRODUCTO ADD CONSTRAINT FK_PRODUCTO_REFERENCE_EMPR
 CREATE  TABLE DOCUMENTO (
   DOCUMENTO_ID                     bigint NOT NULL DEFAULT nextval('S_DOCUMENTO'),
   TIPO_DOCUMENTO_ID                smallint,
+  nota_id                          bigint,
   EMPRESA_ID					   int,
   PROVEEDOR_ID                     int,
   USUARIO_ID                       int,
@@ -512,8 +516,23 @@ ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_PROVEEDOR
     REFERENCES PROVEEDOR (PROVEEDOR_ID);
     
 	
-
+CREATE  TABLE DOCUMENTO_NOTA (
+  DOCUMENTO_NOTA_ID            int NOT NULL DEFAULT nextval('S_DOCUMENTO_NOTA'),
+  DOCUMENTO_ID                    bigint,
+  NOTA_ID                         bigint,
+  fecha_registro                  timestamp,
+  ESTADO                           VARCHAR(1),
+  CONSTRAINT PK_DOCUMENTO_NOTA
+    PRIMARY KEY ( DOCUMENTO_NOTA_ID ) 
+);
     
+ALTER TABLE DOCUMENTO_NOTA ADD CONSTRAINT FK_DOCU_REFERENCE_DOCU_NOTA
+  FOREIGN KEY (DOCUMENTO_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);
+
+ALTER TABLE DOCUMENTO_NOTA ADD CONSTRAINT FK_DOCU_REFERENCE_DOCU_NOTA_ID
+  FOREIGN KEY (NOTA_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);	
 	
 	
 CREATE  TABLE DOCUMENTO_DETALLE (
