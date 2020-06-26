@@ -10,14 +10,31 @@ class ProductoControllers {
       res.json(productos.rows);
    }
 
+   public async getProductosByGrupo(req: Request, res: Response): Promise<any> {
+      const empresaId = req.query.empresaId;
+      const grupoId = req.query.grupoId;
+      const proveedorId = req.query.proveedorId;
+      console.log(req.query);
+      let query = "select * from producto where empresa_id =  "+empresaId;
+      if (grupoId != "") {
+         query = query + "and grupo_id =" + grupoId;
+      }
+      if (proveedorId != "") {
+         query = query + "and proveedor_id =" + proveedorId;
+      }
+      query = query + " and estado=1 order by nombre";
+      const productos = await db.query(query);
+      res.json(productos.rows);
+   }
+
    public async getGruposByEmpresa(req: Request, res: Response): Promise<any> {
       const empresaId = req.query.empresaId;
       const productos = await db.query(productoRepository.getGruposByEmpresa, [empresaId]);
       res.json(productos.rows);
    }
-   
 
-   
+
+
    public async getProductoById(req: Request, res: Response): Promise<any> {
       const empresaId = req.query.empresaId;
       const productoId = req.query.productoId;
@@ -81,7 +98,7 @@ class ProductoControllers {
       console.log(req.body);
       await db.query(query, [grupo_id, proveedor_id, marca_id, fecha_registro, costo, costo_publico, sub_producto,
          impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, promo, pub_promo, estado, kg_promo,
-         varios, utilidad_sugerida, producto_id,fecha_vencimiento,porcentaje_venta]).then(res2 => {
+         varios, utilidad_sugerida, producto_id, fecha_vencimiento, porcentaje_venta]).then(res2 => {
             res.json({ "code": 200, "producto_id": producto_id });
             console.log(req.body);
          }).catch(error => {
@@ -124,7 +141,7 @@ class ProductoControllers {
          + " VALUES ($23,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$24,$25)";
       await db.query(query, [grupo_id, proveedor_id, marca_id, fecha_registro, costo, costo_publico, sub_producto,
          impuesto, stock_min, stock_max, codigo_barras, peso, balanza, nombre, cantidad, promo, pub_promo, estado, kg_promo,
-         varios, utilidad_sugerida, empresa_id, producto_id,fecha_vencimiento,porcentaje_venta]).then(res2 => {
+         varios, utilidad_sugerida, empresa_id, producto_id, fecha_vencimiento, porcentaje_venta]).then(res2 => {
             res.json({ "code": 200, "producto_id": producto_id });
          }).catch(error => {
             console.error(error);

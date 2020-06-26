@@ -21,6 +21,24 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getProductosByGrupo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const grupoId = req.query.grupoId;
+            const proveedorId = req.query.proveedorId;
+            console.log(req.query);
+            let query = "select * from producto where empresa_id =  " + empresaId;
+            if (grupoId != "") {
+                query = query + "and grupo_id =" + grupoId;
+            }
+            if (proveedorId != "") {
+                query = query + "and proveedor_id =" + proveedorId;
+            }
+            query = query + " and estado=1 order by nombre";
+            const productos = yield database_1.default.query(query);
+            res.json(productos.rows);
+        });
+    }
     getGruposByEmpresa(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaId = req.query.empresaId;
