@@ -9,8 +9,11 @@ class DocumentoRoutes {
     }
     config() {
         this.router.post('/createDocumento', documentoControllers_1.documentoControllers.createDocumento);
+        this.router.post('/createDocumento', documentoControllers_1.documentoControllers.createDocumento);
+        this.router.post('/saveDocumentoNota', documentoControllers_1.documentoControllers.saveDocumentoNota);
         this.router.post('/saveInvoice', documentoControllers_1.documentoControllers.saveInvoice);
         this.router.post('/updateDocumento', documentoControllers_1.documentoControllers.updateDocumento);
+        this.router.post('/updateDocumentoNota', documentoControllers_1.documentoControllers.updateDocumentoNota);
         this.router.post('/createTipoPagoDocumento', documentoControllers_1.documentoControllers.createTipoPagoDocumento);
         this.router.get('/getDocumentoByTipo', documentoControllers_1.documentoControllers.getDocumentoByTipo);
         this.router.get('/getCuadreCaja', documentoControllers_1.documentoControllers.getCuadreCaja);
@@ -30,6 +33,7 @@ class DocumentoRoutes {
         this.router.get('/getDocumentoForFacturacionElectronica', documentoControllers_1.documentoControllers.getDocumentoForFacturacionElectronica);
         this.router.get('/getByDocumentoId', documentoControllers_1.documentoControllers.getByDocumentoId);
         this.router.get('/getDocumentoInvoiceByDocumento', documentoControllers_1.documentoControllers.getDocumentoInvoiceByDocumento);
+        this.router.get('/getDocumentoNotaByDocumento', documentoControllers_1.documentoControllers.getDocumentoNotaByDocumento);
         this.router.get('/getGananciaDocumentos', documentoControllers_1.documentoControllers.getGananciaDocumentos);
     }
 }

@@ -78,6 +78,25 @@ class DocumentoControllers {
         });
     }
 
+    public async saveDocumentoNota(req: Request, res: Response): Promise<any> {
+        let documento_id: number = req.body.documento_id;
+        let nota_id: number = req.body.nota_id;
+        let fecha_registro: number = req.body.fecha_registro;
+        let estado: number = req.body.estado;
+        console.log(req.body);
+        const id = await db.query(documentoRepository.getIdDocumentoNota);
+        const documento_nota_id = id.rows[0].nextval;
+        console.log(documento_nota_id);
+        var query = "INSERT INTO documento_nota(documento_nota_id,documento_id,nota_id,fecha_registro,estado) VALUES ($1,$2,$3,$4,$5)";
+        console.log(query);
+        await db.query(query, [documento_nota_id,documento_id,nota_id,fecha_registro,estado]).then(res2 => {
+            res.json({ "code": 200, "documento_nota_id": documento_nota_id });
+        }).catch(error => {
+            console.error(error);
+            res.json({ "code": 400, "documento_nota_id": documento_nota_id });
+        });
+    }
+
 
     public async deleteDocumentoOrdenByOrden(req: Request, res: Response): Promise<any> {
         var documento_id: number = req.body.documento_id;
@@ -122,6 +141,22 @@ class DocumentoControllers {
     }
 
 
+    public async updateDocumentoNota(req: Request, res: Response): Promise<any> {
+        let documento_id: number = req.body.documento_id;
+        let nota_id: number = req.body.nota_id;
+        var estado: number = req.body.estado;
+        var documento_nota_id: number = req.body.documento_nota_id;
+        var fecha_registro = req.body.fecha_registro;
+        console.log(req.body);
+        var query = "UPDATE documento_nota SET  documento_id=$1, nota_id= $2, estado=$3, fecha_registro=$4 WHERE documento_nota_id = $5";
+        console.log(query);
+        await db.query(query, [documento_id, nota_id, estado, fecha_registro, documento_nota_id]).then(res2 => {
+            res.json({ "code": 200, "documento_nota_id": documento_nota_id });
+        }).catch(error => {
+            console.error(error);
+            res.json({ "code": 400, "documento_nota_id": documento_nota_id, "error": error.error });
+        });
+    }
 
     public async updateDocumento(req: Request, res: Response): Promise<any> {
         let documento_id: number = req.body.documento_id;
@@ -131,6 +166,7 @@ class DocumentoControllers {
         var usuario_id: number = req.body.usuario_id;
         var cliente_id: number = req.body.cliente_id;
         var empleado_id: number = req.body.empleado_id;
+        var nota_id: number = req.body.nota_id;
         var fecha_registro = req.body.fecha_registro;
         var consecutivo_dian = req.body.consecutivo_dian;
         var impreso = req.body.impreso;
@@ -163,9 +199,9 @@ class DocumentoControllers {
         var invoice_id= req.body.invoice_id;
         var cufe=req.body.cufe;
         console.log(req.body);
-        var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38 WHERE documento_id = $30";
+        var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39 WHERE documento_id = $30";
         console.log(query);
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id,cufe]).then(res2 => {
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id,cufe,nota_id]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
             console.error(error);
@@ -243,9 +279,13 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
-    
-
-
+    public async getDocumentoNotaByDocumento(req: Request, res: Response): Promise<any> {
+        const documentoId = req.query.documentoId;
+        let query: string = "select * from DOCUMENTO_NOTA  where documento_id = $1 order by fecha_registro desc ";
+        console.log(query);
+        const docuemntos = await db.query(query, [documentoId]);
+        res.json(docuemntos.rows);
+    }
 
     public async getCuadreCaja(req: Request, res: Response): Promise<any> {
         const empresaId = req.query.empresaId;
@@ -253,13 +293,23 @@ class DocumentoControllers {
         const cerrado = req.query.cerrado;
         let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
 
-        let query: string = "select total_facturas,documentos_no_impresos, abonos,efectivo,tarjetas, cheques,vales,cartera from"
-            + " ( select sum(total) total_facturas from documento";
+        let query: string = "select total_facturas,total_notas,documentos_no_impresos, abonos,tarjetas, cheques,vales,cartera from"
+            + " ( select COALESCE(sum(total),0) total_facturas from documento";
         query = query + "  where empresa_id=" + empresaId;
         query = query + "  and usuario_id= " + usuarioId;
         query = query + "  and cierre_diario= " + cerrado;
         query = query + "  and tipo_documento_id in ()";
+        query = query + "  and nota_id is null ";
         query = query + " ) total,";
+        query = query+ " ( select COALESCE(sum(total),0) total_notas from documento,documento_nota";
+        query = query + "  where empresa_id=" + empresaId;
+        query = query + "  and documento.documento_id= documento_nota.documento_id ";
+        query = query + "  and usuario_id= " + usuarioId;
+        query = query + "  and cierre_diario= " + cerrado;
+        query = query + "  and estado ='1' ";
+        query = query + "  and tipo_documento_id in (12,13)";
+       
+        query = query + " ) total_nota,";
         query = query + " (  select count(*) documentos_no_impresos  from documento";
         query = query + "    where empresa_id= " + empresaId;
         query = query + "    and usuario_id= " + usuarioId;
@@ -470,6 +520,7 @@ class DocumentoControllers {
     public async getNominaByEmpleado(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
+        const documentoId = req.query.documentoId;
         console.log(req.query);
         let empleadoId: string[] = (<string>req.query.idEmpleados).split(",");
         let query: string = "select subt.nombre, subt.empleado_id, subt.subtotal subtotal, coalesce(vale.vales,0) vales,"
@@ -478,7 +529,7 @@ class DocumentoControllers {
             + " from"
             + "  (select nombre, empleado.empleado_id,  coalesce(sum(documento.total),0)*(1 -(empleado.porcentaje_pago::decimal/100)) subtotal,empleado.pago_admin,coalesce(sum(documento.total),0)* (empleado.porcentaje_descuento::decimal/100) ahorro"
             + "   from  empleado LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id"
-            + "   and documento.tipo_documento_id=11";
+            + "   and documento.tipo_documento_id= "+documentoId;
         if (fechaInicial == '') {
             query = query + " and documento.cierre_diario =0";
         } else {

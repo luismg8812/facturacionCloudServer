@@ -11,8 +11,11 @@ class DocumentoRoutes{
 
     config():void{
         this.router.post('/createDocumento' ,documentoControllers.createDocumento);
+        this.router.post('/createDocumento' ,documentoControllers.createDocumento);
+        this.router.post('/saveDocumentoNota' ,documentoControllers.saveDocumentoNota );
         this.router.post('/saveInvoice' ,documentoControllers.saveInvoice);
         this.router.post('/updateDocumento' ,documentoControllers.updateDocumento);
+        this.router.post('/updateDocumentoNota' ,documentoControllers.updateDocumentoNota); 
         this.router.post('/createTipoPagoDocumento' ,documentoControllers.createTipoPagoDocumento);
         this.router.get('/getDocumentoByTipo' ,documentoControllers.getDocumentoByTipo);
         this.router.get('/getCuadreCaja' ,documentoControllers.getCuadreCaja);
@@ -32,6 +35,7 @@ class DocumentoRoutes{
         this.router.get('/getDocumentoForFacturacionElectronica' ,documentoControllers.getDocumentoForFacturacionElectronica);
         this.router.get('/getByDocumentoId' ,documentoControllers.getByDocumentoId);
         this.router.get('/getDocumentoInvoiceByDocumento' ,documentoControllers.getDocumentoInvoiceByDocumento);
+        this.router.get('/getDocumentoNotaByDocumento' ,documentoControllers.getDocumentoNotaByDocumento);
         this.router.get('/getGananciaDocumentos' ,documentoControllers.getGananciaDocumentos);
         
     }

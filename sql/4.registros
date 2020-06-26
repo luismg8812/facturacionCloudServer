@@ -149,6 +149,10 @@ INSERT INTO public.tipo_pago(tipo_pago_id, nombre) VALUES (6, 'vale');
 --fin tipo_pago
 
 -- configuracion
+--gramera 0 desarrollo
+--gramera 1: jcm
+--gramera 2: zip
+--g
 INSERT INTO public.configuracion(configuracion_id, server, fecha_combinada, impresion_continua, nombre_producto_largo, guardar_facturas, gramera, num_impresion, empresa_id)VALUES (1, 1, 0, 0, 0, 1, 1, 1, 1);
 --fin configuracion	
 
