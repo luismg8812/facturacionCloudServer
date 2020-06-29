@@ -293,7 +293,7 @@ class DocumentoControllers {
         const cerrado = req.query.cerrado;
         let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
 
-        let query: string = "select total_facturas,total_notas,documentos_no_impresos, abonos,tarjetas, cheques,vales,cartera from"
+        let query: string = "select total_facturas,total_notas,efectivo,documentos_no_impresos, abonos,tarjetas, cheques,vales,cartera from"
             + " ( select COALESCE(sum(total),0) total_facturas from documento";
         query = query + "  where empresa_id=" + empresaId;
         query = query + "  and usuario_id= " + usuarioId;
@@ -324,13 +324,7 @@ class DocumentoControllers {
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and tipo_documento_id =10"
         query = query + " ) abono,"
-        query = query + " ( select sum(total) efectivo from documento,tipo_pago_documento"
-        query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id"
-        query = query + "   and tipo_pago_id=1"
-        query = query + "  and cierre_diario= " + cerrado;
-        query = query + "    and empresa_id=" + empresaId;
-        query = query + "    and usuario_id= " + usuarioId;
-        query = query + "   and tipo_documento_id =10"
+        query = query + " ( select coalesce(sum(total),0) efectivo from documento where documento_id = 0"
         query = query + " ) efectivo,"
         query = query + " ( select coalesce(sum(total),0) tarjetas from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
@@ -520,7 +514,7 @@ class DocumentoControllers {
     public async getNominaByEmpleado(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
-        const documentoId = req.query.documentoId;
+        const tipoDocumentoId = req.query.tipoDocumentoId;
         console.log(req.query);
         let empleadoId: string[] = (<string>req.query.idEmpleados).split(",");
         let query: string = "select subt.nombre, subt.empleado_id, subt.subtotal subtotal, coalesce(vale.vales,0) vales,"
@@ -529,7 +523,7 @@ class DocumentoControllers {
             + " from"
             + "  (select nombre, empleado.empleado_id,  coalesce(sum(documento.total),0)*(1 -(empleado.porcentaje_pago::decimal/100)) subtotal,empleado.pago_admin,coalesce(sum(documento.total),0)* (empleado.porcentaje_descuento::decimal/100) ahorro"
             + "   from  empleado LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id"
-            + "   and documento.tipo_documento_id= "+documentoId;
+            + "   and documento.tipo_documento_id= "+tipoDocumentoId;
         if (fechaInicial == '') {
             query = query + " and documento.cierre_diario =0";
         } else {
