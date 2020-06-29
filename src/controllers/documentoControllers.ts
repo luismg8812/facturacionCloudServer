@@ -424,6 +424,33 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    
+
+    public async getCarteraClientes(req: Request, res: Response): Promise<any> {
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal; 
+        let empresaId = req.query.empresaId;
+        let clienteId = req.query.clienteId;
+        console.log(req.query);
+        let query: string = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo from  
+        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, total,valor, saldo from tipo_pago_documento, documento 
+         where tipo_pago_id = 2`;
+         query = query + " and empresa_id = " + empresaId;
+         query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";
+         if (fechaInicial != "") {
+            query = query + " and DATE(fecha_registro) >= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != "") {
+            query = query + " and DATE(fecha_registro) <= '" + fechaFinal + "'";
+        }
+        if (clienteId != "") {
+            query = query + " and cliente_id =  " + clienteId;
+        }
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
     public async getDocumentosByTipoPago(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal; 

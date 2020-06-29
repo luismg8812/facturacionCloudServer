@@ -94,6 +94,12 @@ START WITH 10
 increment by 1
 ;
 
+create sequence S_ABONO
+START WITH 10
+increment by 1
+;
+
+
 
 
 

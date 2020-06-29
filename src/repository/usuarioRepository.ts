@@ -2,8 +2,8 @@
 
 class UsuarioRepository{
     public usuarioByMail:string="select * from usuario where correo = $1"; 
-    public opcionUsuarioByUsuario:string="select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 ) and menu_id = $2;"; 
-    public opcionUsuarioByUsuarioSinMenu:string="select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 )"; 
+    public opcionUsuarioByUsuario:string="select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 ) and menu_id = $2 order by nombre"; 
+    public opcionUsuarioByUsuarioSinMenu:string="select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 ) order by nombre"; 
     public getActivacionByUsuario:string="select * from activacion where activacion_id in (select activacion_id from activacion_usuario where usuario_id=$1 )"; 
     public opcionPuntoVentaByUsuario:string="select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 ) and op= 1"; 
     

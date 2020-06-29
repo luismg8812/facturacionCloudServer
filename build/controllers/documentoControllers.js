@@ -440,6 +440,32 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getCarteraClientes(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let empresaId = req.query.empresaId;
+            let clienteId = req.query.clienteId;
+            console.log(req.query);
+            let query = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo from  
+        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, total,valor, saldo from tipo_pago_documento, documento 
+         where tipo_pago_id = 2`;
+            query = query + " and empresa_id = " + empresaId;
+            query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";
+            if (fechaInicial != "") {
+                query = query + " and DATE(fecha_registro) >= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != "") {
+                query = query + " and DATE(fecha_registro) <= '" + fechaFinal + "'";
+            }
+            if (clienteId != "") {
+                query = query + " and cliente_id =  " + clienteId;
+            }
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getDocumentosByTipoPago(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const fechaInicial = req.query.fechaInicial;

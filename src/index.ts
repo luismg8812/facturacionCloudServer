@@ -12,6 +12,7 @@ import DocumentoDetalleRoutes from './routes/documentoDetalleRoutes';
 import marcaRoutes from './routes/marcaRoutes';
 import informeDiarioRoutes from './routes/informeDiarioRoutes';
 import apiRoutes from './routes/apiRoutes';
+import abonoRoutes from './routes/abonoRoutes';
 
 class Server {
     public app: Application;
@@ -48,6 +49,7 @@ class Server {
         this.app.use('/informeDiario',informeDiarioRoutes);
         this.app.use('/empleado',empleadoRoutes);
         this.app.use('/api',apiRoutes);
+        this.app.use('/abono',abonoRoutes);
     }
 
     start(): void {
