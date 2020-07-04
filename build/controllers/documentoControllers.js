@@ -22,7 +22,8 @@ class DocumentoControllers {
             var usuario_id = req.body.usuario_id;
             var cliente_id = req.body.cliente_id;
             var empleado_id = req.body.empleado_id;
-            var fecha_registro = req.body.fecha_registro;
+            const fecha = yield database_1.default.query(documentoRepository_1.documentoRepository.getfechaNow);
+            var fecha_registro = fecha.rows[0].fecha_registro;
             var fecha_entrega = req.body.fecha_entrega;
             var consecutivo_dian = req.body.consecutivo_dian;
             var impreso = req.body.impreso;
@@ -59,11 +60,12 @@ class DocumentoControllers {
             console.log(documento_id);
             var query = "INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,invoice_id,cufe) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38 )";
             yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe]).then(res2 => {
-                res.json({ "code": 200, "documento_id": documento_id });
+                res.json({ "code": 200, "documento_id": documento_id, "fecha_registro": fecha_registro });
             }).catch(error => {
                 console.error(error);
                 res.json({ "code": 400, "documento_id": documento_id });
             });
+            //await db.query("update documento set fecha_registro= CURRENT_TIMESTAMP where documento_id= $1", [documento_id]);
         });
     }
     saveInvoice(req, res) {
@@ -179,7 +181,9 @@ class DocumentoControllers {
             var cliente_id = req.body.cliente_id;
             var empleado_id = req.body.empleado_id;
             var nota_id = req.body.nota_id;
-            var fecha_registro = req.body.fecha_registro;
+            const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getFechaRegistro, [documento_id]);
+            var fecha_registro = id.rows[0].fecha_registro;
+            console.log(fecha_registro);
             var consecutivo_dian = req.body.consecutivo_dian;
             var impreso = req.body.impreso;
             var total = req.body.total;

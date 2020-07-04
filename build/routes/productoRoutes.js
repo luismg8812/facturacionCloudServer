@@ -14,7 +14,9 @@ class ProductoRoutes {
         this.router.put('/updateCantidad', productoControllers_1.productoControllers.updateCantidad);
         this.router.put('/inactivar', productoControllers_1.productoControllers.inactivar);
         this.router.put('/updateProducto', productoControllers_1.productoControllers.updateProducto);
+        this.router.put('/updateGrupo', productoControllers_1.productoControllers.updateGrupo);
         this.router.put('/saveProducto', productoControllers_1.productoControllers.saveProducto);
+        this.router.put('/saveGrupo', productoControllers_1.productoControllers.saveGrupo);
         this.router.get('/getProductosByGrupo', productoControllers_1.productoControllers.getProductosByGrupo);
     }
 }

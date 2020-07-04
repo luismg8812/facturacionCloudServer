@@ -77,6 +77,22 @@ class ProductoControllers {
             });
         });
     }
+    updateGrupo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var grupo_id = req.body.grupo_id;
+            var empresa_id = req.body.empresa_id;
+            var nombre = req.body.nombre;
+            let query = " update grupo set empresa_id=$2, nombre=$3 where grupo_id = $1 ";
+            console.log(req.body);
+            yield database_1.default.query(query, [grupo_id, empresa_id, nombre]).then(res2 => {
+                res.json({ "code": 200, "grupo_id": grupo_id });
+                console.log(req.body);
+            }).catch(error => {
+                res.json({ "code": 200, "grupo_id": grupo_id, "error:": error.error });
+                console.log(error);
+            });
+        });
+    }
     updateProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var producto_id = req.body.producto_id;
@@ -162,6 +178,24 @@ class ProductoControllers {
             }).catch(error => {
                 console.error(error);
                 res.json({ "code": 400, "producto_id": producto_id });
+            });
+        });
+    }
+    saveGrupo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var empresa_id = req.body.empresa_id;
+            var nombre = req.body.nombre;
+            console.log(req.body);
+            const id = yield database_1.default.query(productoRepository_1.productoRepository.getIdGrupo);
+            const grupo_id = id.rows[0].nextval;
+            console.log(grupo_id);
+            var query = "INSERT INTO grupo(grupo_id,empresa_id,nombre)"
+                + " VALUES ($1,$2,$3)";
+            yield database_1.default.query(query, [grupo_id, empresa_id, nombre]).then(res2 => {
+                res.json({ "code": 200, "grupo_id": grupo_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "grupo_id": grupo_id });
             });
         });
     }

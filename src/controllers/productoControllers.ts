@@ -63,6 +63,24 @@ class ProductoControllers {
       });
    }
 
+   
+
+   public async updateGrupo(req: Request, res: Response): Promise<any> {
+      var grupo_id = req.body.grupo_id;
+      var empresa_id = req.body.empresa_id;
+      var nombre = req.body.nombre;
+      let query = " update grupo set empresa_id=$2, nombre=$3 where grupo_id = $1 "
+   
+      console.log(req.body);
+      await db.query(query, [grupo_id, empresa_id, nombre]).then(res2 => {
+            res.json({ "code": 200, "grupo_id": grupo_id });
+            console.log(req.body);
+         }).catch(error => {
+            res.json({ "code": 200, "grupo_id": grupo_id, "error:": error.error });
+            console.log(error);
+         });
+   }
+
    public async updateProducto(req: Request, res: Response): Promise<any> {
       var producto_id = req.body.producto_id;
       var grupo_id = req.body.grupo_id;
@@ -146,6 +164,24 @@ class ProductoControllers {
          }).catch(error => {
             console.error(error);
             res.json({ "code": 400, "producto_id": producto_id });
+         });
+   }
+
+   public async saveGrupo(req: Request, res: Response): Promise<any> {
+      
+      var empresa_id = req.body.empresa_id;
+      var nombre = req.body.nombre;
+      console.log(req.body);
+      const id = await db.query(productoRepository.getIdGrupo);
+      const grupo_id = id.rows[0].nextval;
+      console.log(grupo_id);
+      var query = "INSERT INTO grupo(grupo_id,empresa_id,nombre)"
+         + " VALUES ($1,$2,$3)";
+      await db.query(query, [grupo_id, empresa_id, nombre]).then(res2 => {
+            res.json({ "code": 200, "grupo_id": grupo_id });
+         }).catch(error => {
+            console.error(error);
+            res.json({ "code": 400, "grupo_id": grupo_id });
          });
    }
 
