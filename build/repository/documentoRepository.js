@@ -6,6 +6,8 @@ class DocumentoRepository {
         this.getIdDocumentoInvoice = "select nextval('s_DOCUMENTO_INVOICE')";
         this.getIdDocumentoNota = "select nextval('s_DOCUMENTO_NOTA')";
         this.getOrdenesTrabajo = "";
+        this.getFechaRegistro = "select fecha_registro from documento where documento_id = $1";
+        this.getfechaNow = "select CURRENT_TIMESTAMP fecha_registro";
     }
 }
 exports.documentoRepository = new DocumentoRepository();
