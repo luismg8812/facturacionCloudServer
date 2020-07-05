@@ -38,6 +38,21 @@ CREATE  TABLE MENU (
     PRIMARY KEY ( MENU_ID ) 
 ); 
 
+CREATE  TABLE RESOLUCION_EMPRESA (
+  RESOLUCION_EMPRESA_ID            smallint NOT NULL,
+  empresa_id				       smallint,
+  NOMBRE                           VARCHAR(50),
+  resolucion_dian                  varchar(60),
+  LETRA_CONSECUTIVO                VARCHAR(10),
+  autorizacion_desde               int,
+  autorizacion_hasta               int,
+  fecha_resolucion                 timestamp,
+  CONSECUTIVO					   int,
+  t_factura                        varchar(30),
+  CONSTRAINT PK_RESOLUCION_EMPRESA
+    PRIMARY KEY ( RESOLUCION_EMPRESA_ID )
+);
+
 CREATE  TABLE   TIPO_EMPRESA (
   TIPO_EMPRESA_ID          smallint NOT NULL,
   NOMBRE                   VARCHAR(50),
@@ -73,21 +88,13 @@ CREATE  TABLE EMPRESA (
   DEPARTAMENTO                     VARCHAR(50),
   TELEFONO_FIJO                    VARCHAR(50),
   CEL                              VARCHAR(11),
-  LETRA_CONSECUTIVO                VARCHAR(10),
-  resolucion_dian                  varchar(50),
-  fecha_resolucion                 timestamp,
-  t_factura                        varchar(30),
-  autorizacion_desde               int,
-  autorizacion_hasta               int,
   SLOGAN                           varchar(100),
   IMPUESTO                         varchar(12), 
-  CONSECUTIVO					   int,
   actividad_economica			   varchar(100),
   url_logo	  				       varchar(500),
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
-
 
 
 CREATE  TABLE EMPLEADO (
