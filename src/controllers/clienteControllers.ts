@@ -86,6 +86,14 @@ class ClienteControllers{
         res.json(tipoPago.rows);  
     }
 
+    public async getResolucion(req:Request, res:Response):Promise<any>{  
+        const empresaId = req.query.empresaId; 
+        const tipoPago = await  db.query(clienteRepository.getResolucion,[empresaId]);              
+        res.json(tipoPago.rows);  
+    }
+
+    
+
     
 
     public async getTipoIdentificacionAll(req:Request, res:Response):Promise<any>{  

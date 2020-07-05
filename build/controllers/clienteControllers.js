@@ -100,6 +100,13 @@ class ClienteControllers {
             res.json(tipoPago.rows);
         });
     }
+    getResolucion(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const tipoPago = yield database_1.default.query(clienteRepository_1.clienteRepository.getResolucion, [empresaId]);
+            res.json(tipoPago.rows);
+        });
+    }
     getTipoIdentificacionAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const tipoIdentificacion = yield database_1.default.query(clienteRepository_1.clienteRepository.getTipoIdentificacionAll);
