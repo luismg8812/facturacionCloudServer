@@ -20,14 +20,14 @@ class EmpresaControllers{
     
     public async updateConsecutivoEmpresa (req:Request, res:Response):Promise<any>{ 
         var consecutivo=req.body.consecutivo;
-        var empresa_id=req.body.empresa_id;
+        var resolucion_empresa_id=req.body.resolucion_empresa_id;
         console.log(req.body);
-        var query="UPDATE empresa SET  consecutivo=$1 WHERE empresa_id = $2";
-        await db.query(query, [consecutivo,empresa_id ]).then(res2=>{
-            res.json({"code":200,"empresa_id":empresa_id});
+        var query="UPDATE RESOLUCION_EMPRESA SET  consecutivo=$1 WHERE resolucion_empresa_id = $2";
+        await db.query(query, [consecutivo,resolucion_empresa_id ]).then(res2=>{
+            res.json({"code":200,"resolucion_empresa_id":resolucion_empresa_id});
         }).catch(error=>{
             console.error(error);
-            res.json({"code":400,"empresa_id":empresa_id,"error":error.error});
+            res.json({"code":400,"resolucion_empresa_id":resolucion_empresa_id,"error":error.error});
         });
     }
 }

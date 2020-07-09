@@ -1,0 +1,2 @@
+pm2 restart servercomponent
+pm2 restart localcomponent
