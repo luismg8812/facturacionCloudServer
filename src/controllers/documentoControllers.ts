@@ -131,7 +131,10 @@ class DocumentoControllers {
         var tipo_pago_id: number = req.body.tipo_pago_id;
         var documento_id: number = req.body.documento_id;
         var fecha_registro: number = req.body.fecha_registro;
-        var valor: number = req.body.valor;
+        var valor = req.body.valor;
+        if(valor==''){
+            valor=0;
+        }
         console.log(req.body);
         var query = "INSERT INTO tipo_pago_documento(documento_id,tipo_pago_id, fecha_registro, valor) VALUES ($1,$2,$3,$4)";
         await db.query(query, [documento_id, tipo_pago_id, fecha_registro, valor]).then(res2 => {
@@ -318,6 +321,7 @@ class DocumentoControllers {
         query = query + "    where empresa_id= " + empresaId;
         query = query + "    and usuario_id= " + usuarioId;
         query = query + "    and impreso=0";
+        query = query + "    and total>0";
         query = query + "    and cierre_diario= " + cerrado;
         query = query + "    and tipo_documento_id =10";
         query = query + " ) impresos,";
@@ -541,6 +545,26 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
     
+    
+
+    public async getVentasPorGrupos(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        console.log(req.query);
+
+        let query: string = `select   grupo.nombre,sum(parcial) total  from documento_detalle,documento, producto, grupo
+        where documento_detalle.documento_id= documento.documento_id
+        and producto.producto_id = documento_detalle.producto_id
+        and grupo.grupo_id= producto.grupo_id
+        and documento_detalle.estado=1
+        and impreso=1
+        and documento.tipo_documento_id in (10,9)
+        and documento.consecutivo_dian is not null
+        and (documento.cierre_diario=0 or documento.cierre_diario is null)
+        and documento.usuario_id= ${usuarioId} group by grupo.nombre`;
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
 
     public async getNominaByEmpleado(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;

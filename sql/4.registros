@@ -28,10 +28,10 @@ INSERT INTO public.estado_empresa(estado_empresa_id, nombre)VALUES (2, 'DesActiv
 --EMPRESA
 INSERT INTO public.empresa(
 	empresa_id, tipo_empresa_id, estado_empresa_id,  nombre, represente, 
-	nit, regimen, direccion, barrio, ciudad, departamento, telefono_fijo, cel, letra_consecutivo, 
-	resolucion_dian, fecha_resolucion, t_factura, autorizacion_desde, autorizacion_hasta, slogan, impuesto)
+	nit, regimen, direccion, barrio, ciudad, departamento, telefono_fijo, cel, 
+	   slogan, impuesto)
 	VALUES (1, 1, 1, 'EFFECTIVE SOFTWARE', 'LUIS MIUGUEL GONZALEZ', '1061710433', 'SIMPLIFICADO', 'CALLE 5 #38A-13',
-			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', '', '', '2019-04-06', 'IMPRESA POR COMPUTADOR',1, 10000, 'EFECTIVO', 'IVA');
+			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', 'EFECTIVO', 'IVA');
 --FIN EMPRESA
 
 --usuario
@@ -179,6 +179,9 @@ INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (3,
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (4, 'PDF 80mm', 'PDF80MM');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (5, 'PDF 50mm', 'PDF50MM');
 --FIN TIPO IMPRESION
+
+--
+INSERT INTO public.resolucion_empresa(	resolucion_empresa_id, empresa_id, nombre, resolucion_dian, letra_consecutivo, autorizacion_desde, autorizacion_hasta, fecha_resolucion, consecutivo, t_factura)	VALUES (1, 1, 'resolucion por defecto', '102345594', '', '1', '1000', '2020-07-04', 1, 'FACTURA IMPRESA POR COMPUTADOR');
 
 --marcas vehiculos
 Insert into MARCA_VEHICULO (MARCA_VEHICULO_ID,NOMBRE) values (	1,'Abarth');
