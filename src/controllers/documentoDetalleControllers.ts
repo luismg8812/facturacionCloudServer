@@ -8,7 +8,8 @@ class DocumentoDetalleControllers{
         
         let documento_id:number =req.body.documento_id;
         let producto_id:number =req.body.producto_id;
-        let fecha_registro:Date =req.body.fecha_registro;
+       const fecha =   await db.query(documentoDetalleRepository.getfechaNow);
+       var fecha_registro = fecha.rows[0].fecha_registro;
         console.log(fecha_registro);
         let cantidad:number =req.body.cantidad;
         let estado:number =req.body.estado;
@@ -37,7 +38,8 @@ class DocumentoDetalleControllers{
         let documento_detalle_id:number =req.body.documento_detalle_id;
         let documento_id:number =req.body.documento_id;
         let producto_id:number =req.body.producto_id;
-        let fecha_registro:Date =req.body.fecha_registro;
+        const id =   await db.query(documentoDetalleRepository.getFechaRegistro,[documento_detalle_id]);
+        var fecha_registro = id.rows[0].fecha_registro;
         console.log(fecha_registro);
         let cantidad:number =req.body.cantidad;
         let estado:number =req.body.estado;
@@ -86,9 +88,16 @@ class DocumentoDetalleControllers{
         where dd.producto_id = pp.producto_id
         and dd.documento_id = d.documento_id
         and d.impreso=1
+        and d.tipo_documento_id=10
         and d.empresa_id= ${empresaId}
         and dd.estado=1`;
-        query = query + " and DATE(dd.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
+        if (fechaInicial != '') {
+            query = query + " and dd.fecha_registro>= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != '') {
+            query = query + " and dd.fecha_registro <= '" + fechaFinal + "'";
+
+        }
         if (usuarioId != '') {
             query = query + " and d.usuario_id = " + usuarioId;
         }

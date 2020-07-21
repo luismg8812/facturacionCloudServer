@@ -39,8 +39,8 @@ class EmpresaControllers {
             yield database_1.default.query(query, [consecutivo, resolucion_empresa_id]).then(res2 => {
                 res.json({ "code": 200, "resolucion_empresa_id": resolucion_empresa_id });
             }).catch(error => {
-                console.error(error);
-                res.json({ "code": 400, "resolucion_empresa_id": resolucion_empresa_id, "error": error.error });
+                console.error(res);
+                res.json({ "code": 400, "resolucion_empresa_id": resolucion_empresa_id, "error": error });
             });
         });
     }
