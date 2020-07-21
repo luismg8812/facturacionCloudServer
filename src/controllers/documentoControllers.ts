@@ -294,6 +294,7 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    
     public async getCuadreCaja(req: Request, res: Response): Promise<any> {
         const empresaId = req.query.empresaId;
         const usuarioId = req.query.usuarioId;
