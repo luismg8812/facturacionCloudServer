@@ -306,7 +306,7 @@ class DocumentoControllers {
         query = query + "  and usuario_id= " + usuarioId;
         query = query + "  and cierre_diario= " + cerrado;
         query = query + "  and tipo_documento_id in ()";
-        query = query + "  and nota_id is null ";
+        query = query + "  and nota_id is null "; // los documentos que tienen nota no se toman en cuenta
         query = query + " ) total,";
         query = query+ " ( select COALESCE(sum(total),0) total_notas from documento,documento_nota";
         query = query + "  where empresa_id=" + empresaId;
@@ -417,9 +417,15 @@ class DocumentoControllers {
         if (tipoDocumentoId != '') {
             query = query + "  and tipo_documento_id = " + tipoDocumentoId;
         } else {
-            query = query + "  and tipo_documento_id = 10";//se muestra factura por defecto si viene vacio
+            query = query + "  and tipo_documento_id = 10 and impreso=1 ";//se muestra factura por defecto si viene vacio
         }
-        query = query + " and DATE(fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')";
+        if (fechaInicial != '') {
+            query = query + " and fecha_registro>= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != '') {
+            query = query + " and fecha_registro <= '" + fechaFinal + "'";
+
+        }
         if (usuarioId != '') {
             query = query + " and usuario_id = " + usuarioId;
         }
@@ -670,7 +676,8 @@ class DocumentoControllers {
            (select sum(total) total_ventas, sum(total_costo) total_costos_ventas, sum(iva_5) iva_5, sum(iva_19) iva_19,
             sum(excento) excento
             from documento 
-            where tipo_documento_id=10 and empresa_id= ${empresaId}`;
+            where tipo_documento_id=10 and impreso=1
+            and empresa_id= ${empresaId}`;
             if (fechaInicial != '') {
                 query = query + " and fecha_registro>= '" + fechaInicial + "'";
             }
@@ -681,7 +688,8 @@ class DocumentoControllers {
             query = query + `) ventas,
            (select coalesce(sum(total),0) total_remisiones, coalesce(sum(total_costo),0) total_costos_remisiones
             from documento 
-            where tipo_documento_id=9 and empresa_id= ${empresaId}`;
+            where tipo_documento_id=9 and impreso=1
+            and empresa_id= ${empresaId}`;
             if (fechaInicial != '') {
                 query = query + " and fecha_registro>= '" + fechaInicial + "'";
             }
