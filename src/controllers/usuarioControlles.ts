@@ -154,6 +154,32 @@ class UsuarioControllers {
         res.json({ "code": 200, "usuario_id": usuario.rows[0].usuario_id });
     }
 
+    public async createUsuarioMasivo(req: Request, res: Response): Promise<any>{
+        let usuarios: any[] = req.body;
+        usuarios.forEach(async usuario => {
+            var usuario_id = usuario.usuario_id;
+            var empresa_id = usuario.empresa_id;
+            var nombre = usuario.nombre;
+            var apellido = usuario.apellido;
+            var correo = usuario.correo;
+            var clave = usuario.clave;
+            var fecha_registro = usuario.fecha_registro;
+            var identificacion = usuario.identificacion;
+            var estado = usuario.estado;
+            var tipoVinculacion = usuario.tipoVinculacion;
+            var supervisor= usuario.supervisor;
+            var area= usuario.area;
+            var sede= usuario.sede;
+            var puesto= usuario.puesto;
+            if( usuario_id == 0 || usuario_id == ""){
+                await db.query("INSERT INTO usuario(empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, tipo_vinculacion, supervisor, area, sede, puesto) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13 )", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado,tipoVinculacion, supervisor, area, sede, puesto]);    
+            } else {
+                await db.query("UPDATE usuario set empresa_id=$1, nombre=$2, apellido=$3, correo=$4, clave=$5, fecha_registro=$6, identificacion=$7, estado=$8, tipo_vinculacion=$9, supervisor=$10, area=$11, sede=$12, puesto=$13 where usuario_id=$14", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado,tipoVinculacion, supervisor, area, sede, puesto,usuario_id]);
+            }
+        });
+        res.json({ "code": 200, "response":req.body });
+    }
+
     public async updateUsuario(req: Request, res: Response): Promise<any> {
 
         let roles: string[] = (<string>req.query.rolId).split(",");

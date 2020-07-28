@@ -12,4 +12,4 @@ class ClienteRepository{
     
 }
 
-export const clienteRepository = new ClienteRepository();
+export const clienteRepository = new ClienteRepository(); 
