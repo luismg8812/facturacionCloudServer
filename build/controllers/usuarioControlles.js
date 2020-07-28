@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -11,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.usuarioController = void 0;
 const usuarioRepository_1 = require("../repository/usuarioRepository");
 const database_1 = __importDefault(require("../database"));
 class UsuarioControllers {
@@ -154,6 +156,34 @@ class UsuarioControllers {
             }
             console.log("usuario guardo:");
             res.json({ "code": 200, "usuario_id": usuario.rows[0].usuario_id });
+        });
+    }
+    createUsuarioMasivo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let usuarios = req.body;
+            usuarios.forEach((usuario) => __awaiter(this, void 0, void 0, function* () {
+                var usuario_id = usuario.usuario_id;
+                var empresa_id = usuario.empresa_id;
+                var nombre = usuario.nombre;
+                var apellido = usuario.apellido;
+                var correo = usuario.correo;
+                var clave = usuario.clave;
+                var fecha_registro = usuario.fecha_registro;
+                var identificacion = usuario.identificacion;
+                var estado = usuario.estado;
+                var tipoVinculacion = usuario.tipoVinculacion;
+                var supervisor = usuario.supervisor;
+                var area = usuario.area;
+                var sede = usuario.sede;
+                var puesto = usuario.puesto;
+                if (usuario_id == 0) {
+                    yield database_1.default.query("INSERT INTO usuario(empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, tipo_vinculacion, supervisor, area, sede, puesto) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13 )", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, tipoVinculacion, supervisor, area, sede, puesto]);
+                }
+                else {
+                    yield database_1.default.query("UPDATE usuario set empresa_id=$1, nombre=$2, apellido=$3, correo=$4, clave=$5, fecha_registro=$6, identificacion=$7, estado=$8, tipo_vinculacion=$9, supervisor=$10, area=$11, sede=$12, puesto=$13 where usuario_id=$14", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, tipoVinculacion, supervisor, area, sede, puesto, usuario_id]);
+                }
+            }));
+            res.json({ "code": 200, "response": req.body });
         });
     }
     updateUsuario(req, res) {
