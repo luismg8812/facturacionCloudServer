@@ -17,6 +17,6 @@ class DocumentoDetalleRoutes{
         this.router.get('/getDocumentoDetalleByDocumentoList' ,documentoDetalleControllers.getDocumentoDetalleByDocumentoList);
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoDetalleControllers.getDocumentosByFechaAndTipo);    
     }
-}
+} 
 const documentoDetalleRoutes= new DocumentoDetalleRoutes();
 export default documentoDetalleRoutes.router;
