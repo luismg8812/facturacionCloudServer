@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -12,7 +11,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.usuarioController = void 0;
 const usuarioRepository_1 = require("../repository/usuarioRepository");
 const database_1 = __importDefault(require("../database"));
 class UsuarioControllers {
@@ -176,7 +174,7 @@ class UsuarioControllers {
                 var area = usuario.area;
                 var sede = usuario.sede;
                 var puesto = usuario.puesto;
-                if (usuario_id == 0) {
+                if (usuario_id == 0 || usuario_id == "") {
                     yield database_1.default.query("INSERT INTO usuario(empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, tipo_vinculacion, supervisor, area, sede, puesto) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13 )", [empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado, tipoVinculacion, supervisor, area, sede, puesto]);
                 }
                 else {
