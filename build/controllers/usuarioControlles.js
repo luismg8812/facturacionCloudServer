@@ -47,7 +47,7 @@ class UsuarioControllers {
                 " and rol_id= " + rolId +
                 " and documento.tipo_documento_id= " + tipoDocumentoId +
                 " and documento.impreso=1" +
-                " and DATE(documento.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')" +
+                " and DATE(documento.fecha_registro) BETWEEN '" + fechaInicial + "' and '" + fechaFinal + "'" +
                 " GROUP by usuario.nombre";
             console.log(query);
             const usuarioRes = yield database_1.default.query(query);

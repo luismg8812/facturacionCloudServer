@@ -429,6 +429,7 @@ CREATE  TABLE PRODUCTO (
   SUB_PRODUCTO					   smallint,
   IMPRESO_COMANDA                  smallint,
   VARIOS						   SMALLINT,
+  GRANEL						   SMALLINT,
   CONSTRAINT PK_PRODUCTO
     PRIMARY KEY ( PRODUCTO_ID ) 
 );

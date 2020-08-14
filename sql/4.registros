@@ -29,9 +29,9 @@ INSERT INTO public.estado_empresa(estado_empresa_id, nombre)VALUES (2, 'DesActiv
 INSERT INTO public.empresa(
 	empresa_id, tipo_empresa_id, estado_empresa_id,  nombre, represente, 
 	nit, regimen, direccion, barrio, ciudad, departamento, telefono_fijo, cel, 
-	   slogan, impuesto)
+	   slogan, impuesto,url_log)
 	VALUES (1, 1, 1, 'EFFECTIVE SOFTWARE', 'LUIS MIUGUEL GONZALEZ', '1061710433', 'SIMPLIFICADO', 'CALLE 5 #38A-13',
-			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', 'EFECTIVO', 'IVA');
+			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', 'EFECTIVO', 'IVA','https://firebasestorage.googleapis.com/v0/b/facturacion-cloud.appspot.com/o/empresa_5%2FlogoEmpresa2.jpg?alt=media&token=95ac9a2b-df5f-4900-ac33-345bf09d1e60');
 --FIN EMPRESA
 
 --usuario
@@ -72,7 +72,7 @@ INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, es
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (1, 'Activar Comandas','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (2, 'Activar impresión en pantalla','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (3, 'Activar proporción','');
---INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'activa','');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'Multiple impresora','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (5, 'Activar Ver remisiones En cuadre de caja','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (6, 'Activar Crear nota crédito/débito','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (7, 'Activar Código de Barras','');
@@ -178,6 +178,7 @@ INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (2,
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (3, 'PDF MEDIA CARTA', 'PDFCARTA');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (4, 'PDF 80mm', 'PDF80MM');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (5, 'PDF 50mm', 'PDF50MM');
+INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (6, 'TXT MEDIA CARTA NABOR', 'TXTMEDIAC');
 --FIN TIPO IMPRESION
 
 --

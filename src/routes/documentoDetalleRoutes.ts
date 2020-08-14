@@ -8,7 +8,7 @@ class DocumentoDetalleRoutes{
     
     constructor(){
          this.config();
-    }
+    }  
 
     config():void{
         this.router.post('/createDocumentoDetalle' ,documentoDetalleControllers.createDocumentoDetalle);

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productoRepository = void 0;
 class ProductoRepository {
     constructor() {
         this.getProductosByEmpresa = "select * from producto where empresa_id = $1 and estado=1 order by nombre";

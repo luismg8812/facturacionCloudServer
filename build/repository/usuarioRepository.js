@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.usuarioRepository = void 0;
 class UsuarioRepository {
     constructor() {
         this.usuarioByMail = "select * from usuario where correo = $1";
