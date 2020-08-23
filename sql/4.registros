@@ -29,9 +29,9 @@ INSERT INTO public.estado_empresa(estado_empresa_id, nombre)VALUES (2, 'DesActiv
 INSERT INTO public.empresa(
 	empresa_id, tipo_empresa_id, estado_empresa_id,  nombre, represente, 
 	nit, regimen, direccion, barrio, ciudad, departamento, telefono_fijo, cel, 
-	   slogan, impuesto,url_log)
+	   slogan, impuesto, url_logo)
 	VALUES (1, 1, 1, 'EFFECTIVE SOFTWARE', 'LUIS MIUGUEL GONZALEZ', '1061710433', 'SIMPLIFICADO', 'CALLE 5 #38A-13',
-			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', 'EFECTIVO', 'IVA','https://firebasestorage.googleapis.com/v0/b/facturacion-cloud.appspot.com/o/empresa_5%2FlogoEmpresa2.jpg?alt=media&token=95ac9a2b-df5f-4900-ac33-345bf09d1e60');
+			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', 'EFECTIVO', 'IVA','https://firebasestorage.googleapis.com/v0/b/facturacion-cloud.appspot.com/o/empresa_1%2FlogoFactura_gonzalez.jpg?alt=media&token=0e775ce7-a3c2-418a-aa27-fa12ae9bd8d6');
 --FIN EMPRESA
 
 --usuario
@@ -62,6 +62,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (20, 5, 'Informe de ganancias', '/infoganancia', 0, 'Opción que permite ver las ganancias en ventas, remisiones, ordenes de compra y gastos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (21, 5, 'Reporte de producto', '/reporteProductos', 0, 'Opción que permite ver las cantidades de los productos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (22, 1, 'Cartera de Clientes', '/carteraClientes', 0, 'Opción que permite gestionar la cartera de los clientes y realizar abonos');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (23, 3, 'Retiros de caja', '/retirosCaja', 0, 'Opción que permite hacer retiros de la caja que queden registrados en el cuadre de caja');
 --fin sub-menu
 
 --opcion usuario
@@ -72,7 +73,7 @@ INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, es
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (1, 'Activar Comandas','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (2, 'Activar impresión en pantalla','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (3, 'Activar proporción','');
-INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'Multiple impresora','');
+--INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'activa','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (5, 'Activar Ver remisiones En cuadre de caja','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (6, 'Activar Crear nota crédito/débito','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (7, 'Activar Código de Barras','');
@@ -178,7 +179,6 @@ INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (2,
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (3, 'PDF MEDIA CARTA', 'PDFCARTA');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (4, 'PDF 80mm', 'PDF80MM');
 INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (5, 'PDF 50mm', 'PDF50MM');
-INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (6, 'TXT MEDIA CARTA NABOR', 'TXTMEDIAC');
 --FIN TIPO IMPRESION
 
 --
