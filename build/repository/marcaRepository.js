@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.marcaRepository = void 0;
 class MarcaRepository {
     constructor() {
         this.getMarcas = "select * from marca_vehiculo order by nombre";
