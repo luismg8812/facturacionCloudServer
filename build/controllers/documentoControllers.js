@@ -68,6 +68,28 @@ class DocumentoControllers {
             //await db.query("update documento set fecha_registro= CURRENT_TIMESTAMP where documento_id= $1", [documento_id]);
         });
     }
+    saveRetiro(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var empresa_id = req.body.empresa_id;
+            var usuario_hace_id = req.body.usuario_hace_id;
+            var usuario_aplica_id = req.body.usuario_aplica_id;
+            var valor = req.body.valor;
+            var cierre_diario = req.body.cierre_diario;
+            const fecha = yield database_1.default.query(documentoRepository_1.documentoRepository.getfechaNow);
+            var fecha_registro = fecha.rows[0].fecha_registro;
+            console.log(req.body);
+            const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getIdRetiroCaja);
+            const retiro_caja_id = id.rows[0].nextval;
+            console.log("se inserta el retiro caja: " + retiro_caja_id);
+            var query = "INSERT INTO retiro_caja(retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro) VALUES ($1,$2,$3,$4,$5,$6,$7)";
+            yield database_1.default.query(query, [retiro_caja_id, empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro]).then(res2 => {
+                res.json({ "code": 200, "retiro_caja_id": retiro_caja_id, "fecha_registro": fecha_registro });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "retiro_caja_id": retiro_caja_id });
+            });
+        });
+    }
     saveInvoice(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let documento_id = req.body.documento_id;
@@ -316,7 +338,7 @@ class DocumentoControllers {
             const usuarioId = req.query.usuarioId;
             const cerrado = req.query.cerrado;
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
-            let query = "select total_facturas,total_notas,efectivo,documentos_no_impresos, abonos,tarjetas, cheques,vales,cartera from"
+            let query = "select total_facturas,total_notas,efectivo,documentos_no_impresos, abonos,tarjetas, cheques,vales,cartera,retiro_caja from"
                 + " ( select COALESCE(sum(total),0) total_facturas from documento";
             query = query + "  where empresa_id=" + empresaId;
             query = query + "  and usuario_id= " + usuarioId;
@@ -373,6 +395,11 @@ class DocumentoControllers {
             query = query + "    and usuario_id= " + usuarioId;
             query = query + "  and tipo_documento_id in ()";
             query = query + " ) vales,";
+            query = query + " ( select coalesce(sum(valor),0) retiro_caja from retiro_caja where 1=1";
+            query = query + "  and cierre_diario= " + cerrado;
+            query = query + "    and empresa_id=" + empresaId;
+            query = query + "    and usuario_aplica_id= " + usuarioId;
+            query = query + " ) retiros, ";
             query = query + " ( select coalesce(sum(total),0) cartera from documento,tipo_pago_documento ";
             query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  ";
             query = query + "   and tipo_pago_id=2";
@@ -414,6 +441,33 @@ class DocumentoControllers {
             query = query + " order by documento_id desc";
             console.log(query);
             const docuemntos = yield database_1.default.query(query, [empresaId]);
+            res.json(docuemntos.rows);
+        });
+    }
+    getRetirosByFechaAndTipo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            console.log(req.query);
+            let usuario_aplica_id = req.query.usuario_aplica_id;
+            let empresaId = req.query.empresaId;
+            let usuario_hace_id = req.query.usuario_hace_id;
+            let query = "select * from retiro_caja where empresa_id = " + empresaId;
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            if (usuario_aplica_id != '') {
+                query = query + " and usuario_aplica_id = " + usuario_aplica_id;
+            }
+            if (usuario_hace_id != '') {
+                query = query + " and usuario_hace_id =  " + usuario_hace_id;
+            }
+            query = query + " order by fecha_registro";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
         });
     }

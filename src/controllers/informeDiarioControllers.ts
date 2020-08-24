@@ -5,7 +5,7 @@ class InformeDiarioControllers {
     public async getClientesByEmpresa(req: Request, res: Response): Promise<any> {
         const empresaId = req.query.empresaId;
        
-        console.log(req.query);
+        console.log(req.query); 
         let query: string = "select sum(total) total_ventas, sum(total_costo) costo_ventas, sum(iva) iva_ventas, "
         +"sum(iva_5) iva_5, sum(iva_19) iva_19, sum(base_5) base_5, sum(base_19) base_19, sum(excento) excento, (sum(total)-sum(total_costo)) ganancias "
         +"from documento "
@@ -112,13 +112,14 @@ class InformeDiarioControllers {
         console.log(req.query);
         let query: string = "update documento set impreso=1, cierre_diario=1 where tipo_documento_id in (10,9,5,4,8) and empresa_id="+empresaId;
         console.log(query);
+        await db.query("update retiro_caja set cierre_diario=1 where cierre_diario=0;");
         await db.query(query).then(res2 => {
             res.json({ "code": 200, "empresaId": empresaId });
         }).catch(error => {
             console.error(error);
             res.json({ "code": 400, "empresaId": empresaId, "error": error.error });
         });
-       
+        
 
     }
 

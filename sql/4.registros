@@ -62,6 +62,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (20, 5, 'Informe de ganancias', '/infoganancia', 0, 'Opción que permite ver las ganancias en ventas, remisiones, ordenes de compra y gastos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (21, 5, 'Reporte de producto', '/reporteProductos', 0, 'Opción que permite ver las cantidades de los productos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (22, 1, 'Cartera de Clientes', '/carteraClientes', 0, 'Opción que permite gestionar la cartera de los clientes y realizar abonos');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (23, 3, 'Retiros de caja', '/retirosCaja', 0, 'Opción que permite hacer retiros de la caja que queden registrados en el cuadre de caja');
 --fin sub-menu
 
 --opcion usuario

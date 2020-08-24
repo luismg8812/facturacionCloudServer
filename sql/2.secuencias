@@ -99,8 +99,10 @@ START WITH 10
 increment by 1
 ;
 
-
-
+create sequence S_RETIRO_CAJA
+START WITH 10
+increment by 1
+;
 
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
