@@ -13,6 +13,7 @@ class DocumentoRoutes{
         this.router.post('/createDocumento' ,documentoControllers.createDocumento);
         this.router.post('/createDocumento' ,documentoControllers.createDocumento);
         this.router.post('/saveDocumentoNota' ,documentoControllers.saveDocumentoNota );
+        this.router.post('/saveRetiro' ,documentoControllers.saveRetiro);
         this.router.post('/saveInvoice' ,documentoControllers.saveInvoice);
         this.router.post('/updateDocumento' ,documentoControllers.updateDocumento);
         this.router.post('/updateDocumentoNota' ,documentoControllers.updateDocumentoNota); 
@@ -33,6 +34,8 @@ class DocumentoRoutes{
         this.router.get('/getInvoice' ,documentoControllers.getInvoice);
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha' ,documentoControllers.getDocumentoByTipoAndFecha);
+        this.router.get('/getRetirosByFechaAndTipo' ,documentoControllers.getRetirosByFechaAndTipo);
+        
         this.router.get('/getDocumentosByTipoPago' ,documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getCarteraClientes' ,documentoControllers.getCarteraClientes);
         

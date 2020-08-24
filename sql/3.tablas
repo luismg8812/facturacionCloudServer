@@ -372,7 +372,26 @@ ALTER TABLE ROL_USUARIO ADD CONSTRAINT FK_ROL_USU_REFERENCE_ROL
   FOREIGN KEY (ROL_ID)
     REFERENCES ROL (ROL_ID);
 	
+	
+CREATE  TABLE retiro_caja (
+  retiro_caja_ID                   int NOT NULL,
+  usuario_hace_id  				   int,
+  usuario_aplica_id  				   int,
+  EMPRESA_ID					   SMALLINT,
+  valor								decimal,
+  cierre_diario 					smallint,
+  FECHA_REGISTRO                   timestamp,
+  CONSTRAINT PK_retiro_caja
+    PRIMARY KEY ( retiro_caja_ID ) 
+);
 
+ALTER TABLE retiro_caja ADD CONSTRAINT FK_usuario_hace_REFERENCE_retiro_caja
+  FOREIGN KEY (usuario_hace_id)
+    REFERENCES usuario (usuario_id);
+	
+	ALTER TABLE retiro_caja ADD CONSTRAINT FK_usuario_aplica_REFERENCE_retiro_caja
+  FOREIGN KEY (usuario_aplica_id)
+    REFERENCES usuario (usuario_id);
 
 CREATE  TABLE ACTIVACION (
   ACTIVACION_ID                    smallint NOT NULL ,
