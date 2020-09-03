@@ -65,14 +65,15 @@ class DocumentoControllers {
         var usuario_aplica_id: number = req.body.usuario_aplica_id;
         var valor: number = req.body.valor;
         var cierre_diario: number = req.body.cierre_diario;
+        var descripcion: number = req.body.descripcion;
         const fecha =   await db.query(documentoRepository.getfechaNow);
         var fecha_registro = fecha.rows[0].fecha_registro;
         console.log(req.body);
         const id = await db.query(documentoRepository.getIdRetiroCaja);
         const retiro_caja_id = id.rows[0].nextval;
         console.log("se inserta el retiro caja: "+retiro_caja_id);
-        var query = "INSERT INTO retiro_caja(retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro) VALUES ($1,$2,$3,$4,$5,$6,$7)";
-        await db.query(query, [retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro]).then(res2 => {
+        var query = "INSERT INTO retiro_caja(retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro,descripcion) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
+        await db.query(query, [retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro,descripcion]).then(res2 => {
             res.json({ "code": 200, "retiro_caja_id": retiro_caja_id, "fecha_registro":fecha_registro });
         }).catch(error => {
             console.error(error);
@@ -612,6 +613,10 @@ class DocumentoControllers {
 
     public async getVentasPorGrupos(req: Request, res: Response): Promise<any> {
         const usuarioId = req.query.usuarioId;
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal;
+        const conCierre = req.query.conCierre;
+        
         console.log(req.query);
 
         let query: string = `select   grupo.nombre,sum(parcial) total  from documento_detalle,documento, producto, grupo
@@ -621,9 +626,23 @@ class DocumentoControllers {
         and documento_detalle.estado=1
         and impreso=1
         and documento.tipo_documento_id in (10,9)
-        and documento.consecutivo_dian is not null
-        and (documento.cierre_diario=0 or documento.cierre_diario is null)
-        and documento.usuario_id= ${usuarioId} group by grupo.nombre`;
+        and documento.consecutivo_dian is not null`
+        if (fechaInicial != '') {
+            query = query + " and documento.fecha_registro>= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != '') {
+            query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
+
+        }
+        if (conCierre=='true') {
+            query = query + " and (documento.cierre_diario=0 or documento.cierre_diario is null)";
+
+        }
+        
+        if (usuarioId != '') {
+            query = query + " and usuario_id = " + usuarioId;
+        }
+        query = query + " group by grupo.nombre";
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);

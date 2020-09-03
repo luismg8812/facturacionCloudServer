@@ -381,6 +381,7 @@ CREATE  TABLE retiro_caja (
   valor								decimal,
   cierre_diario 					smallint,
   FECHA_REGISTRO                   timestamp,
+  DESCRIPCION					   VARCHAR(500),
   CONSTRAINT PK_retiro_caja
     PRIMARY KEY ( retiro_caja_ID ) 
 );
