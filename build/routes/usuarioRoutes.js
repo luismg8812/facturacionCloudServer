@@ -28,7 +28,10 @@ class UsuarioRoutes {
         this.router.get('/getFile', usuarioControlles_1.usuarioController.getFile);
         this.router.get('/usuarioByRol', usuarioControlles_1.usuarioController.usuarioByRol);
         this.router.get('/getProporcion', usuarioControlles_1.usuarioController.getProporcion);
+        this.router.get('/getLiberarCuadre', usuarioControlles_1.usuarioController.getLiberarCuadre);
         this.router.put('/updateProporcion', usuarioControlles_1.usuarioController.updateProporcion);
+        this.router.post('/saveActivacionUsuario', usuarioControlles_1.usuarioController.saveActivacionUsuario);
+        this.router.post('/deleteActivacionUsuario', usuarioControlles_1.usuarioController.deleteActivacionUsuario);
     }
 }
 const usuarioRoutes = new UsuarioRoutes();

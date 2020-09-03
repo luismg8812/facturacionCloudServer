@@ -26,15 +26,34 @@ class ProductoControllers {
             const empresaId = req.query.empresaId;
             const grupoId = req.query.grupoId;
             const proveedorId = req.query.proveedorId;
+            const agotado = req.query.agotado;
+            const stock = req.query.stock;
+            const estrella = req.query.estrella;
             console.log(req.query);
-            let query = "select * from producto where empresa_id =  " + empresaId;
-            if (grupoId != "") {
-                query = query + "and grupo_id =" + grupoId;
+            let query = "";
+            if (estrella == 'true') {
+                query = query + `select nombre, grupo.cantidad, producto.costo_publico, producto.costo,
+          producto.impuesto, producto.codigo_barras from producto,  (select producto_id, sum(cantidad) 
+          cantidad from documento_detalle
+         group by producto_id) grupo where grupo.producto_id = producto.producto_id
+         order by grupo.cantidad desc`;
             }
-            if (proveedorId != "") {
-                query = query + "and proveedor_id =" + proveedorId;
+            else {
+                query = "select * from producto where empresa_id =  " + empresaId;
+                if (grupoId != "") {
+                    query = query + " and grupo_id =" + grupoId;
+                }
+                if (proveedorId != "") {
+                    query = query + " and proveedor_id =" + proveedorId;
+                }
+                if (agotado == 'true') {
+                    query = query + " and stock_min >= cantidad";
+                }
+                if (stock == 'true') {
+                    query = query + " and stock_min >= cantidad";
+                }
+                query = query + " and estado=1 order by nombre";
             }
-            query = query + " and estado=1 order by nombre";
             const productos = yield database_1.default.query(query);
             res.json(productos.rows);
         });

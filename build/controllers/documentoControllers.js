@@ -75,14 +75,15 @@ class DocumentoControllers {
             var usuario_aplica_id = req.body.usuario_aplica_id;
             var valor = req.body.valor;
             var cierre_diario = req.body.cierre_diario;
+            var descripcion = req.body.descripcion;
             const fecha = yield database_1.default.query(documentoRepository_1.documentoRepository.getfechaNow);
             var fecha_registro = fecha.rows[0].fecha_registro;
             console.log(req.body);
             const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getIdRetiroCaja);
             const retiro_caja_id = id.rows[0].nextval;
             console.log("se inserta el retiro caja: " + retiro_caja_id);
-            var query = "INSERT INTO retiro_caja(retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro) VALUES ($1,$2,$3,$4,$5,$6,$7)";
-            yield database_1.default.query(query, [retiro_caja_id, empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro]).then(res2 => {
+            var query = "INSERT INTO retiro_caja(retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro,descripcion) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
+            yield database_1.default.query(query, [retiro_caja_id, empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro, descripcion]).then(res2 => {
                 res.json({ "code": 200, "retiro_caja_id": retiro_caja_id, "fecha_registro": fecha_registro });
             }).catch(error => {
                 console.error(error);
@@ -514,8 +515,8 @@ class DocumentoControllers {
             let empresaId = req.query.empresaId;
             let clienteId = req.query.clienteId;
             console.log(req.query);
-            let query = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo, cliente_id from  
-        (select documento.documento_id,documento.fecha_registro, cliente_id,consecutivo_dian, total,valor, saldo from tipo_pago_documento, documento 
+            let query = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo from  
+        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, total,valor, saldo from tipo_pago_documento, documento 
          where tipo_pago_id = 2`;
             query = query + " and empresa_id = " + empresaId;
             if (fechaInicial != "") {
@@ -547,7 +548,7 @@ class DocumentoControllers {
                 " and documento.empresa_id=" + empresaId +
                 " and documento.tipo_documento_id=" + tipoDocumentoId +
                 " and documento.impreso = 1" +
-                " and DATE(documento.fecha_registro) BETWEEN '" + fechaInicial + "' and '" + fechaFinal + "'" +
+                " and DATE(documento.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')" +
                 " GROUP by nombre";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
@@ -643,13 +644,13 @@ class DocumentoControllers {
             if (fechaFinal != '') {
                 query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
             }
-            if (!conCierre) {
-                query = query + ` and (documento.cierre_diario=0 or documento.cierre_diario is null)`;
+            if (conCierre == 'true') {
+                query = query + " and (documento.cierre_diario=0 or documento.cierre_diario is null)";
             }
             if (usuarioId != '') {
-                query = query + ` and documento.usuario_id= ${usuarioId} `;
+                query = query + " and usuario_id = " + usuarioId;
             }
-            query = query + ` group by grupo.nombre`;
+            query = query + " group by grupo.nombre";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);

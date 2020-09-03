@@ -63,6 +63,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (21, 5, 'Reporte de producto', '/reporteProductos', 0, 'Opción que permite ver las cantidades de los productos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (22, 1, 'Cartera de Clientes', '/carteraClientes', 0, 'Opción que permite gestionar la cartera de los clientes y realizar abonos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (23, 3, 'Retiros de caja', '/retirosCaja', 0, 'Opción que permite hacer retiros de la caja que queden registrados en el cuadre de caja');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (24, 3, 'Liberar cuadre de caja', '/liberarCuadre', 0, 'opcion que permite liberar los cuadres de caja de los cajeros para consultar sus ventas');
 --fin sub-menu
 
 --opcion usuario
@@ -71,7 +72,7 @@ INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, es
 
 --activaciones
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (1, 'Activar Comandas','');
-INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (2, 'Activar impresión en pantalla','');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (2, 'Activar impresión en pantalla','esta opcion permite ahorrar papel al realizar solo la impresion en el sistema mas no en el papel');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (3, 'Activar proporción','');
 --INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'activa','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (5, 'Activar Ver remisiones En cuadre de caja','');

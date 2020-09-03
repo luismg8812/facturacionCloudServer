@@ -27,7 +27,7 @@ class UsuarioControllers {
             const usuario = req.query.usuario;
             const empresaId = req.query.empresaId;
             const rolId = req.query.rolId;
-            console.log(empresaId);
+            console.log(req.query);
             const usuarioRes = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getByUsuario, [empresaId]);
             res.json(usuarioRes.rows);
         });
@@ -59,6 +59,18 @@ class UsuarioControllers {
             const empresaId = req.query.empresaId;
             console.log(req.query);
             let query = "select * from proporcion where empresa_id = " + empresaId;
+            console.log(query);
+            const usuarioRes = yield database_1.default.query(query);
+            res.json(usuarioRes.rows);
+        });
+    }
+    getLiberarCuadre(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            console.log(req.query);
+            let query = `select nombre, usuario.usuario_id, activacion_id  from usuario LEFT join activacion_usuario on activacion_usuario.usuario_id = usuario.usuario_id
+        and activacion_id=17 
+        and empresa_id= ${empresaId}`;
             console.log(query);
             const usuarioRes = yield database_1.default.query(query);
             res.json(usuarioRes.rows);
@@ -131,6 +143,28 @@ class UsuarioControllers {
                 console.log(err);
             });
             res.json({ "code": 200, "usuario_id": "cualquier mk" });
+        });
+    }
+    saveActivacionUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var activacion_id = req.body.activacion_id;
+            var usuario_id = req.body.usuario_id;
+            var estado = req.body.estado;
+            console.log(req.body);
+            yield database_1.default.query("delete from activacion_usuario where activacion_id=$1 and usuario_id=$2", [activacion_id, usuario_id]);
+            yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id,estado) VALUES ($1,$2,$3)", [activacion_id, usuario_id, estado]);
+            console.log("usuario guardo:");
+            res.json({ "code": 200, "activacion_id": activacion_id });
+        });
+    }
+    deleteActivacionUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var activacion_id = req.body.activacion_id;
+            var usuario_id = req.body.usuario_id;
+            console.log(req.body);
+            yield database_1.default.query("delete from activacion_usuario where activacion_id=$1 and usuario_id=$2", [activacion_id, usuario_id]);
+            console.log("usuario guardo:");
+            res.json({ "code": 200, "activacion_id": activacion_id });
         });
     }
     createUsuario(req, res) {
@@ -257,7 +291,7 @@ class UsuarioControllers {
             const usuarioId = req.query.usuarioId;
             let activacionId = req.query.activacionId.split(",");
             yield database_1.default.query(usuarioRepository_1.usuarioRepository.deleteActivacionUsuario, [usuarioId]);
-            console.log(usuarioId);
+            console.log(req.query);
             for (let i = 0; i < activacionId.length; i++) {
                 yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
             }

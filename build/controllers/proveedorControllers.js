@@ -28,8 +28,8 @@ class ProveedorControllers {
             let documento = req.body.documento;
             let barrio = req.body.barrio;
             let direccion = req.body.direccion;
-            let celular = req.body.celular;
-            let fijo = req.body.fijo;
+            let celular = req.body.celular == "" ? null : req.body.celular;
+            let fijo = req.body.fijo == "" ? null : req.body.fijo;
             let fecha_registro = req.body.fecha_registro;
             let credito_activo = req.body.credito_activo;
             let mail = req.body.mail;
