@@ -9,6 +9,14 @@ exports.default = {
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
+    database_avenidagp: {
+        host: 'ec2-34-238-26-109.compute-1.amazonaws.com',
+        user: 'tjyldbvbvtqshw',
+        password: '942ed2b3f953d1617ac8a8e9856a63bd31591fe09e6d709fc2428a8ed757b136',
+        database: 'dpk5tnrv9sbbm',
+        port: 5432,
+        ssl: { rejectUnauthorized: false },
+    },
     database_local: {
         host: 'localhost',
         user: 'facturacion',
