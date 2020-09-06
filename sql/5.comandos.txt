@@ -14,3 +14,6 @@ pm2 save
 pm2 monit
 
 shell:startup
+
+--instalar servicio 
+httpd.exe -k install -n "EffectiveSoftwareClient"

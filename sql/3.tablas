@@ -5,6 +5,13 @@ CREATE  TABLE ROL (
     PRIMARY KEY ( ROL_ID ) 
 );
 
+CREATE  TABLE TIPO_RESOLUCION (
+  TIPO_RESOLUCION_ID               smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_TIPO_RESOLUCION
+    PRIMARY KEY ( TIPO_RESOLUCION_ID ) 
+);
+
 CREATE  TABLE fact_tipo_empresa (
   fact_tipo_empresa_ID             smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -41,6 +48,7 @@ CREATE  TABLE MENU (
 CREATE  TABLE RESOLUCION_EMPRESA (
   RESOLUCION_EMPRESA_ID            smallint NOT NULL,
   empresa_id				       smallint,
+  TIPO_RESOLUCION_ID               smallint
   NOMBRE                           VARCHAR(50),
   resolucion_dian                  varchar(60),
   LETRA_CONSECUTIVO                VARCHAR(10),
@@ -52,6 +60,12 @@ CREATE  TABLE RESOLUCION_EMPRESA (
   CONSTRAINT PK_RESOLUCION_EMPRESA
     PRIMARY KEY ( RESOLUCION_EMPRESA_ID )
 );
+
+ALTER TABLE RESOLUCION_EMPRESA ADD CONSTRAINT FK_TIPO_RESOLU_REFERENCE_RESO_EMPRESA
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);
+
+
 
 CREATE  TABLE   TIPO_EMPRESA (
   TIPO_EMPRESA_ID          smallint NOT NULL,

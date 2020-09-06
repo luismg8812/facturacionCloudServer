@@ -38,6 +38,11 @@ INSERT INTO public.empresa(
 INSERT INTO public.usuario(usuario_id,empresa_id, nombre, apellido, correo, clave, fecha_registro, identificacion, estado)VALUES (1,1,'admin','admin', 'info@effectivesoftware.com.co','123','2019-04-02', '1', '1');
 --fin usuario
 
+--tipo resolucion empresa
+INSERT INTO TIPO_RESOLUCION (TIPO_RESOLUCION_id,NOMBRE) VALUES(1,'POS');
+INSERT INTO TIPO_RESOLUCION (TIPO_RESOLUCION_id,NOMBRE) VALUES(2,'POR COMPUTADOR');
+INSERT INTO TIPO_RESOLUCION (TIPO_RESOLUCION_id,NOMBRE) VALUES(3,'ELECTRONICA');
+--fin tipo resolucion
 
 ---sub menu data
 Insert into SUB_MENU (SUB_MENU_ID,MENU_ID,NOMBRE,URL,OP) values (1,1,'Ventas del día','/ventasDia',0);
@@ -64,6 +69,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (22, 1, 'Cartera de Clientes', '/carteraClientes', 0, 'Opción que permite gestionar la cartera de los clientes y realizar abonos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (23, 3, 'Retiros de caja', '/retirosCaja', 0, 'Opción que permite hacer retiros de la caja que queden registrados en el cuadre de caja');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (24, 3, 'Liberar cuadre de caja', '/liberarCuadre', 0, 'opcion que permite liberar los cuadres de caja de los cajeros para consultar sus ventas');
+
 --fin sub-menu
 
 --opcion usuario
@@ -93,6 +99,8 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (19, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (20, 'Activar Tipos de pago',' Permite asignar un cliente a las facturas generadas agregando la opción al flujo de teclas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (21, 'Activar Productos Fijos en Orden de pedido',' Permite que se asignen productos fijos no editables en las ordenes de pedido');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (22, 'Activar Cambio de fecha en facturas',' Permite que se cambie la fecha de generacion de una factura');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (23, 'Activar multiples resoluciones',' Permite que se cambiar de resoluciones de facturacion de la DIAN durante la impresión');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (24, 'Activar facturación en orden de trabajo',' Permite que se pueda facturar lo que se ingresa por las ordenes de trabajo');
 -- fin activaciones
 
 --tipo documento data
@@ -183,7 +191,7 @@ INSERT INTO public.tipo_impresion(tipo_impresion_id, nombre, formato) VALUES (5,
 --FIN TIPO IMPRESION
 
 --
-INSERT INTO public.resolucion_empresa(	resolucion_empresa_id, empresa_id, nombre, resolucion_dian, letra_consecutivo, autorizacion_desde, autorizacion_hasta, fecha_resolucion, consecutivo, t_factura)	VALUES (1, 1, 'resolucion por defecto', '102345594', '', '1', '1000', '2020-07-04', 1, 'FACTURA IMPRESA POR COMPUTADOR');
+INSERT INTO public.resolucion_empresa(	resolucion_empresa_id, empresa_id,TIPO_RESOLUCION_id, nombre, resolucion_dian, letra_consecutivo, autorizacion_desde, autorizacion_hasta, fecha_resolucion, consecutivo, t_factura)	VALUES (1, 1,1, 'resolucion por defecto', '102345594', '', '1', '1000', '2020-07-04', 1, 'FACTURA IMPRESA POR COMPUTADOR');
 
 --marcas vehiculos
 Insert into MARCA_VEHICULO (MARCA_VEHICULO_ID,NOMBRE) values (	1,'Abarth');
