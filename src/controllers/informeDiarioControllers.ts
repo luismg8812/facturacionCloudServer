@@ -100,7 +100,7 @@ class InformeDiarioControllers {
         const fechaFin = req.query.fechaFin;
         
         console.log(req.query);
-        let query: string = "select * from informe_diario where DATE(fecha_informe) >= '"+fechaInforme+"' and  DATE(fecha_informe) <= '"+fechaFin+"'"
+        let query: string = "select * from informe_diario where fecha_informe >= '"+fechaInforme+"' and  fecha_informe <= '"+fechaFin+"'"
         +"and empresa_id= "+empresaId
          console.log(query);
         const docuemntos = await db.query(query);
