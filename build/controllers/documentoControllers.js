@@ -514,10 +514,12 @@ class DocumentoControllers {
             const fechaFinal = req.query.fechaFinal;
             let empresaId = req.query.empresaId;
             let clienteId = req.query.clienteId;
+            let tipoDocumentoId = req.query.tipoDocumentoId;
             console.log(req.query);
-            let query = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo from  
-        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, total,valor, saldo from tipo_pago_documento, documento 
-         where tipo_pago_id = 2`;
+            let query = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo,cliente_id from  
+        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, cliente_id,total,valor, saldo from tipo_pago_documento, documento 
+         where tipo_pago_id = 2
+         and tipo_documento_id = ${tipoDocumentoId}`;
             query = query + " and empresa_id = " + empresaId;
             if (fechaInicial != "") {
                 query = query + " and DATE(fecha_registro) >= '" + fechaInicial + "'";
@@ -548,7 +550,7 @@ class DocumentoControllers {
                 " and documento.empresa_id=" + empresaId +
                 " and documento.tipo_documento_id=" + tipoDocumentoId +
                 " and documento.impreso = 1" +
-                " and DATE(documento.fecha_registro) BETWEEN TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY') and TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY')" +
+                " and DATE(documento.fecha_registro) BETWEEN '" + fechaInicial + "' and '" + fechaFinal + "'" +
                 " GROUP by nombre";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
@@ -618,6 +620,39 @@ class DocumentoControllers {
                 query = query + " and consecutivo_dian  like '%" + consecutivoDian + "%'";
             }
             query = query + " order by fecha_registro desc";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
+    getVentasPorSubGrupos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            const conCierre = req.query.conCierre;
+            console.log(req.query);
+            let query = `select   sub_grupo.nombre,sum(parcial) total  from documento_detalle,documento, producto, sub_grupo
+        where documento_detalle.documento_id= documento.documento_id
+        and producto.producto_id = documento_detalle.producto_id
+        and sub_grupo.sub_grupo_id= producto.sub_grupo_id
+        and documento_detalle.estado=1
+        and impreso=1
+        and documento.tipo_documento_id in (10,9)
+        and documento.consecutivo_dian is not null`;
+            if (fechaInicial != '') {
+                query = query + " and documento.fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and documento.fecha_registro <= '" + fechaFinal + "'";
+            }
+            if (conCierre == 'true') {
+                query = query + " and (documento.cierre_diario=0 or documento.cierre_diario is null)";
+            }
+            if (usuarioId != '') {
+                query = query + " and usuario_id = " + usuarioId;
+            }
+            query = query + " group by sub_grupo.nombre";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);

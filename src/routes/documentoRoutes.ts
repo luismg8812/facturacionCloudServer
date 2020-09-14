@@ -27,7 +27,7 @@ class DocumentoRoutes{
         this.router.get('/getOrdenesByDocumentoId' ,documentoControllers.getOrdenesByDocumentoId);
         this.router.get('/getNominaByEmpleado' ,documentoControllers.getNominaByEmpleado);
         this.router.get('/getVentasPorGrupos' ,documentoControllers.getVentasPorGrupos);
-        
+        this.router.get('/getVentasPorSubGrupos' ,documentoControllers.getVentasPorSubGrupos);
         this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
         this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
