@@ -502,10 +502,11 @@ class DocumentoControllers {
         const fechaFinal = req.query.fechaFinal; 
         let empresaId = req.query.empresaId;
         let clienteId = req.query.clienteId;
+        let proveedorId = req.query.proveedorId;
         let tipoDocumentoId = req.query.tipoDocumentoId;
         console.log(req.query);
-        let query: string = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo,cliente_id from  
-        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, cliente_id,total,valor, saldo from tipo_pago_documento, documento 
+        let query: string = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo,cliente_id,proveedor_id from  
+        (select documento.documento_id,documento.fecha_registro, consecutivo_dian, cliente_id,proveedor_id,total,valor, saldo from tipo_pago_documento, documento 
          where tipo_pago_id = 2
          and tipo_documento_id = ${tipoDocumentoId}`;
          
@@ -519,6 +520,10 @@ class DocumentoControllers {
         }
         if (clienteId != "") {
             query = query + " and cliente_id =  " + clienteId;
+        }
+
+        if (proveedorId != "") {
+            query = query + " and proveedor_id =  " + proveedorId;
         }
         query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";
         console.log(query);
