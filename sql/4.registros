@@ -69,7 +69,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (22, 1, 'Cartera de Clientes', '/carteraClientes', 0, 'Opción que permite gestionar la cartera de los clientes y realizar abonos');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (23, 3, 'Retiros de caja', '/retirosCaja', 0, 'Opción que permite hacer retiros de la caja que queden registrados en el cuadre de caja');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (24, 3, 'Liberar cuadre de caja', '/liberarCuadre', 0, 'opcion que permite liberar los cuadres de caja de los cajeros para consultar sus ventas');
-
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (25, 1, 'Cartera de Proveedores', '/carteraProveedores', 0, 'Opción que permite gestionar los abonos de los pagos de los proveedores');
 --fin sub-menu
 
 --opcion usuario
