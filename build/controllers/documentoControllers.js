@@ -256,6 +256,7 @@ class DocumentoControllers {
             const empresaId = req.query.empresaId;
             const usuarioId = req.query.usuarioId;
             const impreso = req.query.impreso;
+            const cerrado = req.query.cerrado;
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
             console.log(tipoDocumentoId);
             let query = "select * from documento where empresa_id= $1 ";
@@ -264,6 +265,14 @@ class DocumentoControllers {
             }
             if (impreso != "") {
                 query = query + " and impreso= " + impreso;
+            }
+            if (cerrado == 'false') {
+                query = query + " and cerrado= 0";
+            }
+            else {
+                if (cerrado == 'true') {
+                    query = query + " and cerrado= 1";
+                }
             }
             query = query + " and tipo_documento_id in () order by documento_id";
             query = query.replace('()', "(" + tipoDocumentoId.toString() + ")");
