@@ -122,7 +122,7 @@ class InformeDiarioControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaId = req.query.empresaId;
             console.log(req.query);
-            let query = "update documento set impreso=1, cierre_diario=1 where tipo_documento_id in (10,9,5,4,8) and empresa_id=" + empresaId;
+            let query = "update documento set impreso=1, cierre_diario=1 where tipo_documento_id in (10,9,5,4,8,12,13) and empresa_id=" + empresaId;
             console.log(query);
             yield database_1.default.query("update retiro_caja set cierre_diario=1 where cierre_diario=0;");
             yield database_1.default.query(query).then(res2 => {
