@@ -110,7 +110,7 @@ class InformeDiarioControllers {
     public async hacerCierreDiario(req: Request, res: Response): Promise<any> {
         const empresaId = req.query.empresaId;
         console.log(req.query);
-        let query: string = "update documento set impreso=1, cierre_diario=1 where tipo_documento_id in (10,9,5,4,8) and empresa_id="+empresaId;
+        let query: string = "update documento set impreso=1, cierre_diario=1 where tipo_documento_id in (10,9,5,4,8,12,13) and empresa_id="+empresaId;
         console.log(query);
         await db.query("update retiro_caja set cierre_diario=1 where cierre_diario=0;");
         await db.query(query).then(res2 => {
