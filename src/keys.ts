@@ -8,7 +8,7 @@ export default{
         ssl: { rejectUnauthorized: false },
     },
 
-    database_surtipulpas:{
+    database_surtipulpas:{   
         host:'ec2-3-215-207-12.compute-1.amazonaws.com',
         user:'vckjpdyimgtsme',
         password:'6eaf1638d1fbaa641664b8851d0fdc598801d97951acf57e374aaeafa844ab0e',
