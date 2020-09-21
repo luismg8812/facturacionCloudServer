@@ -100,6 +100,7 @@ class InformeDiarioControllers {
             yield database_1.default.query(query, [cierre_diario, empresa_id, total_ventas, total_remisiones, iva_ventas, iva_remisiones, fecha_ingreso, fecha_informe, costo_ventas, costo_remisiones, cantidad_documentos, documento_inicio, documento_fin, iva_5, iva_19, base_5, base_19, excento, iva_5_compras, Iva_19_compras, base_19_compras, base_5_compras, excento_compras, informe_diario_id]).then(res2 => {
                 res.json({ "code": 200, "informe_diario_id": informe_diario_id });
             }).catch(error => {
+                console.error("error actualizando informe diario");
                 console.error(error);
                 res.json({ "code": 400, "informe_diario_id": informe_diario_id, "error": error.error });
             });
@@ -112,7 +113,7 @@ class InformeDiarioControllers {
             const fechaFin = req.query.fechaFin;
             console.log(req.query);
             let query = "select * from informe_diario where fecha_informe >= '" + fechaInforme + "' and  fecha_informe <= '" + fechaFin + "'"
-                + "and empresa_id= " + empresaId;
+                + " and empresa_id= " + empresaId;
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
