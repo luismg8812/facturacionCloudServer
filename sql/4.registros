@@ -28,9 +28,9 @@ INSERT INTO public.estado_empresa(estado_empresa_id, nombre)VALUES (2, 'DesActiv
 --EMPRESA
 INSERT INTO public.empresa(
 	empresa_id, tipo_empresa_id, estado_empresa_id,  nombre, represente, 
-	nit, regimen, direccion, barrio, ciudad, departamento, telefono_fijo, cel, 
+	nit,digito_verificacion, regimen, direccion, barrio, ciudad, departamento, telefono_fijo, cel, 
 	   slogan, impuesto, url_logo)
-	VALUES (1, 1, 1, 'EFFECTIVE SOFTWARE', 'LUIS MIUGUEL GONZALEZ', '1061710433', 'SIMPLIFICADO', 'CALLE 5 #38A-13',
+	VALUES (1, 1, 1, 'EFFECTIVE SOFTWARE', 'LUIS MIUGUEL GONZALEZ', '1061710433','3', 'SIMPLIFICADO', 'CALLE 5 #38A-13',
 			'MARIA OCCIDENTE', 'POPAYÁN', 'CAUCA', '', '3185222474', 'EFECTIVO', 'IVA','https://firebasestorage.googleapis.com/v0/b/facturacion-cloud.appspot.com/o/empresa_1%2FlogoFactura_gonzalez.jpg?alt=media&token=0e775ce7-a3c2-418a-aa27-fa12ae9bd8d6');
 --FIN EMPRESA
 
@@ -70,6 +70,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (23, 3, 'Retiros de caja', '/retirosCaja', 0, 'Opción que permite hacer retiros de la caja que queden registrados en el cuadre de caja');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (24, 3, 'Liberar cuadre de caja', '/liberarCuadre', 0, 'opcion que permite liberar los cuadres de caja de los cajeros para consultar sus ventas');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (25, 1, 'Cartera de Proveedores', '/carteraProveedores', 0, 'Opción que permite gestionar los abonos de los pagos de los proveedores');
+--26 cuentas
 --fin sub-menu
 
 --opcion usuario
@@ -1285,6 +1286,46 @@ Insert into MODELO_MARCA (MODELO_MARCA_ID, MARCA_VEHICULO_ID, NOMBRE) values ( 1
 Insert into MODELO_MARCA (MODELO_MARCA_ID, MARCA_VEHICULO_ID, NOMBRE) values ( 1007,53,'Countryman');
 Insert into MODELO_MARCA (MODELO_MARCA_ID, MARCA_VEHICULO_ID, NOMBRE) values ( 1008,53,'Paceman');
 -- fin modelo marcas
+
+--responsabilidad fiscal
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (1,'Aporte especial para la administración de justicia' , 1, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (2,'Gravamen a los movimientos financieros' , 2, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (3, 'Impuesto al patrimonio', 3, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (4, 'Impuesto de renta y complementario régimen especial',4 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (5, 'Impuesto de renta y complementario régimen ordinario',5 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (6, 'Ingresos y patrimonio', 6, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (7, 'Retención en la fuente a título de renta',7 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (8,'Retención timbre nacional' , 8, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (9,'Retención en la fuente en el impuesto sobre las ventas' ,9 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (10,'Usuario aduanero' , 10, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (11, 'Gran contribuyente',13 ,1 );
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (12,'Informante de exógena' ,14 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (13,'Autorretenedor' , 15,1 );
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (14, 'Obligación a facturar por ingresos bienes y/o servicios excluidos',16 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (15, 'Profesionales de compra y venta de divisas', 17, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (16, 'Precios de transferencia', 18, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (17, 'Productor de bienes y/o servicios exentos (incluye exportadores)', 19, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (18, 'Obtención NIT Dto. 3050 de 1997 (Art. 3o)', 20, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (19, 'Declarar ingreso o salida del país de divisas o moneda legal', 21, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (20, 'Obligado a declarar a nombre de terceros', 22, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (21, 'Agente de retención en ventas', 23, 1 );
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (22, 'Declaración consolidada precios de transferencia',24 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (23, 'Declaración individual precios de transferencia', 26, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (24, 'Impuesto Nacional a la Gasolina y al ACPM', 32, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (25, 'Impuesto sobre la renta para la equidad  CREE',35 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (26, 'Establecimiento permanente', 36, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (27, 'Clientes seleccionados por resolución del Director General como obligados a facturar electrónicamente', 37, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (28, 'Obligado a Facturar Electrónicamente ', 38, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (29, 'Proveedor de Servicios Tecnológicos PST',39 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (30, 'Impuesto a la Riqueza',40 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (31, 'Declaración anual de activos en el exterior ',41 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (32, 'Obligado a Llevar Contabilidad', 42, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (33, 'Régimen simple de tributación',47 ,1 );
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (34, 'Impuesto sobre las ventas', 48, 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (35, 'No responsable de IVA', 49,1 );
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (36, 'No responsable de consumo restaurantes y bares',50 , 0);
+INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (37, 'Agente de retención impoconsumo de bienes inmuebles', 51, 0);
+--fin responsabilidad fiscal
 
 
 

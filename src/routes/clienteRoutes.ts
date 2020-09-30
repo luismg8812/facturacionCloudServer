@@ -14,11 +14,17 @@ class ClienteRoutes{
         this.router.get('/getConfiguracionByEmpresa' ,clienteControllers.getConfiguracionByEmpresa);
         this.router.get('/getTipoPago' ,clienteControllers.getTipoPago);
         this.router.get('/getResolucion' ,clienteControllers.getResolucion);
+        this.router.get('/getResolucionById' ,clienteControllers.getResolucionById);
+        this.router.get('/getResponsabilidades' ,clienteControllers.getResponsabilidades);
         this.router.get('/getImpresorasEmpresa' ,clienteControllers.getImpresorasEmpresa);
         this.router.post('/saveCliente' ,clienteControllers.saveCliente);
+        this.router.post('/saveResponsabilidadFiscalCliente' ,clienteControllers.saveResponsabilidadFiscalCliente);
+        
         this.router.post('/updateCliente' ,clienteControllers.updateCliente);
         this.router.get('/getTipoEmpresa' ,clienteControllers.getTipoEmpresa);
         this.router.get('/getTipoIdentificacionAll' ,clienteControllers.getTipoIdentificacionAll);
+        this.router.get('/getResponsabilidadesByCliente' ,clienteControllers.getResponsabilidadesByCliente);
+        
         
     }
     
