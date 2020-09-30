@@ -1,6 +1,0 @@
-ALTER TABLE public.usuario
-    ADD COLUMN "tipo_vinculacion" character varying(200),
-	ADD COLUMN "supervisor" character varying(200),
-	ADD COLUMN "area" character varying(200),
-	ADD COLUMN "puesto" character varying(200),
-	ADD COLUMN "sede" character varying(200);
