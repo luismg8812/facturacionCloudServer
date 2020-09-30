@@ -164,6 +164,7 @@ class DocumentoControllers {
         await db.query(query, [documento_id, tipo_pago_id, fecha_registro, valor]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
+            console.error("error en crear tipo pago documento");
             console.error(error);
             res.json({ "code": 400, "documento_id": documento_id });
         });
@@ -513,6 +514,9 @@ class DocumentoControllers {
         let clienteId = req.query.clienteId;
         let proveedorId = req.query.proveedorId;
         let tipoDocumentoId = req.query.tipoDocumentoId;
+        if(tipoDocumentoId==undefined || tipoDocumentoId==""){
+            tipoDocumentoId='10'; //factura por defecto
+        }
         console.log(req.query);
         let query: string = `select documento_id,fecha_registro, consecutivo_dian, total, valor, saldo,cliente_id,proveedor_id from  
         (select documento.documento_id,documento.fecha_registro, consecutivo_dian, cliente_id,proveedor_id,total,valor, saldo from tipo_pago_documento, documento 
@@ -531,7 +535,7 @@ class DocumentoControllers {
             query = query + " and cliente_id =  " + clienteId;
         }
 
-        if (proveedorId != "") {
+        if (proveedorId != "" && proveedorId!=undefined) {
             query = query + " and proveedor_id =  " + proveedorId;
         }
         query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";

@@ -12,6 +12,15 @@ CREATE  TABLE TIPO_RESOLUCION (
     PRIMARY KEY ( TIPO_RESOLUCION_ID ) 
 );
 
+CREATE  TABLE RESPONSABILIDAD_FISCAL (
+  RESPONSABILIDAD_FISCAL_ID        smallint NOT NULL,
+  CODIGO						   SMALLINT,
+  NOMBRE                           VARCHAR(150),
+   estado 						   smallint, 	
+  CONSTRAINT PK_RESPONSABILIDAD_FISCAL_ID
+    PRIMARY KEY ( RESPONSABILIDAD_FISCAL_ID ) 
+);
+
 CREATE  TABLE fact_tipo_empresa (
   fact_tipo_empresa_ID             smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -61,6 +70,9 @@ CREATE  TABLE RESOLUCION_EMPRESA (
     PRIMARY KEY ( RESOLUCION_EMPRESA_ID )
 );
 
+ALTER TABLE RESOLUCION_EMPRESA ADD CONSTRAINT FK_TIPO_RESOLU_REFERENCE_RESO_EMPRESA
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);
 
 
 
@@ -92,6 +104,7 @@ CREATE  TABLE EMPRESA (
   NOMBRE                           VARCHAR(50),
   REPRESENTE                       VARCHAR(100),
   NIT                              VARCHAR(20),
+  DIGITO_VERIFICACION			   VARCHAR(1),
   REGIMEN                          VARCHAR(20),
   DIRECCION                        VARCHAR(50),
   BARRIO                           VARCHAR(50),
@@ -106,11 +119,6 @@ CREATE  TABLE EMPRESA (
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
-
-ALTER TABLE RESOLUCION_EMPRESA ADD CONSTRAINT FK_TIPO_RESOLU_REFERENCE_RESO_EMPRESA
-  FOREIGN KEY (EMPRESA_ID)
-    REFERENCES EMPRESA (EMPRESA_ID);
-
 
 
 CREATE  TABLE EMPLEADO (
@@ -282,9 +290,11 @@ CREATE  TABLE CLIENTE (
   tipo_identificacion_id		   smallint,
   fact_tipo_empresa_id             smallint,
   NOMBRE                           VARCHAR(50),
+  RAZON_SOCIAL                     VARCHAR(100),
+  DIGITO_VERIFICACION			   varchar(1),
   SEGUNDO_NOMBRE                   VARCHAR(50),
   APELLIDOS                        VARCHAR(50),
-  SEGUNDO_APELLIDO                VARCHAR(50),
+  SEGUNDO_APELLIDO                 VARCHAR(50),
   DOCUMENTO                        VARCHAR(30),
   CIUDAD_ID                        int,
   BARRIO                           VARCHAR(50),
@@ -322,6 +332,21 @@ ALTER TABLE EMPRESA ADD CONSTRAINT FK_EMPR_REFEREN_ESTADO_EMPR
  FOREIGN KEY (ESTADO_EMPRESA_ID)
     REFERENCES ESTADO_EMPRESA (ESTADO_EMPRESA_ID);	
 	
+CREATE  TABLE   responsabilidad_fiscal_cliente (
+  responsabilidad_fiscal_cliente_ID   smallint NOT NULL,
+  cliente_ID			    		  int,
+  responsabilidad_fiscal_id			  smallint,
+  CONSTRAINT PK_responsabilidad_fiscal_cliente
+    PRIMARY KEY ( responsabilidad_fiscal_cliente_ID )
+);	
+
+ALTER TABLE responsabilidad_fiscal_cliente ADD CONSTRAINT FK_responsabilidad_fiscal_clie
+ FOREIGN KEY (cliente_ID)
+    REFERENCES cliente (cliente_ID);	
+	
+ALTER TABLE responsabilidad_fiscal_cliente ADD CONSTRAINT FK_responsabilidad_fiscal_fiscal
+ FOREIGN KEY (responsabilidad_fiscal_id)
+    REFERENCES responsabilidad_fiscal (responsabilidad_fiscal_id);		
 
 CREATE  TABLE   PAGOS_EMPRESA (
   PAGOS_EMPRESA_ID        INT NOT NULL,
@@ -831,7 +856,9 @@ ALTER TABLE INFORME_MENSUAL ADD CONSTRAINT FK_INFO_MENSU_REFERENCE_EMPR
   FOREIGN KEY (EMPRESA_ID)
     REFERENCES EMPRESA (EMPRESA_ID);
 	
-	GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
+
+	
+GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
 commit;
