@@ -36,6 +36,7 @@ class DocumentoDetalleControllers {
             yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, documento_detalle_id, descripcion, impuesto_producto]).then(res2 => {
                 res.json({ "code": 200, "documento_detalle_id": documento_detalle_id });
             }).catch(error => {
+                console.error("error creando documento detalle");
                 console.log(error);
                 res.json({ "code": 400, "documento_detalle_id": documento_detalle_id, "error": error.error });
             });
@@ -61,6 +62,7 @@ class DocumentoDetalleControllers {
             yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, descripcion, documento_detalle_id, impuesto_producto]).then(res2 => {
                 res.json({ "code": 200, "documento_detalle_id": documento_detalle_id });
             }).catch(error => {
+                console.error("error actualizando documento detalle");
                 console.error(error);
                 res.json({ "code": 400, "documento_id": documento_id, "error": error.error });
             });

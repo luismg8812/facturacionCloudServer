@@ -50,8 +50,7 @@ class ClienteControllers{
         let tipo_identificacion_id=req.body.tipo_identificacion_id;
         let segundo_nombre=req.body.segundo_nombre;
         let segundo_apellido=req.body.segundo_apellido;
-        let fact_tipo_empresa_id=req.body.fact_tipo_empresa_id;
-    
+        let fact_tipo_empresa_id=req.body.fact_tipo_empresa_id;  
         console.log(req.body);
         const id = await  db.query(clienteRepository.getIdCliente);
         const cliente_id = id.rows[0].nextval; 

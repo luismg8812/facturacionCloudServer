@@ -131,6 +131,33 @@ increment by 1
 ALTER TABLE CLIENTE ADD  RAZON_SOCIAL                     VARCHAR(100);
 ALTER TABLE CLIENTE ADD  DIGITO_VERIFICACION			   VARCHAR(1);
 
+create sequence S_PRODUCTO_PRECIOS
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE PRODUCTO_PRECIOS (
+  PRODUCTO_PRECIOS_ID              int NOT NULL DEFAULT nextval('S_PRODUCTO_PRECIOS'),
+  PRODUCTO_ID			           int,
+  PRECIO_2						   DECIMAL,
+  PRECIO_3						   DECIMAL,
+  PRECIO_4						   DECIMAL,
+  PRECIO_5						   DECIMAL,
+  PRECIO_6						   DECIMAL,
+  PRECIO_7						   DECIMAL,
+  PRECIO_8						   DECIMAL,
+  PRECIO_9						   DECIMAL,
+  PRECIO_10						   DECIMAL,
+  CONSTRAINT PK_PRODUCTO_GRUPO
+    PRIMARY KEY ( PRODUCTO_ID ) 
+);
+
+ALTER TABLE PRODUCTO_PRECIOS ADD CONSTRAINT FK_PROD_REFERENCE_PRECIO
+  FOREIGN KEY (PRODUCTO_ID)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos productos',' Permite asignar multiples precios para los productos en la facturación');
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
