@@ -102,6 +102,7 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (21, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (22, 'Activar Cambio de fecha en facturas',' Permite que se cambie la fecha de generacion de una factura');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (23, 'Activar multiples resoluciones',' Permite que se cambiar de resoluciones de facturacion de la DIAN durante la impresión');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (24, 'Activar facturación en orden de trabajo',' Permite que se pueda facturar lo que se ingresa por las ordenes de trabajo');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos ',' Permite asignar multiples precios para los productos en la facturación');
 -- fin activaciones
 
 --tipo documento data

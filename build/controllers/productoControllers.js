@@ -84,6 +84,14 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getProductoPreciosById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const productoId = req.query.productoId;
+            console.log(req.query);
+            const productos = yield database_1.default.query(productoRepository_1.productoRepository.getProductoPreciosById, [productoId]);
+            res.json(productos.rows);
+        });
+    }
     inactivar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var producto_id = req.body.producto_id;
@@ -182,6 +190,58 @@ class ProductoControllers {
             }).catch(error => {
                 res.json({ "code": 200, "producto_id": producto_id, "error:": error.error });
                 console.log(error);
+            });
+        });
+    }
+    updateProductoPrecios(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var producto_id = req.body.producto_id;
+            var producto_precios_id = req.body.producto_precios_id;
+            var precio_2 = req.body.precio_2;
+            var precio_3 = req.body.precio_3;
+            var precio_4 = req.body.precio_4;
+            var precio_5 = req.body.precio_5;
+            var precio_6 = req.body.precio_6;
+            var precio_7 = req.body.precio_7;
+            var precio_8 = req.body.precio_8;
+            var precio_9 = req.body.precio_9;
+            var precio_10 = req.body.precio_10;
+            let query = " update producto_precios set producto_id=$2, precio_2=$3, precio_3=$4,"
+                + " precio_4=$5, precio_5=$6, precio_6=$7, precio_7=$8, precio_8=$9,"
+                + " precio_9=$10, precio_10=$11"
+                + " where producto_precios_id = $1";
+            console.log(req.body);
+            yield database_1.default.query(query, [producto_precios_id, producto_id, precio_2, precio_3, precio_4, precio_5, precio_6, precio_7, precio_8, precio_9, precio_10]).then(res2 => {
+                res.json({ "code": 200, "producto_precios_id": producto_precios_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "producto_id": producto_id });
+            });
+        });
+    }
+    saveProductoPrecios(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var producto_id = req.body.producto_id;
+            var precio_2 = req.body.precio_2;
+            var precio_3 = req.body.precio_3;
+            var precio_4 = req.body.precio_4;
+            var precio_5 = req.body.precio_5;
+            var precio_6 = req.body.precio_6;
+            var precio_7 = req.body.precio_7;
+            var precio_8 = req.body.precio_8;
+            var precio_9 = req.body.precio_9;
+            var precio_10 = req.body.precio_10;
+            console.log(req.body);
+            const id = yield database_1.default.query(productoRepository_1.productoRepository.getIdProductoPrecios);
+            const producto_precios_id = id.rows[0].nextval;
+            console.log(producto_precios_id);
+            var query = "INSERT INTO producto_precios(producto_precios_id,producto_id,precio_2,precio_3,precio_4,precio_5,precio_6,precio_7,precio_8,precio_9,precio_10)"
+                + " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)";
+            yield database_1.default.query(query, [producto_precios_id, producto_id, precio_2, precio_3, precio_4, precio_5, precio_6, precio_7, precio_8, precio_9, precio_10]).then(res2 => {
+                res.json({ "code": 200, "producto_precios_id": producto_precios_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "producto_id": producto_id });
             });
         });
     }

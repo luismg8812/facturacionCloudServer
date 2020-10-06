@@ -52,6 +52,7 @@ class InformeDiarioControllers {
         await db.query(query, [informe_diario_id,empresa_id, total_ventas, total_remisiones, iva_ventas, iva_remisiones, fecha_ingreso, fecha_informe, costo_ventas,costo_remisiones,cantidad_documentos,documento_inicio,documento_fin,iva_5,iva_19,base_5,base_19,excento,iva_5_compras,Iva_19_compras, base_19_compras,base_5_compras,excento_compras,cierre_diario]).then(res2 => {
             res.json({ "code": 200, "informe_diario_id": informe_diario_id });
         }).catch(error => {
+            console.error("error creando informe diario");
             console.error(error);
             res.json({ "code": 400, "informe_diario_id": informe_diario_id });
         });
@@ -69,8 +70,8 @@ class InformeDiarioControllers {
         let costo_ventas:number=req.body.costo_ventas;
         let costo_remisiones:number=req.body.costo_remisiones;
         let cantidad_documentos:number=req.body.cantidad_documentos;
-        let documento_inicio:string=req.body.documento_inicio;
-        let documento_fin:string=req.body.documento_fin;
+        let documento_inicio:string=(req.body.documento_inicio==""?null:req.body.documento_inicio);
+        let documento_fin:string=(req.body.documento_fin==""?null:req.body.documento_fin);
         let iva_5:number=req.body.iva_5;
         let iva_19:number=req.body.iva_19;
         let base_5:number=req.body.base_5;
