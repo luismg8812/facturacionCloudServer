@@ -115,6 +115,13 @@ class UsuarioControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getCamposInventarioByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const opcionUsuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getCamposInventarioByUsuario, [usuarioId]);
+            res.json(opcionUsuario.rows);
+        });
+    }
     deleteUsuario(req, res) {
         res.json({ "delete_usuario": +req.params.id });
     }
@@ -272,6 +279,12 @@ class UsuarioControllers {
             res.json(rol.rows);
         });
     }
+    getCampoInventarioAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rol = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getCampoInventarioAll);
+            res.json(rol.rows);
+        });
+    }
     guardarRutas(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuarioId = req.query.usuarioId;
@@ -294,6 +307,19 @@ class UsuarioControllers {
             console.log(req.query);
             for (let i = 0; i < activacionId.length; i++) {
                 yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
+            }
+            console.log("rutas guardo:");
+            res.json({ "code": 200, "usuario_id": usuarioId });
+        });
+    }
+    guardarCamposInventario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            let activacionId = req.query.activacionId.split(",");
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.deletecampoInventarioUsuario, [usuarioId]);
+            console.log(req.query);
+            for (let i = 0; i < activacionId.length; i++) {
+                yield database_1.default.query("INSERT INTO campo_inventario_usuario(campo_inventario_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
             }
             console.log("rutas guardo:");
             res.json({ "code": 200, "usuario_id": usuarioId });

@@ -102,8 +102,12 @@ class UsuarioControllers {
         res.json(opcionUsuario.rows);
     }
 
-
-
+    
+    public async getCamposInventarioByUsuario(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        const opcionUsuario = await db.query(usuarioRepository.getCamposInventarioByUsuario, [usuarioId]);
+        res.json(opcionUsuario.rows);
+    }
 
 
     public deleteUsuario(req: Request, res: Response) {
@@ -267,6 +271,13 @@ class UsuarioControllers {
         res.json(rol.rows);
     }
 
+    public async getCampoInventarioAll(req: Request, res: Response): Promise<any> {
+        const rol = await db.query(usuarioRepository.getCampoInventarioAll);
+        res.json(rol.rows);
+    }
+
+    
+
     public async guardarRutas(req: Request, res: Response): Promise<any> {
         const usuarioId = req.query.usuarioId;
         let subMenuId: string[] = (<string>req.query.subMenuId).split(",");
@@ -293,6 +304,19 @@ class UsuarioControllers {
         console.log("rutas guardo:");
         res.json({ "code": 200, "usuario_id": usuarioId });
     }
+
+    public async guardarCamposInventario(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        let activacionId: string[] = (<string>req.query.activacionId).split(",");
+        await db.query(usuarioRepository.deletecampoInventarioUsuario, [usuarioId]);
+        console.log(req.query);
+        for (let i = 0; i < activacionId.length; i++) {
+            await db.query("INSERT INTO campo_inventario_usuario(campo_inventario_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
+        }
+        console.log("rutas guardo:");
+        res.json({ "code": 200, "usuario_id": usuarioId });
+    }
+    
 
 }
 

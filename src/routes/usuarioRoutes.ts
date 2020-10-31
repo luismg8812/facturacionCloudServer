@@ -24,14 +24,17 @@ class UsuarioRoutes{
         this.router.get('/opcionPuntoVentaByUsuario' ,usuarioController.opcionPuntoVentaByUsuario);
         this.router.get('/opcionUsuarioByUsuarioSinMenu' ,usuarioController.opcionUsuarioByUsuarioSinMenu);
         this.router.get('/getActivacionByUsuario' ,usuarioController.getActivacionByUsuario);
+        this.router.get('/getCamposInventarioByUsuario' ,usuarioController.getCamposInventarioByUsuario);
         this.router.get('/guardarRutas' ,usuarioController.guardarRutas);
         this.router.get('/guardarActivaciones' ,usuarioController.guardarActivaciones);
+        this.router.get('/guardarCamposInventario' ,usuarioController.guardarCamposInventario);
+        
         this.router.post('/postFile',usuarioController.postFile);
         this.router.get('/getFile' ,usuarioController.getFile);
         this.router.get('/usuarioByRol' ,usuarioController.usuarioByRol);
         this.router.get('/getProporcion' ,usuarioController.getProporcion);
         this.router.get('/getLiberarCuadre' ,usuarioController.getLiberarCuadre);
-        
+        this.router.get('/getCampoInventarioAll' ,usuarioController.getCampoInventarioAll);
         this.router.put('/updateProporcion',usuarioController.updateProporcion);
         this.router.post('/saveActivacionUsuario',usuarioController.saveActivacionUsuario);
         this.router.post('/deleteActivacionUsuario',usuarioController.deleteActivacionUsuario);
