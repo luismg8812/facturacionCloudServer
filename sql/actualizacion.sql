@@ -218,7 +218,9 @@ ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_USUARIO
 
 ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_EMPLEADO
  FOREIGN KEY (EMPLEADO_ID)
-    REFERENCES EMPLEADO (EMPLEADO_ID);		
+    REFERENCES EMPLEADO (EMPLEADO_ID);	
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');	
 
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
