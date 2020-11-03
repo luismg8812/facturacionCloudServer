@@ -10,6 +10,8 @@ class ProductoRoutes {
     config() {
         this.router.get('/getProductosByEmpresa', productoControllers_1.productoControllers.getProductosByEmpresa);
         this.router.get('/getProductoById', productoControllers_1.productoControllers.getProductoById);
+        this.router.get('/getProductoByCodBarras', productoControllers_1.productoControllers.getProductoByCodBarras);
+        this.router.get('/getProductoByNombre', productoControllers_1.productoControllers.getProductoByNombre);
         this.router.get('/getProductoPreciosById', productoControllers_1.productoControllers.getProductoPreciosById);
         this.router.get('/getGruposByEmpresa', productoControllers_1.productoControllers.getGruposByEmpresa);
         this.router.get('/getSubGruposByEmpresa', productoControllers_1.productoControllers.getSubGruposByEmpresa);

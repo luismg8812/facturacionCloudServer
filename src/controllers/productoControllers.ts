@@ -73,6 +73,22 @@ class ProductoControllers {
       res.json(productos.rows);
    }
 
+   public async getProductoByCodBarras(req: Request, res: Response): Promise<any> {
+      const empresaId = req.query.empresaId;
+      const codBarras = req.query.codBarras;
+      const productos = await db.query(productoRepository.getProductoByCodBarras, [empresaId, codBarras]);
+      res.json(productos.rows);
+   }
+
+   public async getProductoByNombre(req: Request, res: Response): Promise<any> {
+      const empresaId = req.query.empresaId;
+      const nombre = req.query.nombre;
+      console.log(req.query);
+      const productos = await db.query(`select * from producto where empresa_id = ${empresaId} and lower(nombre) like  lower('%${nombre}%')`);
+      res.json(productos.rows);
+   }
+   
+
    public async getProductoPreciosById(req: Request, res: Response): Promise<any> {
       const productoId = req.query.productoId;
       console.log(req.query);

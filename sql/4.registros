@@ -103,6 +103,7 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (22, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (23, 'Activar multiples resoluciones',' Permite que se cambiar de resoluciones de facturacion de la DIAN durante la impresión');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (24, 'Activar facturación en orden de trabajo',' Permite que se pueda facturar lo que se ingresa por las ordenes de trabajo');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos ',' Permite asignar multiples precios para los productos en la facturación');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');
 -- fin activaciones
 
 --tipo documento data
@@ -1327,6 +1328,18 @@ INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codi
 INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (36, 'No responsable de consumo restaurantes y bares',50 , 0);
 INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (37, 'Agente de retención impoconsumo de bienes inmuebles', 51, 0);
 --fin responsabilidad fiscal
+
+-- campos_inventario
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (1, 'Cantidad', 'Cantidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (2, 'Costo', 'Costo del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (3, 'Costo publico', 'Precio de venta del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (4, 'IVA', 'IVA del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (5, 'Pesado', 'Campo para activar o desactivar la gramera');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (6, 'Cod. Barras', 'Codigo de barras del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (7, 'Promociones', 'Configuración de las promociones del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (8, 'Utilidad', 'Utilidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (9, 'Diferencia', 'Diferencia del costo y costo publico');
+--fin campos inventario--
 
 
 
