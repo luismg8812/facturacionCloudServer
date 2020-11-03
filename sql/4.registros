@@ -1328,6 +1328,18 @@ INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codi
 INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (37, 'Agente de retención impoconsumo de bienes inmuebles', 51, 0);
 --fin responsabilidad fiscal
 
+-- campos_inventario
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (1, 'Cantidad', 'Cantidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (2, 'Costo', 'Costo del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (3, 'Costo publico', 'Precio de venta del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (4, 'IVA', 'IVA del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (5, 'Pesado', 'Campo para activar o desactivar la gramera');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (6, 'Cod. Barras', 'Codigo de barras del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (7, 'Promociones', 'Configuración de las promociones del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (8, 'Utilidad', 'Utilidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (9, 'Diferencia', 'Diferencia del costo y costo publico');
+--fin campos inventario--
+
 
 
 

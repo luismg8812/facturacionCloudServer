@@ -19,7 +19,6 @@ class ClienteRoutes{
         this.router.get('/getImpresorasEmpresa' ,clienteControllers.getImpresorasEmpresa);
         this.router.post('/saveCliente' ,clienteControllers.saveCliente);
         this.router.post('/saveResponsabilidadFiscalCliente' ,clienteControllers.saveResponsabilidadFiscalCliente);
-        
         this.router.post('/updateCliente' ,clienteControllers.updateCliente);
         this.router.get('/getTipoEmpresa' ,clienteControllers.getTipoEmpresa);
         this.router.get('/getTipoIdentificacionAll' ,clienteControllers.getTipoIdentificacionAll);

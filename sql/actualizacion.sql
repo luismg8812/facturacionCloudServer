@@ -158,6 +158,69 @@ ALTER TABLE PRODUCTO_PRECIOS ADD CONSTRAINT FK_PROD_REFERENCE_PRECIO
 
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos productos',' Permite asignar multiples precios para los productos en la facturación');
 
+create sequence S_CAMPO_INVENTARIO_USUARIO
+START WITH 10
+increment by 1
+;
+
+
+CREATE  TABLE CAMPO_INVENTARIO (
+  CAMPO_INVENTARIO_ID              smallint NOT NULL ,
+  NOMBRE                           VARCHAR(100),
+  DESCRIPCION					   VARCHAR(200),
+  CONSTRAINT PK_CAMPO_INVENTARIO
+    PRIMARY KEY ( CAMPO_INVENTARIO_ID ) 
+);
+
+
+CREATE  TABLE CAMPO_INVENTARIO_USUARIO (
+  CAMPO_INVENTARIO_USUARIO_ID      int NOT NULL DEFAULT nextval('S_CAMPO_INVENTARIO_USUARIO'),
+  CAMPO_INVENTARIO_ID                    smallint,
+  USUARIO_ID                       int,
+  CONSTRAINT PK_CAMPO_INVENTARIO_USUARIO
+    PRIMARY KEY ( CAMPO_INVENTARIO_USUARIO_ID ) 
+);
+
+ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_INVENTARIO_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+	
+	ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_USUARIO_REFERENCE_CAMPO
+ FOREIGN KEY (CAMPO_INVENTARIO_ID)
+    REFERENCES CAMPO_INVENTARIO (CAMPO_INVENTARIO_ID);	
+	
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (1, 'Cantidad', 'Cantidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (2, 'Costo', 'Costo del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (3, 'Costo publico', 'Precio de venta del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (4, 'IVA', 'IVA del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (5, 'Pesado', 'Campo para activar o desactivar la gramera');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (6, 'Cod. Barras', 'Codigo de barras del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (7, 'Promociones', 'Configuración de las promociones del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (8, 'Utilidad', 'Utilidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (9, 'Diferencia', 'Diferencia del costo y costo publico');
+
+create sequence S_USUARIO_EMPLEADO
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE USUARIO_EMPLEADO (
+  USUARIO_EMPLEADO_ID      int NOT NULL DEFAULT nextval('S_USUARIO_EMPLEADO'),
+  USUARIO_ID                       int,
+  EMPLEADO_ID                       int,
+  CONSTRAINT PK_USUARIO_EMPLEADO
+    PRIMARY KEY ( USUARIO_EMPLEADO_ID ) 
+);
+
+ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+
+ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_EMPLEADO
+ FOREIGN KEY (EMPLEADO_ID)
+    REFERENCES EMPLEADO (EMPLEADO_ID);		
+
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;

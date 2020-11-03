@@ -6,8 +6,13 @@ class UsuarioControllers {
     public async usuarioByMail(req: Request, res: Response): Promise<any> {
         const mail = req.query.mail;
         console.log(mail);
-        const usuario = await db.query(usuarioRepository.usuarioByMail, [mail]);
-        res.json(usuario.rows);
+        await db.query(usuarioRepository.usuarioByMail, [mail]).then(res2 => {
+            res.json(res2.rows);
+        }).catch(error => {
+            console.error(error);
+            res.json({ "code": 400,"error": error.error });
+        });
+        
     }
 
     public async getByUsuario(req: Request, res: Response): Promise<any> {
@@ -102,8 +107,17 @@ class UsuarioControllers {
         res.json(opcionUsuario.rows);
     }
 
-
-
+    public async getEmpleadoByUsuario(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        const opcionUsuario = await db.query(usuarioRepository.getEmpleadoByUsuario, [usuarioId]);
+        res.json(opcionUsuario.rows);
+    }
+    
+    public async getCamposInventarioByUsuario(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        const opcionUsuario = await db.query(usuarioRepository.getCamposInventarioByUsuario, [usuarioId]);
+        res.json(opcionUsuario.rows);
+    }
 
 
     public deleteUsuario(req: Request, res: Response) {
@@ -150,6 +164,18 @@ class UsuarioControllers {
         await db.query("INSERT INTO activacion_usuario(activacion_id, usuario_id,estado) VALUES ($1,$2,$3)", [activacion_id, usuario_id,estado]);
         console.log("usuario guardo:");
         res.json({ "code": 200, "activacion_id": activacion_id});
+    }
+
+    public async saveEmpleadoUsuario(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        let empleadoId: string[] = (<string>req.query.empleadoId).split(",");
+        await db.query(usuarioRepository.deleteEmpleadoUsuario, [usuarioId]);
+        console.log(req.query);
+        for (let i = 0; i < empleadoId.length; i++) {
+            await db.query("INSERT INTO usuario_empleado (empleado_id, usuario_id) VALUES ($1,$2)", [empleadoId[i], usuarioId]);
+        }
+        console.log("rutas guardo:");
+        res.json({ "code": 200, "usuario_id": usuarioId });
     }
 
     public async deleteActivacionUsuario(req: Request, res: Response): Promise<any> {
@@ -267,6 +293,13 @@ class UsuarioControllers {
         res.json(rol.rows);
     }
 
+    public async getCampoInventarioAll(req: Request, res: Response): Promise<any> {
+        const rol = await db.query(usuarioRepository.getCampoInventarioAll);
+        res.json(rol.rows);
+    }
+
+    
+
     public async guardarRutas(req: Request, res: Response): Promise<any> {
         const usuarioId = req.query.usuarioId;
         let subMenuId: string[] = (<string>req.query.subMenuId).split(",");
@@ -293,6 +326,19 @@ class UsuarioControllers {
         console.log("rutas guardo:");
         res.json({ "code": 200, "usuario_id": usuarioId });
     }
+
+    public async guardarCamposInventario(req: Request, res: Response): Promise<any> {
+        const usuarioId = req.query.usuarioId;
+        let activacionId: string[] = (<string>req.query.activacionId).split(",");
+        await db.query(usuarioRepository.deletecampoInventarioUsuario, [usuarioId]);
+        console.log(req.query);
+        for (let i = 0; i < activacionId.length; i++) {
+            await db.query("INSERT INTO campo_inventario_usuario(campo_inventario_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
+        }
+        console.log("rutas guardo:");
+        res.json({ "code": 200, "usuario_id": usuarioId });
+    }
+    
 
 }
 
