@@ -84,6 +84,23 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getProductoByCodBarras(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const codBarras = req.query.codBarras;
+            const productos = yield database_1.default.query(productoRepository_1.productoRepository.getProductoByCodBarras, [empresaId, codBarras]);
+            res.json(productos.rows);
+        });
+    }
+    getProductoByNombre(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const nombre = req.query.nombre;
+            console.log(req.query);
+            const productos = yield database_1.default.query(`select * from producto where empresa_id = ${empresaId} and lower(nombre) like  lower('%${nombre}%')`);
+            res.json(productos.rows);
+        });
+    }
     getProductoPreciosById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const productoId = req.query.productoId;

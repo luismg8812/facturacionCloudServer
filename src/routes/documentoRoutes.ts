@@ -11,7 +11,6 @@ class DocumentoRoutes{
 
     config():void{
         this.router.post('/createDocumento' ,documentoControllers.createDocumento);
-        this.router.post('/createDocumento' ,documentoControllers.createDocumento);
         this.router.post('/saveDocumentoNota' ,documentoControllers.saveDocumentoNota );
         this.router.post('/saveRetiro' ,documentoControllers.saveRetiro);
         this.router.post('/saveInvoice' ,documentoControllers.saveInvoice);

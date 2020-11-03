@@ -199,6 +199,23 @@ INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VA
 INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (8, 'Utilidad', 'Utilidad del producto');
 INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (9, 'Diferencia', 'Diferencia del costo y costo publico');
 
+create sequence S_USUARIO_EMPLEADO
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE USUARIO_EMPLEADO (
+  USUARIO_EMPLEADO_ID      int NOT NULL DEFAULT nextval('S_USUARIO_EMPLEADO'),
+  USUARIO_ID                       int,
+  EMPLEADO_ID                       int,
+  CONSTRAINT PK_USUARIO_EMPLEADO
+    PRIMARY KEY ( USUARIO_EMPLEADO_ID ) 
+);
+
+ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_INVENTARIO_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	

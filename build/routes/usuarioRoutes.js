@@ -22,6 +22,7 @@ class UsuarioRoutes {
         this.router.get('/opcionPuntoVentaByUsuario', usuarioControlles_1.usuarioController.opcionPuntoVentaByUsuario);
         this.router.get('/opcionUsuarioByUsuarioSinMenu', usuarioControlles_1.usuarioController.opcionUsuarioByUsuarioSinMenu);
         this.router.get('/getActivacionByUsuario', usuarioControlles_1.usuarioController.getActivacionByUsuario);
+        this.router.get('/getEmpleadoByUsuario', usuarioControlles_1.usuarioController.getEmpleadoByUsuario);
         this.router.get('/getCamposInventarioByUsuario', usuarioControlles_1.usuarioController.getCamposInventarioByUsuario);
         this.router.get('/guardarRutas', usuarioControlles_1.usuarioController.guardarRutas);
         this.router.get('/guardarActivaciones', usuarioControlles_1.usuarioController.guardarActivaciones);
@@ -34,6 +35,7 @@ class UsuarioRoutes {
         this.router.get('/getCampoInventarioAll', usuarioControlles_1.usuarioController.getCampoInventarioAll);
         this.router.put('/updateProporcion', usuarioControlles_1.usuarioController.updateProporcion);
         this.router.post('/saveActivacionUsuario', usuarioControlles_1.usuarioController.saveActivacionUsuario);
+        this.router.get('/saveEmpleadoUsuario', usuarioControlles_1.usuarioController.saveEmpleadoUsuario);
         this.router.post('/deleteActivacionUsuario', usuarioControlles_1.usuarioController.deleteActivacionUsuario);
     }
 }

@@ -18,8 +18,12 @@ class UsuarioControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const mail = req.query.mail;
             console.log(mail);
-            const usuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.usuarioByMail, [mail]);
-            res.json(usuario.rows);
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.usuarioByMail, [mail]).then(res2 => {
+                res.json(res2.rows);
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "error": error.error });
+            });
         });
     }
     getByUsuario(req, res) {
@@ -115,6 +119,13 @@ class UsuarioControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getEmpleadoByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const opcionUsuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getEmpleadoByUsuario, [usuarioId]);
+            res.json(opcionUsuario.rows);
+        });
+    }
     getCamposInventarioByUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuarioId = req.query.usuarioId;
@@ -162,6 +173,19 @@ class UsuarioControllers {
             yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id,estado) VALUES ($1,$2,$3)", [activacion_id, usuario_id, estado]);
             console.log("usuario guardo:");
             res.json({ "code": 200, "activacion_id": activacion_id });
+        });
+    }
+    saveEmpleadoUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            let empleadoId = req.query.empleadoId.split(",");
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.deleteEmpleadoUsuario, [usuarioId]);
+            console.log(req.query);
+            for (let i = 0; i < empleadoId.length; i++) {
+                yield database_1.default.query("INSERT INTO usuario_empleado (empleado_id, usuario_id) VALUES ($1,$2)", [empleadoId[i], usuarioId]);
+            }
+            console.log("rutas guardo:");
+            res.json({ "code": 200, "usuario_id": usuarioId });
         });
     }
     deleteActivacionUsuario(req, res) {
