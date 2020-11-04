@@ -726,8 +726,8 @@ class DocumentoControllers {
                 query = query + " and documento.cierre_diario =0";
             }
             else {
-                query = query + " and documento.fecha_registro>= TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY HH24:MI:SS')  ";
-                query = query + " and documento.fecha_registro <=  TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY HH24:MI:SS') ";
+                query = query + " and documento.fecha_registro>= '" + fechaInicial + "' ";
+                query = query + " and documento.fecha_registro <= '" + fechaFinal + "' ";
             }
             query = query + "   GROUP by nombre, empleado.empleado_id,empleado.pago_admin ) subt,"
                 + "  (select nombre, empleado.empleado_id,  sum(documento.total) vales "
@@ -737,8 +737,8 @@ class DocumentoControllers {
                 query = query + " and documento.cierre_diario =0";
             }
             else {
-                query = query + " and documento.fecha_registro>= TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY HH24:MI:SS')  ";
-                query = query + " and documento.fecha_registro <=  TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY HH24:MI:SS') ";
+                query = query + " and documento.fecha_registro>= '" + fechaInicial + "' ";
+                query = query + " and documento.fecha_registro <= '" + fechaFinal + "' ";
             }
             query = query + "   GROUP by nombre, empleado.empleado_id) vale,"
                 + "  (select nombre, empleado.empleado_id,  sum(producto_empleado.valor) productos "
@@ -747,8 +747,8 @@ class DocumentoControllers {
                 query = query + " and (producto_empleado.cierre_diario =0 or producto_empleado.cierre_diario is null)";
             }
             else {
-                query = query + " and producto_empleado.fecha_registro>= TO_TIMESTAMP('" + fechaInicial + "', 'DD-MM-YYYY HH24:MI:SS')  ";
-                query = query + " and producto_empleado.fecha_registro <= TO_TIMESTAMP('" + fechaFinal + "', 'DD-MM-YYYY HH24:MI:SS') ";
+                query = query + " and producto_empleado.fecha_registro>= '" + fechaInicial + "' ";
+                query = query + " and producto_empleado.fecha_registro <= '" + fechaFinal + "' ";
             }
             query = query + "   GROUP by nombre, empleado.empleado_id) produ"
                 + "   where subt.empleado_id = vale.empleado_id"
@@ -775,6 +775,32 @@ class DocumentoControllers {
             });
         });
     }
+    getOrdenesByEmpleados(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empleaId = req.query.empleadoId;
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            const tipoDocumentoId = req.query.tipoDocumentoId;
+            let empleadoId = req.query.empleadoId.split(",");
+            let query = "select * from documento where tipo_documento_id = " + tipoDocumentoId;
+            if (empleadoId.length > 0) {
+                query = query + "and empleado_id in ( " + empleadoId.toString() + " )";
+            }
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            else {
+                query = query + " and cierre_diario=0";
+            }
+            query = query + " order by documento_id asc";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getOrdenesByEmpleado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empleadoId = req.query.empleadoId;
@@ -794,7 +820,7 @@ class DocumentoControllers {
             else {
                 query = query + " and cierre_diario=0";
             }
-            query = query + " order by documento_id desc";
+            query = query + " order by documento_id asc";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
