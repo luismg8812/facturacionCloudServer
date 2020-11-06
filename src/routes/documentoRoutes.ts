@@ -28,6 +28,8 @@ class DocumentoRoutes{
         this.router.get('/getVentasPorGrupos' ,documentoControllers.getVentasPorGrupos);
         this.router.get('/getVentasPorSubGrupos' ,documentoControllers.getVentasPorSubGrupos);
         this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
+        this.router.get('/getOrdenesByEmpleados' ,documentoControllers.getOrdenesByEmpleados);
+        
         this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
         this.router.get('/getInvoice' ,documentoControllers.getInvoice);
