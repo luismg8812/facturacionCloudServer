@@ -717,7 +717,7 @@ class DocumentoControllers {
             + " coalesce(produ.productos,0) productos, coalesce(subt.pago_admin, 0) admon, coalesce(subt.ahorro,0) ahorro,"
             + " (subt.subtotal+coalesce(subt.pago_admin, 0)-coalesce(vale.vales,0)-coalesce(produ.productos,0)-coalesce(subt.ahorro,0)) total"
             + " from"
-            + "  (select nombre, empleado.empleado_id,  coalesce(sum(documento.total),0)*(1 -(empleado.porcentaje_pago::decimal/100)) subtotal,empleado.pago_admin,coalesce(sum(documento.total),0)* (empleado.porcentaje_descuento::decimal/100) ahorro"
+            + "  ( select coalesce( nombre ||' '|| apellido) nombre, empleado.empleado_id,  coalesce(sum(documento.total),0)*(1 -(empleado.porcentaje_pago::decimal/100)) subtotal,empleado.pago_admin,coalesce(sum(documento.total),0)* (empleado.porcentaje_descuento::decimal/100) ahorro"
             + "   from  empleado LEFT JOIN documento ON empleado.empleado_id = documento.empleado_id"
             + "   and documento.tipo_documento_id= "+tipoDocumentoId;
         if (fechaInicial == '') {
