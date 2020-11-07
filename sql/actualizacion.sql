@@ -221,7 +221,37 @@ ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_EMPLEADO
     REFERENCES EMPLEADO (EMPLEADO_ID);	
 
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (27, 'Activar creación de productos desde la venta','se otorgan permisos para permitir la creación de productos dentro de punto de venta dia y gestion de ordenes de trabajo');
 
+
+create sequence S_VEHICULO
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE VEHICULO (
+  VEHICULO_ID                        int NOT NULL,
+  CLIENTE_ID                         int,
+  MARCA_VEHICULO_ID					 smallint,
+  MODELO_MARCA_ID                    int ,
+  PLACA                              VARCHAR(10),
+  LINEA_VEHICULO                     VARCHAR(20),
+  CONSTRAINT PK_VEHICULO
+    PRIMARY KEY ( VEHICULO_ID ) 
+);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_CLIENT
+ FOREIGN KEY (CLIENTE_ID)
+    REFERENCES CLIENTE (CLIENTE_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MARCA
+ FOREIGN KEY (MARCA_VEHICULO_ID)
+    REFERENCES MARCA_VEHICULO (MARCA_VEHICULO_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MODELO
+ FOREIGN KEY (MODELO_MARCA_ID)
+    REFERENCES MODELO_MARCA (MODELO_MARCA_ID);		
+	
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
