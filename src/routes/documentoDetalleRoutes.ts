@@ -8,7 +8,7 @@ class DocumentoDetalleRoutes{
     
     constructor(){
          this.config();
-    }
+    }  
 
     config():void{
         this.router.post('/createDocumentoDetalle' ,documentoDetalleControllers.createDocumentoDetalle);
@@ -17,6 +17,6 @@ class DocumentoDetalleRoutes{
         this.router.get('/getDocumentoDetalleByDocumentoList' ,documentoDetalleControllers.getDocumentoDetalleByDocumentoList);
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoDetalleControllers.getDocumentosByFechaAndTipo);    
     }
-}
+} 
 const documentoDetalleRoutes= new DocumentoDetalleRoutes();
 export default documentoDetalleRoutes.router;
