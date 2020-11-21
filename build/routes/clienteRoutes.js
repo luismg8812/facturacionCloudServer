@@ -16,11 +16,14 @@ class ClienteRoutes {
         this.router.get('/getResponsabilidades', clienteControllers_1.clienteControllers.getResponsabilidades);
         this.router.get('/getImpresorasEmpresa', clienteControllers_1.clienteControllers.getImpresorasEmpresa);
         this.router.post('/saveCliente', clienteControllers_1.clienteControllers.saveCliente);
+        this.router.post('/saveVehiculo', clienteControllers_1.clienteControllers.saveVehiculo);
         this.router.post('/saveResponsabilidadFiscalCliente', clienteControllers_1.clienteControllers.saveResponsabilidadFiscalCliente);
         this.router.post('/updateCliente', clienteControllers_1.clienteControllers.updateCliente);
+        this.router.post('/updateVehiculo', clienteControllers_1.clienteControllers.updateVehiculo);
         this.router.get('/getTipoEmpresa', clienteControllers_1.clienteControllers.getTipoEmpresa);
         this.router.get('/getTipoIdentificacionAll', clienteControllers_1.clienteControllers.getTipoIdentificacionAll);
         this.router.get('/getResponsabilidadesByCliente', clienteControllers_1.clienteControllers.getResponsabilidadesByCliente);
+        this.router.get('/getVehiculos', clienteControllers_1.clienteControllers.getVehiculos);
     }
 }
 const clienteRoutes = new ClienteRoutes();

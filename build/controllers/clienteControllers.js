@@ -28,6 +28,12 @@ class ClienteControllers {
             res.json(impresoraEmpresa.rows);
         });
     }
+    getVehiculos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const impresoraEmpresa = yield database_1.default.query(clienteRepository_1.clienteRepository.getVehiculos);
+            res.json(impresoraEmpresa.rows);
+        });
+    }
     saveResponsabilidadFiscalCliente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let cliente_id = req.body.cliente_id;
@@ -75,6 +81,45 @@ class ClienteControllers {
             }).catch(error => {
                 console.error(error);
                 res.json({ "code": 400, "cliente_id": cliente_id });
+            });
+        });
+    }
+    saveVehiculo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let cliente_id = req.body.cliente_id;
+            let marca_vehiculo_id = req.body.marca_vehiculo_id;
+            let modelo_marca_id = req.body.modelo_marca_id;
+            let placa = req.body.placa;
+            let linea_vehiculo = req.body.linea_vehiculo;
+            console.log(req.body);
+            const id = yield database_1.default.query(clienteRepository_1.clienteRepository.getIdVehiculo);
+            const vehiculo_id = id.rows[0].nextval;
+            console.log(vehiculo_id);
+            var query = "INSERT INTO vehiculo (vehiculo_id,marca_vehiculo_id, modelo_marca_id, placa, linea_vehiculo,cliente_id) VALUES ($1,$2,$3,$4,$5,$6)";
+            yield database_1.default.query(query, [vehiculo_id, marca_vehiculo_id, modelo_marca_id, placa, linea_vehiculo, cliente_id]).then(res2 => {
+                res.json({ "code": 200, "vehiculo_id": vehiculo_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "vehiculo_id": vehiculo_id });
+            });
+        });
+    }
+    updateVehiculo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let vehiculo_id = req.body.vehiculo_id;
+            let cliente_id = req.body.cliente_id;
+            let marca_vehiculo_id = req.body.marca_vehiculo_id;
+            let modelo_marca_id = req.body.modelo_marca_id;
+            let placa = req.body.placa;
+            let linea_vehiculo = req.body.linea_vehiculo;
+            console.log(req.body);
+            var query = "UPDATE vehiculo SET  cliente_id=$1, marca_vehiculo_id= $2, modelo_marca_id=$3, placa=$4, linea_vehiculo=$5 WHERE vehiculo_id = $6";
+            console.log(query);
+            yield database_1.default.query(query, [cliente_id, marca_vehiculo_id, modelo_marca_id, placa, linea_vehiculo, vehiculo_id]).then(res2 => {
+                res.json({ "code": 200, "vehiculo_id": vehiculo_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "vehiculo_id": vehiculo_id, "error": error.error });
             });
         });
     }

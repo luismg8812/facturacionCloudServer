@@ -221,7 +221,84 @@ ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_EMPLEADO
     REFERENCES EMPLEADO (EMPLEADO_ID);	
 
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (27, 'Activar creación de productos desde la venta','se otorgan permisos para permitir la creación de productos dentro de punto de venta dia y gestion de ordenes de trabajo');
 
+
+create sequence S_VEHICULO
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE VEHICULO (
+  VEHICULO_ID                        int NOT NULL,
+  CLIENTE_ID                         int,
+  MARCA_VEHICULO_ID					 smallint,
+  MODELO_MARCA_ID                    int ,
+  PLACA                              VARCHAR(10),
+  LINEA_VEHICULO                     VARCHAR(20),
+  CONSTRAINT PK_VEHICULO
+    PRIMARY KEY ( VEHICULO_ID ) 
+);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_CLIENT
+ FOREIGN KEY (CLIENTE_ID)
+    REFERENCES CLIENTE (CLIENTE_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MARCA
+ FOREIGN KEY (MARCA_VEHICULO_ID)
+    REFERENCES MARCA_VEHICULO (MARCA_VEHICULO_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MODELO
+ FOREIGN KEY (MODELO_MARCA_ID)
+    REFERENCES MODELO_MARCA (MODELO_MARCA_ID);	
+	
+	
+	
+create sequence S_BONO
+START WITH 10
+increment by 1
+;	
+
+CREATE  TABLE TIPO_BONO (
+  TIPO_BONO_ID              smallint NOT NULL ,
+  NOMBRE                           VARCHAR(100),
+  CONSTRAINT PK_TIPO_BONO
+    PRIMARY KEY ( TIPO_BONO_ID ) 
+);	
+	
+CREATE  TABLE BONO (
+  BONO_ID                        int NOT NULL,
+  VEHICULO_ID                         int,
+  TIPO_BONO_ID					 smallint,
+  USUARIO_ID                    int ,
+  DOCUMENTO_ID					BIGint,
+  OBSERVACION                   VARCHAR(300),
+  TOTAL							DECIMAL,
+  ESTADO						VARCHAR(20),
+  FECHA_REGISTRO                timestamp,
+  FECHA_USO                		timestamp,
+  CONSTRAINT PK_BONO
+    PRIMARY KEY ( BONO_ID ) 
+);
+
+ALTER TABLE BONO ADD CONSTRAINT FK_VEHICULO_REFERENCE_BONO
+ FOREIGN KEY (VEHICULO_ID)
+    REFERENCES VEHICULO (VEHICULO_ID);	
+
+ALTER TABLE BONO ADD CONSTRAINT FK_TIPO_BONO_REFERENCE_BONO
+ FOREIGN KEY (TIPO_BONO_ID)
+    REFERENCES TIPO_BONO (TIPO_BONO_ID);	
+
+ALTER TABLE BONO ADD CONSTRAINT FK_USU_REFERENCE_BONO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);		
+	
+	ALTER TABLE BONO ADD CONSTRAINT FK_DOCUMENTO_REFERENCE_BONO
+ FOREIGN KEY (DOCUMENTO_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+
+
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', '/bonos', 1, 'Opción que permite controlar bonos para las promociones');			
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	

@@ -8,7 +8,7 @@ class ProveedorRoutes{
     constructor(){
          this.config();
     }
-
+    
     config():void{
         this.router.get('/getProveedoresByEmpresa' ,proveedorControllers.getProveedoresByEmpresa);  
         this.router.post('/saveProveedor' ,proveedorControllers.saveProveedor);
