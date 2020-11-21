@@ -18,6 +18,7 @@ const marcaRoutes_1 = __importDefault(require("./routes/marcaRoutes"));
 const informeDiarioRoutes_1 = __importDefault(require("./routes/informeDiarioRoutes"));
 const apiRoutes_1 = __importDefault(require("./routes/apiRoutes"));
 const abonoRoutes_1 = __importDefault(require("./routes/abonoRoutes"));
+const bonoRoutes_1 = __importDefault(require("./routes/bonoRoutes"));
 const cuentasContablesRoutes_1 = __importDefault(require("./routes/cuentasContablesRoutes"));
 class Server {
     constructor() {
@@ -52,6 +53,7 @@ class Server {
         this.app.use('/api', apiRoutes_1.default);
         this.app.use('/abono', abonoRoutes_1.default);
         this.app.use('/cuentasContables', cuentasContablesRoutes_1.default);
+        this.app.use('/bono', bonoRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
