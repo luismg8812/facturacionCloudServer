@@ -184,6 +184,13 @@ class ClienteControllers{
         res.json(tipoIdentificacion.rows);  
     }
 
+    public async getById(req:Request, res:Response):Promise<any>{  
+        const getById = req.query.getById; 
+        const tipoIdentificacion = await  db.query(clienteRepository.getById,[getById]);              
+        res.json(tipoIdentificacion.rows);  
+    }
+
+    
     
 
     

@@ -4,6 +4,7 @@ class ClienteRepository {
     constructor() {
         this.getClientesByEmpresa = "select * from cliente where empresa_id = $1";
         this.getConfiguracionByEmpresa = "select * from configuracion where empresa_id = $1";
+        this.getById = "select * from cliente where cliente_id = $1";
         this.getTipoPago = "select * from tipo_pago";
         this.getResolucion = "select * from RESOLUCION_EMPRESA where empresa_id = $1 order by resolucion_empresa_id";
         this.getResolucionId = "select * from RESOLUCION_EMPRESA where resolucion_empresa_id = $1 ";
