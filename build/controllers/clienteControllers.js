@@ -206,5 +206,12 @@ class ClienteControllers {
             res.json(tipoIdentificacion.rows);
         });
     }
+    getById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getById = req.query.getById;
+            const tipoIdentificacion = yield database_1.default.query(clienteRepository_1.clienteRepository.getById, [getById]);
+            res.json(tipoIdentificacion.rows);
+        });
+    }
 }
 exports.clienteControllers = new ClienteControllers();

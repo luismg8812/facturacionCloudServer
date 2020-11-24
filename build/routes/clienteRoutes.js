@@ -20,6 +20,7 @@ class ClienteRoutes {
         this.router.post('/saveResponsabilidadFiscalCliente', clienteControllers_1.clienteControllers.saveResponsabilidadFiscalCliente);
         this.router.post('/updateCliente', clienteControllers_1.clienteControllers.updateCliente);
         this.router.post('/updateVehiculo', clienteControllers_1.clienteControllers.updateVehiculo);
+        this.router.get('/getById', clienteControllers_1.clienteControllers.getById);
         this.router.get('/getTipoEmpresa', clienteControllers_1.clienteControllers.getTipoEmpresa);
         this.router.get('/getTipoIdentificacionAll', clienteControllers_1.clienteControllers.getTipoIdentificacionAll);
         this.router.get('/getResponsabilidadesByCliente', clienteControllers_1.clienteControllers.getResponsabilidadesByCliente);
