@@ -272,6 +272,7 @@ CREATE  TABLE BONO (
   TIPO_BONO_ID					 smallint,
   USUARIO_ID                    int ,
   DOCUMENTO_ID					BIGint,
+  EMPRESA_ID					INT,
   OBSERVACION                   VARCHAR(300),
   TOTAL							DECIMAL,
   ESTADO						VARCHAR(20),
@@ -296,6 +297,10 @@ ALTER TABLE BONO ADD CONSTRAINT FK_USU_REFERENCE_BONO
 	ALTER TABLE BONO ADD CONSTRAINT FK_DOCUMENTO_REFERENCE_BONO
  FOREIGN KEY (DOCUMENTO_ID)
     REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+	
+ALTER TABLE BONO ADD CONSTRAINT FK_empr_REFERENCE_BONO
+ FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);	
 
 
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', '/bonos', 1, 'Opción que permite controlar bonos para las promociones');			

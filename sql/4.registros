@@ -1344,8 +1344,8 @@ INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VA
 --fin campos inventario--
 
 --tipo bono
-INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (1, "Lavado");
-INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (2, "Combustible");
+INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (1, 'Lavado');
+INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (2, 'Combustible');
 --fin tipo bono
 
 

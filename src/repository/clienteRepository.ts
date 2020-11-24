@@ -3,6 +3,7 @@
 class ClienteRepository{
     public getClientesByEmpresa:string="select * from cliente where empresa_id = $1"; 
     public getConfiguracionByEmpresa = "select * from configuracion where empresa_id = $1"; 
+    public getById = "select * from cliente where cliente_id = $1"; 
     public getTipoPago = "select * from tipo_pago";
     public getResolucion = "select * from RESOLUCION_EMPRESA where empresa_id = $1 order by resolucion_empresa_id";
     public getResolucionId = "select * from RESOLUCION_EMPRESA where resolucion_empresa_id = $1 ";

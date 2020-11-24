@@ -24,6 +24,7 @@ class ClienteRoutes{
         this.router.post('/updateCliente' ,clienteControllers.updateCliente);
         this.router.post('/updateVehiculo' ,clienteControllers.updateVehiculo);
         
+        this.router.get('/getById' ,clienteControllers.getById);
         this.router.get('/getTipoEmpresa' ,clienteControllers.getTipoEmpresa);
         this.router.get('/getTipoIdentificacionAll' ,clienteControllers.getTipoIdentificacionAll);
         this.router.get('/getResponsabilidadesByCliente' ,clienteControllers.getResponsabilidadesByCliente);
