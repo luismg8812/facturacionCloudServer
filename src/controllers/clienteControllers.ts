@@ -186,6 +186,7 @@ class ClienteControllers{
 
     public async getById(req:Request, res:Response):Promise<any>{  
         const getById = req.query.getById; 
+        console.log(req.query);
         const tipoIdentificacion = await  db.query(clienteRepository.getById,[getById]);              
         res.json(tipoIdentificacion.rows);  
     }

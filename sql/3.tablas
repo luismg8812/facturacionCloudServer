@@ -114,6 +114,7 @@ CREATE  TABLE EMPRESA (
   IMPUESTO                         varchar(12), 
   actividad_economica			   varchar(100),
   url_logo	  				       varchar(500),
+  correo 						   varchar(50),
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
