@@ -305,6 +305,10 @@ ALTER TABLE BONO ADD CONSTRAINT FK_empr_REFERENCE_BONO
 
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', '/bonos', 1, 'Opción que permite controlar bonos para las promociones');			
 
+alter table empresa add correo varchar(50);
+
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
+alter table documento_detalle add saldo decimal;
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
