@@ -209,6 +209,7 @@ class ClienteControllers {
     getById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const getById = req.query.getById;
+            console.log(req.query);
             const tipoIdentificacion = yield database_1.default.query(clienteRepository_1.clienteRepository.getById, [getById]);
             res.json(tipoIdentificacion.rows);
         });

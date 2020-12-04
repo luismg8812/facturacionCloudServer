@@ -28,12 +28,13 @@ class DocumentoDetalleControllers {
             let impreso_comanda = req.body.impreso_comanda;
             let descripcion = req.body.descripcion;
             let impuesto_producto = req.body.impuesto_producto;
+            let saldo = req.body.saldo;
             console.log(req.body);
             const id = yield database_1.default.query(documentoDetalleRepository_1.documentoDetalleRepository.getIdDocumentoDetalle);
             const documento_detalle_id = id.rows[0].nextval;
             console.log(documento_detalle_id);
-            var query = "INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda,descripcion,impuesto_producto) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8,$10,$11)";
-            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, documento_detalle_id, descripcion, impuesto_producto]).then(res2 => {
+            var query = "INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda,descripcion,impuesto_producto,saldo) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8,$10,$11,$12)";
+            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, documento_detalle_id, descripcion, impuesto_producto, saldo]).then(res2 => {
                 res.json({ "code": 200, "documento_detalle_id": documento_detalle_id });
             }).catch(error => {
                 console.error("error creando documento detalle");
@@ -57,9 +58,10 @@ class DocumentoDetalleControllers {
             let impreso_comanda = req.body.impreso_comanda;
             let descripcion = req.body.descripcion;
             let impuesto_producto = req.body.impuesto_producto;
+            let saldo = req.body.saldo;
             console.log(req.body);
-            var query = "UPDATE documento_detalle SET  documento_id=$1, producto_id= $2, fecha_registro=$3, cantidad=$4, estado=$5, parcial=$6, unitario=$7, impreso_comanda=$8,descripcion=$9, impuesto_producto=$11 WHERE documento_detalle_id = $10";
-            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, descripcion, documento_detalle_id, impuesto_producto]).then(res2 => {
+            var query = "UPDATE documento_detalle SET  documento_id=$1, producto_id= $2, fecha_registro=$3, cantidad=$4, estado=$5, parcial=$6, unitario=$7, impreso_comanda=$8,descripcion=$9, impuesto_producto=$11, saldo=$12 WHERE documento_detalle_id = $10";
+            yield database_1.default.query(query, [documento_id, producto_id, fecha_registro, cantidad, estado, parcial, unitario, impreso_comanda, descripcion, documento_detalle_id, impuesto_producto, saldo]).then(res2 => {
                 res.json({ "code": 200, "documento_detalle_id": documento_detalle_id });
             }).catch(error => {
                 console.error("error actualizando documento detalle");
@@ -114,6 +116,36 @@ class DocumentoDetalleControllers {
             }
             if (empleadoId != '') {
                 query = query + " and d.empleado_id =  " + empleadoId;
+            }
+            query = query + " order by dd.documento_detalle_id desc";
+            console.log(query);
+            const usuario = yield database_1.default.query(query);
+            res.json(usuario.rows);
+        });
+    }
+    getKardex(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let productoId = req.query.productoId;
+            let empresaId = req.query.empresaId;
+            let nombreParcial = req.query.nombreParcial;
+            console.log(req.query);
+            let query = `select *, documento.consecutivo_dian, documento.detalle_entrada from documento_detalle dd,documento
+        where dd.documento_id=documento.documento_id
+        and estado=1
+        and documento.empresa_id= ${empresaId}`;
+            if (fechaInicial != '') {
+                query = query + " and dd.fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and dd.fecha_registro <= '" + fechaFinal + "'";
+            }
+            if (nombreParcial != '') {
+                query = query + " and LOWER(dd.descripcion) like LOWER('%" + nombreParcial + "%')";
+            }
+            if (productoId != '') {
+                query = query + " and dd.producto_id =  " + productoId;
             }
             query = query + " order by dd.documento_detalle_id desc";
             console.log(query);

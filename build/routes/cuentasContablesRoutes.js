@@ -13,6 +13,8 @@ class CuentasContablesRoutes {
         this.router.get('/getClasesContables', cuentasContablesControllers_1.cuentasContablesControllers.getClasesContables);
         this.router.get('/getGrupoByClase', cuentasContablesControllers_1.cuentasContablesControllers.getGrupoByClase);
         this.router.get('/getCuentaByGrupo', cuentasContablesControllers_1.cuentasContablesControllers.getCuentaByGrupo);
+        this.router.get('/getSubCuentaByCuenta', cuentasContablesControllers_1.cuentasContablesControllers.getSubCuentaByCuenta);
+        this.router.get('/getAuxiliarBySubCuenta', cuentasContablesControllers_1.cuentasContablesControllers.getAuxiliarBySubCuenta);
     }
 }
 const cuentasContablesRoutes = new CuentasContablesRoutes();

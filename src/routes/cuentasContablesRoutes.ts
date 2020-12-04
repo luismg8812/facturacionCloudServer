@@ -15,6 +15,8 @@ class CuentasContablesRoutes{
         this.router.get('/getClasesContables' ,cuentasContablesControllers.getClasesContables);
         this.router.get('/getGrupoByClase' ,cuentasContablesControllers.getGrupoByClase);
         this.router.get('/getCuentaByGrupo' ,cuentasContablesControllers.getCuentaByGrupo);
+        this.router.get('/getSubCuentaByCuenta' ,cuentasContablesControllers.getSubCuentaByCuenta);
+        this.router.get('/getAuxiliarBySubCuenta' ,cuentasContablesControllers.getAuxiliarBySubCuenta);
         
     } 
     

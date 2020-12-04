@@ -58,5 +58,21 @@ class CuentasContablesControllers {
             res.json(abonos.rows);
         });
     }
+    getSubCuentaByCuenta(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const cuentaId = req.query.cuentaId;
+            console.log(req.query);
+            const abonos = yield database_1.default.query(cuentasContablesRepository_1.cuentasContablesRepository.getSubCuentaByCuenta, [cuentaId]);
+            res.json(abonos.rows);
+        });
+    }
+    getAuxiliarBySubCuenta(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const subCuentaId = req.query.subCuentaId;
+            console.log(req.query);
+            const abonos = yield database_1.default.query(cuentasContablesRepository_1.cuentasContablesRepository.getAuxiliarBySubCuenta, [subCuentaId]);
+            res.json(abonos.rows);
+        });
+    }
 }
 exports.cuentasContablesControllers = new CuentasContablesControllers();
