@@ -72,6 +72,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (25, 1, 'Cartera de Proveedores', '/carteraProveedores', 0, 'Opción que permite gestionar los abonos de los pagos de los proveedores');
 --26 cuentas
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', 'bonos', 1, 'Opción que permite controlar bonos para las promociones');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
 --fin sub-menu
 
 --opcion usuario
