@@ -96,6 +96,15 @@ class ProductoControllers {
       res.json(productos.rows);
    }
 
+   public async getSubProductoByProductoId(req: Request, res: Response): Promise<any> {
+      const productoId = req.query.productoId;
+      console.log(req.query);
+      const productos = await db.query(productoRepository.getSubProductoByProductoId, [ productoId]);
+      res.json(productos.rows);
+   }
+
+   
+
    
 
    public async inactivar(req: Request, res: Response): Promise<any> {
@@ -225,6 +234,14 @@ class ProductoControllers {
       });
    }
 
+   public async deleteSubProducto(req: Request, res: Response): Promise<any> {
+      
+      var sub_producto_id = req.body.sub_producto_id;
+      console.log(req.body);
+      await db.query("delete from sub_producto where sub_producto_id=$1 ", [sub_producto_id]);
+      console.log("subproducto borrado");
+      res.json({ "code": 200, "sub_producto_id": sub_producto_id});
+  }
    
 
    public async saveProductoPrecios(req: Request, res: Response): Promise<any> {
@@ -293,6 +310,26 @@ class ProductoControllers {
             console.error(error);
             res.json({ "code": 400, "producto_id": producto_id });
          });
+   }
+
+   public async saveSubProducto(req: Request, res: Response): Promise<any> {
+
+      var producto_padre = req.body.producto_padre;
+      var producto_hijo = req.body.producto_hijo;
+      var cantidad = req.body.cantidad;
+      var estado = req.body.estado;
+      console.log(req.body);
+      const id = await db.query(productoRepository.getIdSubProducto);
+      const sub_producto_id = id.rows[0].nextval;
+      console.log(sub_producto_id);
+      var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado)"
+         + " VALUES ($1,$2,$3,$4,$5)";
+      await db.query(query, [sub_producto_id, producto_padre, producto_hijo,cantidad,estado]).then(res2 => {
+         res.json({ "code": 200, "sub_producto_id": sub_producto_id });
+      }).catch(error => {
+         console.error(error);
+         res.json({ "code": 400, "sub_producto_id": sub_producto_id });
+      });
    }
 
    public async saveGrupo(req: Request, res: Response): Promise<any> {

@@ -10,9 +10,11 @@ class ProductoRepository {
         this.getProductoByCodBarras = "select * from producto where empresa_id = $1 and codigo_barras = $2";
         this.getProductoByNombre = "select * from producto where empresa_id = $1 and lower(nombre) like  lower('%$2%')";
         this.getProductoPreciosById = "select * from producto_precios where  producto_id = $1";
+        this.getSubProductoByProductoId = "select * from sub_producto where  producto_padre = $1";
         this.getIdProducto = "select nextval('s_producto')";
         this.getIdProductoPrecios = "select nextval('s_producto_precios')";
         this.getIdGrupo = "select nextval('s_grupo')";
+        this.getIdSubProducto = "select nextval('s_sub_producto')";
     }
 }
 exports.productoRepository = new ProductoRepository();

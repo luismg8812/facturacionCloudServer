@@ -109,6 +109,14 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getSubProductoByProductoId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const productoId = req.query.productoId;
+            console.log(req.query);
+            const productos = yield database_1.default.query(productoRepository_1.productoRepository.getSubProductoByProductoId, [productoId]);
+            res.json(productos.rows);
+        });
+    }
     inactivar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var producto_id = req.body.producto_id;
@@ -236,6 +244,15 @@ class ProductoControllers {
             });
         });
     }
+    deleteSubProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var sub_producto_id = req.body.sub_producto_id;
+            console.log(req.body);
+            yield database_1.default.query("delete from sub_producto where sub_producto_id=$1 ", [sub_producto_id]);
+            console.log("subproducto borrado");
+            res.json({ "code": 200, "sub_producto_id": sub_producto_id });
+        });
+    }
     saveProductoPrecios(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var producto_id = req.body.producto_id;
@@ -303,6 +320,26 @@ class ProductoControllers {
             }).catch(error => {
                 console.error(error);
                 res.json({ "code": 400, "producto_id": producto_id });
+            });
+        });
+    }
+    saveSubProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var producto_padre = req.body.producto_padre;
+            var producto_hijo = req.body.producto_hijo;
+            var cantidad = req.body.cantidad;
+            var estado = req.body.estado;
+            console.log(req.body);
+            const id = yield database_1.default.query(productoRepository_1.productoRepository.getIdSubProducto);
+            const sub_producto_id = id.rows[0].nextval;
+            console.log(sub_producto_id);
+            var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado)"
+                + " VALUES ($1,$2,$3,$4,$5)";
+            yield database_1.default.query(query, [sub_producto_id, producto_padre, producto_hijo, cantidad, estado]).then(res2 => {
+                res.json({ "code": 200, "sub_producto_id": sub_producto_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "sub_producto_id": sub_producto_id });
             });
         });
     }

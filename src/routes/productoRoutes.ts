@@ -15,6 +15,7 @@ class ProductoRoutes{
         this.router.get('/getProductoByCodBarras' ,productoControllers.getProductoByCodBarras);
         this.router.get('/getProductoByNombre' ,productoControllers.getProductoByNombre);  
         this.router.get('/getProductoPreciosById' ,productoControllers.getProductoPreciosById);
+        this.router.get('/getSubProductoByProductoId' ,productoControllers.getSubProductoByProductoId);
         this.router.get('/getGruposByEmpresa' ,productoControllers.getGruposByEmpresa);
         this.router.get('/getSubGruposByEmpresa' ,productoControllers.getSubGruposByEmpresa);
         this.router.put('/updateCantidad' ,productoControllers.updateCantidad);
@@ -24,7 +25,9 @@ class ProductoRoutes{
         this.router.put('/updateGrupo' ,productoControllers.updateGrupo);
         this.router.put('/updateSubGrupo' ,productoControllers.updateSubGrupo);
         this.router.put('/saveProducto' ,productoControllers.saveProducto);
+        this.router.put('/saveSubProducto' ,productoControllers.saveSubProducto); 
         this.router.put('/saveProductoPrecios' ,productoControllers.saveProductoPrecios);  
+        this.router.put('/deleteSubProducto' ,productoControllers.deleteSubProducto);   
         this.router.put('/saveGrupo' ,productoControllers.saveGrupo);
         this.router.put('/saveSubGrupo' ,productoControllers.saveSubGrupo);
         this.router.get('/getProductosByGrupo' ,productoControllers.getProductosByGrupo);
