@@ -8,11 +8,11 @@ export default{
         ssl: { rejectUnauthorized: false },
     },
     
-    database_avenidagp:{
-        host:'ec2-54-159-107-189.compute-1.amazonaws.com',
-        user:'daorvojklxlhnl',
-        password:'6afdc292c4c25f6cbbe13799cbfc10edbf7c48245a86504ab8c95a9663c381fe',
-        database:'df7ckvmi77cpbg',
+    database_manjares:{
+        host:'ec2-3-211-176-230.compute-1.amazonaws.com',
+        user:'yoiygthxwcfhbe',
+        password:'3b5298030c2a0e2035ceb79f764b21fa52f6f70cb7680f39b1976e706d778aa2',
+        database:'dddo4gdi3s15gq',
         port:5432,
         ssl: { rejectUnauthorized: false },
     },
