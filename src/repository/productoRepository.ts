@@ -10,10 +10,11 @@ class ProductoRepository{
     public getProductoByNombre:string="select * from producto where empresa_id = $1 and lower(nombre) like  lower('%$2%')"; 
     
     public getProductoPreciosById:string="select * from producto_precios where  producto_id = $1"; 
-    
+    public getSubProductoByProductoId:string="select * from sub_producto where  producto_padre = $1"; 
     public getIdProducto:string="select nextval('s_producto')"; 
     public getIdProductoPrecios:string="select nextval('s_producto_precios')"; 
     public getIdGrupo:string="select nextval('s_grupo')"; 
+    public getIdSubProducto:string="select nextval('s_sub_producto')"; 
 
 }
 

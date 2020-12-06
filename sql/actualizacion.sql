@@ -309,6 +309,31 @@ alter table empresa add correo varchar(50);
 
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
 alter table documento_detalle add saldo decimal;
+
+CREATE  TABLE   SUB_PRODUCTO (
+  SUB_PRODUCTO_ID                 int NOT NULL,
+  PRODUCTO_PADRE                   int,
+  PRODUCTO_HIJO                    int,
+  CANTIDAD                         decimal,
+  ESTADO                           smallint,
+  CONSTRAINT PK_SUB_PRODUCTO
+    PRIMARY KEY ( SUB_PRODUCTO_ID ) 
+);
+
+ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_PA
+ FOREIGN KEY (PRODUCTO_PADRE)
+    REFERENCES PRODUCTO (PRODUCTO_ID);
+    
+ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
+ FOREIGN KEY (PRODUCTO_HIJO)
+    REFERENCES PRODUCTO (PRODUCTO_ID);
+
+create sequence s_sub_producto
+START WITH 10
+increment by 1
+;
+	
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
