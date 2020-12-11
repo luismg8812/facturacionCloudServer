@@ -421,11 +421,15 @@ class DocumentoControllers {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
         const tipoDocumentoId = req.query.tipoDocumentoId;
-
-        console.log(placa);
+        const idUsuario = req.query.idUsuario;
+        
+        console.log(req.query);
         let query: string = "select * from documento where empresa_id= $1 and tipo_documento_id = " + tipoDocumentoId;
         if (placa != '') {
             query = query + " and LOWER(detalle_entrada) like LOWER('%" + placa + "%')";
+        }
+        if (idUsuario != '') {
+            query = query + " and usuario_id=  " + idUsuario;
         }
         if (cliente != '') {
             query = query + " and cliente_id=  " + cliente;
@@ -774,7 +778,7 @@ class DocumentoControllers {
 
 
     }
-
+    
     
     public async getOrdenesByEmpleados(req: Request, res: Response): Promise<any> {
         const empleaId = req.query.empleadoId;
