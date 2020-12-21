@@ -38,5 +38,7 @@ select * from documento where cliente_id in (355);
 
 delete from modelo_marca where modelo_marca_id not in (138,141,144,223,308,337,339,346,355,358,371,410,417,420,421,424,430,517,520,526,529,530,589,635,687,696,736,739,740,913,915,928,961,970);  
 
-
+delete from producto where producto_id not in (
+select distinct producto.producto_id from producto, documento_detalle where documento_detalle.producto_id = producto.producto_id
+	);
 

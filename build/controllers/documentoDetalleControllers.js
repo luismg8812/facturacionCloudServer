@@ -81,7 +81,7 @@ class DocumentoDetalleControllers {
     getDocumentoDetalleByDocumentoList(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const documento_id = req.query.documento_id;
-            let query = "select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in ()";
+            let query = "select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in () order by documento_detalle_id asc";
             query = query.replace('()', "(" + documento_id.toString() + ")");
             console.log(query);
             const usuario = yield database_1.default.query(query);

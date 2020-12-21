@@ -70,7 +70,7 @@ class DocumentoDetalleControllers{
 
     public async getDocumentoDetalleByDocumentoList (req:Request, res:Response):Promise<any>{
         const documento_id = <string>req.query.documento_id; 
-        let query:string="select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in ()";
+        let query:string="select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in () order by documento_detalle_id asc";
         query=query.replace('()', "("+documento_id.toString()+")");
         console.log(query);
         const usuario = await  db.query(query);       
