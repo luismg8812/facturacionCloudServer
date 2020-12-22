@@ -268,7 +268,7 @@ class DocumentoControllers {
             const impreso = req.query.impreso;
             const cerrado = req.query.cerrado;
             let tipoDocumentoId = req.query.tipoDocumentoId.split(",");
-            console.log(tipoDocumentoId);
+            console.log(req.query);
             let query = "select * from documento where empresa_id= $1 ";
             if (usuarioId != "") {
                 query = query + " and usuario_id= " + usuarioId;
