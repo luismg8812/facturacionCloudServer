@@ -53,6 +53,7 @@ class DocumentoControllers {
         await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo,  anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora,invoice_id,cufe]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id, "fecha_registro":fecha_registro });
         }).catch(error => {
+            console.error("createDocumento");
             console.error(error);
             res.json({ "code": 400, "documento_id": documento_id });
         });
@@ -76,6 +77,7 @@ class DocumentoControllers {
         await db.query(query, [retiro_caja_id,empresa_id, usuario_hace_id, usuario_aplica_id, valor, cierre_diario, fecha_registro,descripcion]).then(res2 => {
             res.json({ "code": 200, "retiro_caja_id": retiro_caja_id, "fecha_registro":fecha_registro });
         }).catch(error => {
+            console.error("saveRetiro");
             console.error(error);
             res.json({ "code": 400, "retiro_caja_id": retiro_caja_id });
         });
@@ -99,6 +101,7 @@ class DocumentoControllers {
         await db.query(query, [documento_invoice_id,documento_id,invoice_id,fecha_registro,mensaje,status]).then(res2 => {
             res.json({ "code": 200, "documento_invoice_id": documento_invoice_id });
         }).catch(error => {
+            console.error("saveInvoice");
             console.error(error);
             res.json({ "code": 400, "documento_invoice_id": documento_invoice_id });
         });
@@ -118,6 +121,7 @@ class DocumentoControllers {
         await db.query(query, [documento_nota_id,documento_id,nota_id,fecha_registro,estado]).then(res2 => {
             res.json({ "code": 200, "documento_nota_id": documento_nota_id });
         }).catch(error => {
+            console.error("saveDocumentoNota");
             console.error(error);
             res.json({ "code": 400, "documento_nota_id": documento_nota_id });
         });
@@ -131,6 +135,7 @@ class DocumentoControllers {
         await db.query(query, [documento_id]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
+            console.error("deleteDocumentoOrdenByOrden");
             console.error(error);
             res.json({ "code": 400, "documento_id": documento_id });
         });
@@ -146,6 +151,7 @@ class DocumentoControllers {
         await db.query(query, [documento_id, orden_id]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
+            console.error("createDocumentoOrden");
             console.error(error);
             res.json({ "code": 400, "documento_id": documento_id });
         });
@@ -154,7 +160,8 @@ class DocumentoControllers {
     public async createTipoPagoDocumento(req: Request, res: Response): Promise<any> {
         var tipo_pago_id: number = req.body.tipo_pago_id;
         var documento_id: number = req.body.documento_id;
-        var fecha_registro: number = req.body.fecha_registro;
+        const fecha =   await db.query(documentoRepository.getfechaNow);
+        var fecha_registro = fecha.rows[0].fecha_registro;
         var valor = req.body.valor;
         if(valor==''){
             valor=0;
@@ -183,6 +190,7 @@ class DocumentoControllers {
         await db.query(query, [documento_id, nota_id, estado, fecha_registro, documento_nota_id]).then(res2 => {
             res.json({ "code": 200, "documento_nota_id": documento_nota_id });
         }).catch(error => {
+            console.error("updateDocumentoNota");
             console.error(error);
             res.json({ "code": 400, "documento_nota_id": documento_nota_id, "error": error.error });
         });
@@ -236,6 +244,7 @@ class DocumentoControllers {
         await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id,cufe,nota_id]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
+            console.error("updateDocumento");
             console.error(error);
             res.json({ "code": 400, "documento_id": documento_id, "error": error.error });
         });
@@ -247,7 +256,7 @@ class DocumentoControllers {
         const impreso = req.query.impreso;
         const cerrado = req.query.cerrado;
         let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
-        console.log(tipoDocumentoId);
+        console.log(req.query);
         let query: string = "select * from documento where empresa_id= $1 ";
         if (usuarioId != "") {
             query = query + " and usuario_id= " + usuarioId;
@@ -421,11 +430,15 @@ class DocumentoControllers {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
         const tipoDocumentoId = req.query.tipoDocumentoId;
-
-        console.log(placa);
+        const idUsuario = req.query.idUsuario;
+        
+        console.log(req.query);
         let query: string = "select * from documento where empresa_id= $1 and tipo_documento_id = " + tipoDocumentoId;
         if (placa != '') {
             query = query + " and LOWER(detalle_entrada) like LOWER('%" + placa + "%')";
+        }
+        if (idUsuario != '') {
+            query = query + " and usuario_id=  " + idUsuario;
         }
         if (cliente != '') {
             query = query + " and cliente_id=  " + cliente;
@@ -767,6 +780,7 @@ class DocumentoControllers {
         await db.query(query, [cierre]).then(res2 => {
             res.json({ "code": 200, "documento_id": cierre });
         }).catch(error => {
+            console.error("cierreNomina");
             console.error(error);
             res.json({ "code": 400, "documento_id": cierre, "error": error.error });
         });
@@ -774,7 +788,7 @@ class DocumentoControllers {
 
 
     }
-
+    
     
     public async getOrdenesByEmpleados(req: Request, res: Response): Promise<any> {
         const empleaId = req.query.empleadoId;

@@ -6,6 +6,7 @@ class ProductoControllers {
 
    public async getProductosByEmpresa(req: Request, res: Response): Promise<any> {
       const empresaId = req.query.empresaId;
+      console.log(req.query);
       const productos = await db.query(productoRepository.getProductosByEmpresa, [empresaId]);
       res.json(productos.rows);
    }
@@ -113,6 +114,7 @@ class ProductoControllers {
       await db.query(query, [producto_id]).then(res2 => {
          res.json({ "code": 200, "producto_id": producto_id });
       }).catch(error => {
+
          res.json({ "code": 200, "producto_id": producto_id, "error:": error.error });
       });
    }
@@ -124,6 +126,7 @@ class ProductoControllers {
       await db.query(query, [cantidad, producto_id]).then(res2 => {
          res.json({ "code": 200, "producto_id": producto_id });
       }).catch(error => {
+         console.error("updateCantidad");
          res.json({ "code": 200, "producto_id": producto_id, "error:": error.error });
       });
    }
@@ -141,6 +144,7 @@ class ProductoControllers {
          res.json({ "code": 200, "grupo_id": grupo_id });
          console.log(req.body);
       }).catch(error => {
+         console.error("updateGrupo");
          res.json({ "code": 200, "grupo_id": grupo_id, "error:": error.error });
          console.log(error);
       });
@@ -157,8 +161,9 @@ class ProductoControllers {
          res.json({ "code": 200, "grupo_id": grupo_id });
          console.log(req.body);
       }).catch(error => {
+         console.error("updateProductoPrecios");
          res.json({ "code": 200, "grupo_id": grupo_id, "error:": error.error });
-         console.log(error);
+         console.error(error);
       });
    }
 
@@ -204,8 +209,9 @@ class ProductoControllers {
             res.json({ "code": 200, "producto_id": producto_id });
             console.log(req.body);
          }).catch(error => {
+            console.error("updateProductoPrecios");
             res.json({ "code": 200, "producto_id": producto_id, "error:": error.error });
-            console.log(error);
+            console.error(error);
          });
    }
 
@@ -229,6 +235,7 @@ class ProductoControllers {
       await db.query(query, [producto_precios_id,producto_id,precio_2,precio_3,precio_4,precio_5,precio_6,precio_7,precio_8,precio_9,precio_10]).then(res2 => {
          res.json({ "code": 200, "producto_precios_id": producto_precios_id });
       }).catch(error => {
+            console.error("updateProductoPrecios");
          console.error(error);
          res.json({ "code": 400, "producto_id": producto_id });
       });
