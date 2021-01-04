@@ -37,6 +37,24 @@ class TrasladosControllers {
             });
         });
     }
+    updateRequerimiento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let empresa_id = req.body.empresa_id;
+            let observacion = req.body.observacion;
+            let usuario_id = req.body.usuario_id;
+            let estado = req.body.estado;
+            let total = req.body.total;
+            const requerimiento_id = req.body.requerimiento_id;
+            console.log(req.body);
+            var query = "UPDATE requerimiento SET empresa_id=$1, usuario_id=$2, estado=$3,total=$4,observacion=$5 WHERE requerimiento_id = $6";
+            yield database_1.default.query(query, [empresa_id, usuario_id, estado, total, observacion, requerimiento_id]).then(res2 => {
+                res.json({ "code": 200, "requerimiento_id": requerimiento_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "requerimiento_id": requerimiento_id });
+            });
+        });
+    }
     saveRequerimientoDetalle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let requerimiento_id = req.body.requerimiento_id;
@@ -69,6 +87,14 @@ class TrasladosControllers {
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
+        });
+    }
+    deleteRequerimientoDetalle(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var requerimientoId = req.body.requerimiento_id;
+            console.log(req.body);
+            const usuario = yield database_1.default.query(trasladosRepository_1.trasladosRepository.deleteRequerimientoDetalle, [requerimientoId]);
+            res.json({ "code": 200, "usuario_id": requerimientoId });
         });
     }
     getRequerimientos(req, res) {

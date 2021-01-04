@@ -12,8 +12,11 @@ class TrasladosRoutes{
     config():void{
         this.router.put('/saveRequerimiento' ,trasladosControllers.saveRequerimiento);
         this.router.put('/saveRequerimientoDetalle' ,trasladosControllers.saveRequerimientoDetalle);
+        this.router.put('/updateRequerimiento' ,trasladosControllers.updateRequerimiento);
         this.router.get('/getRequerimientos' ,trasladosControllers.getRequerimientos);
         this.router.get('/getRequerimientoDetalleByRequerimientoId' ,trasladosControllers.getRequerimientoDetalleByRequerimientoId);
+        this.router.put('/deleteRequerimientoDetalle' ,trasladosControllers.deleteRequerimientoDetalle);
+        
         
     } 
     

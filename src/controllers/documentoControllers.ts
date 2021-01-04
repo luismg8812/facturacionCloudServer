@@ -482,6 +482,42 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    
+
+    public async getDocumentosByFechaAndTipoDetalle(req: Request, res: Response): Promise<any> {
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal;
+        console.log(req.query);
+        let empleadoId = req.query.idEmpleados;
+        let empresaId = req.query.empresaId;
+        let usuarioId = req.query.usuarioId;
+        let tipoDocumentoId = req.query.tipoDocumentoId;
+        let query: string = "select total , fecha_registro, base_5,base_19, consecutivo_dian, documento_id, cliente_id,"
+            + "  iva_5,  iva_19,  excento from documento where 1=1";
+        query = query + " and empresa_id = " + empresaId;
+        if (tipoDocumentoId != '') {
+            query = query + "  and tipo_documento_id = " + tipoDocumentoId;
+        } else {
+            query = query + "  and tipo_documento_id = 10 and impreso=1 ";//se muestra factura por defecto si viene vacio
+        }
+        if (fechaInicial != '') {
+            query = query + " and fecha_registro>= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != '') {
+            query = query + " and fecha_registro <= '" + fechaFinal + "'";
+
+        }
+        if (usuarioId != '') {
+            query = query + " and usuario_id = " + usuarioId;
+        }
+        if (empleadoId != '') {
+            query = query + " and empleado_id =  " + empleadoId;
+        }
+        query = query + " order by fecha_registro";
+        console.log(query); 
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
 
     public async getDocumentosByFechaAndTipo(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
