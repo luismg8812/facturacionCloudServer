@@ -710,7 +710,7 @@ class DocumentoControllers {
         }
         
         if (usuarioId != '') {
-            query = query + " and usuario_id = " + usuarioId;
+            query = query + " and documento.usuario_id = " + usuarioId;
         }
         query = query + " group by sub_grupo.nombre";
         console.log(query);
@@ -747,7 +747,7 @@ class DocumentoControllers {
         }
         
         if (usuarioId != '') {
-            query = query + " and usuario_id = " + usuarioId;
+            query = query + " and documento.usuario_id = " + usuarioId;
         }
         query = query + " group by grupo.nombre";
         console.log(query);

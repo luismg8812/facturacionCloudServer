@@ -134,17 +134,6 @@ START WITH 10
 increment by 1
 ;
 
-create sequence S_REQUERIMIENTO
-START WITH 10
-increment by 1
-;
-
-create sequence s_requerimiento_DETALLE
-START WITH 10
-increment by 1
-;
-
-
 
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;

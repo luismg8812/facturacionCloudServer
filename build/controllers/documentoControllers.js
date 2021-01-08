@@ -716,7 +716,7 @@ class DocumentoControllers {
                 query = query + " and (documento.cierre_diario=0 or documento.cierre_diario is null)";
             }
             if (usuarioId != '') {
-                query = query + " and usuario_id = " + usuarioId;
+                query = query + " and documento.usuario_id = " + usuarioId;
             }
             query = query + " group by sub_grupo.nombre";
             console.log(query);
@@ -749,7 +749,7 @@ class DocumentoControllers {
                 query = query + " and (documento.cierre_diario=0 or documento.cierre_diario is null)";
             }
             if (usuarioId != '') {
-                query = query + " and usuario_id = " + usuarioId;
+                query = query + " and documento.usuario_id = " + usuarioId;
             }
             query = query + " group by grupo.nombre";
             console.log(query);

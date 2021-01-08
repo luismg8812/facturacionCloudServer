@@ -721,6 +721,12 @@ INSERT INTO public.sub_cuenta(sub_cuenta_id, empresa_id, cuenta_id, codigo, nomb
 --fin sub cuentas
 
 --auxiliar
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (1, 1,1,1,1, '11050501','Caja general',0,1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (2, 1,1,1,1, '11050597','D. fiscal caja general',1,0);
+
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (3, 1,2,1,1, '11051001','Cajas menores',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (4, 1,2,1,1, '11051097','D. fiscal base cartera', 1,0 );
+
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (5, 1,3,1,1, '11100501','Moneda nacional',0 ,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (6, 1,3,1,1, '11100502','Pagos en línea',0 , 1);
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (7, 1,3,1,1, '11100597','D. fiscal moneda nacional',1 ,0 );
@@ -759,13 +765,13 @@ INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id
 
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (30, 1,14,1,1, '13301501','Eventos', 0,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (31, 1,14,1,1, '13301502','Otros', 0,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (32, 1,14,1,1, '13301597','D. fiscal anticipos a trabajadores',1 , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (32, 1,14,1,1, '13301597','D. fiscal anticipos a trabajadores',1 ,0 );
 
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (33, 1,15,1,1, '13309501','Otros', 0, 1);
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (34, 1,15,1,1, '13309597','D. fiscal Otros',1 ,0 );
 
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (35, 1,16,1,1, '13551001','Anticipo de impuestos de industria y com.', 0,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (36, 1,16,1,1, '13551097','D. fiscal Anticipo de impuesto industria y comercio',1 ,0 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (36, 1,16,1,1, '13551097','D. fiscal Anticipo de impuesto industria y comerc.',1 ,0 );
 
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (37, 1,17,1,1, '13551501','Anticipo Retención en la fuente 2,5%',0 ,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (38, 1,17,1,1, '13551502','Devolución Retención en la fuente 2,5%',0 , 1);
@@ -808,7 +814,7 @@ INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (73, 1,19,1,1, '13551816','Autorretencion impuesto de industria y comercio',0 ,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (74, 1,19,1,1, '13551817','Autorretencion avisos y tableros',0 ,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (75, 1,19,1,1, '13551818','Anticipo de impuesto de industria y comercio',0 ,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (76, 1,19,1,1, '13551897','D. fiscal Impuesto de industria y comercio retenido',1 ,0 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (76, 1,19,1,1, '13551897','D. fiscal Impuesto de industria comercio retenido',1 ,0 );
 
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (77, 1,20,1,1, '13651501','Educación',0 ,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (78, 1,20,1,1, '13651597','D. fiscal educación', 1,0 );
@@ -873,12 +879,14 @@ INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id
 
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (118, 1,40,1,1, '18050501','Autorretencion servicios',0 ,1 );
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (119, 1,40,1,1, '18050502','Retención en la fuente compras 1.5%',0 ,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (118, 1,40,1,1, '18050503','Tarjetas de crédito',0 , 1);
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (119, 1,40,1,1, '18050504','Servicios 6%',0 ,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (120, 1,40,1,1, '18050505','Autorretencion',0 ,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (121, 1,40,1,1, '18050506','Anticipo sobretasa cree',0 , 1);
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (122, 1,40,1,1, '18050507','Sobrantes en liquidación privada de impuestos', 0, 1);
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (123, 1,40,1,1, '18050597','D. fiscal sobrantes en liquidación privada de impuestos',1 ,0 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (120, 1,40,1,1, '18050503','Tarjetas de crédito',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (121, 1,40,1,1, '18050504','Servicios 6%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (122, 1,40,1,1, '18050505','Autorretencion',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (123, 1,40,1,1, '18050506','Anticipo sobretasa cree',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (124, 1,40,1,1, '18050507','Sobrantes en liquidación privada de impuestos', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (125, 1,40,1,1, '18050597','D. fiscal sobrantes en liquidación privada',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (124, 1,41,1,1, '19451001','De inversiones',0 ,1 );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (125, 1,41,,, '19451097','D. fiscal de inversiones',1 ,0 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (126, 1,41,1,1, '19451001','De inversiones',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (127, 1,41,1,1, '19451097','D. fiscal de inversiones',1 ,0 );
+
+

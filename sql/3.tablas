@@ -1012,44 +1012,6 @@ ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
  FOREIGN KEY (PRODUCTO_HIJO)
     REFERENCES PRODUCTO (PRODUCTO_ID);  
 
-CREATE  TABLE REQUERIMIENTO (
-  REQUERIMIENTO_ID        int NOT NULL DEFAULT nextval('S_REQUERIMIENTO'),
-  EMPRESA_ID			  int,
-   usuario_id              smallint,
-  FECHA_REGISTRO          timestamp,
-  ESTADO                  smallint,
-  total                   decimal,
-  observacion   		  varchar(400),
-  CONSTRAINT PK_REQUERIMIENTO
-    PRIMARY KEY ( REQUERIMIENTO_ID ) 
-);	
-
-ALTER TABLE REQUERIMIENTO ADD CONSTRAINT FK_req_REFEREN_empresa
- FOREIGN KEY (EMPRESA_ID)
-    REFERENCES EMPRESA (EMPRESA_ID);  
-
-CREATE  TABLE requerimiento_DETALLE (
-  requerimiento_DETALLE_ID         bigint NOT NULL DEFAULT nextval('s_requerimiento_DETALLE'),
-  REQUERIMIENTO_ID        int,
-  PRODUCTO_ID                      int,
-  FECHA_REGISTRO                   timestamp,
-  CANTIDAD                         decimal,
-  ESTADO                           smallint,
-  PARCIAL                          decimal,
-  UNITARIO 						   decimal,
-  descripcion                      varchar(200),
-  CONSTRAINT PK_requerimiento_DETALLE
-    PRIMARY KEY ( requerimiento_DETALLE_ID ) 
-);
-
-
-ALTER TABLE requerimiento_DETALLE ADD CONSTRAINT FK_reque_REFERENCE_product
-  FOREIGN KEY (PRODUCTO_ID)
-    REFERENCES PRODUCTO (PRODUCTO_ID);
-	
-	ALTER TABLE requerimiento_DETALLE ADD CONSTRAINT FK_reque_detalle_REFERENCE_reque
-  FOREIGN KEY (REQUERIMIENTO_ID)
-    REFERENCES REQUERIMIENTO (REQUERIMIENTO_ID);
 	
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	

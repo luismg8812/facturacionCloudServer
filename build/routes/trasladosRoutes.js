@@ -9,11 +9,17 @@ class TrasladosRoutes {
     }
     config() {
         this.router.put('/saveRequerimiento', trasladosControllers_1.trasladosControllers.saveRequerimiento);
+        this.router.put('/saveTraslado', trasladosControllers_1.trasladosControllers.saveTraslado);
         this.router.put('/saveRequerimientoDetalle', trasladosControllers_1.trasladosControllers.saveRequerimientoDetalle);
+        this.router.put('/saveTrasladoDetalle', trasladosControllers_1.trasladosControllers.saveTrasladoDetalle);
         this.router.put('/updateRequerimiento', trasladosControllers_1.trasladosControllers.updateRequerimiento);
+        this.router.put('/updateTraslado', trasladosControllers_1.trasladosControllers.updateTraslado);
         this.router.get('/getRequerimientos', trasladosControllers_1.trasladosControllers.getRequerimientos);
+        this.router.get('/getTraslados', trasladosControllers_1.trasladosControllers.getTraslados);
         this.router.get('/getRequerimientoDetalleByRequerimientoId', trasladosControllers_1.trasladosControllers.getRequerimientoDetalleByRequerimientoId);
         this.router.put('/deleteRequerimientoDetalle', trasladosControllers_1.trasladosControllers.deleteRequerimientoDetalle);
+        this.router.put('/deleteTrasladoDetalle', trasladosControllers_1.trasladosControllers.deleteTrasladoDetalle);
+        this.router.get('/getTrasladoDetalleByTrasladoId', trasladosControllers_1.trasladosControllers.getTrasladoDetalleByTrasladoId);
     }
 }
 const trasladosRoutes = new TrasladosRoutes();
