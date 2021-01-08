@@ -334,6 +334,14 @@ increment by 1
 ;
 	
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'Activar facturación para cantidades negativas','si se tiene activa esta opción se permite facturar productos que tengan cantidades por debajo de 0');	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
+
+ alter table producto add REGISTRO_SANITARIO	 VARCHAR(200);
+ alter table producto add lote						   VARCHAR(200);
+ alter table producto add cum			   VARCHAR(200);
+ alter table producto add laboratorio			   VARCHAR(200);
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	

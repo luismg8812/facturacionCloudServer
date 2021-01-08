@@ -27,6 +27,7 @@ class DocumentoRoutes {
         this.router.get('/getVentasPorSubGrupos', documentoControllers_1.documentoControllers.getVentasPorSubGrupos);
         this.router.get('/getOrdenesByEmpleado', documentoControllers_1.documentoControllers.getOrdenesByEmpleado);
         this.router.get('/getOrdenesByEmpleados', documentoControllers_1.documentoControllers.getOrdenesByEmpleados);
+        this.router.get('/getDocumentosByFechaAndTipoDetalle', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipoDetalle);
         this.router.post('/cierreNomina', documentoControllers_1.documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento', documentoControllers_1.documentoControllers.getTiposDocumento);
         this.router.get('/getInvoice', documentoControllers_1.documentoControllers.getInvoice);

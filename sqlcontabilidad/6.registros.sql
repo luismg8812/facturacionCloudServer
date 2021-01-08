@@ -190,6 +190,7 @@ INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codig
 INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codigo, nombre) VALUES (7, 1, 1, '17', 'Otros activos no financieros');
 INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codigo, nombre) VALUES (8, 1, 1, '18', 'Impuesto a las ganancias');
 INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codigo, nombre) VALUES (9, 1, 1, '19', 'Otros activos financieros');
+
 INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codigo, nombre) VALUES (10, 1, 2, '21', 'Pasivos financieros');
 INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codigo, nombre) VALUES (11, 1, 2, '22', 'Proveedores');
 INSERT INTO public.grupo_contable(grupo_contable_id, empresa_id, clase_id, codigo, nombre) VALUES (12, 1, 2, '23', 'Acreedores comerciales y otras cuentas por pagar');
@@ -723,166 +724,169 @@ INSERT INTO public.sub_cuenta(sub_cuenta_id, empresa_id, cuenta_id, codigo, nomb
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (1, 1,1,1,1, '11050501','Caja general',0,1);
 INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (2, 1,1,1,1, '11050597','D. fiscal caja general',1,0);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (3, 1,2,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (4, 1,2,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (3, 1,2,1,1, '11051001','Cajas menores',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (4, 1,2,1,1, '11051097','D. fiscal base cartera', 1,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (5, 1,3,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (6, 1,3,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (7, 1,3,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (5, 1,3,1,1, '11100501','Moneda nacional',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (6, 1,3,1,1, '11100502','Pagos en línea',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (7, 1,3,1,1, '11100597','D. fiscal moneda nacional',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (8, 1,4,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (9, 1,4,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (8, 1,4,1,1, '11200501','Bancos',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (9, 1,4,1,1, '11200597','D. fiscal bancos',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (10, 1,5,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (11, 1,5,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (10, 1,5,1,1, '11450501','Fiducias', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (11, 1,5,1,1, '11450597','D. fiscal fiducias',1 , 1);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (12, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (13, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (14, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (15, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (12, 1,6,1,1, '12053501','Comercio al por mayor y al por menor', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (13, 1,6,1,1, '12053502	','Reajuste fiscal', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (14, 1,6,1,1, '12053503','Método de participación', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (15, 1,6,1,1, '12053597','Método de participación',1 , 0);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (16, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (17, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (16, 1,7,1,1, '12951501','Acciones o derechos en clubes deportivos',1 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (17, 1,7,1,1, '12951597','D. fiscal acciones o derechos en clubes deportivos',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (18, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (19, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (18, 1,8,1,1, '12959501','Otras inversiones',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (19, 1,8,1,1, '12959597','D. fiscal otras inversiones',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (20, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (21, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (20, 1,9,1,1, '13050501','Clientes nacionales',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (21, 1,9,1,1, '13050597','D. fiscal Clientes nacionales',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (22, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (23, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (22, 1,10,1,1, '13051001','Clientes del exterior',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (23, 1,10,1,1, '13051097','D. fiscal Clientes del exterior',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (24, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (25, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (24, 1,11,1,1, '13251001','A accionistas',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (25, 1,11,1,1, '13251097','D. fiscal a accionistas',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (26, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (27, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (26, 1,12,1,1, '13300501','A proveedores',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (27, 1,12,1,1, '13300597','D. fiscal a proveedores',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (28, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (29, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (28, 1,13,1,1, '13301001','A contratistas',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (29, 1,13,1,1, '13301097','D. fiscal a contratistas',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (30, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (31, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (32, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (30, 1,14,1,1, '13301501','Eventos', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (31, 1,14,1,1, '13301502','Otros', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (32, 1,14,1,1, '13301597','D. fiscal anticipos a trabajadores',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (33, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (34, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (33, 1,15,1,1, '13309501','Otros', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (34, 1,15,1,1, '13309597','D. fiscal Otros',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (35, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (36, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (35, 1,16,1,1, '13551001','Anticipo de impuestos de industria y com.', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (36, 1,16,1,1, '13551097','D. fiscal Anticipo de impuesto industria y comerc.',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (37, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (38, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (39, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (40, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (41, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (42, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (43, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (44, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (45, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (46, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (47, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (48, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (49, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (50, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (51, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (52, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (53, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (54, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (37, 1,17,1,1, '13551501','Anticipo Retención en la fuente 2,5%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (38, 1,17,1,1, '13551502','Devolución Retención en la fuente 2,5%',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (39, 1,17,1,1, '13551503','Anticipo Retención en la fuente 4%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (40, 1,17,1,1, '13551504','Devolución Retención en la fuente 4%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (41, 1,17,1,1, '13551505','Anticipo Retención en la fuente 6%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (42, 1,17,1,1, '13551506','Devolución retención en la fuente 6%',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (43, 1,17,1,1, '13551507','Anticipo Retención en la fuente 10%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (44, 1,17,1,1, '13551508','Devolución Retención en la fuente 10%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (45, 1,17,1,1, '13551509','Anticipo Retención en la fuente 11%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (46, 1,17,1,1, '13551510','Devolución en ventas Retefuente 11%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (47, 1,17,1,1, '13551511','Anticipo Retención en la fuente 7%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (48, 1,17,1,1, '13551512','Devolución Retención en la fuente 7%', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (49, 1,17,1,1, '13551513','Anticipo Retención en la fuente 3,5%', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (50, 1,17,1,1, '13551514','Devolución Retención en la fuente 3,5%',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (51, 1,17,1,1, '13551515','Anticipo Retención en la fuente 2%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (52, 1,17,1,1, '13551516','Devolución Retención en la fuente 2%', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (53, 1,17,1,1, '13551517','Anticipo Retención en la fuente 1%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (54, 1,17,1,1, '13551518','Devolución Retención en la fuente 1%', 0,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (55, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (56, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (57, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (55, 1,18,1,1, '13551701','Impuesto a las ventas retenido 15%',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (56, 1,18,1,1, '13551702','Devolución impuesto a las ventas retenido 15%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (57, 1,18,1,1, '13551797','D. fiscal impuesto a las ventas retenido', 1, 0);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (58, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (59, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (60, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (61, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (62, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (63, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (64, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (65, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (66, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (67, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (68, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (69, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (70, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (71, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (72, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (73, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (74, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (75, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (76, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (58, 1,19,1,1, '13551801','Rete Ica 11,04',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (59, 1,19,1,1, '13551802','Devolución Rete Ica 11,04',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (60, 1,19,1,1, '13551803','Rete Ica 13,08',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (61, 1,19,1,1, '13551804','Devolución Rete Ica 13,08',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (62, 1,19,1,1, '13551805','Rete Ica 9,66',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (63, 1,19,1,1, '13551806','Devolución Rete Ica 9,66',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (64, 1,19,1,1, '13551807','Rete Ica 8', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (65, 1,19,1,1, '13551808','Devolución Rete Ica 8',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (66, 1,19,1,1, '13551809','Rete Ica 7',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (67, 1,19,1,1, '13551810','Devolución Rete Ica 7',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (68, 1,19,1,1, '13551811','Rete Ica 6.9', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (69, 1,19,1,1, '13551812','Devolución Rete Ica 6.9',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (70, 1,19,1,1, '13551813','Rete Ica 4', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (71, 1,19,1,1, '13551814','Devolución Rete Ica 4',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (72, 1,19,1,1, '13551815','Impuesto de industria y comercio retenido',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (73, 1,19,1,1, '13551816','Autorretencion impuesto de industria y comercio',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (74, 1,19,1,1, '13551817','Autorretencion avisos y tableros',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (75, 1,19,1,1, '13551818','Anticipo de impuesto de industria y comercio',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (76, 1,19,1,1, '13551897','D. fiscal Impuesto de industria comercio retenido',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (77, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (78, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (77, 1,20,1,1, '13651501','Educación',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (78, 1,20,1,1, '13651597','D. fiscal educación', 1,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (79, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (80, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (79, 1,21,1,1, '13652501','Calamidad domestica',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (80, 1,21,1,1, '13652597','D. fiscal calamidad domestica',1 , 0);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (81, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (82, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (83, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (81, 1,22,1,1, '13809501','Incapacidades', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (82, 1,22,1,1, '13809502','Otros deudores',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (83, 1,22,1,1, '13809597','D. fiscal otros deudores',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (84, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (85, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (84, 1,23,1,1, '13990501','Clientes', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (85, 1,23,1,1, '13990597','D. fiscal clientes',1 , 1);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (86, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (87, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (86, 1,24,1,1, '14350101','Mercancías no fabricadas',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (87, 1,24,1,1, '14350197','D. fiscal mercancías no fabricadas', 1, 0);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (88, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (89, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (88, 1,25,1,1, '14980101','Otros',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (89, 1,25,1,1, '14980197','D. fiscal Otros',1 ,0 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (90, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (91, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (90, 1,26,1,1, '15040505','Urbanos',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (91, 1,26,1,1, '15040597','D. fiscal revaluación urbanos',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (92, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (93, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (92, 1,27,1,1, '15160501','Edificios', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (93, 1,27,1,1, '15160597','D. fiscal edificios',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (94, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (95, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (94, 1,28,1,1, '15161001','Oficinas', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (95, 1,28,1,1, '15161097','D. fiscal revaluación construcciones',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (96, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (97, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (96, 1,29,1,1, '15240501','Muebles y enseres',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (97, 1,29,1,1, '15240597','D. fiscal muebles y enseres',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (98, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (99, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (98, 1,30,1,1, '15241001','Equipos', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (99, 1,30,1,1, '15241097','D. fiscal equipos',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (100, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (101, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (100, 1,31,1,1, '15280501','Equipos de procesamiento de datos',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (101, 1,31,1,1, '15280597','D. fiscal equipos de procesamiento de datos', 1,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (102, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (103, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (102, 1,32,1,1, '15400501','Vehículos en leasing', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (103, 1,32,1,1, '15400597','D. fiscal vehículos leasing',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (104, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (105, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (104, 1,33,1,1, '15920501','Construcciones y edificaciones',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (105, 1,33,1,1, '15920597','D. fiscal valor de salvamento construcciones',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (106, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (107, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (106, 1,34,1,1, '15921501','Equipo de oficina', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (107, 1,34,1,1, '15921597','D. fiscal equipo de oficina',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (108, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (109, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (108, 1,35,1,1, '15922001','Equipo de computación y comunicación',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (109, 1,35,1,1, '15922097','D. fiscal equipo de computación y comunicación',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (110, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (111, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (110, 1,36,1,1, '15923501','Flota y equipo de transporte',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (111, 1,36,1,1, '15923597','D. fiscal depreciación flota',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (112, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (113, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (112, 1,37,1,1, '16350101','Derecho de uso',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (113, 1,37,1,1, '16350197','D. fiscal derecho de uso',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (114, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (115, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (114, 1,38,1,1, '16351501','Marca adquirida', 0,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (115, 1,38,1,1, '1635159','D. fiscal marca adquirida',1 ,1 );
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (116, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (117, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (118, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (119, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (120, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (121, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (122, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (123, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (116, 1,39,1,1, '17202001','Negocios conjuntos',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (117, 1,39,1,1, '','D. fiscal Negocios conjuntos',1 , 0);
 
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (124, 1,,,, '','', , );
-INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (125, 1,,,, '','', , );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (118, 1,40,1,1, '18050501','Autorretencion servicios',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (119, 1,40,1,1, '18050502','Retención en la fuente compras 1.5%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (120, 1,40,1,1, '18050503','Tarjetas de crédito',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (121, 1,40,1,1, '18050504','Servicios 6%',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (122, 1,40,1,1, '18050505','Autorretencion',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (123, 1,40,1,1, '18050506','Anticipo sobretasa cree',0 , 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (124, 1,40,1,1, '18050507','Sobrantes en liquidación privada de impuestos', 0, 1);
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (125, 1,40,1,1, '18050597','D. fiscal sobrantes en liquidación privada',1 ,0 );
+
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (126, 1,41,1,1, '19451001','De inversiones',0 ,1 );
+INSERT INTO public.auxiliar(auxiliar_id, empresa_id, sub_cuenta_id, categoria_id, vencimiento_id, codigo, nombre, diferencia_fiscal, estado) VALUES (127, 1,41,1,1, '19451097','D. fiscal de inversiones',1 ,0 );
 
 

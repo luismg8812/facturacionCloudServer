@@ -14,6 +14,7 @@ import informeDiarioRoutes from './routes/informeDiarioRoutes';
 import apiRoutes from './routes/apiRoutes';
 import abonoRoutes from './routes/abonoRoutes';
 import bonoRoutes from './routes/bonoRoutes';
+import trasladosRoutes from './routes/TrasladosRoutes';
 import cuentasContablesRoutes from './routes/cuentasContablesRoutes';
 
 class Server {
@@ -54,6 +55,7 @@ class Server {
         this.app.use('/abono',abonoRoutes);
         this.app.use('/cuentasContables',cuentasContablesRoutes);
         this.app.use('/bono',bonoRoutes);
+        this.app.use('/traslados',trasladosRoutes);
     }
 
     start(): void {

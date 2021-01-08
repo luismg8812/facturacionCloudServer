@@ -133,6 +133,12 @@ class UsuarioControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getEmpresas(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresas = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getEmpresas);
+            res.json(empresas.rows);
+        });
+    }
     deleteUsuario(req, res) {
         res.json({ "delete_usuario": +req.params.id });
     }
@@ -278,9 +284,14 @@ class UsuarioControllers {
             var contador_factura = req.body.contador_factura;
             var contador_remision = req.body.contador_remision;
             console.log(req.body);
-            yield database_1.default.query("UPDATE proporcion set contador_factura=$1, contador_remision=$2 where proporcion_id=$3", [contador_factura, contador_remision, proporcion_id]);
-            console.log("proporcion actualizada:");
-            res.json({ "code": 200, "proporcion_id": proporcion_id });
+            yield database_1.default.query("UPDATE proporcion set contador_factura=$1, contador_remision=$2 where proporcion_id=$3", [contador_factura, contador_remision, proporcion_id]).then(res2 => {
+                console.log("proporcion actualizada:");
+                res.json({ "code": 200, "proporcion_id": proporcion_id });
+            }).catch(error => {
+                console.error("updateProporcion");
+                console.error(error);
+                res.json({ "code": 400, "proporcion_id": proporcion_id });
+            });
         });
     }
     getRolByUsuario(req, res) {

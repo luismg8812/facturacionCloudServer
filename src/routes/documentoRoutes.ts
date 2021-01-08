@@ -30,6 +30,7 @@ class DocumentoRoutes{
         this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
         this.router.get('/getOrdenesByEmpleados' ,documentoControllers.getOrdenesByEmpleados);
         
+        this.router.get('/getDocumentosByFechaAndTipoDetalle' ,documentoControllers.getDocumentosByFechaAndTipoDetalle);
         this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
         this.router.get('/getInvoice' ,documentoControllers.getInvoice);
