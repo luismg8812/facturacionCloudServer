@@ -14,7 +14,7 @@ import informeDiarioRoutes from './routes/informeDiarioRoutes';
 import apiRoutes from './routes/apiRoutes';
 import abonoRoutes from './routes/abonoRoutes';
 import bonoRoutes from './routes/bonoRoutes';
-import trasladosRoutes from './routes/TrasladosRoutes';
+import trasladosRoutes from './routes/trasladosRoutes';
 import cuentasContablesRoutes from './routes/cuentasContablesRoutes';
 
 class Server {
