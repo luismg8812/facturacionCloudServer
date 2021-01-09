@@ -9,7 +9,7 @@ class TrasladosRoutes{
          this.config();
     }
 
-    config():void{
+    config():void{ 
         this.router.put('/saveRequerimiento' ,trasladosControllers.saveRequerimiento);
         this.router.put('/saveTraslado' ,trasladosControllers.saveTraslado);
         this.router.put('/saveRequerimientoDetalle' ,trasladosControllers.saveRequerimientoDetalle);
