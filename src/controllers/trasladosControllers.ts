@@ -171,7 +171,13 @@ class TrasladosControllers{
         res.json({ "code": 200, "trasladoId": trasladoId });
     }
 
-    
+    public async getRequerimientoById(req: Request, res: Response): Promise<any> {
+        const requerimientoId = req.query.requerimientoId;
+        let query: string = "select * from requerimiento where requerimiento_id = "+requerimientoId;
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
  
     public async getTraslados(req: Request, res: Response): Promise<any> {
         const empresaOrigenId = req.query.empresaOrigenId;

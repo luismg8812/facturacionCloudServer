@@ -186,6 +186,15 @@ class TrasladosControllers {
             res.json({ "code": 200, "trasladoId": trasladoId });
         });
     }
+    getRequerimientoById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const requerimientoId = req.query.requerimientoId;
+            let query = "select * from requerimiento where requerimiento_id = " + requerimientoId;
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getTraslados(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaOrigenId = req.query.empresaOrigenId;

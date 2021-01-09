@@ -22,6 +22,7 @@ class TrasladosRoutes{
         this.router.put('/deleteRequerimientoDetalle' ,trasladosControllers.deleteRequerimientoDetalle);
         this.router.put('/deleteTrasladoDetalle' ,trasladosControllers.deleteTrasladoDetalle);
         this.router.get('/getTrasladoDetalleByTrasladoId' ,trasladosControllers.getTrasladoDetalleByTrasladoId);
+        this.router.get('/getRequerimientoById' ,trasladosControllers.getRequerimientoById);
         
     } 
     
