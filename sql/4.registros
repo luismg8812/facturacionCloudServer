@@ -74,6 +74,8 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', 'bonos', 1, 'Opción que permite controlar bonos para las promociones');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
 --29 requerimiento de mercancia
+--30 traslado de mercancia
+--31 aceptacion y rechazo de mercancia
 --fin sub-menu
 
 --opcion usuario

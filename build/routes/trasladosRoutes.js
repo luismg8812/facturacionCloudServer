@@ -21,6 +21,7 @@ class TrasladosRoutes {
         this.router.put('/deleteTrasladoDetalle', trasladosControllers_1.trasladosControllers.deleteTrasladoDetalle);
         this.router.get('/getTrasladoDetalleByTrasladoId', trasladosControllers_1.trasladosControllers.getTrasladoDetalleByTrasladoId);
         this.router.get('/getRequerimientoById', trasladosControllers_1.trasladosControllers.getRequerimientoById);
+        this.router.get('/getRequerimientoDetalleByRequerimientoIdList', trasladosControllers_1.trasladosControllers.getRequerimientoDetalleByRequerimientoIdList);
     }
 }
 const trasladosRoutes = new TrasladosRoutes();

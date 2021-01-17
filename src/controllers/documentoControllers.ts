@@ -88,10 +88,10 @@ class DocumentoControllers {
     public async saveInvoice(req: Request, res: Response): Promise<any> {
         let documento_id: number = req.body.documento_id;
         let invoice_id: number = req.body.invoice_id;
-        let fecha_registro: number = req.body.fecha_registro;
         let mensaje: number = req.body.mensaje;
         let status: number = req.body.status;
-        
+        const fecha =   await db.query(documentoRepository.getfechaNow);
+        var fecha_registro = fecha.rows[0].fecha_registro;
         console.log(req.body);
         const id = await db.query(documentoRepository.getIdDocumentoInvoice);
         const documento_invoice_id = id.rows[0].nextval;
@@ -378,7 +378,7 @@ class DocumentoControllers {
         query = query + " ) abono,"
         query = query + " ( select coalesce(sum(total),0) efectivo from documento where documento_id = 0"
         query = query + " ) efectivo,"
-        query = query + " ( select coalesce(sum(total),0) tarjetas from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) tarjetas from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=5"
         query = query + "  and cierre_diario= " + cerrado;
@@ -386,7 +386,7 @@ class DocumentoControllers {
         query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) tarjetas,"
-        query = query + " ( select coalesce(sum(total),0) cheques from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) cheques from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=3"
         query = query + "  and cierre_diario= " + cerrado;
@@ -394,7 +394,7 @@ class DocumentoControllers {
         query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) cheques,"
-        query = query + " ( select coalesce(sum(total),0) vales from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) vales from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=6"
         query = query + "  and cierre_diario= " + cerrado;
@@ -407,7 +407,7 @@ class DocumentoControllers {
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and usuario_aplica_id= " + usuarioId;
         query = query + " ) retiros, "
-        query = query + " ( select coalesce(sum(total),0) cartera from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) cartera from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=2"
         query = query + "  and cierre_diario= " + cerrado;
@@ -498,7 +498,7 @@ class DocumentoControllers {
         if (tipoDocumentoId != '') {
             query = query + "  and tipo_documento_id = " + tipoDocumentoId;
         } else {
-            query = query + "  and tipo_documento_id = 10 and impreso=1 ";//se muestra factura por defecto si viene vacio
+            query = query + "  and tipo_documento_id = 10 and impreso=1 and nota_id is null  ";//se muestra factura por defecto si viene vacio
         }
         if (fechaInicial != '') {
             query = query + " and fecha_registro>= '" + fechaInicial + "'";
@@ -528,7 +528,7 @@ class DocumentoControllers {
         let usuarioId = req.query.usuarioId;
         let tipoDocumentoId = req.query.tipoDocumentoId;
         let query: string = "select sum(total) total,DATE(fecha_registro) fecha, sum(base_5) base_5,count(*) num,sum(base_19) base_19, "
-            + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento from documento where 1=1";
+            + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento, sum(total_costo) total_costo from documento where 1=1";
         query = query + " and empresa_id = " + empresaId;
         if (tipoDocumentoId != '') {
             query = query + "  and tipo_documento_id = " + tipoDocumentoId;
@@ -608,6 +608,14 @@ class DocumentoControllers {
         " and documento.impreso = 1"+
         " and DATE(documento.fecha_registro) BETWEEN '"+fechaInicial+"' and '"+fechaFinal+"'"+
         " GROUP by nombre";
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
+    
+    public async getUltimoDocumentoId(req: Request, res: Response): Promise<any> {
+        let query: string = "select consecutivo_dian documento_id from documento where documento_id = (SELECT MAX(documento_id)  FROM documento);";
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);

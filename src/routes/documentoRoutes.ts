@@ -37,7 +37,7 @@ class DocumentoRoutes{
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha' ,documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getRetirosByFechaAndTipo' ,documentoControllers.getRetirosByFechaAndTipo);
-        
+        this.router.get('/getUltimoDocumentoId' ,documentoControllers.getUltimoDocumentoId);
         this.router.get('/getDocumentosByTipoPago' ,documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getCarteraClientes' ,documentoControllers.getCarteraClientes);
         
