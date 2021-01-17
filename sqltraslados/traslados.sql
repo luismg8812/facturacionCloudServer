@@ -1,6 +1,7 @@
 ---------TRASLADOS
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (29, 3, 'Requerimiento de mercancia', '/requerimiento', 0, 'Opción que permite realizar requerimiento de mercancia a las areas de produccion o a otras sucursales');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (30, 3, 'Traslado de mercancia', '/traslado', 0, 'Opción que permite realizar traslados de mercancia a las areas de produccion o a otras sucursales');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (31, 3, 'Aceptacion y rechazo de mercancia', '/aceptacionMercancia', 0, 'Opción que permite aceptar o rechazar los traslados de mercancia entre las diferentes sucursales');
 
 create sequence S_REQUERIMIENTO
 START WITH 10

@@ -92,7 +92,7 @@ class TrasladosControllers {
             const requerimiento_id = req.body.requerimiento_id;
             console.log(req.body);
             var query = "UPDATE traslado SET empresa_origen_id=$1, empresa_destino_id=$2, usuario_crea_id=$3,usuario_aprueba_id=$4,estado=$5, requerimiento_id=$6, total=$7 WHERE traslado_id = $8";
-            yield database_1.default.query(query, [empresa_origen_id, empresa_destino_id, usuario_crea_id, usuario_aprueba_id, estado, requerimiento_id, traslado_id, total]).then(res2 => {
+            yield database_1.default.query(query, [empresa_origen_id, empresa_destino_id, usuario_crea_id, usuario_aprueba_id, estado, requerimiento_id, total, traslado_id]).then(res2 => {
                 res.json({ "code": 200, "traslado_id": traslado_id });
             }).catch(error => {
                 console.error(error);
@@ -193,6 +193,19 @@ class TrasladosControllers {
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
+        });
+    }
+    getRequerimientoDetalleByRequerimientoIdList(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const documento_id = req.query.requerimientoIdList;
+            let query = "select descripcion, sum(cantidad) cantidad from REQUERIMIENTO_DETALLE,requerimiento where  " +
+                " requerimiento.requerimiento_id = requerimiento_detalle.requerimiento_id" +
+                " and requerimiento.requerimiento_id in () " +
+                " and requerimiento.estado=0 group by descripcion";
+            query = query.replace('()', "(" + documento_id.toString() + ")");
+            console.log(query);
+            const usuario = yield database_1.default.query(query);
+            res.json(usuario.rows);
         });
     }
     getTraslados(req, res) {

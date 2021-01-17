@@ -34,6 +34,7 @@ class DocumentoRoutes {
         this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha', documentoControllers_1.documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getRetirosByFechaAndTipo', documentoControllers_1.documentoControllers.getRetirosByFechaAndTipo);
+        this.router.get('/getUltimoDocumentoId', documentoControllers_1.documentoControllers.getUltimoDocumentoId);
         this.router.get('/getDocumentosByTipoPago', documentoControllers_1.documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getCarteraClientes', documentoControllers_1.documentoControllers.getCarteraClientes);
         this.router.get('/getDocumentoForFacturacionElectronica', documentoControllers_1.documentoControllers.getDocumentoForFacturacionElectronica);
