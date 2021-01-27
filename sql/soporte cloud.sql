@@ -42,3 +42,4 @@ delete from producto where producto_id not in (
 select distinct producto.producto_id from producto, documento_detalle where documento_detalle.producto_id = producto.producto_id
 	);
 
+delete from documento_detalle where fecha_registro BETWEEN '2020-10-31 06:10:40.094' and '2020-11-01 19:10:40.094'
