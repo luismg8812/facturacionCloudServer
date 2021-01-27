@@ -13,8 +13,7 @@ class InformeDiarioRoutes{
         this.router.get('/getCierreDiario' ,informeDiarioControllers.getClientesByEmpresa);
         this.router.get('/hacerCierreDiario' ,informeDiarioControllers.hacerCierreDiario);
         this.router.get('/getInfoDiarioByDate' ,informeDiarioControllers.getInfoDiarioByDate);
-        this.router.post('/saveInformeDiario' ,informeDiarioControllers.saveInformeDiario);
-        this.router.post('/updateInformeDiario' ,informeDiarioControllers.updateInformeDiario);
+     
         
     }
     
