@@ -505,6 +505,10 @@ CREATE  TABLE PRODUCTO (
   IMPRESO_COMANDA                  smallint,
   VARIOS						   SMALLINT,
   GRANEL						   SMALLINT,
+  REGISTRO_SANITARIO			   VARCHAR(200),
+  lote						   VARCHAR(200),
+  cum			   VARCHAR(200),
+  laboratorio			   VARCHAR(200),
   CONSTRAINT PK_PRODUCTO
     PRIMARY KEY ( PRODUCTO_ID ) 
 );
@@ -537,6 +541,7 @@ CREATE  TABLE DOCUMENTO (
   PROVEEDOR_ID                     int,
   USUARIO_ID                       int,
   CLIENTE_ID                       int,
+  resolucion_empresa_id            smallint,
   EMPLEADO_ID                      smallint,
   FECHA_REGISTRO                   timestamp DEFAULT CURRENT_TIMESTAMP,
   FECHA_ENTREGA                    timestamp,
@@ -601,6 +606,10 @@ ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_TIPO
 ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_PROVEEDOR
   FOREIGN KEY (PROVEEDOR_ID)
     REFERENCES PROVEEDOR (PROVEEDOR_ID);
+	
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_resolucion
+  FOREIGN KEY (RESOLUCION_EMPRESA_ID)
+    REFERENCES RESOLUCION_EMPRESA (RESOLUCION_EMPRESA_ID);
     
 	
 CREATE  TABLE DOCUMENTO_NOTA (
@@ -760,40 +769,6 @@ ALTER TABLE DOCUMENTO_ORDEN ADD CONSTRAINT FK_DOCU_ORD_REFERENCE_ORDEN
   FOREIGN KEY (ORDEN_ID)
     REFERENCES DOCUMENTO (DOCUMENTO_ID);
 	
-	CREATE  TABLE INFORME_DIARIO (
-  		
-  INFORME_DIARIO_ID            int NOT NULL,
-  EMPRESA_ID                       smallint,
-  TOTAL_VENTAS              decimal,
-  TOTAL_REMISIONES          decimal,
-  IVA_VENTAS                decimal,
-  IVA_REMISIONES            decimal,
-  FECHA_INGRESO             timestamp,
-  FECHA_INFORME             timestamp,
-  COSTO_VENTAS            decimal,
-  COSTO_REMISIONES            decimal,
-  cantidad_Documentos        smallint,
-  documento_inicio          VARCHAR(50),
-  documento_fin            	VARCHAR(50),
-  iva_5                     decimal,
-  Iva_19                    decimal,
-  base_19                   decimal,
-  base_5                    decimal,
-  excento                   decimal,
-  iva_5_compras             decimal,
-  Iva_19_compras            decimal,
-  base_19_compras           decimal,
-  base_5_compras            decimal,
-  excento_compras           decimal,
-  cierre_diario				smallint,
-  
-  CONSTRAINT PK_INFORME_DIARIO
-    PRIMARY KEY ( INFORME_DIARIO_ID ) 
-);  
-
-ALTER TABLE INFORME_DIARIO ADD CONSTRAINT FK_EMPR_REFERENCE_MARCA
-  FOREIGN KEY (EMPRESA_ID)
-    REFERENCES EMPRESA (EMPRESA_ID);
 	
 CREATE  TABLE INFORME_MENSUAL (	
   INFORME_MENSUAL_ID            int NOT NULL,
@@ -1006,7 +981,7 @@ ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_PA
     
 ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
  FOREIGN KEY (PRODUCTO_HIJO)
-    REFERENCES PRODUCTO (PRODUCTO_ID);  	
+    REFERENCES PRODUCTO (PRODUCTO_ID);  
 
 	
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;

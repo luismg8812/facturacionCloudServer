@@ -30,13 +30,14 @@ class DocumentoRoutes{
         this.router.get('/getOrdenesByEmpleado' ,documentoControllers.getOrdenesByEmpleado);
         this.router.get('/getOrdenesByEmpleados' ,documentoControllers.getOrdenesByEmpleados);
         
+        this.router.get('/getDocumentosByFechaAndTipoDetalle' ,documentoControllers.getDocumentosByFechaAndTipoDetalle);
         this.router.post('/cierreNomina' ,documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento' ,documentoControllers.getTiposDocumento);
         this.router.get('/getInvoice' ,documentoControllers.getInvoice);
         this.router.get('/getDocumentosByFechaAndTipo' ,documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha' ,documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getRetirosByFechaAndTipo' ,documentoControllers.getRetirosByFechaAndTipo);
-        
+        this.router.get('/getUltimoDocumentoId' ,documentoControllers.getUltimoDocumentoId);
         this.router.get('/getDocumentosByTipoPago' ,documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getCarteraClientes' ,documentoControllers.getCarteraClientes);
         

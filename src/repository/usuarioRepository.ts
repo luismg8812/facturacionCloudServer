@@ -9,7 +9,7 @@ class UsuarioRepository{
     
     public opcionPuntoVentaByUsuario:string="select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 ) and op= 1"; 
     public getCamposInventarioByUsuario:string="select * from campo_inventario where campo_inventario_id in (select campo_inventario_id from campo_inventario_usuario where usuario_id=$1 )"; 
-    
+    public getEmpresas:string="select * from  empresa order by nombre"; 
     public getByUsuario:string="select * from usuario where empresa_id = $1"; 
     public getRolByUsuario:string="select * from rol_usuario where usuario_id = $1";
     public deleteRolUsuario:string="delete from rol_usuario where usuario_id = $1";

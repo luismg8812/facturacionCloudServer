@@ -13,6 +13,7 @@ class DocumentoControllers {
         var usuario_id: number = req.body.usuario_id;
         var cliente_id: number = req.body.cliente_id;
         var empleado_id: number = req.body.empleado_id;
+        var resolucion_empresa_id:number=req.body.resolucion_empresa_id;
         const fecha =   await db.query(documentoRepository.getfechaNow);
         var fecha_registro = fecha.rows[0].fecha_registro;
         var fecha_entrega = req.body.fecha_entrega;
@@ -49,8 +50,8 @@ class DocumentoControllers {
         const id = await db.query(documentoRepository.getIdDocumento);
         const documento_id = id.rows[0].nextval;
         console.log(documento_id);
-        var query = "INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,invoice_id,cufe) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38 )";
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo,  anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora,invoice_id,cufe]).then(res2 => {
+        var query = "INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,invoice_id,cufe,resolucion_empresa_id) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38,$39 )";
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo,  anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora,invoice_id,cufe,resolucion_empresa_id]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id, "fecha_registro":fecha_registro });
         }).catch(error => {
             console.error("createDocumento");
@@ -88,10 +89,10 @@ class DocumentoControllers {
     public async saveInvoice(req: Request, res: Response): Promise<any> {
         let documento_id: number = req.body.documento_id;
         let invoice_id: number = req.body.invoice_id;
-        let fecha_registro: number = req.body.fecha_registro;
         let mensaje: number = req.body.mensaje;
         let status: number = req.body.status;
-        
+        const fecha =   await db.query(documentoRepository.getfechaNow);
+        var fecha_registro = fecha.rows[0].fecha_registro;
         console.log(req.body);
         const id = await db.query(documentoRepository.getIdDocumentoInvoice);
         const documento_invoice_id = id.rows[0].nextval;
@@ -203,6 +204,7 @@ class DocumentoControllers {
         var proveedor_id: number = req.body.proveedor_id;
         var usuario_id: number = req.body.usuario_id;
         var cliente_id: number = req.body.cliente_id;
+        var resolucion_empresa_id: number = req.body.resolucion_empresa_id;
         var empleado_id: number = req.body.empleado_id;
         var nota_id: number = req.body.nota_id;
         const id =   await db.query(documentoRepository.getFechaRegistro,[documento_id]);
@@ -239,9 +241,9 @@ class DocumentoControllers {
         var invoice_id= req.body.invoice_id;
         var cufe=req.body.cufe;
         console.log(req.body);
-        var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39 WHERE documento_id = $30";
+        var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39, resolucion_empresa_id=$40 WHERE documento_id = $30";
         console.log(query);
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id,cufe,nota_id]).then(res2 => {
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id,cufe,nota_id,resolucion_empresa_id]).then(res2 => {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
             console.error("updateDocumento");
@@ -256,7 +258,7 @@ class DocumentoControllers {
         const impreso = req.query.impreso;
         const cerrado = req.query.cerrado;
         let tipoDocumentoId: string[] = (<string>req.query.tipoDocumentoId).split(",");
-        console.log(tipoDocumentoId);
+        console.log(req.query);
         let query: string = "select * from documento where empresa_id= $1 ";
         if (usuarioId != "") {
             query = query + " and usuario_id= " + usuarioId;
@@ -378,7 +380,7 @@ class DocumentoControllers {
         query = query + " ) abono,"
         query = query + " ( select coalesce(sum(total),0) efectivo from documento where documento_id = 0"
         query = query + " ) efectivo,"
-        query = query + " ( select coalesce(sum(total),0) tarjetas from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) tarjetas from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=5"
         query = query + "  and cierre_diario= " + cerrado;
@@ -386,7 +388,7 @@ class DocumentoControllers {
         query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) tarjetas,"
-        query = query + " ( select coalesce(sum(total),0) cheques from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) cheques from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=3"
         query = query + "  and cierre_diario= " + cerrado;
@@ -394,7 +396,7 @@ class DocumentoControllers {
         query = query + "    and usuario_id= " + usuarioId;
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) cheques,"
-        query = query + " ( select coalesce(sum(total),0) vales from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) vales from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=6"
         query = query + "  and cierre_diario= " + cerrado;
@@ -407,7 +409,7 @@ class DocumentoControllers {
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and usuario_aplica_id= " + usuarioId;
         query = query + " ) retiros, "
-        query = query + " ( select coalesce(sum(total),0) cartera from documento,tipo_pago_documento "
+        query = query + " ( select coalesce(sum(valor),0) cartera from documento,tipo_pago_documento "
         query = query + "   where  tipo_pago_documento.documento_id=documento.documento_id  "
         query = query + "   and tipo_pago_id=2"
         query = query + "  and cierre_diario= " + cerrado;
@@ -482,8 +484,9 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    
 
-    public async getDocumentosByFechaAndTipo(req: Request, res: Response): Promise<any> {
+    public async getDocumentosByFechaAndTipoDetalle(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
         console.log(req.query);
@@ -491,13 +494,13 @@ class DocumentoControllers {
         let empresaId = req.query.empresaId;
         let usuarioId = req.query.usuarioId;
         let tipoDocumentoId = req.query.tipoDocumentoId;
-        let query: string = "select sum(total) total,DATE(fecha_registro) fecha, sum(base_5) base_5,count(*) num,sum(base_19) base_19, "
-            + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento from documento where 1=1";
+        let query: string = "select total , fecha_registro, base_5,base_19, consecutivo_dian, documento_id, cliente_id,"
+            + "  iva_5,  iva_19,  excento from documento where 1=1";
         query = query + " and empresa_id = " + empresaId;
         if (tipoDocumentoId != '') {
             query = query + "  and tipo_documento_id = " + tipoDocumentoId;
         } else {
-            query = query + "  and tipo_documento_id = 10 and impreso=1 ";//se muestra factura por defecto si viene vacio
+            query = query + "  and tipo_documento_id = 10 and impreso=1 and nota_id is null  ";//se muestra factura por defecto si viene vacio
         }
         if (fechaInicial != '') {
             query = query + " and fecha_registro>= '" + fechaInicial + "'";
@@ -509,6 +512,44 @@ class DocumentoControllers {
         if (usuarioId != '') {
             query = query + " and usuario_id = " + usuarioId;
         }
+        if (empleadoId != '') {
+            query = query + " and empleado_id =  " + empleadoId;
+        }
+        query = query + " order by fecha_registro";
+        console.log(query); 
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
+    public async getDocumentosByFechaAndTipo(req: Request, res: Response): Promise<any> {
+        const fechaInicial = req.query.fechaInicial;
+        const fechaFinal = req.query.fechaFinal;
+        console.log(req.query);
+        let empleadoId = req.query.idEmpleados;
+        let empresaId = req.query.empresaId;
+        let usuarioId = req.query.usuarioId;
+        let tipoDocumentoId = req.query.tipoDocumentoId;
+        let autirizacion=req.query.autorizacion;
+        let query: string = "select sum(total) total,DATE(fecha_registro) fecha, sum(base_5) base_5,count(*) num,sum(base_19) base_19, "
+            + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento, sum(total_costo) total_costo from documento where 1=1";
+        query = query + " and empresa_id = " + empresaId;
+        if (tipoDocumentoId != '') {
+            query = query + "  and tipo_documento_id = " + tipoDocumentoId;
+        } else {
+            query = query + "  and tipo_documento_id = 10 and impreso=1 ";//se muestra factura por defecto si viene vacio
+        }
+        if (fechaInicial != '') {
+            query = query + " and fecha_registro>= '" + fechaInicial + "'";
+        }
+        if (fechaFinal != '') {
+            query = query + " and fecha_registro <= '" + fechaFinal + "'";
+        }
+        if (usuarioId != '') {
+            query = query + " and usuario_id = " + usuarioId;
+        }
+        if(autirizacion!=""){
+            query = query + "and resolucion_empresa_id = " + autirizacion;    
+        }   
         if (empleadoId != '') {
             query = query + " and empleado_id =  " + empleadoId;
         }
@@ -572,6 +613,14 @@ class DocumentoControllers {
         " and documento.impreso = 1"+
         " and DATE(documento.fecha_registro) BETWEEN '"+fechaInicial+"' and '"+fechaFinal+"'"+
         " GROUP by nombre";
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
+    
+    public async getUltimoDocumentoId(req: Request, res: Response): Promise<any> {
+        let query: string = "select consecutivo_dian documento_id from documento where documento_id = (SELECT MAX(documento_id)  FROM documento);";
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
@@ -674,7 +723,7 @@ class DocumentoControllers {
         }
         
         if (usuarioId != '') {
-            query = query + " and usuario_id = " + usuarioId;
+            query = query + " and documento.usuario_id = " + usuarioId;
         }
         query = query + " group by sub_grupo.nombre";
         console.log(query);
@@ -711,7 +760,7 @@ class DocumentoControllers {
         }
         
         if (usuarioId != '') {
-            query = query + " and usuario_id = " + usuarioId;
+            query = query + " and documento.usuario_id = " + usuarioId;
         }
         query = query + " group by grupo.nombre";
         console.log(query);

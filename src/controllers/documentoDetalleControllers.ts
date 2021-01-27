@@ -90,9 +90,11 @@ class DocumentoDetalleControllers{
         where dd.producto_id = pp.producto_id
         and dd.documento_id = d.documento_id
         and d.impreso=1
+        and pp.porcentaje_venta is not null 
+        and pp.porcentaje_venta > 0 
         and d.tipo_documento_id=10
         and d.empresa_id= ${empresaId}
-        and dd.estado=1`;
+        and dd.estado= 1 `;
         if (fechaInicial != '') {
             query = query + " and dd.fecha_registro>= '" + fechaInicial + "'";
         }
