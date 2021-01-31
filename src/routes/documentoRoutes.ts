@@ -46,6 +46,7 @@ class DocumentoRoutes{
         this.router.get('/getDocumentoInvoiceByDocumento' ,documentoControllers.getDocumentoInvoiceByDocumento);
         this.router.get('/getDocumentoNotaByDocumento' ,documentoControllers.getDocumentoNotaByDocumento);
         this.router.get('/getGananciaDocumentos' ,documentoControllers.getGananciaDocumentos);
+        this.router.get('/getTerceros' ,documentoControllers.getTerceros);
         
     }
 }

@@ -22,6 +22,7 @@ class DocumentoControllers {
             var usuario_id = req.body.usuario_id;
             var cliente_id = req.body.cliente_id;
             var empleado_id = req.body.empleado_id;
+            var resolucion_empresa_id = req.body.resolucion_empresa_id;
             const fecha = yield database_1.default.query(documentoRepository_1.documentoRepository.getfechaNow);
             var fecha_registro = fecha.rows[0].fecha_registro;
             var fecha_entrega = req.body.fecha_entrega;
@@ -58,8 +59,8 @@ class DocumentoControllers {
             const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getIdDocumento);
             const documento_id = id.rows[0].nextval;
             console.log(documento_id);
-            var query = "INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,invoice_id,cufe) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38 )";
-            yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe]).then(res2 => {
+            var query = "INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,invoice_id,cufe,resolucion_empresa_id) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38,$39 )";
+            yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe, resolucion_empresa_id]).then(res2 => {
                 res.json({ "code": 200, "documento_id": documento_id, "fecha_registro": fecha_registro });
             }).catch(error => {
                 console.error("createDocumento");
@@ -215,6 +216,7 @@ class DocumentoControllers {
             var proveedor_id = req.body.proveedor_id;
             var usuario_id = req.body.usuario_id;
             var cliente_id = req.body.cliente_id;
+            var resolucion_empresa_id = req.body.resolucion_empresa_id;
             var empleado_id = req.body.empleado_id;
             var nota_id = req.body.nota_id;
             const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getFechaRegistro, [documento_id]);
@@ -251,9 +253,9 @@ class DocumentoControllers {
             var invoice_id = req.body.invoice_id;
             var cufe = req.body.cufe;
             console.log(req.body);
-            var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39 WHERE documento_id = $30";
+            var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39, resolucion_empresa_id=$40 WHERE documento_id = $30";
             console.log(query);
-            yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe, nota_id]).then(res2 => {
+            yield database_1.default.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe, nota_id, resolucion_empresa_id]).then(res2 => {
                 res.json({ "code": 200, "documento_id": documento_id });
             }).catch(error => {
                 console.error("updateDocumento");
@@ -541,6 +543,7 @@ class DocumentoControllers {
             let empresaId = req.query.empresaId;
             let usuarioId = req.query.usuarioId;
             let tipoDocumentoId = req.query.tipoDocumentoId;
+            let autirizacion = req.query.autorizacion;
             let query = "select sum(total) total,DATE(fecha_registro) fecha, sum(base_5) base_5,count(*) num,sum(base_19) base_19, "
                 + " sum(iva_5) iva_5, sum(iva_19) iva_19, sum(excento) excento, sum(total_costo) total_costo from documento where 1=1";
             query = query + " and empresa_id = " + empresaId;
@@ -558,6 +561,9 @@ class DocumentoControllers {
             }
             if (usuarioId != '') {
                 query = query + " and usuario_id = " + usuarioId;
+            }
+            if (autirizacion != "") {
+                query = query + "and resolucion_empresa_id = " + autirizacion;
             }
             if (empleadoId != '') {
                 query = query + " and empleado_id =  " + empleadoId;
@@ -917,6 +923,72 @@ class DocumentoControllers {
                 query = query + " and fecha_registro <= '" + fechaFinal + "'";
             }
             query = query + " ) remisiones ";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
+    getTerceros(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let empresaId = req.query.empresaId;
+            let tipoDocumento = req.query.tipoDocumento;
+            let montoDesde = req.query.montoDesde;
+            let montoHasta = req.query.montoHasta;
+            let tipoTercero = req.query.tipoTercero;
+            console.log(req.query);
+            let query = `select nombre||' '||apellidos nombre, documento,total,base_19 , iva_19, base_5, iva_5,exento, direccion, celular from `;
+            if (tipoTercero == '1') {
+                query = query + " cliente, ";
+            }
+            else {
+                query = query + " proveedor, ";
+            }
+            query = query + ` (select `;
+            if (tipoTercero == '1') {
+                query = query + " cliente_id, ";
+            }
+            else {
+                query = query + " proveedor_id, ";
+            }
+            query = query + ` ROUND(sum(total)) total, ROUND(sum(iva_19)) iva_19,
+         ROUND(sum(base_19)) base_19,
+         ROUND(sum(base_5)) base_5,ROUND(sum(iva_5)) iva_5, ROUND(sum(excento)) exento
+        from documento 
+        where empresa_id=${empresaId} `;
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            if (tipoDocumento == '') {
+                query = query + " and tipo_documento_id = 10  and consecutivo_dian is not null";
+            }
+            else {
+                query = query + " and tipo_documento_id = " + tipoDocumento;
+            }
+            query = query + ` GROUP by `;
+            if (tipoTercero == '1') {
+                query = query + " cliente_id) docu ";
+            }
+            else {
+                query = query + " proveedor_id) docu ";
+            }
+            if (tipoTercero == '1') {
+                query = query + ` where docu.cliente_id = cliente.cliente_id `;
+            }
+            else {
+                query = query + ` where docu.proveedor_id = proveedor.proveedor_id `;
+            }
+            if (montoDesde != '') {
+                query = query + " and docu.total>= " + montoDesde;
+            }
+            if (montoHasta != '') {
+                query = query + " and docu.total<= " + montoHasta;
+            }
+            query = query + ` order by trim(nombre)`;
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
