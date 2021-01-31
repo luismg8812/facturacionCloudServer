@@ -76,7 +76,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 --29 requerimiento de mercancia
 --30 traslado de mercancia
 --31 aceptacion y rechazo de mercancia
-
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (32, 5, 'Reporte de terceros', '/reporteTerceros', 0, 'Opción que permite ver las compras o ventas de los clientes o proveedores durante un rango de fechas determinado');
 --fin sub-menu
 
 --opcion usuario
