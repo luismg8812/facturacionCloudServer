@@ -928,5 +928,71 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getTerceros(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const fechaInicial = req.query.fechaInicial;
+            const fechaFinal = req.query.fechaFinal;
+            let empresaId = req.query.empresaId;
+            let tipoDocumento = req.query.tipoDocumento;
+            let montoDesde = req.query.montoDesde;
+            let montoHasta = req.query.montoHasta;
+            let tipoTercero = req.query.tipoTercero;
+            console.log(req.query);
+            let query = `select nombre||' '||apellidos nombre, documento,total,base_19 , iva_19, base_5, iva_5,exento, direccion, celular from `;
+            if (tipoTercero == '1') {
+                query = query + " cliente, ";
+            }
+            else {
+                query = query + " proveedor, ";
+            }
+            query = query + ` (select `;
+            if (tipoTercero == '1') {
+                query = query + " cliente_id, ";
+            }
+            else {
+                query = query + " proveedor_id, ";
+            }
+            query = query + ` ROUND(sum(total)) total, ROUND(sum(iva_19)) iva_19,
+         ROUND(sum(base_19)) base_19,
+         ROUND(sum(base_5)) base_5,ROUND(sum(iva_5)) iva_5, ROUND(sum(excento)) exento
+        from documento 
+        where empresa_id=${empresaId} `;
+            if (fechaInicial != '') {
+                query = query + " and fecha_registro>= '" + fechaInicial + "'";
+            }
+            if (fechaFinal != '') {
+                query = query + " and fecha_registro <= '" + fechaFinal + "'";
+            }
+            if (tipoDocumento == '') {
+                query = query + " and tipo_documento_id = 10  and consecutivo_dian is not null";
+            }
+            else {
+                query = query + " and tipo_documento_id = " + tipoDocumento;
+            }
+            query = query + ` GROUP by `;
+            if (tipoTercero == '1') {
+                query = query + " cliente_id) docu ";
+            }
+            else {
+                query = query + " proveedor_id) docu ";
+            }
+            if (tipoTercero == '1') {
+                query = query + ` where docu.cliente_id = cliente.cliente_id `;
+            }
+            else {
+                query = query + ` where docu.proveedor_id = proveedor.proveedor_id `;
+            }
+            if (montoDesde != '') {
+                query = query + " and docu.total>= " + montoDesde;
+            }
+            if (montoHasta != '') {
+                query = query + " and docu.total<= " + montoHasta;
+            }
+            query = query + ` order by trim(nombre)`;
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
 }
 exports.documentoControllers = new DocumentoControllers();
