@@ -9,11 +9,11 @@ export default{
         
     },
     
-    database_manjares:{
-        host:'ec2-3-211-176-230.compute-1.amazonaws.com',
-        user:'yoiygthxwcfhbe',
-        password:'3b5298030c2a0e2035ceb79f764b21fa52f6f70cb7680f39b1976e706d778aa2',
-        database:'dddo4gdi3s15gq',   
+    database_molino:{
+        host:'ec2-35-171-57-132.compute-1.amazonaws.com',
+        user:'unhreaehuefply',
+        password:'dd27f266fd77ef093e12c522769681be543a274ff7ccb7a8ba1becb4445f05f2',
+        database:'d9jc7qnur8hsto',   
         port:5432,
         ssl: { rejectUnauthorized: false },
     },
