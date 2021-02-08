@@ -24,5 +24,13 @@ exports.default = {
         database: 'facturacion_local',
         port: 5432
         // ssl: true
-    }
+    },
+    database_license: {
+        host: 'ec2-54-164-233-77.compute-1.amazonaws.com',
+        user: 'rsyygckuvkfjgq',
+        password: '7b9d8a4b1a587b534fb82caccc701f62420043c10ff0f2fc602cf91062eb0e44',
+        database: 'dch2jqe7njrsdb',
+        port: 5432,
+        ssl: { rejectUnauthorized: false },
+    },
 };
