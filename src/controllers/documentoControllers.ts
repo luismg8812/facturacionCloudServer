@@ -592,7 +592,7 @@ class DocumentoControllers {
         if (proveedorId != "" && proveedorId != undefined) {
             query = query + " and proveedor_id =  " + proveedorId;
         }
-        query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";
+        query = query + " and tipo_pago_documento.documento_id=documento.documento_id ) tipo order by fecha_registro desc";
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
