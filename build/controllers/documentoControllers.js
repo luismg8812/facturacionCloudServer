@@ -603,7 +603,7 @@ class DocumentoControllers {
             if (proveedorId != "" && proveedorId != undefined) {
                 query = query + " and proveedor_id =  " + proveedorId;
             }
-            query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";
+            query = query + " and tipo_pago_documento.documento_id=documento.documento_id ) tipo order by fecha_registro desc";
             console.log(query);
             const docuemntos = yield database_1.default.query(query);
             res.json(docuemntos.rows);
