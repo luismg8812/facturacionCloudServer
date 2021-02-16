@@ -678,6 +678,7 @@ CREATE  TABLE ABONO (
   USUARIO_ID                      int,
   CANTIDAD                        decimal,
   FECHA_INGRESO                   timestamp,
+  cierre_diario					  smallint,
   CONSTRAINT PK_ABONO
     PRIMARY KEY ( ABONO_ID ) 
 );    
