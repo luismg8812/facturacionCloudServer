@@ -387,7 +387,7 @@ class DocumentoControllers {
             query = query + " ) impresos,";
             query = query + " (  select coalesce(sum(cantidad),0) abonos from abono,documento";
             query = query + "    where abono.documento_id = documento.documento_id";
-            query = query + "  and cierre_diario= " + cerrado;
+            query = query + "  and abono.cierre_diario= " + cerrado;
             query = query + "    and abono.usuario_id= " + usuarioId;
             query = query + "    and empresa_id=" + empresaId;
             query = query + "    and tipo_documento_id =10";
