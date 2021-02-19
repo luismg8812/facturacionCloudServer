@@ -115,6 +115,7 @@ CREATE  TABLE EMPRESA (
   actividad_economica			   varchar(100),
   url_logo	  				       varchar(500),
   correo 						   varchar(50),
+  identificador 		    	   int,
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
@@ -677,6 +678,7 @@ CREATE  TABLE ABONO (
   USUARIO_ID                      int,
   CANTIDAD                        decimal,
   FECHA_INGRESO                   timestamp,
+  cierre_diario					  smallint,
   CONSTRAINT PK_ABONO
     PRIMARY KEY ( ABONO_ID ) 
 );    
