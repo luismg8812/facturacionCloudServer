@@ -76,11 +76,11 @@ class Server {
     validarLisencia() {
         return __awaiter(this, void 0, void 0, function* () {
             const empresa = yield database_1.default.query("select * from empresa where empresa_id =1");
-            const resolucion = yield database_1.default.query("select * from resolucion_empresa where empresa_id =1");
+            const resolucion = yield database_1.default.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");
             console.log(empresa.rows[0]);
             console.log(resolucion.rows[0]);
             if (empresa.rows[0].identificador == undefined) {
-                console.log("bloq empresa");
+                console.log("bloq empresa por identificador");
                 yield database_1.default.query("UPDATE configuracion set server=0 ");
                 return;
             }
