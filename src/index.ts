@@ -70,11 +70,11 @@ class Server {
 
     async validarLisencia(){
         const empresa = await db.query("select * from empresa where empresa_id =1");  
-        const resolucion = await db.query("select * from resolucion_empresa where empresa_id =1");  
+        const resolucion = await db.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");  
         console.log(empresa.rows[0]);
         console.log(resolucion.rows[0]);
         if(empresa.rows[0].identificador==undefined){     
-            console.log("bloq empresa");
+            console.log("bloq empresa por identificador");
             await db.query("UPDATE configuracion set server=0 ");
             return;
         }       

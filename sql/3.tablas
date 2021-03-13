@@ -678,6 +678,7 @@ CREATE  TABLE ABONO (
   USUARIO_ID                      int,
   CANTIDAD                        decimal,
   FECHA_INGRESO                   timestamp,
+  cierre_diario					  smallint,
   CONSTRAINT PK_ABONO
     PRIMARY KEY ( ABONO_ID ) 
 );    
@@ -983,6 +984,22 @@ ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_PA
 ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
  FOREIGN KEY (PRODUCTO_HIJO)
     REFERENCES PRODUCTO (PRODUCTO_ID);  
+	
+
+CREATE  TABLE   CONTROL_INVENTARIO (
+  control_inventario_id                 int NOT NULL,
+  producto_id							int,
+  inicial                   			int,
+  entrada                    			int,
+  venta                         		decimal,
+  fecha_cierre                     		timestamp,
+  CONSTRAINT PK_CONTROL_INVENTARIO
+    PRIMARY KEY ( control_inventario_id ) 
+);
+
+ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
+ FOREIGN KEY (producto_id)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
 
 	
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;

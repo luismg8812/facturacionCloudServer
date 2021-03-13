@@ -373,7 +373,7 @@ class DocumentoControllers {
         query = query + " ) impresos,";
         query = query + " (  select coalesce(sum(cantidad),0) abonos from abono,documento";
         query = query + "    where abono.documento_id = documento.documento_id";
-        query = query + "  and cierre_diario= " + cerrado;
+        query = query + "  and abono.cierre_diario= " + cerrado;
         query = query + "    and abono.usuario_id= " + usuarioId;
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and tipo_documento_id =10"
@@ -386,6 +386,7 @@ class DocumentoControllers {
         query = query + "  and cierre_diario= " + cerrado;
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and usuario_id= " + usuarioId;
+        query = query + "  and nota_id is null "; // los documentos que tienen nota no se toman en cuenta
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) tarjetas,"
         query = query + " ( select coalesce(sum(valor),0) cheques from documento,tipo_pago_documento "
@@ -394,6 +395,7 @@ class DocumentoControllers {
         query = query + "  and cierre_diario= " + cerrado;
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and usuario_id= " + usuarioId;
+        query = query + "  and nota_id is null "; // los documentos que tienen nota no se toman en cuenta
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) cheques,"
         query = query + " ( select coalesce(sum(valor),0) vales from documento,tipo_pago_documento "
@@ -402,6 +404,7 @@ class DocumentoControllers {
         query = query + "  and cierre_diario= " + cerrado;
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and usuario_id= " + usuarioId;
+        query = query + "  and nota_id is null "; // los documentos que tienen nota no se toman en cuenta
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) vales,"
         query = query + " ( select coalesce(sum(valor),0) retiro_caja from retiro_caja where 1=1"
@@ -415,6 +418,7 @@ class DocumentoControllers {
         query = query + "  and cierre_diario= " + cerrado;
         query = query + "    and empresa_id=" + empresaId;
         query = query + "    and usuario_id= " + usuarioId;
+        query = query + "  and nota_id is null "; // los documentos que tienen nota no se toman en cuenta
         query = query + "  and tipo_documento_id in ()";
         query = query + " ) cartera";
         const tokens = query.split('()')
@@ -592,7 +596,7 @@ class DocumentoControllers {
         if (proveedorId != "" && proveedorId != undefined) {
             query = query + " and proveedor_id =  " + proveedorId;
         }
-        query = query + " and tipo_pago_documento.documento_id=documento.documento_id) tipo ";
+        query = query + " and tipo_pago_documento.documento_id=documento.documento_id ) tipo order by fecha_registro desc";
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
