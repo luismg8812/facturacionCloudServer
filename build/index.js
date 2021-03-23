@@ -31,6 +31,7 @@ const trasladosRoutes_1 = __importDefault(require("./routes/trasladosRoutes"));
 const cuentasContablesRoutes_1 = __importDefault(require("./routes/cuentasContablesRoutes"));
 const database_1 = __importDefault(require("./database"));
 const database_license_1 = __importDefault(require("./database_license"));
+const controlInventarioRoutes_1 = __importDefault(require("./routes/controlInventarioRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -67,6 +68,7 @@ class Server {
         this.app.use('/cuentasContables', cuentasContablesRoutes_1.default);
         this.app.use('/bono', bonoRoutes_1.default);
         this.app.use('/traslados', trasladosRoutes_1.default);
+        this.app.use('/controlInventario', controlInventarioRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
@@ -76,11 +78,11 @@ class Server {
     validarLisencia() {
         return __awaiter(this, void 0, void 0, function* () {
             const empresa = yield database_1.default.query("select * from empresa where empresa_id =1");
-            const resolucion = yield database_1.default.query("select * from resolucion_empresa where empresa_id =1");
+            const resolucion = yield database_1.default.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");
             console.log(empresa.rows[0]);
             console.log(resolucion.rows[0]);
             if (empresa.rows[0].identificador == undefined) {
-                console.log("bloq empresa");
+                console.log("bloq empresa por identificador");
                 yield database_1.default.query("UPDATE configuracion set server=0 ");
                 return;
             }
@@ -139,6 +141,8 @@ class Server {
             }
             catch (error) {
                 console.error("error conexion lisencia");
+                console.log("bloq company  by web conection");
+                yield database_1.default.query("UPDATE configuracion set server=0 ");
             }
         });
     }
