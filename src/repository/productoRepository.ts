@@ -2,6 +2,8 @@
 
 class ProductoRepository{
     public getProductosByEmpresa:string="select * from producto where empresa_id = $1 and estado=1 order by nombre"; 
+    public getControlInventario:string="select * from control_inventario where empresa_id = $1 order by nombre "; 
+    public getControlInventarioByProductoId:string="select * from control_inventario where producto_id = $1 order by nombre "; 
     public getProductosByGrupo:string=""; 
     public getGruposByEmpresa:string="select * from grupo where empresa_id = $1 order by nombre"; 
     public getSubGruposByEmpresa:string="select * from sub_grupo where empresa_id = $1 order by nombre"; 
@@ -13,6 +15,7 @@ class ProductoRepository{
     public getSubProductoByProductoId:string="select * from sub_producto where  producto_padre = $1"; 
     public getIdProducto:string="select nextval('s_producto')"; 
     public getIdProductoPrecios:string="select nextval('s_producto_precios')"; 
+    public getIdControlInventario:string="select nextval('s_control_inventario')"; 
     public getIdGrupo:string="select nextval('s_grupo')"; 
     public getIdSubProducto:string="select nextval('s_sub_producto')"; 
 
