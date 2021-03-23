@@ -989,6 +989,8 @@ ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
 CREATE  TABLE   CONTROL_INVENTARIO (
   control_inventario_id                 int NOT NULL,
   producto_id							int,
+   EMPRESA_ID				        	INT,
+   nombre                                VARCHAR(200),
   inicial                   			int,
   entrada                    			int,
   venta                         		decimal,
@@ -997,9 +999,16 @@ CREATE  TABLE   CONTROL_INVENTARIO (
     PRIMARY KEY ( control_inventario_id ) 
 );
 
+    --alter table control_inventario add nombre                                VARCHAR(200);
+    --alter table control_inventario add empresa_id                                int;
+
 ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
  FOREIGN KEY (producto_id)
     REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_empr_REFEREN_control_inv
+ FOREIGN KEY (empresa_id)
+    REFERENCES empresa (empresa_id);		
 
 	
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;

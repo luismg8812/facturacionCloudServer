@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const abonoRepository_1 = require("../repository/abonoRepository");
 const database_1 = __importDefault(require("../database"));
-class AbonoControllers {
+class ControlInventarioControllers {
     saveAbono(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let documento_id = req.body.documento_id;
@@ -21,12 +21,13 @@ class AbonoControllers {
             let usuario_id = req.body.usuario_id;
             let cantidad = req.body.cantidad;
             let fecha_ingreso = req.body.fecha_ingreso;
+            let cierre_diario = req.body.cierre_diario;
             console.log(req.body);
             const id = yield database_1.default.query(abonoRepository_1.abonoRepository.getIdAbono);
             const abono_id = id.rows[0].nextval;
             console.log(abono_id);
-            var query = "INSERT INTO abono(abono_id,documento_id, tipo_pago_id, usuario_id, cantidad,fecha_ingreso) VALUES ($1,$2,$3,$4,$5,$6)";
-            yield database_1.default.query(query, [abono_id, documento_id, tipo_pago_id, usuario_id, cantidad, fecha_ingreso]).then(res2 => {
+            var query = "INSERT INTO abono(abono_id,documento_id, tipo_pago_id, usuario_id, cantidad,fecha_ingreso,cierre_diario) VALUES ($1,$2,$3,$4,$5,$6,$7)";
+            yield database_1.default.query(query, [abono_id, documento_id, tipo_pago_id, usuario_id, cantidad, fecha_ingreso, cierre_diario]).then(res2 => {
                 res.json({ "code": 200, "abono_id": abono_id });
             }).catch(error => {
                 console.error(error);
@@ -42,4 +43,4 @@ class AbonoControllers {
         });
     }
 }
-exports.abonoControllers = new AbonoControllers();
+exports.controlInventarioControllers = new ControlInventarioControllers();
