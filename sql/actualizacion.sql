@@ -359,6 +359,8 @@ alter table abono add cierre_diario smallint;
 CREATE  TABLE   CONTROL_INVENTARIO (
   control_inventario_id                 int NOT NULL,
   producto_id							int,
+  nombre                                VARCHAR(200),
+  EMPRESA_ID					        INT,
   inicial                   			int,
   entrada                    			int,
   venta                         		decimal,
@@ -373,6 +375,11 @@ ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
 
 
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
+
+create sequence s_control_inventario
+START WITH 10
+increment by 1
+;
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
