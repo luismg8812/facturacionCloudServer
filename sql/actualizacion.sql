@@ -369,6 +369,9 @@ CREATE  TABLE   CONTROL_INVENTARIO (
     PRIMARY KEY ( control_inventario_id ) 
 );
 
+ --alter table control_inventario add nombre                                VARCHAR(200);
+    --alter table control_inventario add empresa_id                                int;
+
 ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
  FOREIGN KEY (producto_id)
     REFERENCES PRODUCTO (PRODUCTO_ID);	
@@ -380,6 +383,31 @@ create sequence s_control_inventario
 START WITH 10
 increment by 1
 ;
+
+CREATE  TABLE   accion_auditoria (
+  accion_auditoria_id                 smallint NOT NULL,
+  nombre                        VARCHAR(200),
+  CONSTRAINT PK_accion_auditoria
+    PRIMARY KEY ( accion_auditoria_id ) 
+);
+
+CREATE  TABLE   AUDITORIA (
+  auditoria_id                 int NOT NULL,
+  accion_auditoria						smallint,
+  usuario_id							int,
+  valor_anterior                        VARCHAR(200),
+  valor_actual                          VARCHAR(200),
+  aplicativo                            VARCHAR(200),
+  observacion                           VARCHAR(200),
+  EMPRESA_ID					        INT,
+  fecha_registro                     		timestamp,
+  CONSTRAINT PK_auditoria
+    PRIMARY KEY ( auditoria_id ) 
+);
+
+ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
+ FOREIGN KEY (accion_auditoria)
+    REFERENCES accion_auditoria (accion_auditoria);	
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
