@@ -14,7 +14,12 @@ import informeDiarioRoutes from './routes/informeDiarioRoutes';
 import apiRoutes from './routes/apiRoutes';
 import abonoRoutes from './routes/abonoRoutes';
 import bonoRoutes from './routes/bonoRoutes';
+import trasladosRoutes from './routes/trasladosRoutes';
 import cuentasContablesRoutes from './routes/cuentasContablesRoutes';
+import db from './database';
+import db_license from './database_license';
+import controlInventarioRoutes from './routes/controlInventarioRoutes';
+
 
 class Server {
     public app: Application;
@@ -23,6 +28,7 @@ class Server {
         this.app = express();
         this.config();
         this.router();
+        this.validarLisencia();
     }
 
     config(): void {
@@ -54,12 +60,84 @@ class Server {
         this.app.use('/abono',abonoRoutes);
         this.app.use('/cuentasContables',cuentasContablesRoutes);
         this.app.use('/bono',bonoRoutes);
+        this.app.use('/traslados',trasladosRoutes);
+        this.app.use('/controlInventario',controlInventarioRoutes);
     }
 
     start(): void {
         this.app.listen(this.app.get('port'), () => {
             console.log("start by port: ", this.app.get('port'));
         });
+    }
+
+    async validarLisencia(){
+        const empresa = await db.query("select * from empresa where empresa_id =1");  
+        const resolucion = await db.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");  
+        console.log(empresa.rows[0]);
+        console.log(resolucion.rows[0]);
+        if(empresa.rows[0].identificador==undefined){     
+            console.log("bloq empresa por identificador");
+            await db.query("UPDATE configuracion set server=0 ");
+            return;
+        }       
+        try {
+            let bloq=0;
+            let empr= empresa.rows[0];
+            let reso=resolucion.rows[0];
+            const estado_empresa =await db_license.query("select * from estado_empresa where identificador = "+ empresa.rows[0].identificador );        
+            console.log(estado_empresa.rows);
+            let es=estado_empresa.rows[0];
+            if(es.activar==0){
+                if(es.nombre!=empr.nombre){
+                    console.log("bloq by name");
+                    bloq=1;
+                }
+                if(es.representante!=empr.representante){
+                    console.log("bloq by representante");
+                    bloq=1;
+                }
+                if(es.nit!=empr.nit){
+                    console.log("bloq by nit");
+                    bloq=1;
+                }
+                if(es.regimen!=empr.regimen){
+                    console.log("bloq by regimen");
+                    bloq=1;
+                }
+                if(es.direccion!=empr.direccion){
+                    console.log("bloq by direccion");
+                    bloq=1;
+                }
+                if(es.resolucion_dian!=reso.resolucion_dian){
+                    console.log("bloq by resolucion_dian");
+                    bloq=1;
+                }
+                if(es.letra_consecutivo!=reso.letra_consecutivo){
+                    console.log("bloq by letra_consecutivo");
+                    bloq=1;
+                }
+                if(es.autorizacion_hasta!=reso.autorizacion_hasta){
+                    console.log("bloq by autorizacion_hasta");
+                    bloq=1;
+                }
+                if(es.estado!=1){
+                    console.log("bloq by estado");
+                    bloq=1;
+                }
+                if(bloq==1){
+                    console.log("bloq empresa");
+                    await db.query("UPDATE configuracion set server=0 ");
+                }
+            }else{
+                await db.query("UPDATE configuracion set server=1 ");
+            }
+            
+        } catch (error) {
+            console.error("error conexion lisencia");
+            console.log("bloq company  by web conection");
+            await db.query("UPDATE configuracion set server=0 ");
+        }
+
     }
 }
 

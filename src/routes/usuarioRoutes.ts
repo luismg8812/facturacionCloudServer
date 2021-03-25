@@ -39,6 +39,7 @@ class UsuarioRoutes{
         this.router.put('/updateProporcion',usuarioController.updateProporcion);
         this.router.post('/saveActivacionUsuario',usuarioController.saveActivacionUsuario);
         this.router.get('/saveEmpleadoUsuario',usuarioController.saveEmpleadoUsuario);
+        this.router.get('/getEmpresas',usuarioController.getEmpresas);
         
         this.router.post('/deleteActivacionUsuario',usuarioController.deleteActivacionUsuario);
     }

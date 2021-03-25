@@ -11,8 +11,6 @@ class InformeDiarioRoutes {
         this.router.get('/getCierreDiario', informeDiarioControllers_1.informeDiarioControllers.getClientesByEmpresa);
         this.router.get('/hacerCierreDiario', informeDiarioControllers_1.informeDiarioControllers.hacerCierreDiario);
         this.router.get('/getInfoDiarioByDate', informeDiarioControllers_1.informeDiarioControllers.getInfoDiarioByDate);
-        this.router.post('/saveInformeDiario', informeDiarioControllers_1.informeDiarioControllers.saveInformeDiario);
-        this.router.post('/updateInformeDiario', informeDiarioControllers_1.informeDiarioControllers.updateInformeDiario);
     }
 }
 const informeDiarioRoutes = new InformeDiarioRoutes();

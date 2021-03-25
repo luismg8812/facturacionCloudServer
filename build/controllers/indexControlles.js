@@ -17,9 +17,9 @@ class IndexControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const tipoIdentificacion = yield database_1.default.query("select * from tipo_identificacion order by tipo_identificacion_id");
             res.json(tipoIdentificacion.rows);
-            res.send(`<h1>intro index server
-        ${tipoIdentificacion.rows}
-        </h1>`);
+            //res.send(`<h1>intro index server
+            //${tipoIdentificacion.rows}
+            //</h1>`);
         });
     }
 }

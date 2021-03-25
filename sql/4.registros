@@ -73,6 +73,11 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 --26 cuentas
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', 'bonos', 1, 'Opción que permite controlar bonos para las promociones');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
+--29 requerimiento de mercancia
+--30 traslado de mercancia
+--31 aceptacion y rechazo de mercancia
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (32, 5, 'Reporte de terceros', '/reporteTerceros', 0, 'Opción que permite ver las compras o ventas de los clientes o proveedores durante un rango de fechas determinado');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
 --fin sub-menu
 
 --opcion usuario
@@ -107,6 +112,10 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (24, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos ',' Permite asignar multiples precios para los productos en la facturación');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (27, 'Activar creación de productos desde la venta','se otorgan permisos para permitir la creación de productos dentro de punto de venta dia y gestion de ordenes de trabajo');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'Activar facturación para cantidades negativas','si se tiene activa esta opción se permite facturar productos que tengan cantidades por debajo de 0');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Envío de facturas electrónicas automaticamente','Esta opción permite que las facturas electronicas que se generan sean enviadas automanticanente a la DIAN');
 -- fin activaciones
 
 --tipo documento data
