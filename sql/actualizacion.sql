@@ -384,6 +384,11 @@ START WITH 10
 increment by 1
 ;
 
+create sequence s_auditoria
+START WITH 10
+increment by 1
+;
+
 CREATE  TABLE   accion_auditoria (
   accion_auditoria_id                 smallint NOT NULL,
   nombre                        VARCHAR(200),
@@ -393,7 +398,7 @@ CREATE  TABLE   accion_auditoria (
 
 CREATE  TABLE   AUDITORIA (
   auditoria_id                 int NOT NULL,
-  accion_auditoria						smallint,
+  accion_auditoria_id						smallint,
   usuario_id							int,
   valor_anterior                        VARCHAR(200),
   valor_actual                          VARCHAR(200),
@@ -406,8 +411,18 @@ CREATE  TABLE   AUDITORIA (
 );
 
 ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
- FOREIGN KEY (accion_auditoria)
-    REFERENCES accion_auditoria (accion_auditoria);	
+ FOREIGN KEY (accion_auditoria_id)
+    REFERENCES accion_auditoria (accion_auditoria_id);
+
+--accion auditoria
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (1, 'Cambio de precio inventario fisico');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (2, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (3, 'Cambio de precio edicion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (4, 'eliminacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (5, 'creacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
+--accion auditoria	
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	

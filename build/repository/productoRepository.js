@@ -18,6 +18,7 @@ class ProductoRepository {
         this.getIdControlInventario = "select nextval('s_control_inventario')";
         this.getIdGrupo = "select nextval('s_grupo')";
         this.getIdSubProducto = "select nextval('s_sub_producto')";
+        this.getIdAuditoria = "select nextval('s_auditoria')";
     }
 }
 exports.productoRepository = new ProductoRepository();
