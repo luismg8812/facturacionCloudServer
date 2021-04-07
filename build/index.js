@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -84,7 +85,7 @@ class Server {
             if (empresa.rows[0].identificador == undefined || empresa.rows[0].identificador == null) {
                 console.log("bloq empresa por identificador");
                 yield database_1.default.query("UPDATE configuracion set server=0 ");
-                yield database_1.default.query("UPDATE empresa set esatado_empresa_id=2 ");
+                yield database_1.default.query("UPDATE empresa set estado_empresa_id=2 ");
                 return;
             }
             try {

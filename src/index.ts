@@ -78,7 +78,7 @@ class Server {
         if(empresa.rows[0].identificador==undefined || empresa.rows[0].identificador==null){     
             console.log("bloq empresa por identificador");
             await db.query("UPDATE configuracion set server=0 ");
-            await db.query("UPDATE empresa set esatado_empresa_id=2 ");
+            await db.query("UPDATE empresa set estado_empresa_id=2 ");
             return;
         }       
         try {
