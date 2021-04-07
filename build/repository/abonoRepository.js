@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.abonoRepository = void 0;
 class AbonoRepository {
     constructor() {
         this.getIdAbono = "select nextval('s_abono')";
