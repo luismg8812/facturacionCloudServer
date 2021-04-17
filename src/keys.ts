@@ -9,10 +9,10 @@ export default{
     },
     
     database_innovacionboutique:{
-        host:'ec2-18-206-20-102.compute-1.amazonaws.com',
-        user:'gesuiveaglsxix',
-        password:'00b96d74475b543d0f11535164a1926bc85c7248189ca523d500b75e6c3fc406',
-        database:'d3956p1ahr79td',
+        host:'ec2-54-163-254-204.compute-1.amazonaws.com',
+        user:'oahwvwwypzcdzq',
+        password:'dbffdcae688ccaeab8981c6f63e1a79697eb8f4b33b7bba1b519347bb888c5c7',
+        database:'d5251j31s92sr2',
         port:5432,
         ssl: { rejectUnauthorized: false },
     },
