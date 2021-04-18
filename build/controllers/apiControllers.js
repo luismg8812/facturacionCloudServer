@@ -58,16 +58,6 @@ class ApiControllers {
                         filename: 'nice.jpeg',
                         path: ruta + 'nice.jpeg',
                         cid: 'nice.png'
-                    },
-                    {
-                        filename: xml_name,
-                        content: xml_64,
-                        encoding: 'base64'
-                    },
-                    {
-                        filename: pdf_name,
-                        content: pdf_64,
-                        encoding: 'base64'
                     }
                 ]
             }, function (err, info) {

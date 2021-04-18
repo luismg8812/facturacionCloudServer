@@ -29,7 +29,8 @@ class ProductoRoutes{
         this.router.put('/saveProductoPrecios' ,productoControllers.saveProductoPrecios);  
         this.router.put('/deleteSubProducto' ,productoControllers.deleteSubProducto);   
         this.router.put('/saveGrupo' ,productoControllers.saveGrupo);
-        this.router.put('/saveSubGrupo' ,productoControllers.saveSubGrupo);
+        this.router.put('/saveSubGrupo' ,productoControllers.saveSubGrupo);   
+        this.router.put('/saveAuditoria' ,productoControllers.saveAuditoria);
         this.router.get('/getProductosByGrupo' ,productoControllers.getProductosByGrupo);
     }
 }

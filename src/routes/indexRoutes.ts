@@ -11,6 +11,7 @@ class IndexRoutes{
 
     config():void{
         this.router.get('/',indexControllers.index);
+        this.router.get('/validarLisencia',indexControllers.validarLisencia);
     }
 }
 const indexRoutes= new IndexRoutes();
