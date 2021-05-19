@@ -70,7 +70,7 @@ class DocumentoDetalleControllers{
 
     public async getDocumentoDetalleByDocumentoList (req:Request, res:Response):Promise<any>{
         const documento_id = <string>req.query.documento_id; 
-        let query:string="select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in ()";
+        let query:string="select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in () order by documento_detalle_id asc";
         query=query.replace('()', "("+documento_id.toString()+")");
         console.log(query);
         const usuario = await  db.query(query);       
@@ -90,9 +90,11 @@ class DocumentoDetalleControllers{
         where dd.producto_id = pp.producto_id
         and dd.documento_id = d.documento_id
         and d.impreso=1
+        and pp.porcentaje_venta is not null 
+        and pp.porcentaje_venta > 0 
         and d.tipo_documento_id=10
         and d.empresa_id= ${empresaId}
-        and dd.estado=1`;
+        and dd.estado= 1 `;
         if (fechaInicial != '') {
             query = query + " and dd.fecha_registro>= '" + fechaInicial + "'";
         }

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.clienteRepository = void 0;
 class ClienteRepository {
     constructor() {
         this.getClientesByEmpresa = "select * from cliente where empresa_id = $1";

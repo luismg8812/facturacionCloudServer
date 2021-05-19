@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.usuarioRepository = void 0;
 class UsuarioRepository {
     constructor() {
         this.usuarioByMail = "select * from usuario where correo = $1";
@@ -9,6 +10,7 @@ class UsuarioRepository {
         this.getEmpleadoByUsuario = "select * from empleado where empleado_id in (select empleado_id from usuario_empleado where usuario_id=$1 )";
         this.opcionPuntoVentaByUsuario = "select * from sub_menu where sub_menu_id in (select sub_menu_id from opcion_usuario where usuario_id=$1 ) and op= 1";
         this.getCamposInventarioByUsuario = "select * from campo_inventario where campo_inventario_id in (select campo_inventario_id from campo_inventario_usuario where usuario_id=$1 )";
+        this.getEmpresas = "select * from  empresa order by nombre";
         this.getByUsuario = "select * from usuario where empresa_id = $1";
         this.getRolByUsuario = "select * from rol_usuario where usuario_id = $1";
         this.deleteRolUsuario = "delete from rol_usuario where usuario_id = $1";

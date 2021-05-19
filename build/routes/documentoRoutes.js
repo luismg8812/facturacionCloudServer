@@ -20,6 +20,7 @@ class DocumentoRoutes {
         this.router.get('/getOrdenesTrabajo', documentoControllers_1.documentoControllers.getOrdenesTrabajo);
         this.router.post('/createDocumentoOrden', documentoControllers_1.documentoControllers.createDocumentoOrden);
         this.router.post('/deleteDocumentoOrdenByOrden', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByOrden);
+        this.router.post('/deleteDocumentoOrdenByDocumento', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByDocumento);
         this.router.get('/getDocumentoOrdenById', documentoControllers_1.documentoControllers.getDocumentoOrdenById);
         this.router.get('/getOrdenesByDocumentoId', documentoControllers_1.documentoControllers.getOrdenesByDocumentoId);
         this.router.get('/getNominaByEmpleado', documentoControllers_1.documentoControllers.getNominaByEmpleado);
@@ -27,12 +28,14 @@ class DocumentoRoutes {
         this.router.get('/getVentasPorSubGrupos', documentoControllers_1.documentoControllers.getVentasPorSubGrupos);
         this.router.get('/getOrdenesByEmpleado', documentoControllers_1.documentoControllers.getOrdenesByEmpleado);
         this.router.get('/getOrdenesByEmpleados', documentoControllers_1.documentoControllers.getOrdenesByEmpleados);
+        this.router.get('/getDocumentosByFechaAndTipoDetalle', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipoDetalle);
         this.router.post('/cierreNomina', documentoControllers_1.documentoControllers.cierreNomina);
         this.router.get('/getTiposDocumento', documentoControllers_1.documentoControllers.getTiposDocumento);
         this.router.get('/getInvoice', documentoControllers_1.documentoControllers.getInvoice);
         this.router.get('/getDocumentosByFechaAndTipo', documentoControllers_1.documentoControllers.getDocumentosByFechaAndTipo);
         this.router.get('/getDocumentoByTipoAndFecha', documentoControllers_1.documentoControllers.getDocumentoByTipoAndFecha);
         this.router.get('/getRetirosByFechaAndTipo', documentoControllers_1.documentoControllers.getRetirosByFechaAndTipo);
+        this.router.get('/getUltimoDocumentoId', documentoControllers_1.documentoControllers.getUltimoDocumentoId);
         this.router.get('/getDocumentosByTipoPago', documentoControllers_1.documentoControllers.getDocumentosByTipoPago);
         this.router.get('/getCarteraClientes', documentoControllers_1.documentoControllers.getCarteraClientes);
         this.router.get('/getDocumentoForFacturacionElectronica', documentoControllers_1.documentoControllers.getDocumentoForFacturacionElectronica);
@@ -40,6 +43,7 @@ class DocumentoRoutes {
         this.router.get('/getDocumentoInvoiceByDocumento', documentoControllers_1.documentoControllers.getDocumentoInvoiceByDocumento);
         this.router.get('/getDocumentoNotaByDocumento', documentoControllers_1.documentoControllers.getDocumentoNotaByDocumento);
         this.router.get('/getGananciaDocumentos', documentoControllers_1.documentoControllers.getGananciaDocumentos);
+        this.router.get('/getTerceros', documentoControllers_1.documentoControllers.getTerceros);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -11,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.documentoDetalleControllers = void 0;
 const database_1 = __importDefault(require("../database"));
 const documentoDetalleRepository_1 = require("../repository/documentoDetalleRepository");
 class DocumentoDetalleControllers {
@@ -81,7 +83,7 @@ class DocumentoDetalleControllers {
     getDocumentoDetalleByDocumentoList(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const documento_id = req.query.documento_id;
-            let query = "select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in ()";
+            let query = "select * from DOCUMENTO_DETALLE where  estado=1 and documento_id in () order by documento_detalle_id asc";
             query = query.replace('()', "(" + documento_id.toString() + ")");
             console.log(query);
             const usuario = yield database_1.default.query(query);
@@ -102,9 +104,11 @@ class DocumentoDetalleControllers {
         where dd.producto_id = pp.producto_id
         and dd.documento_id = d.documento_id
         and d.impreso=1
+        and pp.porcentaje_venta is not null 
+        and pp.porcentaje_venta > 0 
         and d.tipo_documento_id=10
         and d.empresa_id= ${empresaId}
-        and dd.estado=1`;
+        and dd.estado= 1 `;
             if (fechaInicial != '') {
                 query = query + " and dd.fecha_registro>= '" + fechaInicial + "'";
             }

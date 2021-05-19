@@ -333,6 +333,96 @@ START WITH 10
 increment by 1
 ;
 	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'Activar facturación para cantidades negativas','si se tiene activa esta opción se permite facturar productos que tengan cantidades por debajo de 0');	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
+
+ alter table producto add REGISTRO_SANITARIO	 VARCHAR(200);
+ alter table producto add lote						   VARCHAR(200);
+ alter table producto add cum			   VARCHAR(200);
+ alter table producto add laboratorio			   VARCHAR(200);
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
+
+alter table documento add resolucion_empresa_id smallint;
+	
+	ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_resolucion
+  FOREIGN KEY (RESOLUCION_EMPRESA_ID)
+    REFERENCES RESOLUCION_EMPRESA (RESOLUCION_EMPRESA_ID);
+	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Envío de facturas electrónicas automaticamente','Esta opción permite que las facturas electronicas que se generan sean enviadas automanticanente a la DIAN');	
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (32, 5, 'Reporte de terceros', '/reporteTerceros', 0, 'Opción que permite ver las compras o ventas de los clientes o proveedores durante un rango de fechas determinado');
+
+alter table empresa add identificador int; 
+
+alter table abono add cierre_diario smallint;
+
+CREATE  TABLE   CONTROL_INVENTARIO (
+  control_inventario_id                 int NOT NULL,
+  producto_id							int,
+  nombre                                VARCHAR(200),
+  EMPRESA_ID					        INT,
+  inicial                   			int,
+  entrada                    			int,
+  venta                         		decimal,
+  fecha_cierre                     		timestamp,
+  CONSTRAINT PK_CONTROL_INVENTARIO
+    PRIMARY KEY ( control_inventario_id ) 
+);
+
+ --alter table control_inventario add nombre                                VARCHAR(200);
+    --alter table control_inventario add empresa_id                                int;
+
+ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
+ FOREIGN KEY (producto_id)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
+
+create sequence s_control_inventario
+START WITH 10
+increment by 1
+;
+
+create sequence s_auditoria
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE   accion_auditoria (
+  accion_auditoria_id                 smallint NOT NULL,
+  nombre                        VARCHAR(200),
+  CONSTRAINT PK_accion_auditoria
+    PRIMARY KEY ( accion_auditoria_id ) 
+);
+
+CREATE  TABLE   AUDITORIA (
+  auditoria_id                 int NOT NULL,
+  accion_auditoria_id						smallint,
+  usuario_id							int,
+  valor_anterior                        VARCHAR(200),
+  valor_actual                          VARCHAR(200),
+  aplicativo                            VARCHAR(200),
+  observacion                           VARCHAR(200),
+  EMPRESA_ID					        INT,
+  fecha_registro                     		timestamp,
+  CONSTRAINT PK_auditoria
+    PRIMARY KEY ( auditoria_id ) 
+);
+
+ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
+ FOREIGN KEY (accion_auditoria_id)
+    REFERENCES accion_auditoria (accion_auditoria_id);
+
+--accion auditoria
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (1, 'Cambio de precio inventario fisico');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (2, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (3, 'Cambio de precio edicion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (4, 'eliminacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (5, 'creacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
+--accion auditoria	
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	

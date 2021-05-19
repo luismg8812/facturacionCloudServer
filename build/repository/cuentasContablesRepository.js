@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.cuentasContablesRepository = void 0;
 class CuentasContablesRepository {
     constructor() {
         this.getIdAbono = "select nextval('s_abono')";
