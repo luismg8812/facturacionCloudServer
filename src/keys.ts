@@ -8,11 +8,11 @@ export default{
         ssl: { rejectUnauthorized: false },
     },
     
-    database_innovacionboutique:{
-        host:'ec2-54-163-254-204.compute-1.amazonaws.com',
-        user:'oahwvwwypzcdzq',
-        password:'dbffdcae688ccaeab8981c6f63e1a79697eb8f4b33b7bba1b519347bb888c5c7',
-        database:'d5251j31s92sr2',
+    database_yacu:{
+        host:'ec2-35-174-56-18.compute-1.amazonaws.com',
+        user:'gdqczxicdwjrpl',
+        password:'cd6f91f4eebe2f582eed85802838f346d7e630757dc6d5af082914cc81114613',
+        database:'d9ief342ca76i2',
         port:5432,
         ssl: { rejectUnauthorized: false },
     },
