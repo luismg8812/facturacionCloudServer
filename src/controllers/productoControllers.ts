@@ -338,13 +338,14 @@ class ProductoControllers {
       var producto_hijo = req.body.producto_hijo;
       var cantidad = req.body.cantidad;
       var estado = req.body.estado;
+      var pesado= req.body.pesado;
       console.log(req.body);
       const id = await db.query(productoRepository.getIdSubProducto);
       const sub_producto_id = id.rows[0].nextval;
       console.log(sub_producto_id);
-      var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado)"
-         + " VALUES ($1,$2,$3,$4,$5)";
-      await db.query(query, [sub_producto_id, producto_padre, producto_hijo,cantidad,estado]).then(res2 => {
+      var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado,pesado)"
+         + " VALUES ($1,$2,$3,$4,$5,$6)";
+      await db.query(query, [sub_producto_id, producto_padre, producto_hijo,cantidad,estado,pesado]).then(res2 => {
          res.json({ "code": 200, "sub_producto_id": sub_producto_id });
       }).catch(error => {
          console.error(error);

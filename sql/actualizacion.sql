@@ -424,6 +424,9 @@ INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cam
 INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
 --accion auditoria	
 
+--PESADO EN SUBPRODUCTO
+ALTER TABLE SUB_PRODUCTO ADD PESADO  smallint;
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
