@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.productoControllers = void 0;
 const productoRepository_1 = require("../repository/productoRepository");
 const database_1 = __importDefault(require("../database"));
+const documentoRepository_1 = require("../repository/documentoRepository");
 class ProductoControllers {
     getProductosByEmpresa(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -349,13 +350,14 @@ class ProductoControllers {
             var producto_hijo = req.body.producto_hijo;
             var cantidad = req.body.cantidad;
             var estado = req.body.estado;
+            var pesado = req.body.pesado;
             console.log(req.body);
             const id = yield database_1.default.query(productoRepository_1.productoRepository.getIdSubProducto);
             const sub_producto_id = id.rows[0].nextval;
             console.log(sub_producto_id);
-            var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado)"
-                + " VALUES ($1,$2,$3,$4,$5)";
-            yield database_1.default.query(query, [sub_producto_id, producto_padre, producto_hijo, cantidad, estado]).then(res2 => {
+            var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado,pesado)"
+                + " VALUES ($1,$2,$3,$4,$5,$6)";
+            yield database_1.default.query(query, [sub_producto_id, producto_padre, producto_hijo, cantidad, estado, pesado]).then(res2 => {
                 res.json({ "code": 200, "sub_producto_id": sub_producto_id });
             }).catch(error => {
                 console.error(error);
@@ -396,6 +398,31 @@ class ProductoControllers {
             }).catch(error => {
                 console.error(error);
                 res.json({ "code": 400, "sub_grupo_id": grupo_id });
+            });
+        });
+    }
+    saveAuditoria(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var empresa_id = req.body.empresa_id;
+            var accion_auditoria_id = req.body.accion_auditoria_id;
+            var usuario_id = req.body.usuario_id;
+            var valor_anterior = req.body.valor_anterior;
+            var valor_actual = req.body.valor_actual;
+            var aplicativo = req.body.aplicativo;
+            var observacion = req.body.observacion;
+            const fecha = yield database_1.default.query(documentoRepository_1.documentoRepository.getfechaNow);
+            var fecha_registro = fecha.rows[0].fecha_registro;
+            console.log(req.body);
+            const id = yield database_1.default.query(productoRepository_1.productoRepository.getIdAuditoria);
+            const auditoria_id = id.rows[0].nextval;
+            console.log(auditoria_id);
+            var query = "INSERT INTO auditoria (auditoria_id,accion_auditoria_id,empresa_id,usuario_id,valor_anterior,valor_actual,aplicativo,observacion,fecha_registro)"
+                + " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
+            yield database_1.default.query(query, [auditoria_id, accion_auditoria_id, empresa_id, usuario_id, valor_anterior, valor_actual, aplicativo, observacion, fecha_registro]).then(res2 => {
+                res.json({ "code": 200, "auditoria_id": auditoria_id });
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "auditoria_id": auditoria_id });
             });
         });
     }

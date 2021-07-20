@@ -154,6 +154,20 @@ class DocumentoControllers {
             });
         });
     }
+    deleteDocumentoOrdenByDocumento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var documento_id = req.body.documento_id;
+            console.log(req.body);
+            var query = "delete from documento_orden where documento_id = $1";
+            yield database_1.default.query(query, [documento_id]).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id });
+            }).catch(error => {
+                console.error("deleteDocumentoOrdenByDocumento");
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
+        });
+    }
     createDocumentoOrden(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var documento_orden_id = req.body.tipo_pago_id;

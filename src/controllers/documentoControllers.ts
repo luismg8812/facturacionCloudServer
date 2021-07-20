@@ -142,6 +142,20 @@ class DocumentoControllers {
         });
     }
 
+    public async deleteDocumentoOrdenByDocumento(req: Request, res: Response): Promise<any> {
+        var documento_id: number = req.body.documento_id;
+        console.log(req.body);
+        var query = "delete from documento_orden where documento_id = $1";
+        await db.query(query, [documento_id]).then(res2 => {
+            res.json({ "code": 200, "documento_id": documento_id });
+        }).catch(error => {
+            console.error("deleteDocumentoOrdenByDocumento");
+            console.error(error);
+            res.json({ "code": 400, "documento_id": documento_id });
+        });
+    }
+
+
 
     public async createDocumentoOrden(req: Request, res: Response): Promise<any> {
         var documento_orden_id: number = req.body.tipo_pago_id;

@@ -40,8 +40,8 @@ class ApiControllers {
                 }
             });
             let ruta = __dirname.replace("\controllers", "public\\images\\");
-            html = html + `<b/><img src="${ruta + 'logo.png'}" height="42" width="42">`;
-            html = html + `<b/><img src="${ruta + 'nice.jpeg'}" height="42" width="42">`;
+            //html = html + `<b/><img src="${ruta + 'logo.png'}" height="42" width="42">`
+            //html = html + `<b/><img src="${ruta + 'nice.jpeg'}" height="42" width="42">`
             //console.log(html);
             yield transporter.sendMail({
                 from: '"Facturacion Effective" <facturacion_electronica@effectivesoftware.com.co>',
@@ -49,16 +49,16 @@ class ApiControllers {
                 subject: "Factura Electrónica Effective",
                 html: html,
                 attachments: [
-                    {
-                        filename: 'logo.png',
-                        path: ruta + 'logo.png',
-                        cid: 'logo.png'
+                    /*{
+                      filename: 'logo.png',
+                      path: ruta + 'logo.png',
+                      cid: 'logo.png'
                     },
                     {
-                        filename: 'nice.jpeg',
-                        path: ruta + 'nice.jpeg',
-                        cid: 'nice.png'
-                    },
+                      filename: 'nice.jpeg',
+                      path: ruta + 'nice.jpeg',
+                      cid: 'nice.png'
+                    },*/
                     {
                         filename: xml_name,
                         content: xml_64,

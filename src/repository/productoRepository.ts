@@ -18,6 +18,7 @@ class ProductoRepository{
     public getIdControlInventario:string="select nextval('s_control_inventario')"; 
     public getIdGrupo:string="select nextval('s_grupo')"; 
     public getIdSubProducto:string="select nextval('s_sub_producto')"; 
+    public getIdAuditoria:string="select nextval('s_auditoria')"; 
 
 }
 
