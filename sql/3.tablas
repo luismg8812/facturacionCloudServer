@@ -973,6 +973,7 @@ CREATE  TABLE   SUB_PRODUCTO (
   PRODUCTO_HIJO                    int,
   CANTIDAD                         decimal,
   ESTADO                           smallint,
+  PESADO                           smallint,
   CONSTRAINT PK_SUB_PRODUCTO
     PRIMARY KEY ( SUB_PRODUCTO_ID ) 
 );
