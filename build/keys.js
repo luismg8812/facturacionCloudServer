@@ -9,11 +9,11 @@ exports.default = {
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
-    database_innovacionboutique: {
-        host: 'ec2-54-163-254-204.compute-1.amazonaws.com',
-        user: 'oahwvwwypzcdzq',
-        password: 'dbffdcae688ccaeab8981c6f63e1a79697eb8f4b33b7bba1b519347bb888c5c7',
-        database: 'd5251j31s92sr2',
+    database_carwash: {
+        host: 'ec2-52-203-74-38.compute-1.amazonaws.com',
+        user: 'tyqspeswizwhyq',
+        password: '0cb9404da262a47c17b70c6112d1a7f0fc8501b4097c5c20e8c1322aa34c5681',
+        database: 'ddl8m7qtpd6552',
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
