@@ -31,10 +31,19 @@ class ProductoControllers {
       } else {
          query = "select * from producto where empresa_id =  " + empresaId;
          if (grupoId != "") {
-            query = query + " and grupo_id =" + grupoId;
+            if(grupoId=='0'){
+               query = query + " and grupo_id is null " ;
+            }else{
+               query = query + " and grupo_id =" + grupoId;
+            }
          }
          if (subGrupoId != "") {
-            query = query + " and sub_grupo_id =" + subGrupoId;
+            if(subGrupoId=='0'){
+               query = query + " and sub_grupo_id is null " ;
+            }else{
+               query = query + " and sub_grupo_id =" + subGrupoId;
+            }
+            
          }
          if (proveedorId != "") {
             query = query + " and proveedor_id =" + proveedorId;

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const abonoControllers_1 = require("../controllers/abonoControllers");
-class ControlInventarioRoutes {
+class AbonoRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
@@ -12,5 +12,5 @@ class ControlInventarioRoutes {
         this.router.get('/getAbonosByDocumento', abonoControllers_1.abonoControllers.getAbonosByDocumento);
     }
 }
-const controlInventarioRoutes = new ControlInventarioRoutes();
-exports.default = controlInventarioRoutes.router;
+const abonoRoutes = new AbonoRoutes();
+exports.default = abonoRoutes.router;
