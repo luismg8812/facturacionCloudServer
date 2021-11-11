@@ -9,11 +9,11 @@ exports.default = {
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
-    database_avenidagp: {
-        host: 'ec2-54-159-107-189.compute-1.amazonaws.com',
-        user: 'daorvojklxlhnl',
-        password: '6afdc292c4c25f6cbbe13799cbfc10edbf7c48245a86504ab8c95a9663c381fe',
-        database: 'df7ckvmi77cpbg',
+    database_dkch: {
+        host: 'ec2-54-159-244-207.compute-1.amazonaws.com',
+        user: 'auhcfkogwknfha',
+        password: '3d1f0cbc89311b9ace87c17ce758116fb923941c40ead076dad0f4e7e7ed6796',
+        database: 'd54obbbtgsi3em',
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
