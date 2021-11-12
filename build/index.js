@@ -33,6 +33,7 @@ const cuentasContablesRoutes_1 = __importDefault(require("./routes/cuentasContab
 const database_1 = __importDefault(require("./database"));
 const database_license_1 = __importDefault(require("./database_license"));
 const controlInventarioRoutes_1 = __importDefault(require("./routes/controlInventarioRoutes"));
+const coteroRoutes_1 = __importDefault(require("./routes/coteroRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -70,6 +71,7 @@ class Server {
         this.app.use('/bono', bonoRoutes_1.default);
         this.app.use('/traslados', trasladosRoutes_1.default);
         this.app.use('/controlInventario', controlInventarioRoutes_1.default);
+        this.app.use('/cotero', coteroRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

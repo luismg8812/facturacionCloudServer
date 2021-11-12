@@ -19,6 +19,7 @@ import cuentasContablesRoutes from './routes/cuentasContablesRoutes';
 import db from './database';
 import db_license from './database_license';
 import controlInventarioRoutes from './routes/controlInventarioRoutes';
+import coteroRoutes from './routes/coteroRoutes';
 
 
 class Server {
@@ -62,6 +63,7 @@ class Server {
         this.app.use('/bono',bonoRoutes);
         this.app.use('/traslados',trasladosRoutes);
         this.app.use('/controlInventario',controlInventarioRoutes);
+        this.app.use('/cotero',coteroRoutes);
     }
 
     start(): void {
