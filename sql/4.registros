@@ -118,7 +118,8 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Envío de facturas electrónicas automaticamente','Esta opción permite que las facturas electronicas que se generan sean enviadas automanticanente a la DIAN');
-INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
 
 -- fin activaciones
 

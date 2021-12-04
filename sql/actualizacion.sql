@@ -453,6 +453,7 @@ ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_COTERO
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (35, null, 'Gestión de Coteros', 'coteros', 1, 'Opción que permite controlar los coteros que se asignaran a las entradas de almance');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
 
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
