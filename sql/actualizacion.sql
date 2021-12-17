@@ -131,6 +131,330 @@ increment by 1
 ALTER TABLE CLIENTE ADD  RAZON_SOCIAL                     VARCHAR(100);
 ALTER TABLE CLIENTE ADD  DIGITO_VERIFICACION			   VARCHAR(1);
 
+create sequence S_PRODUCTO_PRECIOS
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE PRODUCTO_PRECIOS (
+  PRODUCTO_PRECIOS_ID              int NOT NULL DEFAULT nextval('S_PRODUCTO_PRECIOS'),
+  PRODUCTO_ID			           int,
+  PRECIO_2						   DECIMAL,
+  PRECIO_3						   DECIMAL,
+  PRECIO_4						   DECIMAL,
+  PRECIO_5						   DECIMAL,
+  PRECIO_6						   DECIMAL,
+  PRECIO_7						   DECIMAL,
+  PRECIO_8						   DECIMAL,
+  PRECIO_9						   DECIMAL,
+  PRECIO_10						   DECIMAL,
+  CONSTRAINT PK_PRODUCTO_GRUPO
+    PRIMARY KEY ( PRODUCTO_ID ) 
+);
+
+ALTER TABLE PRODUCTO_PRECIOS ADD CONSTRAINT FK_PROD_REFERENCE_PRECIO
+  FOREIGN KEY (PRODUCTO_ID)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos productos',' Permite asignar multiples precios para los productos en la facturación');
+
+create sequence S_CAMPO_INVENTARIO_USUARIO
+START WITH 10
+increment by 1
+;
+
+
+CREATE  TABLE CAMPO_INVENTARIO (
+  CAMPO_INVENTARIO_ID              smallint NOT NULL ,
+  NOMBRE                           VARCHAR(100),
+  DESCRIPCION					   VARCHAR(200),
+  CONSTRAINT PK_CAMPO_INVENTARIO
+    PRIMARY KEY ( CAMPO_INVENTARIO_ID ) 
+);
+
+
+CREATE  TABLE CAMPO_INVENTARIO_USUARIO (
+  CAMPO_INVENTARIO_USUARIO_ID      int NOT NULL DEFAULT nextval('S_CAMPO_INVENTARIO_USUARIO'),
+  CAMPO_INVENTARIO_ID                    smallint,
+  USUARIO_ID                       int,
+  CONSTRAINT PK_CAMPO_INVENTARIO_USUARIO
+    PRIMARY KEY ( CAMPO_INVENTARIO_USUARIO_ID ) 
+);
+
+ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_INVENTARIO_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+	
+	ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_USUARIO_REFERENCE_CAMPO
+ FOREIGN KEY (CAMPO_INVENTARIO_ID)
+    REFERENCES CAMPO_INVENTARIO (CAMPO_INVENTARIO_ID);	
+	
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (1, 'Cantidad', 'Cantidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (2, 'Costo', 'Costo del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (3, 'Costo publico', 'Precio de venta del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (4, 'IVA', 'IVA del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (5, 'Pesado', 'Campo para activar o desactivar la gramera');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (6, 'Cod. Barras', 'Codigo de barras del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (7, 'Promociones', 'Configuración de las promociones del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (8, 'Utilidad', 'Utilidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (9, 'Diferencia', 'Diferencia del costo y costo publico');
+
+create sequence S_USUARIO_EMPLEADO
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE USUARIO_EMPLEADO (
+  USUARIO_EMPLEADO_ID      int NOT NULL DEFAULT nextval('S_USUARIO_EMPLEADO'),
+  USUARIO_ID                       int,
+  EMPLEADO_ID                       int,
+  CONSTRAINT PK_USUARIO_EMPLEADO
+    PRIMARY KEY ( USUARIO_EMPLEADO_ID ) 
+);
+
+ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+
+ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_EMPLEADO
+ FOREIGN KEY (EMPLEADO_ID)
+    REFERENCES EMPLEADO (EMPLEADO_ID);	
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (27, 'Activar creación de productos desde la venta','se otorgan permisos para permitir la creación de productos dentro de punto de venta dia y gestion de ordenes de trabajo');
+
+
+create sequence S_VEHICULO
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE VEHICULO (
+  VEHICULO_ID                        int NOT NULL,
+  CLIENTE_ID                         int,
+  MARCA_VEHICULO_ID					 smallint,
+  MODELO_MARCA_ID                    int ,
+  PLACA                              VARCHAR(10),
+  LINEA_VEHICULO                     VARCHAR(20),
+  CONSTRAINT PK_VEHICULO
+    PRIMARY KEY ( VEHICULO_ID ) 
+);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_CLIENT
+ FOREIGN KEY (CLIENTE_ID)
+    REFERENCES CLIENTE (CLIENTE_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MARCA
+ FOREIGN KEY (MARCA_VEHICULO_ID)
+    REFERENCES MARCA_VEHICULO (MARCA_VEHICULO_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MODELO
+ FOREIGN KEY (MODELO_MARCA_ID)
+    REFERENCES MODELO_MARCA (MODELO_MARCA_ID);	
+	
+	
+	
+create sequence S_BONO
+START WITH 10
+increment by 1
+;	
+
+CREATE  TABLE TIPO_BONO (
+  TIPO_BONO_ID              smallint NOT NULL ,
+  NOMBRE                           VARCHAR(100),
+  CONSTRAINT PK_TIPO_BONO
+    PRIMARY KEY ( TIPO_BONO_ID ) 
+);	
+	
+CREATE  TABLE BONO (
+  BONO_ID                        int NOT NULL,
+  VEHICULO_ID                         int,
+  TIPO_BONO_ID					 smallint,
+  USUARIO_ID                    int ,
+  DOCUMENTO_ID					BIGint,
+  EMPRESA_ID					INT,
+  OBSERVACION                   VARCHAR(300),
+  TOTAL							DECIMAL,
+  ESTADO						VARCHAR(20),
+  FECHA_REGISTRO                timestamp,
+  FECHA_USO                		timestamp,
+  CONSTRAINT PK_BONO
+    PRIMARY KEY ( BONO_ID ) 
+);
+
+ALTER TABLE BONO ADD CONSTRAINT FK_VEHICULO_REFERENCE_BONO
+ FOREIGN KEY (VEHICULO_ID)
+    REFERENCES VEHICULO (VEHICULO_ID);	
+
+ALTER TABLE BONO ADD CONSTRAINT FK_TIPO_BONO_REFERENCE_BONO
+ FOREIGN KEY (TIPO_BONO_ID)
+    REFERENCES TIPO_BONO (TIPO_BONO_ID);	
+
+ALTER TABLE BONO ADD CONSTRAINT FK_USU_REFERENCE_BONO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);		
+	
+	ALTER TABLE BONO ADD CONSTRAINT FK_DOCUMENTO_REFERENCE_BONO
+ FOREIGN KEY (DOCUMENTO_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+	
+ALTER TABLE BONO ADD CONSTRAINT FK_empr_REFERENCE_BONO
+ FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);	
+
+
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', '/bonos', 1, 'Opción que permite controlar bonos para las promociones');			
+
+alter table empresa add correo varchar(50);
+
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
+alter table documento_detalle add saldo decimal;
+
+CREATE  TABLE   SUB_PRODUCTO (
+  SUB_PRODUCTO_ID                 int NOT NULL,
+  PRODUCTO_PADRE                   int,
+  PRODUCTO_HIJO                    int,
+  CANTIDAD                         decimal,
+  ESTADO                           smallint,
+  CONSTRAINT PK_SUB_PRODUCTO
+    PRIMARY KEY ( SUB_PRODUCTO_ID ) 
+);
+
+ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_PA
+ FOREIGN KEY (PRODUCTO_PADRE)
+    REFERENCES PRODUCTO (PRODUCTO_ID);
+    
+ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
+ FOREIGN KEY (PRODUCTO_HIJO)
+    REFERENCES PRODUCTO (PRODUCTO_ID);
+
+create sequence s_sub_producto
+START WITH 10
+increment by 1
+;
+	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'Activar facturación para cantidades negativas','si se tiene activa esta opción se permite facturar productos que tengan cantidades por debajo de 0');	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
+
+ alter table producto add REGISTRO_SANITARIO	 VARCHAR(200);
+ alter table producto add lote						   VARCHAR(200);
+ alter table producto add cum			   VARCHAR(200);
+ alter table producto add laboratorio			   VARCHAR(200);
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
+
+alter table documento add resolucion_empresa_id smallint;
+	
+	ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_resolucion
+  FOREIGN KEY (RESOLUCION_EMPRESA_ID)
+    REFERENCES RESOLUCION_EMPRESA (RESOLUCION_EMPRESA_ID);
+	
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Envío de facturas electrónicas automaticamente','Esta opción permite que las facturas electronicas que se generan sean enviadas automanticanente a la DIAN');	
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (32, 5, 'Reporte de terceros', '/reporteTerceros', 0, 'Opción que permite ver las compras o ventas de los clientes o proveedores durante un rango de fechas determinado');
+
+alter table empresa add identificador int; 
+
+alter table abono add cierre_diario smallint;
+
+CREATE  TABLE   CONTROL_INVENTARIO (
+  control_inventario_id                 int NOT NULL,
+  producto_id							int,
+  nombre                                VARCHAR(200),
+  EMPRESA_ID					        INT,
+  inicial                   			int,
+  entrada                    			int,
+  venta                         		decimal,
+  fecha_cierre                     		timestamp,
+  CONSTRAINT PK_CONTROL_INVENTARIO
+    PRIMARY KEY ( control_inventario_id ) 
+);
+
+ --alter table control_inventario add nombre                                VARCHAR(200);
+    --alter table control_inventario add empresa_id                                int;
+
+ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
+ FOREIGN KEY (producto_id)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
+
+create sequence s_control_inventario
+START WITH 10
+increment by 1
+;
+
+create sequence s_auditoria
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE   accion_auditoria (
+  accion_auditoria_id                 smallint NOT NULL,
+  nombre                        VARCHAR(200),
+  CONSTRAINT PK_accion_auditoria
+    PRIMARY KEY ( accion_auditoria_id ) 
+);
+
+CREATE  TABLE   AUDITORIA (
+  auditoria_id                 int NOT NULL,
+  accion_auditoria_id						smallint,
+  usuario_id							int,
+  valor_anterior                        VARCHAR(200),
+  valor_actual                          VARCHAR(200),
+  aplicativo                            VARCHAR(200),
+  observacion                           VARCHAR(200),
+  EMPRESA_ID					        INT,
+  fecha_registro                     		timestamp,
+  CONSTRAINT PK_auditoria
+    PRIMARY KEY ( auditoria_id ) 
+);
+
+ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
+ FOREIGN KEY (accion_auditoria_id)
+    REFERENCES accion_auditoria (accion_auditoria_id);
+
+--accion auditoria
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (1, 'Cambio de precio inventario fisico');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (2, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (3, 'Cambio de precio edicion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (4, 'eliminacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (5, 'creacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
+--accion auditoria	
+
+--PESADO EN SUBPRODUCTO
+ALTER TABLE SUB_PRODUCTO ADD PESADO  smallint;
+
+--coteros
+create sequence s_cotero
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE COTERO (
+  COTERO_ID        smallint NOT NULL,
+  NOMBRE                           VARCHAR(200),
+  estado 						   smallint, 	
+  PESO                             decimal,
+  CONSTRAINT PK_COTERO_ID
+    PRIMARY KEY ( COTERO_ID ) 
+);
+
+ALTER TABLE DOCUMENTO_DETALLE ADD COTERO_ID   smallint;
+ALTER TABLE DOCUMENTO_DETALLE ADD peso_cotero   decimal;
+ALTER TABLE DOCUMENTO ADD peso_cotero	decimal;
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_COTERO
+  FOREIGN KEY (COTERO_ID)
+    REFERENCES COTERO (COTERO_ID);
+	
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (35, null, 'Gestión de Coteros', 'coteros', 1, 'Opción que permite controlar los coteros que se asignaran a las entradas de almance');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;

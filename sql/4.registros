@@ -71,6 +71,15 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (24, 3, 'Liberar cuadre de caja', '/liberarCuadre', 0, 'opcion que permite liberar los cuadres de caja de los cajeros para consultar sus ventas');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (25, 1, 'Cartera de Proveedores', '/carteraProveedores', 0, 'Opción que permite gestionar los abonos de los pagos de los proveedores');
 --26 cuentas
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (27, null, 'Gestión de bonos', 'bonos', 1, 'Opción que permite controlar bonos para las promociones');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (28, 3, 'Kardex', '/kardex', 0, 'Opción que permite realizar el seguimiento del comportamiento de un determinado producto');
+--29 requerimiento de mercancia
+--30 traslado de mercancia
+--31 aceptacion y rechazo de mercancia
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (32, 5, 'Reporte de terceros', '/reporteTerceros', 0, 'Opción que permite ver las compras o ventas de los clientes o proveedores durante un rango de fechas determinado');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (34, null, 'Hoja de vida artículo', 'hojaVidaArticulo', 1, 'Opción que permite impirmir la hoja de vida de los artículos a los cuales se les ha realizado ordenes de trabajo en un rango de fechas especifico');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (35, null, 'Gestión de Coteros', 'coteros', 1, 'Opción que permite controlar los coteros que se asignaran a las entradas de almance');
 --fin sub-menu
 
 --opcion usuario
@@ -81,7 +90,7 @@ INSERT INTO public.opcion_usuario(opcion_usuario_id, sub_menu_id, usuario_id, es
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (1, 'Activar Comandas','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (2, 'Activar impresión en pantalla','esta opcion permite ahorrar papel al realizar solo la impresion en el sistema mas no en el papel');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (3, 'Activar proporción','');
---INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'activa','');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (4, 'activar multiple impresora','Opción que permite asignar mas de un tipo de impresion en la facturacion');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (5, 'Activar Ver remisiones En cuadre de caja','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (6, 'Activar Crear nota crédito/débito','');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (7, 'Activar Código de Barras','');
@@ -102,6 +111,16 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (21, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (22, 'Activar Cambio de fecha en facturas',' Permite que se cambie la fecha de generacion de una factura');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (23, 'Activar multiples resoluciones',' Permite que se cambiar de resoluciones de facturacion de la DIAN durante la impresión');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (24, 'Activar facturación en orden de trabajo',' Permite que se pueda facturar lo que se ingresa por las ordenes de trabajo');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (25, 'Activar multiples precios para productos ',' Permite asignar multiples precios para los productos en la facturación');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (26, 'Activar permisos para reapertura de ordenes de trabajo',' se otorgan permisos para reapertura de ordenes de trabajo');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (27, 'Activar creación de productos desde la venta','se otorgan permisos para permitir la creación de productos dentro de punto de venta dia y gestion de ordenes de trabajo');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'Activar facturación para cantidades negativas','si se tiene activa esta opción se permite facturar productos que tengan cantidades por debajo de 0');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Envío de facturas electrónicas automaticamente','Esta opción permite que las facturas electronicas que se generan sean enviadas automanticanente a la DIAN');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
+
 -- fin activaciones
 
 --tipo documento data
@@ -1327,7 +1346,31 @@ INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codi
 INSERT INTO public.responsabilidad_fiscal(responsabilidad_fiscal_id, nombre,codigo, estado)VALUES (37, 'Agente de retención impoconsumo de bienes inmuebles', 51, 0);
 --fin responsabilidad fiscal
 
+-- campos_inventario
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (1, 'Cantidad', 'Cantidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (2, 'Costo', 'Costo del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (3, 'Costo publico', 'Precio de venta del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (4, 'IVA', 'IVA del producto en inventario fisico');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (5, 'Pesado', 'Campo para activar o desactivar la gramera');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (6, 'Cod. Barras', 'Codigo de barras del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (7, 'Promociones', 'Configuración de las promociones del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (8, 'Utilidad', 'Utilidad del producto');
+INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VALUES (9, 'Diferencia', 'Diferencia del costo y costo publico');
+--fin campos inventario--
 
+--tipo bono
+INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (1, 'Lavado');
+INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (2, 'Combustible');
+--fin tipo bono
 
+--accion auditoria
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (1, 'Cambio de precio inventario fisico');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (2, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (3, 'Cambio de precio edicion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (4, 'eliminacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (5, 'creacion de producto');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cambio de precio entrada de almacen');
+INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
+--accion auditoria
 
 

@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -11,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.usuarioController = void 0;
 const usuarioRepository_1 = require("../repository/usuarioRepository");
 const database_1 = __importDefault(require("../database"));
 class UsuarioControllers {
@@ -18,8 +20,12 @@ class UsuarioControllers {
         return __awaiter(this, void 0, void 0, function* () {
             const mail = req.query.mail;
             console.log(mail);
-            const usuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.usuarioByMail, [mail]);
-            res.json(usuario.rows);
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.usuarioByMail, [mail]).then(res2 => {
+                res.json(res2.rows);
+            }).catch(error => {
+                console.error(error);
+                res.json({ "code": 400, "error": error.error });
+            });
         });
     }
     getByUsuario(req, res) {
@@ -115,6 +121,26 @@ class UsuarioControllers {
             res.json(opcionUsuario.rows);
         });
     }
+    getEmpleadoByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const opcionUsuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getEmpleadoByUsuario, [usuarioId]);
+            res.json(opcionUsuario.rows);
+        });
+    }
+    getCamposInventarioByUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            const opcionUsuario = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getCamposInventarioByUsuario, [usuarioId]);
+            res.json(opcionUsuario.rows);
+        });
+    }
+    getEmpresas(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresas = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getEmpresas);
+            res.json(empresas.rows);
+        });
+    }
     deleteUsuario(req, res) {
         res.json({ "delete_usuario": +req.params.id });
     }
@@ -155,6 +181,19 @@ class UsuarioControllers {
             yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id,estado) VALUES ($1,$2,$3)", [activacion_id, usuario_id, estado]);
             console.log("usuario guardo:");
             res.json({ "code": 200, "activacion_id": activacion_id });
+        });
+    }
+    saveEmpleadoUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            let empleadoId = req.query.empleadoId.split(",");
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.deleteEmpleadoUsuario, [usuarioId]);
+            console.log(req.query);
+            for (let i = 0; i < empleadoId.length; i++) {
+                yield database_1.default.query("INSERT INTO usuario_empleado (empleado_id, usuario_id) VALUES ($1,$2)", [empleadoId[i], usuarioId]);
+            }
+            console.log("rutas guardo:");
+            res.json({ "code": 200, "usuario_id": usuarioId });
         });
     }
     deleteActivacionUsuario(req, res) {
@@ -247,9 +286,14 @@ class UsuarioControllers {
             var contador_factura = req.body.contador_factura;
             var contador_remision = req.body.contador_remision;
             console.log(req.body);
-            yield database_1.default.query("UPDATE proporcion set contador_factura=$1, contador_remision=$2 where proporcion_id=$3", [contador_factura, contador_remision, proporcion_id]);
-            console.log("proporcion actualizada:");
-            res.json({ "code": 200, "proporcion_id": proporcion_id });
+            yield database_1.default.query("UPDATE proporcion set contador_factura=$1, contador_remision=$2 where proporcion_id=$3", [contador_factura, contador_remision, proporcion_id]).then(res2 => {
+                console.log("proporcion actualizada:");
+                res.json({ "code": 200, "proporcion_id": proporcion_id });
+            }).catch(error => {
+                console.error("updateProporcion");
+                console.error(error);
+                res.json({ "code": 400, "proporcion_id": proporcion_id });
+            });
         });
     }
     getRolByUsuario(req, res) {
@@ -269,6 +313,12 @@ class UsuarioControllers {
     getActivacionAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const rol = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getActivacionAll);
+            res.json(rol.rows);
+        });
+    }
+    getCampoInventarioAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rol = yield database_1.default.query(usuarioRepository_1.usuarioRepository.getCampoInventarioAll);
             res.json(rol.rows);
         });
     }
@@ -294,6 +344,19 @@ class UsuarioControllers {
             console.log(req.query);
             for (let i = 0; i < activacionId.length; i++) {
                 yield database_1.default.query("INSERT INTO activacion_usuario(activacion_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
+            }
+            console.log("rutas guardo:");
+            res.json({ "code": 200, "usuario_id": usuarioId });
+        });
+    }
+    guardarCamposInventario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioId = req.query.usuarioId;
+            let activacionId = req.query.activacionId.split(",");
+            yield database_1.default.query(usuarioRepository_1.usuarioRepository.deletecampoInventarioUsuario, [usuarioId]);
+            console.log(req.query);
+            for (let i = 0; i < activacionId.length; i++) {
+                yield database_1.default.query("INSERT INTO campo_inventario_usuario(campo_inventario_id, usuario_id) VALUES ($1,$2)", [activacionId[i], usuarioId]);
             }
             console.log("rutas guardo:");
             res.json({ "code": 200, "usuario_id": usuarioId });

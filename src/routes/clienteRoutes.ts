@@ -18,12 +18,17 @@ class ClienteRoutes{
         this.router.get('/getResponsabilidades' ,clienteControllers.getResponsabilidades);
         this.router.get('/getImpresorasEmpresa' ,clienteControllers.getImpresorasEmpresa);
         this.router.post('/saveCliente' ,clienteControllers.saveCliente);
-        this.router.post('/saveResponsabilidadFiscalCliente' ,clienteControllers.saveResponsabilidadFiscalCliente);
+        this.router.post('/saveVehiculo' ,clienteControllers.saveVehiculo);
         
+        this.router.post('/saveResponsabilidadFiscalCliente' ,clienteControllers.saveResponsabilidadFiscalCliente);
         this.router.post('/updateCliente' ,clienteControllers.updateCliente);
+        this.router.post('/updateVehiculo' ,clienteControllers.updateVehiculo);
+        
+        this.router.get('/getById' ,clienteControllers.getById);
         this.router.get('/getTipoEmpresa' ,clienteControllers.getTipoEmpresa);
         this.router.get('/getTipoIdentificacionAll' ,clienteControllers.getTipoIdentificacionAll);
         this.router.get('/getResponsabilidadesByCliente' ,clienteControllers.getResponsabilidadesByCliente);
+        this.router.get('/getVehiculos' ,clienteControllers.getVehiculos);
         
         
     }

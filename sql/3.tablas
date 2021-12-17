@@ -5,6 +5,15 @@ CREATE  TABLE ROL (
     PRIMARY KEY ( ROL_ID ) 
 );
 
+CREATE  TABLE COTERO (
+  COTERO_ID        smallint NOT NULL,
+  NOMBRE                           VARCHAR(200),
+  estado 						   smallint, 	
+  PESO                             decimal,
+  CONSTRAINT PK_COTERO_ID
+    PRIMARY KEY ( COTERO_ID ) 
+);
+
 CREATE  TABLE TIPO_RESOLUCION (
   TIPO_RESOLUCION_ID               smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -70,9 +79,7 @@ CREATE  TABLE RESOLUCION_EMPRESA (
     PRIMARY KEY ( RESOLUCION_EMPRESA_ID )
 );
 
-ALTER TABLE RESOLUCION_EMPRESA ADD CONSTRAINT FK_TIPO_RESOLU_REFERENCE_RESO_EMPRESA
-  FOREIGN KEY (EMPRESA_ID)
-    REFERENCES EMPRESA (EMPRESA_ID);
+
 
 
 
@@ -116,10 +123,14 @@ CREATE  TABLE EMPRESA (
   IMPUESTO                         varchar(12), 
   actividad_economica			   varchar(100),
   url_logo	  				       varchar(500),
+  correo 						   varchar(50),
+  identificador 		    	   int,
   CONSTRAINT PK_EMPRESA
   PRIMARY KEY ( EMPRESA_ID ) 
 );
-
+ALTER TABLE RESOLUCION_EMPRESA ADD CONSTRAINT FK_TIPO_RESOLU_REFERENCE_RESO_EMPRESA
+  FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);
 
 CREATE  TABLE EMPLEADO (
   EMPLEADO_ID                      smallint NOT NULL DEFAULT nextval('S_EMPLEADO'),
@@ -504,6 +515,10 @@ CREATE  TABLE PRODUCTO (
   IMPRESO_COMANDA                  smallint,
   VARIOS						   SMALLINT,
   GRANEL						   SMALLINT,
+  REGISTRO_SANITARIO			   VARCHAR(200),
+  lote						   VARCHAR(200),
+  cum			   VARCHAR(200),
+  laboratorio			   VARCHAR(200),
   CONSTRAINT PK_PRODUCTO
     PRIMARY KEY ( PRODUCTO_ID ) 
 );
@@ -536,6 +551,7 @@ CREATE  TABLE DOCUMENTO (
   PROVEEDOR_ID                     int,
   USUARIO_ID                       int,
   CLIENTE_ID                       int,
+  resolucion_empresa_id            smallint,
   EMPLEADO_ID                      smallint,
   FECHA_REGISTRO                   timestamp DEFAULT CURRENT_TIMESTAMP,
   FECHA_ENTREGA                    timestamp,
@@ -563,12 +579,13 @@ CREATE  TABLE DOCUMENTO (
  ANULADO                           smallint,
  DESCRIPCION_CLIENTE               VARCHAR(1000),
  DESCRIPCION_TRABAJADOR              VARCHAR(1000),
- LINEA_VEHICULO                   VARCHAR(20),
  MODELO_MARCA_ID                            int,
+ LINEA_VEHICULO 				   VARCHAR(20),
  impresora 						   varchar(20),
  invoice_id						   smallint,
  CUFE							   varchar(500),
  QRCODE							   varchar(500),
+ peso_cotero					   decimal,
   CONSTRAINT PK_DOCUMENTO
     PRIMARY KEY ( DOCUMENTO_ID ) 
 );
@@ -600,6 +617,10 @@ ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_TIPO
 ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_PROVEEDOR
   FOREIGN KEY (PROVEEDOR_ID)
     REFERENCES PROVEEDOR (PROVEEDOR_ID);
+	
+ALTER TABLE DOCUMENTO ADD CONSTRAINT FK_DOCU_REFERENCE_resolucion
+  FOREIGN KEY (RESOLUCION_EMPRESA_ID)
+    REFERENCES RESOLUCION_EMPRESA (RESOLUCION_EMPRESA_ID);
     
 	
 CREATE  TABLE DOCUMENTO_NOTA (
@@ -628,15 +649,23 @@ CREATE  TABLE DOCUMENTO_DETALLE (
   FECHA_REGISTRO                   timestamp,
   CANTIDAD                         decimal,
   ESTADO                           smallint,
+  COTERO_ID                        smallint,
   PARCIAL                          decimal,
   UNITARIO 						   decimal,
  IMPRESO_COMANDA 				   decimal,
  descripcion                       varchar(200),
  url_foto                          varchar(250),
  impuesto_producto				   decimal,
+ saldo							   decimal,
+ peso_cotero 					   decimal,
   CONSTRAINT PK_DOCUMENTO_DETALLE
     PRIMARY KEY ( DOCUMENTO_DETALLE_ID ) 
 );
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_COTERO
+  FOREIGN KEY (COTERO_ID)
+    REFERENCES COTERO (COTERO_ID);
+
 
 COMMENT ON COLUMN DOCUMENTO_DETALLE.IMPRESO_COMANDA IS 'este campo controla cuando el producto esta en algula lista, si es ya se imprimio en como comanda';
 
@@ -666,6 +695,7 @@ CREATE  TABLE ABONO (
   USUARIO_ID                      int,
   CANTIDAD                        decimal,
   FECHA_INGRESO                   timestamp,
+  cierre_diario					  smallint,
   CONSTRAINT PK_ABONO
     PRIMARY KEY ( ABONO_ID ) 
 );    
@@ -758,40 +788,6 @@ ALTER TABLE DOCUMENTO_ORDEN ADD CONSTRAINT FK_DOCU_ORD_REFERENCE_ORDEN
   FOREIGN KEY (ORDEN_ID)
     REFERENCES DOCUMENTO (DOCUMENTO_ID);
 	
-	CREATE  TABLE INFORME_DIARIO (
-  		
-  INFORME_DIARIO_ID            int NOT NULL,
-  EMPRESA_ID                       smallint,
-  TOTAL_VENTAS              decimal,
-  TOTAL_REMISIONES          decimal,
-  IVA_VENTAS                decimal,
-  IVA_REMISIONES            decimal,
-  FECHA_INGRESO             timestamp,
-  FECHA_INFORME             timestamp,
-  COSTO_VENTAS            decimal,
-  COSTO_REMISIONES            decimal,
-  cantidad_Documentos        smallint,
-  documento_inicio          VARCHAR(50),
-  documento_fin            	VARCHAR(50),
-  iva_5                     decimal,
-  Iva_19                    decimal,
-  base_19                   decimal,
-  base_5                    decimal,
-  excento                   decimal,
-  iva_5_compras             decimal,
-  Iva_19_compras            decimal,
-  base_19_compras           decimal,
-  base_5_compras            decimal,
-  excento_compras           decimal,
-  cierre_diario				smallint,
-  
-  CONSTRAINT PK_INFORME_DIARIO
-    PRIMARY KEY ( INFORME_DIARIO_ID ) 
-);  
-
-ALTER TABLE INFORME_DIARIO ADD CONSTRAINT FK_EMPR_REFERENCE_MARCA
-  FOREIGN KEY (EMPRESA_ID)
-    REFERENCES EMPRESA (EMPRESA_ID);
 	
 CREATE  TABLE INFORME_MENSUAL (	
   INFORME_MENSUAL_ID            int NOT NULL,
@@ -856,6 +852,208 @@ ALTER TABLE INFORME_MENSUAL ADD CONSTRAINT FK_INFO_MENSU_REFERENCE_EMPR
   FOREIGN KEY (EMPRESA_ID)
     REFERENCES EMPRESA (EMPRESA_ID);
 	
+
+
+CREATE  TABLE PRODUCTO_PRECIOS (
+  PRODUCTO_PRECIOS_ID                         int NOT NULL DEFAULT nextval('S_PRODUCTO_PRECIOS'),
+  PRODUCTO_ID			           int,
+  PRECIO_2						   DECIMAL,
+  PRECIO_3						   DECIMAL,
+  PRECIO_4						   DECIMAL,
+  PRECIO_5						   DECIMAL,
+  PRECIO_6						   DECIMAL,
+  PRECIO_7						   DECIMAL,
+  PRECIO_8						   DECIMAL,
+  PRECIO_9						   DECIMAL,
+  PRECIO_10						   DECIMAL,
+  CONSTRAINT PK_PRODUCTO_PRECIOS
+    PRIMARY KEY ( PRODUCTO_PRECIOS_ID ) 
+);
+
+ALTER TABLE PRODUCTO_PRECIOS ADD CONSTRAINT FK_PROD_REFERENCE_PRECIO
+  FOREIGN KEY (PRODUCTO_ID)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+CREATE  TABLE CAMPO_INVENTARIO (
+  CAMPO_INVENTARIO_ID              smallint NOT NULL ,
+  NOMBRE                           VARCHAR(100),
+  DESCRIPCION					   VARCHAR(200),
+  CONSTRAINT PK_CAMPO_INVENTARIO
+    PRIMARY KEY ( CAMPO_INVENTARIO_ID ) 
+);
+
+
+CREATE  TABLE CAMPO_INVENTARIO_USUARIO (
+  CAMPO_INVENTARIO_USUARIO_ID      int NOT NULL DEFAULT nextval('S_CAMPO_INVENTARIO_USUARIO'),
+  CAMPO_INVENTARIO_ID                    smallint,
+  USUARIO_ID                       int,
+  CONSTRAINT PK_CAMPO_INVENTARIO_USUARIO
+    PRIMARY KEY ( CAMPO_INVENTARIO_USUARIO_ID ) 
+);
+
+ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_INVENTARIO_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+	
+ALTER TABLE CAMPO_INVENTARIO_USUARIO ADD CONSTRAINT FK_CAMPO_USUARIO_REFERENCE_CAMPO
+ FOREIGN KEY (CAMPO_INVENTARIO_ID)
+   REFERENCES CAMPO_INVENTARIO (CAMPO_INVENTARIO_ID);		
+
+
+CREATE  TABLE USUARIO_EMPLEADO (
+  USUARIO_EMPLEADO_ID      int NOT NULL DEFAULT nextval('S_USUARIO_EMPLEADO'),
+  USUARIO_ID                       int,
+  EMPLEADO_ID                       int,
+  CONSTRAINT PK_USUARIO_EMPLEADO
+    PRIMARY KEY ( USUARIO_EMPLEADO_ID ) 
+);
+
+ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_USUARIO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);	
+
+ALTER TABLE USUARIO_EMPLEADO ADD CONSTRAINT FK_USU_EMPLE_REFERENCE_EMPLEADO
+ FOREIGN KEY (EMPLEADO_ID)
+    REFERENCES EMPLEADO (EMPLEADO_ID);
+	
+	
+CREATE  TABLE VEHICULO (
+  VEHICULO_ID                        int NOT NULL,
+  CLIENTE_ID                         int,
+  MARCA_VEHICULO_ID					 smallint,
+  MODELO_MARCA_ID                    int NOT NULL,
+  PLACA                              VARCHAR(10),
+  LINEA_VEHICULO                     VARCHAR(20),
+  CONSTRAINT PK_VEHICULO
+    PRIMARY KEY ( VEHICULO_ID ) 
+);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_CLIENT
+ FOREIGN KEY (CLIENTE_ID)
+    REFERENCES CLIENTE (CLIENTE_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MARCA
+ FOREIGN KEY (MARCA_VEHICULO_ID)
+    REFERENCES MARCA_VEHICULO (MARCA_VEHICULO_ID);
+
+ALTER TABLE VEHICULO ADD CONSTRAINT FK_VEHICULO_REFERENCE_MODELO
+ FOREIGN KEY (MODELO_MARCA_ID)
+    REFERENCES MODELO_MARCA (MODELO_MARCA_ID);			
+	
+CREATE  TABLE TIPO_BONO (
+  TIPO_BONO_ID              smallint NOT NULL ,
+  NOMBRE                           VARCHAR(100),
+  CONSTRAINT PK_TIPO_BONO
+    PRIMARY KEY ( TIPO_BONO_ID ) 
+);	
+	
+CREATE  TABLE BONO (
+  BONO_ID                        int NOT NULL,
+  VEHICULO_ID                         int,
+  TIPO_BONO_ID					 smallint,
+  USUARIO_ID                    int ,
+  DOCUMENTO_ID					BIGint,
+  EMPRESA_ID					INT,
+  OBSERVACION                   VARCHAR(300),
+  TOTAL							DECIMAL,
+  ESTADO						VARCHAR(20),
+  FECHA_REGISTRO                timestamp,
+  FECHA_USO                		timestamp,
+  CONSTRAINT PK_BONO
+    PRIMARY KEY ( BONO_ID ) 
+);
+
+ALTER TABLE BONO ADD CONSTRAINT FK_VEHICULO_REFERENCE_BONO
+ FOREIGN KEY (VEHICULO_ID)
+    REFERENCES VEHICULO (VEHICULO_ID);	
+
+ALTER TABLE BONO ADD CONSTRAINT FK_TIPO_BONO_REFERENCE_BONO
+ FOREIGN KEY (TIPO_BONO_ID)
+    REFERENCES TIPO_BONO (TIPO_BONO_ID);	
+
+ALTER TABLE BONO ADD CONSTRAINT FK_USU_REFERENCE_BONO
+ FOREIGN KEY (USUARIO_ID)
+    REFERENCES USUARIO (USUARIO_ID);		
+	
+	ALTER TABLE BONO ADD CONSTRAINT FK_DOCUMENTO_REFERENCE_BONO
+ FOREIGN KEY (DOCUMENTO_ID)
+    REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+	
+ALTER TABLE BONO ADD CONSTRAINT FK_empr_REFERENCE_BONO
+ FOREIGN KEY (EMPRESA_ID)
+    REFERENCES EMPRESA (EMPRESA_ID);	
+	
+
+CREATE  TABLE   SUB_PRODUCTO (
+  SUB_PRODUCTO_ID                 int NOT NULL,
+  PRODUCTO_PADRE                   int,
+  PRODUCTO_HIJO                    int,
+  CANTIDAD                         decimal,
+  ESTADO                           smallint,
+  PESADO                           smallint,
+  CONSTRAINT PK_SUB_PRODUCTO
+    PRIMARY KEY ( SUB_PRODUCTO_ID ) 
+);
+
+ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_PA
+ FOREIGN KEY (PRODUCTO_PADRE)
+    REFERENCES PRODUCTO (PRODUCTO_ID);
+    
+ALTER TABLE SUB_PRODUCTO ADD CONSTRAINT FK_SUB_PRO_REFEREN_SUB_PRO_HI
+ FOREIGN KEY (PRODUCTO_HIJO)
+    REFERENCES PRODUCTO (PRODUCTO_ID);  
+	
+
+CREATE  TABLE   CONTROL_INVENTARIO (
+  control_inventario_id                 int NOT NULL,
+  producto_id							int,
+   EMPRESA_ID				        	INT,
+   nombre                                VARCHAR(200),
+  inicial                   			int,
+  entrada                    			int,
+  venta                         		decimal,
+  fecha_cierre                     		timestamp,
+  CONSTRAINT PK_CONTROL_INVENTARIO
+    PRIMARY KEY ( control_inventario_id ) 
+);
+
+
+ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
+ FOREIGN KEY (producto_id)
+    REFERENCES PRODUCTO (PRODUCTO_ID);	
+
+ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_empr_REFEREN_control_inv
+ FOREIGN KEY (empresa_id)
+    REFERENCES empresa (empresa_id);
+
+CREATE  TABLE   accion_auditoria (
+  accion_auditoria_id                 smallint NOT NULL,
+  nombre                        VARCHAR(200),
+  CONSTRAINT PK_accion_auditoria
+    PRIMARY KEY ( accion_auditoria_id ) 
+);
+
+CREATE  TABLE   AUDITORIA (
+  auditoria_id                 int NOT NULL,
+  accion_auditoria_id						smallint,
+  usuario_id							int,
+  valor_anterior                        VARCHAR(200),
+  valor_actual                          VARCHAR(200),
+  aplicativo                            VARCHAR(200),
+  observacion                           VARCHAR(200),
+  EMPRESA_ID					        INT,
+  fecha_registro                     		timestamp,
+  CONSTRAINT PK_auditoria
+    PRIMARY KEY ( auditoria_id ) 
+);
+
+ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
+ FOREIGN KEY (accion_auditoria_id)
+    REFERENCES accion_auditoria (accion_auditoria_id);		
+	
+
+
+
 
 	
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
