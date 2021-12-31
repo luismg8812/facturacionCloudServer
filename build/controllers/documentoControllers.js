@@ -639,6 +639,18 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getTipoPagoByDocumento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let documentoId = req.query.documentoId;
+            console.log(req.query);
+            let query = `select tipo_pago.nombre, tipo_pago_documento.valor from tipo_pago_documento,tipo_pago 
+        where tipo_pago_documento.tipo_pago_id= tipo_pago.tipo_pago_id
+        and documento_id =` + documentoId;
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getDocumentosByTipoPago(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const fechaInicial = req.query.fechaInicial;

@@ -44,6 +44,7 @@ class DocumentoRoutes {
         this.router.get('/getDocumentoNotaByDocumento', documentoControllers_1.documentoControllers.getDocumentoNotaByDocumento);
         this.router.get('/getGananciaDocumentos', documentoControllers_1.documentoControllers.getGananciaDocumentos);
         this.router.get('/getTerceros', documentoControllers_1.documentoControllers.getTerceros);
+        this.router.get('/getTipoPagoByDocumento', documentoControllers_1.documentoControllers.getTipoPagoByDocumento);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

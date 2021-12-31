@@ -626,6 +626,20 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+    
+
+    public async getTipoPagoByDocumento(req: Request, res: Response): Promise<any> {
+        
+        let documentoId = req.query.documentoId;
+        console.log(req.query);
+        let query: string = `select tipo_pago.nombre, tipo_pago_documento.valor from tipo_pago_documento,tipo_pago 
+        where tipo_pago_documento.tipo_pago_id= tipo_pago.tipo_pago_id
+        and documento_id =`+ documentoId ;
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
     public async getDocumentosByTipoPago(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;
         const fechaFinal = req.query.fechaFinal;
