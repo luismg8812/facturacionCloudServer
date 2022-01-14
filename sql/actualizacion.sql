@@ -455,6 +455,8 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'A
 
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
 
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (34, 'Activar Edición de facturas','Esta opción permite editar las facturas creadas he impresas');
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
