@@ -555,6 +555,7 @@ CREATE  TABLE DOCUMENTO (
   EMPLEADO_ID                      smallint,
   FECHA_REGISTRO                   timestamp DEFAULT CURRENT_TIMESTAMP,
   FECHA_ENTREGA                    timestamp,
+  FECHA_VENCIMIENTO                   timestamp,
   CONSECUTIVO_DIAN                 varchar(20),
   IMPRESO                          smallint,
   TOTAL                            decimal,

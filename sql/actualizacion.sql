@@ -457,6 +457,11 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'A
 
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (34, 'Activar Edición de facturas','Esta opción permite editar las facturas creadas he impresas');
 
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (35, 'Activar omitir deducción de inventario de remisiones','Cuando se activa esta opción NO se deducen del inventario las cantidades facturadas mediante remisiones');
+
+ALTER TABLE DOCUMENTO ADD FECHA_VENCIMIENTO  timestamp;
+
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;
