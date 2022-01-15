@@ -33,6 +33,7 @@ const cuentasContablesRoutes_1 = __importDefault(require("./routes/cuentasContab
 const database_1 = __importDefault(require("./database"));
 const database_license_1 = __importDefault(require("./database_license"));
 const controlInventarioRoutes_1 = __importDefault(require("./routes/controlInventarioRoutes"));
+const coteroRoutes_1 = __importDefault(require("./routes/coteroRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -70,6 +71,7 @@ class Server {
         this.app.use('/bono', bonoRoutes_1.default);
         this.app.use('/traslados', trasladosRoutes_1.default);
         this.app.use('/controlInventario', controlInventarioRoutes_1.default);
+        this.app.use('/cotero', coteroRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
@@ -82,9 +84,10 @@ class Server {
             const resolucion = yield database_1.default.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");
             console.log(empresa.rows[0]);
             console.log(resolucion.rows[0]);
-            if (empresa.rows[0].identificador == undefined) {
+            if (empresa.rows[0].identificador == undefined || empresa.rows[0].identificador == null) {
                 console.log("bloq empresa por identificador");
                 yield database_1.default.query("UPDATE configuracion set server=0 ");
+                yield database_1.default.query("UPDATE empresa set estado_empresa_id=2 ");
                 return;
             }
             try {
@@ -134,6 +137,7 @@ class Server {
                     if (bloq == 1) {
                         console.log("bloq empresa");
                         yield database_1.default.query("UPDATE configuracion set server=0 ");
+                        yield database_1.default.query("UPDATE empresa set estado_empresa_id=2 ");
                     }
                 }
                 else {
@@ -144,6 +148,7 @@ class Server {
                 console.error("error conexion lisencia");
                 console.log("bloq company  by web conection");
                 yield database_1.default.query("UPDATE configuracion set server=0 ");
+                yield database_1.default.query("UPDATE empresa set estado_empresa_id=2 ");
             }
         });
     }

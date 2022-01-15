@@ -19,6 +19,7 @@ import cuentasContablesRoutes from './routes/cuentasContablesRoutes';
 import db from './database';
 import db_license from './database_license';
 import controlInventarioRoutes from './routes/controlInventarioRoutes';
+import coteroRoutes from './routes/coteroRoutes';
 
 
 class Server {
@@ -62,6 +63,7 @@ class Server {
         this.app.use('/bono',bonoRoutes);
         this.app.use('/traslados',trasladosRoutes);
         this.app.use('/controlInventario',controlInventarioRoutes);
+        this.app.use('/cotero',coteroRoutes);
     }
 
     start(): void {
@@ -75,9 +77,10 @@ class Server {
         const resolucion = await db.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");  
         console.log(empresa.rows[0]);
         console.log(resolucion.rows[0]);
-        if(empresa.rows[0].identificador==undefined){     
+        if(empresa.rows[0].identificador==undefined || empresa.rows[0].identificador==null){     
             console.log("bloq empresa por identificador");
             await db.query("UPDATE configuracion set server=0 ");
+            await db.query("UPDATE empresa set estado_empresa_id=2 ");
             return;
         }       
         try {
@@ -127,6 +130,7 @@ class Server {
                 if(bloq==1){
                     console.log("bloq empresa");
                     await db.query("UPDATE configuracion set server=0 ");
+                    await db.query("UPDATE empresa set estado_empresa_id=2 ");
                 }
             }else{
                 await db.query("UPDATE configuracion set server=1 ");
@@ -136,6 +140,7 @@ class Server {
             console.error("error conexion lisencia");
             console.log("bloq company  by web conection");
             await db.query("UPDATE configuracion set server=0 ");
+            await db.query("UPDATE empresa set estado_empresa_id=2 ");
         }
 
     }

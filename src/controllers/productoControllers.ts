@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { productoRepository } from '../repository/productoRepository';
 import db from '../database';
+import { documentoRepository } from '../repository/documentoRepository';
 
 class ProductoControllers {
 
@@ -30,10 +31,19 @@ class ProductoControllers {
       } else {
          query = "select * from producto where empresa_id =  " + empresaId;
          if (grupoId != "") {
-            query = query + " and grupo_id =" + grupoId;
+            if(grupoId=='0'){
+               query = query + " and grupo_id is null " ;
+            }else{
+               query = query + " and grupo_id =" + grupoId;
+            }
          }
          if (subGrupoId != "") {
-            query = query + " and sub_grupo_id =" + subGrupoId;
+            if(subGrupoId=='0'){
+               query = query + " and sub_grupo_id is null " ;
+            }else{
+               query = query + " and sub_grupo_id =" + subGrupoId;
+            }
+            
          }
          if (proveedorId != "") {
             query = query + " and proveedor_id =" + proveedorId;
@@ -337,13 +347,14 @@ class ProductoControllers {
       var producto_hijo = req.body.producto_hijo;
       var cantidad = req.body.cantidad;
       var estado = req.body.estado;
+      var pesado= req.body.pesado;
       console.log(req.body);
       const id = await db.query(productoRepository.getIdSubProducto);
       const sub_producto_id = id.rows[0].nextval;
       console.log(sub_producto_id);
-      var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado)"
-         + " VALUES ($1,$2,$3,$4,$5)";
-      await db.query(query, [sub_producto_id, producto_padre, producto_hijo,cantidad,estado]).then(res2 => {
+      var query = "INSERT INTO sub_producto(sub_producto_id, producto_padre, producto_hijo,cantidad,estado,pesado)"
+         + " VALUES ($1,$2,$3,$4,$5,$6)";
+      await db.query(query, [sub_producto_id, producto_padre, producto_hijo,cantidad,estado,pesado]).then(res2 => {
          res.json({ "code": 200, "sub_producto_id": sub_producto_id });
       }).catch(error => {
          console.error(error);
@@ -386,6 +397,33 @@ class ProductoControllers {
          res.json({ "code": 400, "sub_grupo_id": grupo_id });
       });
    }
+
+   public async saveAuditoria(req: Request, res: Response): Promise<any> {
+
+      var empresa_id = req.body.empresa_id;
+      var accion_auditoria_id = req.body.accion_auditoria_id;
+      var usuario_id = req.body.usuario_id;
+      var valor_anterior = req.body.valor_anterior;
+      var valor_actual = req.body.valor_actual;
+      var aplicativo = req.body.aplicativo;
+      var observacion = req.body.observacion;
+      const fecha = await db.query(documentoRepository.getfechaNow);
+        var fecha_registro = fecha.rows[0].fecha_registro;
+      console.log(req.body);
+      const id = await db.query(productoRepository.getIdAuditoria);
+      const auditoria_id = id.rows[0].nextval;
+      console.log(auditoria_id);
+      var query = "INSERT INTO auditoria (auditoria_id,accion_auditoria_id,empresa_id,usuario_id,valor_anterior,valor_actual,aplicativo,observacion,fecha_registro)"
+         + " VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
+      await db.query(query, [auditoria_id,accion_auditoria_id, empresa_id, usuario_id,valor_anterior,valor_actual,aplicativo,observacion,fecha_registro]).then(res2 => {
+         res.json({ "code": 200, "auditoria_id": auditoria_id });
+      }).catch(error => {
+         console.error(error);
+         res.json({ "code": 400, "auditoria_id": auditoria_id });
+      });
+   }
+
+   
 
    
 

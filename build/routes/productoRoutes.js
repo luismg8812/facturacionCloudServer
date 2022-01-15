@@ -28,6 +28,7 @@ class ProductoRoutes {
         this.router.put('/deleteSubProducto', productoControllers_1.productoControllers.deleteSubProducto);
         this.router.put('/saveGrupo', productoControllers_1.productoControllers.saveGrupo);
         this.router.put('/saveSubGrupo', productoControllers_1.productoControllers.saveSubGrupo);
+        this.router.put('/saveAuditoria', productoControllers_1.productoControllers.saveAuditoria);
         this.router.get('/getProductosByGrupo', productoControllers_1.productoControllers.getProductosByGrupo);
     }
 }

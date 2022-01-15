@@ -5,6 +5,15 @@ CREATE  TABLE ROL (
     PRIMARY KEY ( ROL_ID ) 
 );
 
+CREATE  TABLE COTERO (
+  COTERO_ID        smallint NOT NULL,
+  NOMBRE                           VARCHAR(200),
+  estado 						   smallint, 	
+  PESO                             decimal,
+  CONSTRAINT PK_COTERO_ID
+    PRIMARY KEY ( COTERO_ID ) 
+);
+
 CREATE  TABLE TIPO_RESOLUCION (
   TIPO_RESOLUCION_ID               smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -546,6 +555,7 @@ CREATE  TABLE DOCUMENTO (
   EMPLEADO_ID                      smallint,
   FECHA_REGISTRO                   timestamp DEFAULT CURRENT_TIMESTAMP,
   FECHA_ENTREGA                    timestamp,
+  FECHA_VENCIMIENTO                   timestamp,
   CONSECUTIVO_DIAN                 varchar(20),
   IMPRESO                          smallint,
   TOTAL                            decimal,
@@ -576,6 +586,7 @@ CREATE  TABLE DOCUMENTO (
  invoice_id						   smallint,
  CUFE							   varchar(500),
  QRCODE							   varchar(500),
+ peso_cotero					   decimal,
   CONSTRAINT PK_DOCUMENTO
     PRIMARY KEY ( DOCUMENTO_ID ) 
 );
@@ -639,6 +650,7 @@ CREATE  TABLE DOCUMENTO_DETALLE (
   FECHA_REGISTRO                   timestamp,
   CANTIDAD                         decimal,
   ESTADO                           smallint,
+  COTERO_ID                        smallint,
   PARCIAL                          decimal,
   UNITARIO 						   decimal,
  IMPRESO_COMANDA 				   decimal,
@@ -646,9 +658,15 @@ CREATE  TABLE DOCUMENTO_DETALLE (
  url_foto                          varchar(250),
  impuesto_producto				   decimal,
  saldo							   decimal,
+ peso_cotero 					   decimal,
   CONSTRAINT PK_DOCUMENTO_DETALLE
     PRIMARY KEY ( DOCUMENTO_DETALLE_ID ) 
 );
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_COTERO
+  FOREIGN KEY (COTERO_ID)
+    REFERENCES COTERO (COTERO_ID);
+
 
 COMMENT ON COLUMN DOCUMENTO_DETALLE.IMPRESO_COMANDA IS 'este campo controla cuando el producto esta en algula lista, si es ya se imprimio en como comanda';
 
@@ -973,6 +991,7 @@ CREATE  TABLE   SUB_PRODUCTO (
   PRODUCTO_HIJO                    int,
   CANTIDAD                         decimal,
   ESTADO                           smallint,
+  PESADO                           smallint,
   CONSTRAINT PK_SUB_PRODUCTO
     PRIMARY KEY ( SUB_PRODUCTO_ID ) 
 );
@@ -999,8 +1018,6 @@ CREATE  TABLE   CONTROL_INVENTARIO (
     PRIMARY KEY ( control_inventario_id ) 
 );
 
-    --alter table control_inventario add nombre                                VARCHAR(200);
-    --alter table control_inventario add empresa_id                                int;
 
 ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
  FOREIGN KEY (producto_id)
@@ -1008,7 +1025,36 @@ ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_producto_REFEREN_control_inv
 
 ALTER TABLE CONTROL_INVENTARIO ADD CONSTRAINT FK_empr_REFEREN_control_inv
  FOREIGN KEY (empresa_id)
-    REFERENCES empresa (empresa_id);		
+    REFERENCES empresa (empresa_id);
+
+CREATE  TABLE   accion_auditoria (
+  accion_auditoria_id                 smallint NOT NULL,
+  nombre                        VARCHAR(200),
+  CONSTRAINT PK_accion_auditoria
+    PRIMARY KEY ( accion_auditoria_id ) 
+);
+
+CREATE  TABLE   AUDITORIA (
+  auditoria_id                 int NOT NULL,
+  accion_auditoria_id						smallint,
+  usuario_id							int,
+  valor_anterior                        VARCHAR(200),
+  valor_actual                          VARCHAR(200),
+  aplicativo                            VARCHAR(200),
+  observacion                           VARCHAR(200),
+  EMPRESA_ID					        INT,
+  fecha_registro                     		timestamp,
+  CONSTRAINT PK_auditoria
+    PRIMARY KEY ( auditoria_id ) 
+);
+
+ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
+ FOREIGN KEY (accion_auditoria_id)
+    REFERENCES accion_auditoria (accion_auditoria_id);		
+	
+
+
+
 
 	
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;

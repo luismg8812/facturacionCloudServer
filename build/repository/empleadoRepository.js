@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.empleadoRepository = void 0;
 class EmpleadoRepository {
     constructor() {
         this.getEmpleadoByAll = "select * from empleado  where empresa_id = $1";

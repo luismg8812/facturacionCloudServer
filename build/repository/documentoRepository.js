@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.documentoRepository = void 0;
 class DocumentoRepository {
     constructor() {
         this.getIdDocumento = "select nextval('s_documento')";

@@ -20,6 +20,7 @@ class DocumentoRoutes {
         this.router.get('/getOrdenesTrabajo', documentoControllers_1.documentoControllers.getOrdenesTrabajo);
         this.router.post('/createDocumentoOrden', documentoControllers_1.documentoControllers.createDocumentoOrden);
         this.router.post('/deleteDocumentoOrdenByOrden', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByOrden);
+        this.router.post('/deleteDocumentoOrdenByDocumento', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByDocumento);
         this.router.get('/getDocumentoOrdenById', documentoControllers_1.documentoControllers.getDocumentoOrdenById);
         this.router.get('/getOrdenesByDocumentoId', documentoControllers_1.documentoControllers.getOrdenesByDocumentoId);
         this.router.get('/getNominaByEmpleado', documentoControllers_1.documentoControllers.getNominaByEmpleado);
@@ -43,6 +44,7 @@ class DocumentoRoutes {
         this.router.get('/getDocumentoNotaByDocumento', documentoControllers_1.documentoControllers.getDocumentoNotaByDocumento);
         this.router.get('/getGananciaDocumentos', documentoControllers_1.documentoControllers.getGananciaDocumentos);
         this.router.get('/getTerceros', documentoControllers_1.documentoControllers.getTerceros);
+        this.router.get('/getTipoPagoByDocumento', documentoControllers_1.documentoControllers.getTipoPagoByDocumento);
     }
 }
 const documentoRoutes = new DocumentoRoutes();

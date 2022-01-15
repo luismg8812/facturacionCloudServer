@@ -34,8 +34,8 @@ class ApiControllers {
     });
     let ruta = __dirname.replace("\controllers", "public\\images\\");
 
-    html = html + `<b/><img src="${ruta + 'logo.png'}" height="42" width="42">`
-    html = html + `<b/><img src="${ruta + 'nice.jpeg'}" height="42" width="42">`
+    //html = html + `<b/><img src="${ruta + 'logo.png'}" height="42" width="42">`
+    //html = html + `<b/><img src="${ruta + 'nice.jpeg'}" height="42" width="42">`
     //console.log(html);
     await transporter.sendMail({
       from: '"Facturacion Effective" <facturacion_electronica@effectivesoftware.com.co>', // sender address
@@ -44,7 +44,7 @@ class ApiControllers {
 
       html: html, // html body
       attachments: [
-        {
+        /*{
           filename: 'logo.png',
           path: ruta + 'logo.png',
           cid: 'logo.png'
@@ -53,7 +53,7 @@ class ApiControllers {
           filename: 'nice.jpeg',
           path: ruta + 'nice.jpeg',
           cid: 'nice.png'
-        },
+        },*/
         {
           filename: xml_name,
           content: xml_64,
@@ -64,6 +64,7 @@ class ApiControllers {
           content: pdf_64,
           encoding: 'base64'
         }
+        
       ]
     }, function (err, info) {
       if (err) {
@@ -72,8 +73,6 @@ class ApiControllers {
         console.log(info);
       }
     });
-
-
     res.json({ "code": 200, "messaje": "info.messajeId" });
   }
 
