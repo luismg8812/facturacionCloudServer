@@ -245,8 +245,8 @@ class DocumentoControllers {
             var resolucion_empresa_id = req.body.resolucion_empresa_id;
             var empleado_id = req.body.empleado_id;
             var nota_id = req.body.nota_id;
-            const id = yield database_1.default.query(documentoRepository_1.documentoRepository.getFechaRegistro, [documento_id]);
-            var fecha_registro = id.rows[0].fecha_registro;
+            //const id = await db.query(documentoRepository.getFechaRegistro, [documento_id]);
+            var fecha_registro = req.body.fecha_registro;
             let fecha_vencimiento = new Date(req.body.fecha_vencimiento);
             console.log(fecha_vencimiento);
             var consecutivo_dian = req.body.consecutivo_dian;
