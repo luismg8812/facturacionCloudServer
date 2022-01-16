@@ -164,6 +164,25 @@ class DocumentoControllers {
             });
         });
     }
+    deleteDocumento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var documento_id = req.body.documento_id;
+            console.log(req.body);
+            yield database_1.default.query(`delete from documento_invoice where documento_id = ${documento_id}`);
+            yield database_1.default.query(`delete from documento_nota where documento_id = ${documento_id}`);
+            ;
+            yield database_1.default.query(`delete from documento_orden where documento_id = ${documento_id}`);
+            yield database_1.default.query(`delete from abono where documento_id = ${documento_id}`);
+            yield database_1.default.query(`delete from documento_detalle where documento_id = ${documento_id};`);
+            yield database_1.default.query(`delete from documento where documento_id = ${documento_id};`).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id });
+            }).catch(error => {
+                console.error("erorr deleteDocumento");
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
+        });
+    }
     deleteDocumentoOrdenByDocumento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var documento_id = req.body.documento_id;

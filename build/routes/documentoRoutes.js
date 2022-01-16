@@ -21,6 +21,7 @@ class DocumentoRoutes {
         this.router.post('/createDocumentoOrden', documentoControllers_1.documentoControllers.createDocumentoOrden);
         this.router.post('/deleteDocumentoOrdenByOrden', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByOrden);
         this.router.post('/deleteDocumentoOrdenByDocumento', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByDocumento);
+        this.router.post('/deleteDocumento', documentoControllers_1.documentoControllers.deleteDocumento);
         this.router.get('/getDocumentoOrdenById', documentoControllers_1.documentoControllers.getDocumentoOrdenById);
         this.router.get('/getOrdenesByDocumentoId', documentoControllers_1.documentoControllers.getOrdenesByDocumentoId);
         this.router.get('/getNominaByEmpleado', documentoControllers_1.documentoControllers.getNominaByEmpleado);
