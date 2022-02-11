@@ -156,7 +156,7 @@ class DocumentoControllers {
         var documento_id: number = req.body.documento_id;
         console.log(req.body);
         await db.query(`delete from documento_invoice where documento_id = ${documento_id}`);
-        await db.query(`delete from documento_nota where documento_id = ${documento_id}`);            );
+        await db.query(`delete from documento_nota where documento_id = ${documento_id}`);       
         await db.query(`delete from documento_orden where documento_id = ${documento_id}`);
         await db.query(`delete from abono where documento_id = ${documento_id}`);
         await db.query(`delete from documento_detalle where documento_id = ${documento_id};`);
@@ -248,8 +248,8 @@ class DocumentoControllers {
         var resolucion_empresa_id: number = req.body.resolucion_empresa_id;
         var empleado_id: number = req.body.empleado_id;
         var nota_id: number = req.body.nota_id;
-        //const id = await db.query(documentoRepository.getFechaRegistro, [documento_id]);
-        var fecha_registro = req.body.fecha_registro;
+        const id = await db.query(documentoRepository.getFechaRegistro, [documento_id]);
+        var fecha_registro = id.rows[0].fecha_registro;
         let fecha_vencimiento = new Date(req.body.fecha_vencimiento);
         console.log(fecha_vencimiento);
         var consecutivo_dian = req.body.consecutivo_dian;
