@@ -27,10 +27,10 @@ export default{
     },
 
     database_license:{
-        host:'ec2-54-164-233-77.compute-1.amazonaws.com',
-        user:'rsyygckuvkfjgq',
-        password:'7b9d8a4b1a587b534fb82caccc701f62420043c10ff0f2fc602cf91062eb0e44',
-        database:'dch2jqe7njrsdb',
+        host:'ec2-52-86-177-34.compute-1.amazonaws.com',
+        user:'lmdlznybcgeknr',
+        password:'4718c2a0f460ad5e31e2da9e48fa74efee3d91cfa581b15d9198758df788b372',
+        database:'d5shhn3l43vgfl',
         port:5432,
         ssl: { rejectUnauthorized: false },
     },

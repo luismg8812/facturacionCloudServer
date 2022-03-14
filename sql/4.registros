@@ -78,6 +78,8 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 --31 aceptacion y rechazo de mercancia
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (32, 5, 'Reporte de terceros', '/reporteTerceros', 0, 'Opción que permite ver las compras o ventas de los clientes o proveedores durante un rango de fechas determinado');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (34, null, 'Hoja de vida artículo', 'hojaVidaArticulo', 1, 'Opción que permite impirmir la hoja de vida de los artículos a los cuales se les ha realizado ordenes de trabajo en un rango de fechas especifico');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (35, null, 'Gestión de Coteros', 'coteros', 1, 'Opción que permite controlar los coteros que se asignaran a las entradas de almance');
 --fin sub-menu
 
 --opcion usuario
@@ -116,6 +118,11 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (28, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (29, 'Activar usuario para multiples empresas','el usuario que tenga activada esta opción prodrá ver los registros de todas las sucursales registradas');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (30, 'Activar Productos especiales desde punto de venta','Esta opción permite agregar productos que NO existan en el inventario y facturarlos');
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (31, 'Activar Envío de facturas electrónicas automaticamente','Esta opción permite que las facturas electronicas que se generan sean enviadas automanticanente a la DIAN');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (34, 'Activar Edicion de facturas','Esta opción permite editar las facturas creadas he impresas');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (35, 'Activar omitir deducción de inventario de remisiones','Cuando se activa esta opción NO se deducen del inventario las cantidades facturadas mediante remisiones');
+
 -- fin activaciones
 
 --tipo documento data

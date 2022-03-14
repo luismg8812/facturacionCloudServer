@@ -424,6 +424,44 @@ INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cam
 INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
 --accion auditoria	
 
+--PESADO EN SUBPRODUCTO
+ALTER TABLE SUB_PRODUCTO ADD PESADO  smallint;
+
+--coteros
+create sequence s_cotero
+START WITH 10
+increment by 1
+;
+
+CREATE  TABLE COTERO (
+  COTERO_ID        smallint NOT NULL,
+  NOMBRE                           VARCHAR(200),
+  estado 						   smallint, 	
+  PESO                             decimal,
+  CONSTRAINT PK_COTERO_ID
+    PRIMARY KEY ( COTERO_ID ) 
+);
+
+ALTER TABLE DOCUMENTO_DETALLE ADD COTERO_ID   smallint;
+ALTER TABLE DOCUMENTO_DETALLE ADD peso_cotero   decimal;
+ALTER TABLE DOCUMENTO ADD peso_cotero	decimal;
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_COTERO
+  FOREIGN KEY (COTERO_ID)
+    REFERENCES COTERO (COTERO_ID);
+	
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (35, null, 'Gestión de Coteros', 'coteros', 1, 'Opción que permite controlar los coteros que se asignaran a las entradas de almance');
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (32, 'Activar Coteros en entradas de almancen','Esta opción permite el manejo de coteros si es necesario en el peso de los productos que ingresan por entradas de almacen, adicional activar el uso de gestión de coteros');
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (33, 'Activar Edicion inventario fisico','Esta opción permite que los campos del inventario fisico esten activos para editar los productos');
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (34, 'Activar Edición de facturas','Esta opción permite editar las facturas creadas he impresas');
+
+INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (35, 'Activar omitir deducción de inventario de remisiones','Cuando se activa esta opción NO se deducen del inventario las cantidades facturadas mediante remisiones');
+
+ALTER TABLE DOCUMENTO ADD FECHA_VENCIMIENTO  timestamp;
+
+
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA public TO facturacion;

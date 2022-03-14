@@ -17,6 +17,7 @@ class DocumentoControllers {
         const fecha = await db.query(documentoRepository.getfechaNow);
         var fecha_registro = fecha.rows[0].fecha_registro;
         var fecha_entrega = req.body.fecha_entrega;
+        var fecha_vencimiento = req.body.fecha_vencimiento;
         var consecutivo_dian = req.body.consecutivo_dian;
         var impreso = req.body.impreso;
         var total = req.body.total;
@@ -50,14 +51,23 @@ class DocumentoControllers {
         const id = await db.query(documentoRepository.getIdDocumento);
         const documento_id = id.rows[0].nextval;
         console.log(documento_id);
-        var query = "INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,invoice_id,cufe,resolucion_empresa_id) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38,$39 )";
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe, resolucion_empresa_id]).then(res2 => {
-            res.json({ "code": 200, "documento_id": documento_id, "fecha_registro": fecha_registro });
-        }).catch(error => {
-            console.error("createDocumento");
-            console.error(error);
-            res.json({ "code": 400, "documento_id": documento_id });
-        });
+        var query = `INSERT INTO documento(documento_id,tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, 
+            empleado_id, fecha_registro, consecutivo_dian,impreso,total,excento,gravado,iva,cierre_diario,detalle_entrada,mac,
+            saldo,peso_total,descuento, cambio,iva_5,iva_19,base_5,base_19,retefuente,interes,total_costo,letra_consecutivo,
+            anulado, fecha_entrega, descripcion_cliente, descripcion_trabajador,modelo_marca_id,linea_vehiculo,impresora,
+            invoice_id,cufe,resolucion_empresa_id,fecha_vencimiento) VALUES ($30,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,
+                $19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40 )`;
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro,
+            consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total,
+            descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado,
+            documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora,
+            invoice_id, cufe, resolucion_empresa_id, fecha_vencimiento]).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id, "fecha_registro": fecha_registro });
+            }).catch(error => {
+                console.error("createDocumento");
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id });
+            });
         //await db.query("update documento set fecha_registro= CURRENT_TIMESTAMP where documento_id= $1", [documento_id]);
     }
 
@@ -137,6 +147,23 @@ class DocumentoControllers {
             res.json({ "code": 200, "documento_id": documento_id });
         }).catch(error => {
             console.error("deleteDocumentoOrdenByOrden");
+            console.error(error);
+            res.json({ "code": 400, "documento_id": documento_id });
+        });
+    }
+
+    public async deleteDocumento(req: Request, res: Response): Promise<any> {
+        var documento_id: number = req.body.documento_id;
+        console.log(req.body);
+        await db.query(`delete from documento_invoice where documento_id = ${documento_id}`);
+        await db.query(`delete from documento_nota where documento_id = ${documento_id}`);       
+        await db.query(`delete from documento_orden where documento_id = ${documento_id}`);
+        await db.query(`delete from abono where documento_id = ${documento_id}`);
+        await db.query(`delete from documento_detalle where documento_id = ${documento_id};`);
+        await db.query(`delete from documento where documento_id = ${documento_id};`).then(res2 => {
+            res.json({ "code": 200, "documento_id": documento_id });
+        }).catch(error => {
+            console.error("erorr deleteDocumento");
             console.error(error);
             res.json({ "code": 400, "documento_id": documento_id });
         });
@@ -223,7 +250,8 @@ class DocumentoControllers {
         var nota_id: number = req.body.nota_id;
         const id = await db.query(documentoRepository.getFechaRegistro, [documento_id]);
         var fecha_registro = id.rows[0].fecha_registro;
-        console.log(fecha_registro);
+        let fecha_vencimiento = new Date(req.body.fecha_vencimiento);
+        console.log(fecha_vencimiento);
         var consecutivo_dian = req.body.consecutivo_dian;
         var impreso = req.body.impreso;
         var total = req.body.total;
@@ -254,16 +282,26 @@ class DocumentoControllers {
         var impresora = req.body.impresora;
         var invoice_id = req.body.invoice_id;
         var cufe = req.body.cufe;
+        let peso_cotero: number = req.body.peso_cotero;
         console.log(req.body);
-        var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5, empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14,detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24,retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32, descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39, resolucion_empresa_id=$40 WHERE documento_id = $30";
+        var query = "UPDATE documento SET  tipo_documento_id=$1, empresa_id= $2, proveedor_id=$3, usuario_id=$4, cliente_id=$5,"
+            + "empleado_id=$6, fecha_registro=$7, consecutivo_dian=$8,impreso=$9,total=$10,excento=$11,gravado=$12,iva=$13,cierre_diario=$14," +
+            "detalle_entrada=$15,mac=$16,saldo=$17,peso_total=$18,descuento=$19, cambio=$20,iva_5=$21,iva_19=$22,base_5=$23,base_19=$24," +
+            "retefuente=$25,interes=$26,total_costo=$27,letra_consecutivo=$28,anulado=$29 ,  fecha_entrega=$31, descripcion_cliente=$32," +
+            " descripcion_trabajador=$33, modelo_marca_id=$34,linea_vehiculo=$35, impresora=$36, invoice_id=$37, cufe=$38, nota_id=$39, " +
+            "resolucion_empresa_id=$40,peso_cotero=$41,fecha_vencimiento=$42 WHERE documento_id = $30";
         console.log(query);
-        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro, consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento, cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id, fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe, nota_id, resolucion_empresa_id]).then(res2 => {
-            res.json({ "code": 200, "documento_id": documento_id });
-        }).catch(error => {
-            console.error("updateDocumento");
-            console.error(error);
-            res.json({ "code": 400, "documento_id": documento_id, "error": error.error });
-        });
+        await db.query(query, [tipo_documento_id, empresa_id, proveedor_id, usuario_id, cliente_id, empleado_id, fecha_registro,
+            consecutivo_dian, impreso, total, excento, gravado, iva, cierre_diario, detalle_entrada, mac, saldo, peso_total, descuento,
+            cambio, iva_5, iva_19, base_5, base_19, retefuente, interes, total_costo, letra_consecutivo, anulado, documento_id,
+            fecha_entrega, descripcion_cliente, descripcion_trabajador, modelo_marca_id, linea_vehiculo, impresora, invoice_id, cufe,
+            nota_id, resolucion_empresa_id, peso_cotero, fecha_vencimiento]).then(res2 => {
+                res.json({ "code": 200, "documento_id": documento_id });
+            }).catch(error => {
+                console.error("updateDocumento");
+                console.error(error);
+                res.json({ "code": 400, "documento_id": documento_id, "error": error.error });
+            });
     }
 
     public async getDocumentoByTipo(req: Request, res: Response): Promise<any> {
@@ -611,6 +649,20 @@ class DocumentoControllers {
             query = query + " and proveedor_id =  " + proveedorId;
         }
         query = query + " and tipo_pago_documento.documento_id=documento.documento_id ) tipo order by fecha_registro desc";
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
+
+
+    public async getTipoPagoByDocumento(req: Request, res: Response): Promise<any> {
+
+        let documentoId = req.query.documentoId;
+        console.log(req.query);
+        let query: string = `select tipo_pago.nombre, tipo_pago_documento.valor from tipo_pago_documento,tipo_pago 
+        where tipo_pago_documento.tipo_pago_id= tipo_pago.tipo_pago_id
+        and documento_id =`+ documentoId;
         console.log(query);
         const docuemntos = await db.query(query);
         res.json(docuemntos.rows);
@@ -998,8 +1050,8 @@ class DocumentoControllers {
         }
         if (tipoDocumento == '') {
             query = query + " and tipo_documento_id = 10  and consecutivo_dian is not null";
-        }else{
-            query = query + " and tipo_documento_id = "+tipoDocumento;
+        } else {
+            query = query + " and tipo_documento_id = " + tipoDocumento;
         }
         query = query + ` GROUP by `;
         if (tipoTercero == '1') {
@@ -1012,18 +1064,18 @@ class DocumentoControllers {
         } else {
             query = query + ` where docu.proveedor_id = proveedor.proveedor_id `;
         }
-      
+
         if (montoDesde != '') {
-            query = query + " and docu.total>= " + montoDesde ;
+            query = query + " and docu.total>= " + montoDesde;
         }
         if (montoHasta != '') {
-            query = query + " and docu.total<= " + montoHasta ;
+            query = query + " and docu.total<= " + montoHasta;
         }
         query = query + ` order by trim(nombre)`;
-            console.log(query);
-            const docuemntos = await db.query(query);
-            res.json(docuemntos.rows);
-           
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+
     }
 
 }
