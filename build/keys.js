@@ -9,11 +9,11 @@ exports.default = {
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
-    database_surtipulpas: {
-        host: 'ec2-34-192-41-115.compute-1.amazonaws.com',
-        user: 'dzwkwolgczwidc',
-        password: '0761b09ac9bf2d27b366606188ffa523f03b635fd719d1428f0bdbf9ac4b4f67',
-        database: 'd5pn44is4r6jp3',
+    database_disfruta: {
+        host: 'ec2-34-231-63-30.compute-1.amazonaws.com',
+        user: 'wjtwdcasucekjs',
+        password: 'e79b69789e69aeccb1ddc072abf7ec1b5c8e9f6f9f9b45ebc6aa3e4b7cc82f8d',
+        database: 'dbln91oa866ep0',
         port: 5432,
         ssl: { rejectUnauthorized: false },
     },
