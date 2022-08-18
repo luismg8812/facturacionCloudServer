@@ -8,11 +8,11 @@ export default{
         ssl: { rejectUnauthorized: false },
     },
 
-    database_disfruta:{   
-        host:'ec2-34-231-63-30.compute-1.amazonaws.com',
-        user:'wjtwdcasucekjs',
-        password:'e79b69789e69aeccb1ddc072abf7ec1b5c8e9f6f9f9b45ebc6aa3e4b7cc82f8d',
-        database:'dbln91oa866ep0',
+    database_emociones:{   
+        host:'ec2-44-195-100-240.compute-1.amazonaws.com',
+        user:'huovasemiacalh',
+        password:'7e0a133888f026780d48c60c823354b23d686a4cb0c51104569cf6bc940da53a',
+        database:'db83r6aloka9gr',
         port:5432,
         ssl: { rejectUnauthorized: false },
     },
