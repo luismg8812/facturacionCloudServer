@@ -8,11 +8,11 @@ export default{
         ssl: { rejectUnauthorized: false },
     },
     
-    database_losqson:{
-        host:'ec2-54-224-194-214.compute-1.amazonaws.com',
-        user:'ibrowbwccyocth',
-        password:'ecc2ad9b49daf34e8a348d5e5d7a97239a59277fe365864941aaeb7f9e5d815f',
-        database:'dev16kv3lgu4t3',
+    database_generacion:{
+        host:'ec2-3-208-79-113.compute-1.amazonaws.com',
+        user:'hkcwgbolpebyyx',
+        password:'fd5fbee3cab6f05ceaeaeac3bbe064df1568f22875a5f5ea2e2ffc3611ca8d60',
+        database:'d4uo0iv79gl2c2',
         port:5432,
         ssl: { rejectUnauthorized: false },
     },
