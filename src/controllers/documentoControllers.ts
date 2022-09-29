@@ -156,7 +156,7 @@ class DocumentoControllers {
         var documento_id: number = req.body.documento_id;
         console.log(req.body);
         await db.query(`delete from documento_invoice where documento_id = ${documento_id}`);
-        await db.query(`delete from documento_nota where documento_id = ${documento_id}`);       
+        await db.query(`delete from documento_nota where documento_id = ${documento_id}`);
         await db.query(`delete from documento_orden where documento_id = ${documento_id}`);
         await db.query(`delete from abono where documento_id = ${documento_id}`);
         await db.query(`delete from documento_detalle where documento_id = ${documento_id};`);
@@ -481,6 +481,8 @@ class DocumentoControllers {
         res.json(docuemntos.rows);
     }
 
+
+
     public async getOrdenesTrabajo(req: Request, res: Response): Promise<any> {
         const empresaId = req.query.empresaId;
         const placa = req.query.placa;
@@ -512,6 +514,34 @@ class DocumentoControllers {
         const docuemntos = await db.query(query, [empresaId]);
         res.json(docuemntos.rows);
     }
+
+    public async getOrdenesEnCero(req: Request, res: Response): Promise<any> {
+        const empresaId = req.query.empresaId;
+        const tipoDocumentoId = req.query.tipoDocumentoId;
+        console.log(req.query);
+        let query: string = "select * from documento where empresa_id= $1 and tipo_documento_id = " + tipoDocumentoId;
+        query = query + " and total=0 ";
+        query = query + " order by documento_id desc";
+        console.log(query);
+        const docuemntos = await db.query(query, [empresaId]);
+        res.json(docuemntos.rows);
+    }
+
+    public async borrarOrdenesEn0(req: Request, res: Response): Promise<any> {
+        let ordenes: string[] = (<string>req.query.ordenes).split(",");
+        console.log(ordenes);
+        let query: string = "delete from documento where documento_id in ()";
+        
+        const tokens = query.split('()')
+        const stripped = tokens.join("(" + ordenes.toString() + ")")
+        query = stripped;
+        console.log(query);
+        console.log(query);
+        const docuemntos = await db.query(query);
+        res.json(docuemntos.rows);
+    }
+
+    
 
     public async getRetirosByFechaAndTipo(req: Request, res: Response): Promise<any> {
         const fechaInicial = req.query.fechaInicial;

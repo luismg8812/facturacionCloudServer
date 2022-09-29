@@ -530,6 +530,33 @@ class DocumentoControllers {
             res.json(docuemntos.rows);
         });
     }
+    getOrdenesEnCero(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const empresaId = req.query.empresaId;
+            const tipoDocumentoId = req.query.tipoDocumentoId;
+            console.log(req.query);
+            let query = "select * from documento where empresa_id= $1 and tipo_documento_id = " + tipoDocumentoId;
+            query = query + " and total=0 ";
+            query = query + " order by documento_id desc";
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query, [empresaId]);
+            res.json(docuemntos.rows);
+        });
+    }
+    borrarOrdenesEn0(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let ordenes = req.query.ordenes.split(",");
+            console.log(ordenes);
+            let query = "delete from documento where documento_id in ()";
+            const tokens = query.split('()');
+            const stripped = tokens.join("(" + ordenes.toString() + ")");
+            query = stripped;
+            console.log(query);
+            console.log(query);
+            const docuemntos = yield database_1.default.query(query);
+            res.json(docuemntos.rows);
+        });
+    }
     getRetirosByFechaAndTipo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const fechaInicial = req.query.fechaInicial;

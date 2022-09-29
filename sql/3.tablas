@@ -922,7 +922,7 @@ CREATE  TABLE VEHICULO (
   VEHICULO_ID                        int NOT NULL,
   CLIENTE_ID                         int,
   MARCA_VEHICULO_ID					 smallint,
-  MODELO_MARCA_ID                    int NOT NULL,
+  MODELO_MARCA_ID                    int,
   PLACA                              VARCHAR(10),
   LINEA_VEHICULO                     VARCHAR(20),
   CONSTRAINT PK_VEHICULO

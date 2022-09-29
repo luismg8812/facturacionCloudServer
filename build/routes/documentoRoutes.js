@@ -18,6 +18,8 @@ class DocumentoRoutes {
         this.router.get('/getDocumentoByTipo', documentoControllers_1.documentoControllers.getDocumentoByTipo);
         this.router.get('/getCuadreCaja', documentoControllers_1.documentoControllers.getCuadreCaja);
         this.router.get('/getOrdenesTrabajo', documentoControllers_1.documentoControllers.getOrdenesTrabajo);
+        this.router.get('/getOrdenesEnCero', documentoControllers_1.documentoControllers.getOrdenesEnCero);
+        this.router.get('/borrarOrdenesEn0', documentoControllers_1.documentoControllers.borrarOrdenesEn0);
         this.router.post('/createDocumentoOrden', documentoControllers_1.documentoControllers.createDocumentoOrden);
         this.router.post('/deleteDocumentoOrdenByOrden', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByOrden);
         this.router.post('/deleteDocumentoOrdenByDocumento', documentoControllers_1.documentoControllers.deleteDocumentoOrdenByDocumento);
