@@ -530,14 +530,20 @@ class DocumentoControllers {
     public async borrarOrdenesEn0(req: Request, res: Response): Promise<any> {
         let ordenes: string[] = (<string>req.query.ordenes).split(",");
         console.log(ordenes);
+        let query_orden: string = "delete from documento_orden where orden_id in ()";
         let query: string = "delete from documento where documento_id in ()";
         
         const tokens = query.split('()')
         const stripped = tokens.join("(" + ordenes.toString() + ")")
         query = stripped;
+        const tokens_ordenes = query_orden.split('()')
+        const stripped_ordenes = tokens_ordenes.join("(" + ordenes.toString() + ")")
+        query = stripped;
+        query_orden = stripped_ordenes;
+        console.log(query_orden);
         console.log(query);
-        console.log(query);
-        const docuemntos = await db.query(query);
+        await db.query(stripped_ordenes);
+        const docuemntos = await db.query(stripped);
         res.json(docuemntos.rows);
     }
 

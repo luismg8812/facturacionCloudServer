@@ -547,13 +547,19 @@ class DocumentoControllers {
         return __awaiter(this, void 0, void 0, function* () {
             let ordenes = req.query.ordenes.split(",");
             console.log(ordenes);
+            let query_orden = "delete from documento_orden where orden_id in ()";
             let query = "delete from documento where documento_id in ()";
             const tokens = query.split('()');
             const stripped = tokens.join("(" + ordenes.toString() + ")");
             query = stripped;
+            const tokens_ordenes = query_orden.split('()');
+            const stripped_ordenes = tokens_ordenes.join("(" + ordenes.toString() + ")");
+            query = stripped;
+            query_orden = stripped_ordenes;
+            console.log(query_orden);
             console.log(query);
-            console.log(query);
-            const docuemntos = yield database_1.default.query(query);
+            yield database_1.default.query(stripped_ordenes);
+            const docuemntos = yield database_1.default.query(stripped);
             res.json(docuemntos.rows);
         });
     }

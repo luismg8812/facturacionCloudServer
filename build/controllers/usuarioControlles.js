@@ -161,10 +161,13 @@ class UsuarioControllers {
     }
     postFile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //console.log(req.body);
+            // console.log(req.body);
             let file = req.body;
             //console.log(file);
-            var base64Data = req.body.foto.replace(/^data:image\/png;base64,/, "");
+            var base64Data = "";
+            base64Data = req.body.foto.replace(/^data:image\/png;base64,/, "");
+            base64Data = req.body.foto.replace(/^data:image\/jpeg;base64,/, "");
+            base64Data = req.body.foto.replace(/^data:image\/gif;base64,/, "");
             require("fs").writeFile("resources/img/" + req.body.nombre, base64Data, 'base64', function (err) {
                 console.log(err);
             });
