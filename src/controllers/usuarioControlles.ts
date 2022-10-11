@@ -151,13 +151,34 @@ class UsuarioControllers {
 
 
     public async postFile(req: Request, res: Response): Promise<any> {
-       // console.log(req.body);
+        console.log(req.body);
         let file: File = req.body;
-        //console.log(file);
+        
         var base64Data = "";
-        base64Data =req.body.foto.replace(/^data:image\/png;base64,/, "");
-        base64Data =req.body.foto.replace(/^data:image\/jpeg;base64,/, "");
-        base64Data =req.body.foto.replace(/^data:image\/gif;base64,/, "");
+        if(req.body.foto.includes("jpeg;base64/9j")){
+            base64Data =req.body.foto.replace(/^data:image\/gif;base64,\/9j\/4/, "");
+                                                //data:image/jpeg;base64,/9j/4TBGRXhpZgAATU0AKgAAAAgACwEAAAMAAAABD
+                                                //data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAKKCAYAAABS2A
+                                                //data:image/jpeg;base64,/9j/4S++RXhpZgAA
+        }
+        if(req.body.foto.includes("png")){
+            base64Data =req.body.foto.replace(/^data:image\/png;base64,/, "");
+        }
+        if(req.body.foto.includes("jpeg;base64")){
+            base64Data =req.body.foto.replace(/^data:image\/jpeg;base64,/, "");
+        }
+
+        if(req.body.foto.includes("jpg;base64")){
+            base64Data =req.body.foto.replace(/^data:image\/jpg;base64,/, "");
+        }
+        if(req.body.foto.includes("JPG;base64")){
+            base64Data =req.body.foto.replace(/^data:image\/JPG;base64,/, "");
+        }
+        if(req.body.foto.includes("JPG;base64")){
+            base64Data =req.body.foto.replace(/^data:image\/JPG;base64,/, "");
+        }
+              
+        //console.log(base64Data);
         require("fs").writeFile("resources/img/" + req.body.nombre, base64Data, 'base64', function (err: any) {
             console.log(err);
         });
