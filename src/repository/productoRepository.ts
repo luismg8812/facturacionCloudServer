@@ -1,6 +1,7 @@
 
 
 class ProductoRepository{
+    public getProcedencias:string="select * from procedencia_producto "; 
     public getProductosByEmpresa:string="select * from producto where empresa_id = $1 and estado=1 order by nombre"; 
     public getControlInventario:string="select * from control_inventario where empresa_id = $1 order by nombre "; 
     public getControlInventarioByProductoId:string="select * from control_inventario where producto_id = $1 order by nombre "; 

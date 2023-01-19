@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.productoRepository = void 0;
 class ProductoRepository {
     constructor() {
+        this.getProcedencias = "select * from procedencia_producto ";
         this.getProductosByEmpresa = "select * from producto where empresa_id = $1 and estado=1 order by nombre";
         this.getControlInventario = "select * from control_inventario where empresa_id = $1 order by nombre ";
         this.getControlInventarioByProductoId = "select * from control_inventario where producto_id = $1 order by nombre ";

@@ -1373,6 +1373,9 @@ INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (4, 'eli
 INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (5, 'creacion de producto');
 INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (6, 'Cambio de precio entrada de almacen');
 INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Descuento');
---accion auditoria
+--fin accion auditoria
 
+--procedencia--
+INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (1, 'Interno');
+INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (2, 'Externo');
 

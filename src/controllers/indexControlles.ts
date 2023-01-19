@@ -24,7 +24,7 @@ class IndexControllers{
             let bloq=0;
             let empr= empresa.rows[0];
             let reso=resolucion.rows[0];
-            const estado_empresa =await db_license.query("select * from estado_empresa where identificador = "+ empresa.rows[0].identificador );        
+            /*const estado_empresa =await db_license.query("select * from estado_empresa where identificador = "+ empresa.rows[0].identificador );        
             console.log(estado_empresa.rows);
             let es=estado_empresa.rows[0];
             if(es.activar==0){
@@ -76,7 +76,7 @@ class IndexControllers{
             }else{
                 await db.query("UPDATE configuracion set server=1 ");
                 await db.query("UPDATE empresa set estado_empresa_id=1 ");
-            }
+            }*/
             
         } catch (error) {
             console.error("error conexion lisencia");      

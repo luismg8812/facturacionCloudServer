@@ -12,6 +12,12 @@ class ProductoControllers {
       res.json(productos.rows);
    }
 
+   public async getProcedencias(req: Request, res: Response): Promise<any> {
+      console.log("llega a");
+      const procedencias = await db.query(productoRepository.getProcedencias);
+      res.json(procedencias.rows);
+   }
+
    public async getProductosByGrupo(req: Request, res: Response): Promise<any> {
       const empresaId = req.query.empresaId;
       const grupoId = req.query.grupoId;

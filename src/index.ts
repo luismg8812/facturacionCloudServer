@@ -29,7 +29,9 @@ class Server {
         this.app = express();
         this.config();
         this.router();
-        this.validarLisencia();
+
+
+        //  this.validarLisencia();
     }
 
     config(): void {
@@ -72,7 +74,7 @@ class Server {
         });
     }
 
-    async validarLisencia(){
+    /*async validarLisencia(){
         const empresa = await db.query("select * from empresa where empresa_id =1");  
         const resolucion = await db.query("select * from resolucion_empresa where empresa_id =1 and resolucion_empresa_id =1");  
         console.log(empresa.rows[0]);
@@ -143,7 +145,7 @@ class Server {
             await db.query("UPDATE empresa set estado_empresa_id=2 ");
         }
 
-    }
+    }*/
 }
 
 const server = new Server();

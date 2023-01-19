@@ -14,6 +14,14 @@ CREATE  TABLE COTERO (
     PRIMARY KEY ( COTERO_ID ) 
 );
 
+CREATE  TABLE PROCEDENCIA_PRODUCTO (
+  PROCEDENCIA_PRODUCTO_ID          smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_PROCEDENCIA
+    PRIMARY KEY ( PROCEDENCIA_PRODUCTO_ID ) 
+);
+
+
 CREATE  TABLE TIPO_RESOLUCION (
   TIPO_RESOLUCION_ID               smallint NOT NULL,
   NOMBRE                           VARCHAR(50),
@@ -491,7 +499,7 @@ CREATE  TABLE PRODUCTO (
   sub_GRUPO_ID                         smallint,
   EMPRESA_ID                       smallint,
   MARCA_ID                         smallint,
-  PROVEEDOR_ID                     smallint,
+  PROVEEDOR_ID                     int,
   FECHA_REGISTRO                   timestamp,
   FECHA_VENCIMIENTO                timestamp,
   COSTO                            decimal,
@@ -647,6 +655,8 @@ CREATE  TABLE DOCUMENTO_DETALLE (
   DOCUMENTO_DETALLE_ID             bigint NOT NULL DEFAULT nextval('S_DOCUMENTO_DETALLE'),
   DOCUMENTO_ID                     bigint,
   PRODUCTO_ID                      int,
+  PROCEDENCIA_PRODUCTO_ID           smallint,
+  PROVEEDOR_ID                     int,
   FECHA_REGISTRO                   timestamp,
   CANTIDAD                         decimal,
   ESTADO                           smallint,
@@ -659,6 +669,7 @@ CREATE  TABLE DOCUMENTO_DETALLE (
  impuesto_producto				   decimal,
  saldo							   decimal,
  peso_cotero 					   decimal,
+ 
   CONSTRAINT PK_DOCUMENTO_DETALLE
     PRIMARY KEY ( DOCUMENTO_DETALLE_ID ) 
 );
@@ -666,6 +677,10 @@ CREATE  TABLE DOCUMENTO_DETALLE (
 ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_COTERO
   FOREIGN KEY (COTERO_ID)
     REFERENCES COTERO (COTERO_ID);
+	
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROCECENCIA
+  FOREIGN KEY (PROCEDENCIA_PRODUCTO_ID)
+    REFERENCES PROCEDENCIA_PRODUCTO (PROCEDENCIA_PRODUCTO_ID);	
 
 
 COMMENT ON COLUMN DOCUMENTO_DETALLE.IMPRESO_COMANDA IS 'este campo controla cuando el producto esta en algula lista, si es ya se imprimio en como comanda';
@@ -677,6 +692,10 @@ ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROD
 ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_DOCU
   FOREIGN KEY (DOCUMENTO_ID)
     REFERENCES DOCUMENTO (DOCUMENTO_ID);	
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROV
+  FOREIGN KEY (PROVEEDOR_ID)
+    REFERENCES PROVEEDOR (PROVEEDOR_ID);	
 	
 	
 CREATE  TABLE TIPO_PAGO_DOCUMENTO (
@@ -1052,7 +1071,6 @@ ALTER TABLE AUDITORIA ADD CONSTRAINT FK_accion_REFEREN_auditoria
  FOREIGN KEY (accion_auditoria_id)
     REFERENCES accion_auditoria (accion_auditoria_id);		
 	
-
 
 
 

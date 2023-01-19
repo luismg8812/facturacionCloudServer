@@ -25,6 +25,13 @@ class ProductoControllers {
             res.json(productos.rows);
         });
     }
+    getProcedencias(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("llega a");
+            const procedencias = yield database_1.default.query(productoRepository_1.productoRepository.getProcedencias);
+            res.json(procedencias.rows);
+        });
+    }
     getProductosByGrupo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const empresaId = req.query.empresaId;

@@ -32,6 +32,8 @@ class ProductoRoutes{
         this.router.put('/saveSubGrupo' ,productoControllers.saveSubGrupo);   
         this.router.put('/saveAuditoria' ,productoControllers.saveAuditoria);
         this.router.get('/getProductosByGrupo' ,productoControllers.getProductosByGrupo);
+        this.router.get('/getProcedencias' ,productoControllers.getProcedencias);
+        
     }
 }
 const productoRoutes= new ProductoRoutes();

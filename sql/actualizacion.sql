@@ -460,7 +460,28 @@ INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (34, 'A
 INSERT INTO public.activacion(	activacion_id, nombre,descripcion)	VALUES (35, 'Activar omitir deducción de inventario de remisiones','Cuando se activa esta opción NO se deducen del inventario las cantidades facturadas mediante remisiones');
 
 ALTER TABLE DOCUMENTO ADD FECHA_VENCIMIENTO  timestamp;
+------------trabajos y repuestos externos con proveedor
 
+CREATE  TABLE PROCEDENCIA_PRODUCTO (
+  PROCEDENCIA_PRODUCTO_ID          smallint NOT NULL,
+  NOMBRE                           VARCHAR(50),
+  CONSTRAINT PK_PROCEDENCIA
+    PRIMARY KEY ( PROCEDENCIA_PRODUCTO_ID ) 
+);
+
+ALTER TABLE DOCUMENTO_DETALLE ADD PROCEDENCIA_PRODUCTO_ID   smallint;
+ALTER TABLE DOCUMENTO_DETALLE ADD PROVEEDOR_ID   int;
+
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROCECENCIA
+  FOREIGN KEY (PROCEDENCIA_PRODUCTO_ID)
+    REFERENCES PROCEDENCIA_PRODUCTO (PROCEDENCIA_PRODUCTO_ID);
+	
+ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROV
+  FOREIGN KEY (PROVEEDOR_ID)
+    REFERENCES PROVEEDOR (PROVEEDOR_ID);	
+
+INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (1, 'Interno');
+INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (2, 'Externo');
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
