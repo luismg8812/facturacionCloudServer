@@ -80,6 +80,7 @@ INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)V
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (33, 5, 'Control de inventario', '/controlImventario', 0, 'Esta opción permite controlar el inventario de los productos que ingresan vs los productos que salen entre cierre diario y cierre diario');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (34, null, 'Hoja de vida artículo', 'hojaVidaArticulo', 1, 'Opción que permite impirmir la hoja de vida de los artículos a los cuales se les ha realizado ordenes de trabajo en un rango de fechas especifico');
 INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (35, null, 'Gestión de Coteros', 'coteros', 1, 'Opción que permite controlar los coteros que se asignaran a las entradas de almance');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (36, null, 'Gestión de Trabajos externos', 'trabajosExternos', 1, 'Opción que permite gestionar los pagos a proveedores de trabajos externos a los propios realizados en el taller');
 --fin sub-menu
 
 --opcion usuario
@@ -1363,6 +1364,8 @@ INSERT INTO public.campo_inventario(campo_inventario_id, nombre, descripcion) VA
 --tipo bono
 INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (1, 'Lavado');
 INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (2, 'Combustible');
+INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (3, 'Repuestos');
+INSERT INTO public.tipo_bono(tipo_bono_id, nombre)VALUES (4, 'Mano de obra');
 --fin tipo bono
 
 --accion auditoria
@@ -1378,4 +1381,5 @@ INSERT INTO public.accion_auditoria(accion_auditoria_id, nombre) VALUES (7, 'Des
 --procedencia--
 INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (1, 'Interno');
 INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (2, 'Externo');
+----------------
 

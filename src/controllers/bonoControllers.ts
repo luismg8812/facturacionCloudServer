@@ -72,6 +72,7 @@ class BonoControllers {
         const fechaIni = req.query.fechaIni;
         const fechaFin = req.query.fechaFin;
         const empresaId = req.query.empresaId;
+        const documentoId = req.query.documentoId;
         console.log(req.query);
         let query = "select placa, bono_id, estado,fecha_registro,fecha_uso, total,observacion from bono, vehiculo where bono.vehiculo_id= vehiculo.vehiculo_id and  empresa_id = "+empresaId;
         if(placa!=""){
@@ -85,6 +86,9 @@ class BonoControllers {
         }
         if(clienteId!=""){
             query = query + " and cliente_id=" + clienteId
+        }
+        if(documentoId!=""){
+            query = query + " and documento_id=" + documentoId
         }
         if (fechaIni != '') {
             query = query + " and fecha_registro>= '" + fechaIni + "'";

@@ -10,6 +10,7 @@ class AbonoRoutes{
     }
 
     config():void{
+
         this.router.post('/saveAbono' ,abonoControllers.saveAbono);
         this.router.get('/getAbonosByDocumento' ,abonoControllers.getAbonosByDocumento);
     } 
