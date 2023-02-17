@@ -332,6 +332,18 @@ class ProductoControllers {
       const id = await db.query(productoRepository.getIdProducto);
       const producto_id = id.rows[0].nextval;
       console.log(producto_id);
+      if(grupo_id==""){
+         grupo_id=null;
+      }
+      if(sub_grupo_id==""){
+         sub_grupo_id=null;
+      }
+      if(marca_id==""){
+         marca_id=null;
+      }
+      if(proveedor_id==""){
+         proveedor_id=null;
+      }
       var query = "INSERT INTO producto(producto_id,grupo_id,proveedor_id,marca_id,fecha_registro,costo,costo_publico,"+
          "sub_producto,impuesto,stock_min,stock_max,codigo_barras,peso,balanza,nombre,cantidad,promo,pub_promo,estado,"+
          "kg_promo,varios,utilidad_sugerida,empresa_id,fecha_vencimiento,porcentaje_venta,sub_grupo_id,lote,cum,registro_sanitario,laboratorio)"
