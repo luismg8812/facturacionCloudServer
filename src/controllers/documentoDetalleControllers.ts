@@ -22,13 +22,13 @@ class DocumentoDetalleControllers{
         let impuesto_producto:number =req.body.impuesto_producto;
         let saldo:number =req.body.saldo;
         let procedencia_producto_id:number =req.body.procedencia_producto_id;
-        
+        let costo_producto:number=        req.body.costo_producto;
         console.log(req.body);
         const id = await  db.query(documentoDetalleRepository.getIdDocumentoDetalle);
         const documento_detalle_id = id.rows[0].nextval; 
-        var query ="INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda,descripcion,impuesto_producto,saldo,cotero_id,proveedor_id,procedencia_producto_id) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8,$10,$11,$12,$13,$14,$15)";
+        var query ="INSERT INTO documento_detalle(documento_detalle_id, documento_id, producto_id, fecha_registro, cantidad, estado,parcial,unitario,impreso_comanda,descripcion,impuesto_producto,saldo,cotero_id,proveedor_id,procedencia_producto_id,costo_producto) VALUES ($9,$1,$2,$3,$4,$5,$6,$7,$8,$10,$11,$12,$13,$14,$15, $16)";
         console.log(query);
-        await db.query(query, [documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda,documento_detalle_id,descripcion,impuesto_producto,saldo,cotero_id,proveedor_id,procedencia_producto_id]).then(res2=>{
+        await db.query(query, [documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda,documento_detalle_id,descripcion,impuesto_producto,saldo,cotero_id,proveedor_id,procedencia_producto_id,costo_producto]).then(res2=>{
             res.json({"code":200,"documento_detalle_id":documento_detalle_id});
         }).catch(error=>{
             console.error("error creando documento detalle");
@@ -57,12 +57,13 @@ class DocumentoDetalleControllers{
         let saldo:number =req.body.saldo;
         let peso_cotero:number=req.body.peso_cotero;
         let procedencia_producto_id:number =req.body.procedencia_producto_id;
+        let costo_producto:number=req.body.costo_producto;
         console.log(req.body);
         var query="UPDATE documento_detalle SET  documento_id=$1, producto_id= $2, fecha_registro=$3, cantidad=$4, estado=$5, parcial=$6,"+ 
                   "unitario=$7, impreso_comanda=$8,descripcion=$9, impuesto_producto=$11, saldo=$12,cotero_id=$13, peso_cotero=$14,"+
-                  " proveedor_id=$15,procedencia_producto_id=$16 WHERE documento_detalle_id = $10";
+                  " proveedor_id=$15,procedencia_producto_id=$16, costo_producto=$17 WHERE documento_detalle_id = $10";
         await db.query(query, [documento_id,producto_id,fecha_registro,cantidad,estado,parcial,unitario,impreso_comanda,descripcion,
-            documento_detalle_id,impuesto_producto,saldo,cotero_id,peso_cotero,proveedor_id,procedencia_producto_id]).then(res2=>{
+            documento_detalle_id,impuesto_producto,saldo,cotero_id,peso_cotero,proveedor_id,procedencia_producto_id,costo_producto]).then(res2=>{
             res.json({"code":200,"documento_detalle_id":documento_detalle_id});
         }).catch(error=>{
             console.error("error actualizando documento detalle");

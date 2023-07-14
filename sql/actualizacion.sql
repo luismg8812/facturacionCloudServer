@@ -482,6 +482,9 @@ ALTER TABLE DOCUMENTO_DETALLE ADD CONSTRAINT FK_DETALLE_REFERENCE_PROV
 
 INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (1, 'Interno');
 INSERT INTO public.procedencia_producto(	procedencia_producto_id, nombre)	VALUES (2, 'Externo');
+INSERT INTO public.sub_menu(sub_menu_id, menu_id, nombre, url, op, descripcion)VALUES (36, null, 'Gestión de Trabajos externos', 'trabajosExternos', 1, 'Opción que permite gestionar los pagos a proveedores de trabajos externos a los propios realizados en el taller');
+
+ALTER TABLE DOCUMENTO_DETALLE ADD COSTO_PRODUCTO   decimal;
 
 GRANT ALL PRIVILEGES ON DATABASE facturacion_local to facturacion;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO facturacion;	
